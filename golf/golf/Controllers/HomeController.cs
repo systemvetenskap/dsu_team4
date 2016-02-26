@@ -13,22 +13,22 @@ namespace golf.Controllers
             ViewBag.Message = "Startsida";
             return View();
         }
-        public ActionResult Medlemshantering()
+        public ActionResult MemberHandling()
         {
             ViewBag.Message = "Medlemshantering";
             return View();
         }
-        public ActionResult Statistik()
+        public ActionResult Statistics()
         {
             ViewBag.Message = "Statistik";
             return View();
         }
-        public ActionResult Tavlingar()
+        public ActionResult Competitions()
         {
             ViewBag.Message = "Tävlingar";
             return View();
         }
-        public ActionResult Tidsbokning()
+        public ActionResult TimeScheduling()
         {
             ViewBag.Message = "Tidsbokningar";
             return View();
