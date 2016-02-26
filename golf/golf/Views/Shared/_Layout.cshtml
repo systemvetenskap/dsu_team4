@@ -15,19 +15,17 @@
                     <p class="site-title">@Html.ActionLink("Hålslaget BK", "Index", "Home")</p>
                 </div>
                 <div class="float-right">
-                    <section id="login">
-                        @Html.Partial("_LoginPartial")
-                    </section>
                     <nav>
                         <ul id="menu">
+                            <section id="login">@Html.Partial("_LoginPartial")</section>
                             <li>@Html.ActionLink("Hem", "Index", "Home")</li>
                             <li>@Html.ActionLink("Medlemshantering", "Medlemshantering", "Home")</li>
                             <li>@Html.ActionLink("Tidsbokning", "Tidsbokning", "Home")</li>
                             <li>@Html.ActionLink("Tävlingar", "Tavlingar", "Home")</li>
-                            <li>@Html.ActionLink("Statistik", "Statistik", "Home")</li>
+                            <li>@Html.ActionLink("Statistik", "Statistik", "Home")</li>                             
                         </ul>
                     </nav>
-                </div>
+                </div>                
             </div>
         </header>
         <div id="body">
@@ -39,11 +37,10 @@
         <footer>
             <div class="content-wrapper">
                 <div class="float-left">
-                    <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
+                    <p>&copy; @DateTime.Now.Year - © Grupp 4</p>
                 </div>
             </div>
         </footer>
-
         @Scripts.Render("~/bundles/jquery")
         @RenderSection("scripts", required: false)
     </body>
