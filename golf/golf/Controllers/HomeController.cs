@@ -10,21 +10,33 @@ namespace golf.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
+            ViewBag.Message = "Startsida";
 
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Medlemshantering()
         {
-            ViewBag.Message = "Your app description page.";
+            ViewBag.Message = "Medlemshantering";
 
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult Statistik()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Statitik";
+
+            return View();
+        }
+        public ActionResult Tavlingar()
+        {
+            ViewBag.Message = "Tävlingar";
+
+            return View();
+        }
+        public ActionResult Tidsbokning()
+        {
+            ViewBag.Message = "Tidsbokningar";
 
             return View();
         }
