@@ -1,7 +1,7 @@
 ﻿html {
-    background-color: #e2e2e2;
+    background-color: #fff;
     margin: 0;
-    padding: 0;
+    padding-bottom: 10px;
 }
 
 body {
@@ -17,7 +17,7 @@ a {
     outline: none;
     padding-left: 3px;
     padding-right: 3px;
-    text-decoration: underline;
+    text-decoration: none;
 }
 
     a:link, a:visited,
@@ -26,7 +26,7 @@ a {
     }
 
     a:hover {
-        background-color: #c7d1d6;
+        color: yellowgreen;
     }
 
 header, footer, hgroup,
@@ -97,19 +97,21 @@ h5, h6 {
 }
 
 #body {
-    background-color: #efeeef;
+    background-color: #fff;
     clear: both;
-    padding-bottom: 35px;
 }
 
     .main-content {
         background: url("../Images/accent.png") no-repeat;
         padding-left: 10px;
-        padding-top: 30px;
+        padding-top: 20px;
     }
 
     .featured + .main-content {
         background: url("../Images/heroAccent.png") no-repeat;
+        background-color:#fff;
+        max-width:900px;
+        text-align:justify;
     }
 
 header .content-wrapper {
@@ -117,8 +119,10 @@ header .content-wrapper {
 }
 
 footer {
+    margin:0 auto;
+    max-width:900px;
     clear: both;
-    background-color: #efeeef;
+    background-color: #fff;
     font-size: .9em;
     height: 100px;
 }
@@ -180,7 +184,7 @@ footer {
 ul#menu {
     font-size: 1.3em;
     font-weight: 600;
-    margin: 0 0 5px;
+    margin: 0 0 0 0px;
     padding: 0;
     text-align: right;
 }
@@ -198,7 +202,7 @@ ul#menu {
         }
 
         ul#menu li a:hover {
-            color: #333;
+            color: yellowgreen;
             text-decoration: none;
         }
 
@@ -221,7 +225,7 @@ ul#menu {
         }
 
         .featured p {
-            font-size: 1.1em;
+            font-size: 1.5em;
         }
 
 /* page titles */

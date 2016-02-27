@@ -256,7 +256,6 @@
     <Content Include="Global.asax" />
     <None Include="Properties\PublishProfiles\dsu4Web - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
-    <Content Include="Images\bgwallpaper.jpg" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />

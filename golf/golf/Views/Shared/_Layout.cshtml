@@ -15,9 +15,9 @@
                     <p class="site-title">@Html.ActionLink("Hålslaget BK", "Index", "Home")</p>
                 </div>
                 <div class="float-right">
-                    <nav>
-                        <ul id="menu">
-                            <section id="login">@Html.Partial("_LoginPartial")</section>
+                    @Html.Partial("_LoginPartial")
+                    <nav>                        
+                        <ul id="menu"> 
                             <li>@Html.ActionLink("Hem", "Index", "Home")</li>
                             <li>@Html.ActionLink("Medlemshantering", "MemberHandling", "Home")</li>
                             <li>@Html.ActionLink("Tidsbokning", "TimeScheduling", "Home")</li>
