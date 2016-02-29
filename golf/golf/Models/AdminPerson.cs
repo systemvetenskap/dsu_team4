@@ -12,18 +12,10 @@ namespace golf.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Person
+    public partial class AdminPerson
     {
         public int Id { get; set; }
-        public string firstName { get; set; }
-        public string lastName { get; set; }
-        public string streetAddres { get; set; }
-        public string postalCode { get; set; }
-        public string city { get; set; }
-        public string email { get; set; }
-        public Nullable<int> gender_ID { get; set; }
-        public Nullable<int> Golfer_ID { get; set; }
-        public Nullable<int> memberType_ID { get; set; }
-        public Nullable<int> PW { get; set; }
+        public Nullable<int> Person_ID { get; set; }
+        public Nullable<int> AdminType_ID { get; set; }
     }
 }
