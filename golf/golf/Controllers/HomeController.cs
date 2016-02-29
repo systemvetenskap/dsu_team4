@@ -33,5 +33,9 @@ namespace golf.Controllers
             ViewBag.Message = "Tidsbokningar";
             return View();
         }
+        public ActionResult Register()
+        {
+            return View();
+        }
     }
 }
