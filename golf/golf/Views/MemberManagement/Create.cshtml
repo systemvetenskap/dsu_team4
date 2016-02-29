@@ -1,11 +1,23 @@
-﻿@model golf.Models.Person
+﻿@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h2>@ViewBag.Message</h2>
+            </hgroup>
+            <p>
+                Detta är medlemshanteringen.
+            </p>
+        </div>
+    </section>
+}
+@model golf.Models.Person
 
 @{
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
-
+<h2>Lägg till medlem</h2>
+<br>
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
@@ -14,7 +26,7 @@
         <legend>Person</legend>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.firstName)
+            @Html.Label("Förnamn")
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.firstName)
@@ -22,7 +34,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.lastName)
+            @Html.Label("Efternamn")
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.lastName)
@@ -30,7 +42,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.streetAddres)
+            @Html.Label("Gatuadress")
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.streetAddres)
@@ -38,7 +50,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.postalCode)
+            @Html.Label("Postnummer")
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.postalCode)
@@ -46,7 +58,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.city)
+            @Html.Label("Stad")
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.city)
@@ -54,24 +66,18 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.email)
+            @Html.Label("E-post")
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.email)
             @Html.ValidationMessageFor(model => model.email)
         </div>
-
-
-
         <p>
-            <input type="submit" value="Create" />
+            <input type="submit" value="Lägg till medlem" />
         </p>
     </fieldset>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

@@ -101,18 +101,18 @@ h5, h6 {
     clear: both;
 }
 
-    .main-content {
+    /*.main-content {
         background: url("../Images/accent.png") no-repeat;
         padding-left: 10px;
         padding-top: 20px;
-    }
+    }*/
 
-    .featured + .main-content {
+    /*.featured + .main-content {
         background: url("../Images/heroAccent.png") no-repeat;
         background-color:#fff;
         max-width:900px;
         text-align:justify;
-    }
+    }*/
 
 header .content-wrapper {
     padding-top: 20px; 
@@ -277,10 +277,10 @@ aside {
         padding: 0;
     }
 
-        aside ul li {
+        /*aside ul li {
             background: url("../Images/bullet.png") no-repeat 0 50%;
             padding: 2px 0 2px 20px;
-        }
+        }*/
 
 .label {
     font-weight: 700;
