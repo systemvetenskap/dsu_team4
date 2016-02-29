@@ -65,6 +65,10 @@ namespace golf.Controllers
         {
             return View();
         }
+        public ActionResult Egister()
+        {
+            return View();
+        }
 
         //
         // POST: /Account/Register
