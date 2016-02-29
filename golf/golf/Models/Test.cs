@@ -12,10 +12,8 @@ namespace golf.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class AdminPerson
+    public partial class Test
     {
         public int Id { get; set; }
-        public Nullable<int> Person_ID { get; set; }
-        public Nullable<int> AdminType_ID { get; set; }
     }
 }

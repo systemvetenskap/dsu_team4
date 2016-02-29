@@ -8,26 +8,36 @@ using System.Web.Mvc;
 using golf.Models;
 using golf.person;
 
+
+
+
 namespace golf.Controllers
 {
     public class MemberManagementController : Controller
     {
-        private context db = new context();
 
-        //
-        // GET: /MemberManagement/
-
+        //Kontext, databas, EF 
+        dsuteam4Entities1 databas = new dsuteam4Entities1();
+ 
+        //Lista Personer från persontabellen    
         public ActionResult Index()
         {
-            return View(db.People.ToList());
+            return View(databas.Person.ToList());
         }
 
-        //
-        // GET: /MemberManagement/Details/5
-
+        //Visa detaljer om personer
         public ActionResult Details(int id = 0)
         {
-            Person person = db.People.Find(id);
+            
+            Person person = databas.Person.Find(id);
+            Golfer golf = databas.Golfer.Find(id);
+
+
+            ViewBag.gid = golf.golfID.ToString();
+            ViewBag.HCP = golf.HCP.ToString();
+          
+           
+           
             if (person == null)
             {
                 return HttpNotFound();
@@ -35,16 +45,14 @@ namespace golf.Controllers
             return View(person);
         }
 
-        //
-        // GET: /MemberManagement/Create
 
+        //Öppna skapa View(Vy)
         public ActionResult Create()
         {
             return View();
         }
 
-        //
-        // POST: /MemberManagement/Create
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -52,20 +60,18 @@ namespace golf.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.People.Add(person);
-                db.SaveChanges();
+                databas.Person.Add(person);
+                databas.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             return View(person);
         }
 
-        //
-        // GET: /MemberManagement/Edit/5
 
         public ActionResult Edit(int id = 0)
         {
-            Person person = db.People.Find(id);
+            Person person = databas.Person.Find(id);
             if (person == null)
             {
                 return HttpNotFound();
@@ -73,8 +79,7 @@ namespace golf.Controllers
             return View(person);
         }
 
-        //
-        // POST: /MemberManagement/Edit/5
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -82,19 +87,18 @@ namespace golf.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(person).State = EntityState.Modified;
-                db.SaveChanges();
+                databas.Entry(person).State = EntityState.Modified;
+                databas.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(person);
         }
 
-        //
-        // GET: /MemberManagement/Delete/5
+
 
         public ActionResult Delete(int id = 0)
         {
-            Person person = db.People.Find(id);
+            Person person = databas.Person.Find(id);
             if (person == null)
             {
                 return HttpNotFound();
@@ -102,22 +106,20 @@ namespace golf.Controllers
             return View(person);
         }
 
-        //
-        // POST: /MemberManagement/Delete/5
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Person person = db.People.Find(id);
-            db.People.Remove(person);
-            db.SaveChanges();
+            Person person = databas.Person.Find(id);
+            databas.Person.Remove(person);
+            databas.SaveChanges();
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
-            db.Dispose();
+            databas.Dispose();
             base.Dispose(disposing);
         }
     }

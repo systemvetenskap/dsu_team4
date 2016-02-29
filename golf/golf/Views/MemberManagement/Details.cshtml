@@ -1,5 +1,6 @@
 ﻿@model golf.Models.Person
 
+
 @{
     ViewBag.Title = "Details";
 }
@@ -10,57 +11,66 @@
     <legend>Person</legend>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.firstName)
+         @Html.Label("Förnamn")
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.firstName)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.lastName)
+       @Html.Label("Efternamn")
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.lastName)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.streetAddres)
+         @Html.Label("Adress")
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.streetAddres)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.postalCode)
+         @Html.Label("Postnummer")
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.postalCode)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.city)
+         @Html.Label("Ort")
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.city)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.email)
+        @Html.Label("E-post")
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.email)
     </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.gender_ID)
+    <div class="display-field">
+        @Html.Label("HCP")
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.gender_ID)
+        @ViewBag.HCP
+    </div>
+
+    <div class="display-label">
+        @Html.Label("Golfid")
+    </div>
+    <div class="display-field">
+        @ViewBag.gid
     </div>
 
 
 </fieldset>
+
+
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Ändra", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Tillbaka", "Index")
 </p>

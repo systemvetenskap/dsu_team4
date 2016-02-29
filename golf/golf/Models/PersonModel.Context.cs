@@ -13,10 +13,10 @@ namespace golf.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class dsuteam4Entities : DbContext
+    public partial class dsuteam4Entities1 : DbContext
     {
-        public dsuteam4Entities()
-            : base("name=dsuteam4Entities")
+        public dsuteam4Entities1()
+            : base("name=dsuteam4Entities1")
         {
         }
     
@@ -25,11 +25,7 @@ namespace golf.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<AdminPerson> AdminPerson { get; set; }
-        public DbSet<AdminType> AdminType { get; set; }
-        public DbSet<Gender> Gender { get; set; }
         public DbSet<Golfer> Golfer { get; set; }
-        public DbSet<MemberType> MemberType { get; set; }
         public DbSet<Person> Person { get; set; }
     }
 }

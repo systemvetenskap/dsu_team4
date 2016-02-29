@@ -12,17 +12,10 @@ namespace golf.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Person
+    public partial class C__MigrationHistory
     {
-        public int Id { get; set; }
-        public string firstName { get; set; }
-        public string lastName { get; set; }
-        public string streetAddres { get; set; }
-        public string postalCode { get; set; }
-        public string city { get; set; }
-        public string email { get; set; }
-        public Nullable<int> gender_ID { get; set; }
-        public Nullable<int> memberType_ID { get; set; }
-        public string PW { get; set; }
+        public string MigrationId { get; set; }
+        public byte[] Model { get; set; }
+        public string ProductVersion { get; set; }
     }
 }

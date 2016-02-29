@@ -16,6 +16,7 @@ namespace golf.Models
     {
         public int Id { get; set; }
         public string golfID { get; set; }
-        public int HCP { get; set; }
+        public string HCP { get; set; }
+        public Nullable<int> Person_ID { get; set; }
     }
 }

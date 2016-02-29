@@ -1,87 +1,84 @@
-﻿@model IEnumerable<golf.Models.Person>
+﻿@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h2>@ViewBag.Message</h2>
+            </hgroup>
+            <p>
+                Detta är medlemshanteringen.
+            </p>
+        </div>
+    </section>
+}
+@model IEnumerable<golf.Models.Person>
 
 @{
-    ViewBag.Title = "Index";
+
 }
 
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Lägg till medlem", "Create")
 </p>
 <table>
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.firstName)
+            @Html.Label("Förnamn")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.lastName)
+            @Html.Label("Efternamn")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.streetAddres)
+            @Html.Label("Adress")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.postalCode)
+            @Html.Label("Postnummer")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.city)
+            @Html.Label("Ort")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.email)
+            @Html.Label("E-post")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.gender_ID)
+            @Html.Label("Lösenord")
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Golfer_ID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.memberType_ID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PW)
-        </th>
+
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.firstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.lastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.streetAddres)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.postalCode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.city)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.gender_ID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Golfer_ID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.memberType_ID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PW)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.firstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.lastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.streetAddres)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.postalCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.city)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.PW)
+            </td>
+            <td>
+                @Html.ActionLink("Ändra", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Visa", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Radera", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
 
 </table>

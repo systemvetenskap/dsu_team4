@@ -60,6 +60,23 @@
           <Property Name="memberType_ID" Type="int" />
           <Property Name="PW" Type="int" />
         </EntityType>
+        <EntityType Name="Player">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="lastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="streetAddres" Type="nvarchar" MaxLength="50" />
+          <Property Name="postalCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="city" Type="nvarchar" MaxLength="50" />
+          <Property Name="email" Type="nvarchar" MaxLength="200" />
+          <Property Name="gender" Type="nvarchar" MaxLength="50" />
+          <Property Name="HCP" Type="nvarchar" MaxLength="50" />
+          <Property Name="golfID" Type="nvarchar" MaxLength="50" />
+          <Property Name="memberType" Type="nvarchar" MaxLength="50" />
+          <Property Name="PW" Type="nvarchar" MaxLength="500" />
+        </EntityType>
         <EntityContainer Name="dsuteam4ModelStoreContainer">
           <EntitySet Name="AdminPerson" EntityType="Self.AdminPerson" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AdminType" EntityType="Self.AdminType" Schema="dbo" store:Type="Tables" />
@@ -67,6 +84,7 @@
           <EntitySet Name="Golfer" EntityType="Self.Golfer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MemberType" EntityType="Self.MemberType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Player" EntityType="Self.Player" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
@@ -128,6 +146,23 @@
           <Property Name="memberType_ID" Type="Int32" />
           <Property Name="PW" Type="Int32" />
         </EntityType>
+        <EntityType Name="Player">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="lastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="streetAddres" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="postalCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HCP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="golfID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="memberType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PW" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityContainer Name="dsuteam4Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AdminPerson" EntityType="Self.AdminPerson" />
           <EntitySet Name="AdminType" EntityType="Self.AdminType" />
@@ -135,6 +170,7 @@
           <EntitySet Name="Golfer" EntityType="Self.Golfer" />
           <EntitySet Name="MemberType" EntityType="Self.MemberType" />
           <EntitySet Name="Person" EntityType="Self.Person" />
+          <EntitySet Name="Player" EntityType="Self.Player" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -199,6 +235,24 @@
                 <ScalarProperty Name="gender_ID" ColumnName="gender_ID" />
                 <ScalarProperty Name="Golfer_ID" ColumnName="Golfer_ID" />
                 <ScalarProperty Name="memberType_ID" ColumnName="memberType_ID" />
+                <ScalarProperty Name="PW" ColumnName="PW" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Player">
+            <EntityTypeMapping TypeName="dsuteam4Model.Player">
+              <MappingFragment StoreEntitySet="Player">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="streetAddres" ColumnName="streetAddres" />
+                <ScalarProperty Name="postalCode" ColumnName="postalCode" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="HCP" ColumnName="HCP" />
+                <ScalarProperty Name="golfID" ColumnName="golfID" />
+                <ScalarProperty Name="memberType" ColumnName="memberType" />
                 <ScalarProperty Name="PW" ColumnName="PW" />
               </MappingFragment>
             </EntityTypeMapping>

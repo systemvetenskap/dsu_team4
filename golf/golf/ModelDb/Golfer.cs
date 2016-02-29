@@ -7,16 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace golf.Models
+namespace golf.ModelDb
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class MemberType
+    public partial class Golfer
     {
         public int Id { get; set; }
-        public string name { get; set; }
-        public Nullable<int> memberFee { get; set; }
-        public Nullable<int> cleaningFee { get; set; }
+        public string golfID { get; set; }
+        public string HCP { get; set; }
+        public Nullable<int> Person_ID { get; set; }
     }
 }
