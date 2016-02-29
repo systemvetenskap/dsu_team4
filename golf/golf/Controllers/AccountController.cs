@@ -16,6 +16,7 @@ namespace golf.Controllers
             ViewBag.Message = "Egister Här kan du regga dig om du vill det och tycker att det är kul att reggas på en hemisdan på internet där det kan bokas tider för golf, regga dig";
             return View();
         }
+       
         public ActionResult Index2()
         {
             return View();

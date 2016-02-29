@@ -1,11 +1,78 @@
-﻿@{
-    ViewBag.Title = "Egistrera";
+﻿@model golf.Models.Person
+
+@{
+    ViewBag.Title = "Create";
 }
 
-<h2>Egister</h2>
-<ol class="round">
-    <li class="one">
-        <h5>Ej</h5>
-        "Egistrera ig är ör tt li edlem"
-    </li>
-</ol>
+<h2>Skapa ny användare</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Person</legend>
+
+        <div class="editor-label">
+            @Html.Label("Förnamn")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.firstName)
+            @Html.ValidationMessageFor(model => model.firstName)
+        </div>
+
+        <div class="editor-label">
+            @Html.Label("Efternamn")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.lastName)
+            @Html.ValidationMessageFor(model => model.lastName)
+        </div>
+
+        <div class="editor-label">
+            @Html.Label("Gatuadress")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.streetAddres)
+            @Html.ValidationMessageFor(model => model.streetAddres)
+        </div>
+
+        <div class="editor-label">
+            @Html.Label("Postnummer")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.postalCode)
+            @Html.ValidationMessageFor(model => model.postalCode)
+        </div>
+
+        <div class="editor-label">
+            @Html.Label("stad")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.city)
+            @Html.ValidationMessageFor(model => model.city)
+        </div>
+
+        <div class="editor-label">
+            @Html.Label("E-post")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.email)
+            @Html.ValidationMessageFor(model => model.email)
+        </div>
+
+
+
+        <p>
+            <input type="submit" value="Skapa ny användare" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
