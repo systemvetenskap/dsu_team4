@@ -19,19 +19,32 @@ namespace golf.Controllers
 
         public ActionResult Index()
         {
-            return View(db.Person.ToList());
+            return View();
         }
 
-        public ActionResult LogInCheck(string email, string PW)
+        public ActionResult LogInCheck(Person model)
         {
+
+            String email = model.email;
+            String PW = model.PW;
             foreach (Person P in db.Person)
             {
                 if (P.email==email && P.PW==PW)
                 {
-                    RenewCurrentUser();  
+
+                    FormsAuthentication.SetAuthCookie(model.email, true);
+
+                   
+
+                    //RenewCurrentUser();  
                 }
             }
-            return View();
+
+            return RedirectToAction("~View/User/Index");
+
+            //return View("View/User/Index.cshtml");
+          
+
         }
 
         public void RenewCurrentUser()

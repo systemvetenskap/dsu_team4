@@ -16,7 +16,7 @@ namespace golf.Controllers
             ViewBag.Message = "Egister ig är ör att li edlem";
             return View();
         }
-        public ActionResult Index()
+        public ActionResult Login()
         {
             ViewBag.Message = "Logga in här";
             return View();

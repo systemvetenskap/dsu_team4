@@ -1,4 +1,5 @@
-﻿@model IEnumerable<golf.Models.Person>
+﻿@model golf.Models.Person
+
 
 @{
     ViewBag.Title = "Index";
@@ -17,18 +18,23 @@
     </section>
 }
 
-
+@using (Html.BeginForm("LogInCheck", "Log"))
+{ 
     @Html.Label("E-post")
-    @Html.TextBox("email")
+   
     <br />
     @Html.Label("Lösenord")
-    @Html.TextBox("PW")
+    
+    @Html.TextBoxFor(m => m.email)
+    @Html.TextBoxFor(m => m.PW)
+    
 
-
-
+    <input type="submit" value="LogInCheck" />
+}
 <p>
-
-    <input type="button" value="Logga in" onclick="@("window.location.href='" + @Url.Action("Index ", "Log") + "'");" />
+    
+    @*@Html.ActionLink("Logga in", "LogInCheck", "Log")
+    <input type="button" value="Logga in" onclick="@("window.location.href='" + @Url.Action("Index ", "Log") + "'");" />*@
 </p>
 
 @*<p>
