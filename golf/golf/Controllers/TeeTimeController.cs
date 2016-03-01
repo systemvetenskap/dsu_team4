@@ -17,12 +17,9 @@ namespace golf.Controllers
         public ActionResult Index()
         {
             
-            foreach(TeeTime tt in databas.TeeTime)
-            {
-                
-            }
+            
            
-            return View();
+            return View(databas.TeeTime.ToList());
         }
 
     }

@@ -1,0 +1,13 @@
+﻿body {
+}
+
+.timeWrapper{
+    width: 80%;
+    height: 60%
+}
+
+.timeDiv{
+    width:8.33333333%;
+    height: auto;
+    float: left;
+}
