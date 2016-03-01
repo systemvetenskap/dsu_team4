@@ -21,15 +21,12 @@
 @using (Html.BeginForm("LogInCheck", "Log"))
 { 
     @Html.Label("E-post")
-   
-    <br />
-    @Html.Label("Lösenord")
-    
     @Html.TextBoxFor(m => m.email)
+    <br />
+    @Html.Label("Lösenord")    
     @Html.TextBoxFor(m => m.PW)
-    
-
-    <input type="submit" value="LogInCheck" />
+    <br>
+    <input type="submit" value="Logga in" />
 }
 <p>
     

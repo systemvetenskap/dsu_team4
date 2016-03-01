@@ -31,20 +31,11 @@ namespace golf.Controllers
             {
                 if (P.email==email && P.PW==PW)
                 {
-
                     FormsAuthentication.SetAuthCookie(model.email, true);
-
-                   
-
-                    //RenewCurrentUser();  
+                    return View("~/Views/Home/Index.cshtml");
                 }
             }
-
-            return RedirectToAction("~Views/User/Index");
-
-            //return View("View/User/Index.cshtml");
-          
-
+            return View("~/Views/Log/Index.cshtml"); 
         }
 
         public void RenewCurrentUser()

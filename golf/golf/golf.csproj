@@ -366,6 +366,7 @@
     <Content Include="Views\Log\Create.cshtml" />
     <Content Include="Views\Log\Edit.cshtml" />
     <Content Include="Views\Log\Delete.cshtml" />
+    <Content Include="Views\Account\LogOff.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

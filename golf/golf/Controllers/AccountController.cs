@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace golf.Controllers
 {
@@ -24,6 +25,11 @@ namespace golf.Controllers
        
         public ActionResult Index2()
         {
+            return View();
+        }
+        public ActionResult LogOff()
+        {
+            FormsAuthentication.SignOut();
             return View();
         }
     }
