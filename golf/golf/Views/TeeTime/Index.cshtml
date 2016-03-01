@@ -20,32 +20,51 @@
         foreach (var item in Model)
         {
             string saveTime = item.teeTime1;
+            
             char getChar = saveTime[3];
-            string checkTime = getChar.ToString();            
+            string checkMinute = getChar.ToString();
+            
+            string checkHour = saveTime[0].ToString() + saveTime[1].ToString(); 
 
-            if (checkTime == i.ToString())
+            if (checkMinute == i.ToString())
             {
-                if (checkTime == "0")
+                if (checkMinute == "0")
                 {
-                    <div class="timedivHour" id=@item.Id time=@item.teeTime1[3]>
-                        @Html.DisplayFor(modelItem => item.teeTime1)
+                    <div class="hourAndMinutes">
+                        <div class="timedivHour" id=@item.Id time=@item.teeTime1[3]>
+                            @Html.DisplayFor(modelItem => item.teeTime1)
+                        </div>
+                        @foreach (var o in Model)
+                        {
+                            if (o.teeTime1[0].ToString() + o.teeTime1[1].ToString() == checkHour && o.teeTime1[3].ToString() != "0")
+                            {
+                            <div class="timedivMin" id=@o.Id >
+                                @Html.DisplayFor(modelItem => o.teeTime1)
+                            </div>
+                                
+                            }
+                        }
+
                     </div>
                 }
-                else 
-                {
+
+                    @*else
+                    {
+
                     <div class="timedivMin" id=@item.Id time=@item.teeTime1[3]>
                         @Html.DisplayFor(modelItem => item.teeTime1)
                     </div>
-                }
+                    }*@
 
-            }
-
-
-
-        }
+                    }
 
 
-    }
 
+                
+                    }
+
+
+                    }
 </div>
+
 
