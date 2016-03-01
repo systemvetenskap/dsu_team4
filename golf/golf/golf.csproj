@@ -194,6 +194,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LogController.cs" />
     <Compile Include="Controllers\MemberManagementController.cs" />
+    <Compile Include="Controllers\TeeTimeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
