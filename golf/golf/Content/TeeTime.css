@@ -2,13 +2,32 @@
 }
 
 .timeWrapper{
-    width: 80%;
-    height: 60%
-}
-
-.timediv{
-    width:16.6666666666666666666%;
-    height: auto;
+    width: 100%;
     
+    
+}
+.timedivHour{
+    width:7%;
+    background-color: lightgreen;
+    font-weight: bold;
+    padding-bottom: 2%;
+    margin-left: 1%;
+    margin-bottom: 1%;
+    float: left;
+}
+.timedivMin{
+    width:7%;
+    background-color: lightgreen;
+    padding-bottom: 2%;
+    margin-left: 1%;
+    margin-bottom: 1%;
+    float: left;
+
+}
+.timedivEmpty{
+    width:7%;
+    background-color: lightgreen;
+    padding-bottom: 2%;
+    margin-left: 1%;
     float: left;
 }

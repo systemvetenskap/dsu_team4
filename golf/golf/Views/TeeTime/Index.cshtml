@@ -10,15 +10,42 @@
 
     
     
+<div class="test">
 
+</div>
 <h2>Index</h2>
 <div class="timeWrapper">
-    @foreach (var item in Model)
+    @for (int i = 0; i < 6; i++)
     {
-        <div class="timediv" id=@item.Id>
-            @Html.DisplayFor(modelItem => item.teeTime1)
-        </div>
+        foreach (var item in Model)
+        {
+            string saveTime = item.teeTime1;
+            char getChar = saveTime[3];
+            string checkTime = getChar.ToString();            
+
+            if (checkTime == i.ToString())
+            {
+                if (checkTime == "0")
+                {
+                    <div class="timedivHour" id=@item.Id time=@item.teeTime1[3]>
+                        @Html.DisplayFor(modelItem => item.teeTime1)
+                    </div>
+                }
+                else 
+                {
+                    <div class="timedivMin" id=@item.Id time=@item.teeTime1[3]>
+                        @Html.DisplayFor(modelItem => item.teeTime1)
+                    </div>
+                }
+
+            }
+
+
+
+        }
+
 
     }
+
 </div>
 
