@@ -292,6 +292,12 @@ aside {
     float: left;
     width: 55%;
 }
+        .MyPageLoggedIn
+        {
+    color: white;
+    background-color:yellow;
+    
+}
 
     #loginForm .validation-error {
         display: block;
@@ -616,7 +622,7 @@ tr.pager td {
     .main-content,
     .featured + .main-content {
         background-position: 10px 0;
-        background-color:red;
+        background-color:#fff;
     }
 
     .content-wrapper {
@@ -689,4 +695,7 @@ tr.pager td {
         footer p {
             margin: 0;
         }
+
 }
+
+
