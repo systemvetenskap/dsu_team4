@@ -12,19 +12,13 @@ namespace golf.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Golfer
+    public partial class TeeTimeDateGolfer
     {
-        public Golfer()
-        {
-            this.TeeTimeDateGolfer = new HashSet<TeeTimeDateGolfer>();
-        }
-    
         public int Id { get; set; }
-        public string golfID { get; set; }
-        public string HCP { get; set; }
-        public int Person_ID { get; set; }
+        public int TeeTimeDate_ID { get; set; }
+        public int Golfer_ID { get; set; }
     
-        public virtual Person Person { get; set; }
-        public virtual ICollection<TeeTimeDateGolfer> TeeTimeDateGolfer { get; set; }
+        public virtual Golfer Golfer { get; set; }
+        public virtual TeeTimeDate TeeTimeDate { get; set; }
     }
 }

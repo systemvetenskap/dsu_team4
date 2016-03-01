@@ -200,6 +200,9 @@
     </Compile>
     <Compile Include="member\person\context.cs" />
     <Compile Include="ModelDb\Context\tt.cs" />
+    <Compile Include="Models\AdminPerson.cs">
+      <DependentUpon>PersonModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Golfer.cs">
       <DependentUpon>PersonModel.tt</DependentUpon>
     </Compile>
@@ -220,6 +223,18 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PersonModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TeeDate.cs">
+      <DependentUpon>PersonModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TeeTime.cs">
+      <DependentUpon>PersonModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TeeTimeDate.cs">
+      <DependentUpon>PersonModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TeeTimeDateGolfer.cs">
+      <DependentUpon>PersonModel.tt</DependentUpon>
     </Compile>
     <Compile Include="person\context.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
