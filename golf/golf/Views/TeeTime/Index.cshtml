@@ -1,8 +1,11 @@
 ﻿@model IEnumerable<golf.Models.TeeTime>
 @{
     ViewBag.Title = "Index";
-    <link href="@Url.Content("~/TeeTime.css")" rel="stylesheet" type="text/css" />
+    
     Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Styles {
+    <link href="@Url.Content("~/Content/TeeTime.css")" rel="stylesheet" type="text/css" />
 }
 
     
