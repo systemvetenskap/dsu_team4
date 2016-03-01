@@ -361,7 +361,7 @@
     <Content Include="Views\User\Create.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\Delete.cshtml" />
-    <Content Include="Views\Log\Index.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Log\Details.cshtml" />
     <Content Include="Views\Log\Create.cshtml" />
     <Content Include="Views\Log\Edit.cshtml" />
