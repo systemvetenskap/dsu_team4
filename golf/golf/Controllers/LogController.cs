@@ -40,7 +40,7 @@ namespace golf.Controllers
                 }
             }
 
-            return RedirectToAction("~View/User/Index");
+            return RedirectToAction("~Views/User/Index");
 
             //return View("View/User/Index.cshtml");
           
