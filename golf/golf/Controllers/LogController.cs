@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using golf.Models;
+using System.Web.Security;
 
 namespace golf.Controllers
 {
@@ -19,6 +20,44 @@ namespace golf.Controllers
         public ActionResult Index()
         {
             return View(db.Person.ToList());
+        }
+
+        public ActionResult LogInCheck(string email, string PW)
+        {
+            foreach (Person P in db.Person)
+            {
+                if (P.email==email && P.PW==PW)
+                {
+                    RenewCurrentUser();  
+                }
+            }
+            return View();
+        }
+
+        public void RenewCurrentUser()
+        {
+            System.Web.HttpCookie authCookie =
+                System.Web.HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName];
+            if (authCookie != null)
+            {
+                FormsAuthenticationTicket authTicket = null;
+                authTicket = FormsAuthentication.Decrypt(authCookie.Value);
+
+                if (authTicket != null && !authTicket.Expired)
+                {
+                    FormsAuthenticationTicket newAuthTicket = authTicket;
+
+                    if (FormsAuthentication.SlidingExpiration)
+                    {
+                        newAuthTicket = FormsAuthentication.RenewTicketIfOld(authTicket);
+                    }
+                    string userData = newAuthTicket.UserData;
+                    string[] roles = userData.Split(',');
+
+                    System.Web.HttpContext.Current.User =
+                        new System.Security.Principal.GenericPrincipal(new FormsIdentity(newAuthTicket), roles);
+                }
+            }
         }
 
 
