@@ -13,7 +13,7 @@ namespace golf.Controllers
         
         public ActionResult Egister()
         {
-            ViewBag.Message = "Egister g är ör att li edlem";
+            ViewBag.Message = "Egister ig är ör att li edlem";
             return View();
         }
         public ActionResult Login()
