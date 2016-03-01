@@ -14,6 +14,12 @@ namespace golf.Models
     
     public partial class Person
     {
+        public Person()
+        {
+            this.AdminPerson = new HashSet<AdminPerson>();
+            this.Golfer = new HashSet<Golfer>();
+        }
+    
         public int Id { get; set; }
         public string firstName { get; set; }
         public string lastName { get; set; }
@@ -24,5 +30,8 @@ namespace golf.Models
         public Nullable<int> gender_ID { get; set; }
         public Nullable<int> memberType_ID { get; set; }
         public string PW { get; set; }
+    
+        public virtual ICollection<AdminPerson> AdminPerson { get; set; }
+        public virtual ICollection<Golfer> Golfer { get; set; }
     }
 }

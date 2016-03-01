@@ -146,5 +146,49 @@ namespace WindowsFormsApplication1
 
 
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            string cStringAzure = "Data Source=dsuteam4.database.windows.net;Initial Catalog=dsuteam4;Persist Security Info=True;User ID=dusadmin;Password=Team42016";
+            SqlConnection connAzure = new SqlConnection(cStringAzure);
+            string addTimes = "INSERT INTO TeeTime(teeTime) VALUES(@teeTime)";
+            
+            
+            for (int i = 7; i < 19; i++)
+			{
+                string del1;
+			 
+             if (i < 10)
+             {
+                del1 = "0"+ i.ToString();
+             }
+             else
+             {
+                del1 = i.ToString();
+             }
+                
+                for (int z = 0; z < 60; z += 10)
+			    {
+                    string del2;
+                    if (z == 0)
+                    {
+                        del2 = "0" + z.ToString();
+                    }
+                    else
+                    {
+			        del2 = z.ToString();
+                    }
+                    string hela = del1 +":"+ del2;
+                    SqlCommand com3 = new SqlCommand(addTimes, connAzure);
+                    com3.Parameters.AddWithValue("teeTime", hela);
+                    connAzure.Open();
+                    com3.ExecuteNonQuery();
+                    connAzure.Close();
+			    }
+			
+            
+            }
+        
+        }
     }
 }
