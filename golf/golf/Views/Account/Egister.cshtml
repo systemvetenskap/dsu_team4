@@ -21,7 +21,7 @@
 
         <fieldset>
             <legend>Person</legend>
-            @using (Html.BeginForm("RegisterNew", "Controllers"))
+            @using (Html.BeginForm("RegisterNew", "Account"))
             {
 
 
@@ -29,7 +29,7 @@
                 @Html.Label("Förnamn")
             </div>
             <div class="editor-field">
-                @Html.EditorFor(model => model.firstName)
+                @Html.TextBoxFor(model => model.firstName)
                 @Html.ValidationMessageFor(model => model.firstName)
             </div>
 
@@ -37,7 +37,7 @@
                 @Html.Label("Efternamn")
             </div>
             <div class="editor-field">
-                @Html.EditorFor(model => model.lastName)
+                @Html.TextBoxFor(model => model.lastName)
                 @Html.ValidationMessageFor(model => model.lastName)
             </div>
 
@@ -45,7 +45,7 @@
                 @Html.Label("Gatuadress")
             </div>
             <div class="editor-field">
-                @Html.EditorFor(model => model.streetAddres)
+               @Html.TextBoxFor(model => model.streetAddres)
                 @Html.ValidationMessageFor(model => model.streetAddres)
             </div>
 
@@ -53,7 +53,7 @@
                 @Html.Label("Postnummer")
             </div>
             <div class="editor-field">
-                @Html.EditorFor(model => model.postalCode)
+                @Html.TextBoxFor(model => model.postalCode)
                 @Html.ValidationMessageFor(model => model.postalCode)
             </div>
 
@@ -61,7 +61,7 @@
                 @Html.Label("stad")
             </div>
             <div class="editor-field">
-                @Html.EditorFor(model => model.city)
+               @Html.TextBoxFor(model => model.city)
                 @Html.ValidationMessageFor(model => model.city)
             </div>
 
@@ -69,7 +69,7 @@
                 @Html.Label("E-post")
             </div>
             <div class="editor-field">
-                @Html.EditorFor(model => model.email)
+              @Html.TextBoxFor(model => model.email)
                 @Html.ValidationMessageFor(model => model.email)
             </div>
 
