@@ -370,6 +370,7 @@
     <Content Include="Views\Account\LogOff.cshtml" />
     <Content Include="Views\TeeTime\Index.cshtml" />
     <Content Include="Views\Account\MyPage.cshtml" />
+    <Content Include="Views\Account\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

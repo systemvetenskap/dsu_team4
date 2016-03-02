@@ -14,11 +14,51 @@ namespace golf.Controllers
         //
         // GET: /Account/
         private dsuteam4Entities1 db = new dsuteam4Entities1();
-        public ActionResult Egister()
+        //public ActionResult Egister()
+        //{
+        //    ViewBag.Message = "Registrera dig här för att bli medlem";
+        //    return View();
+        //}
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult RegisterNew(Person model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Person.Add(model);
+        //        db.SaveChanges();
+        //        return RedirectToAction("MyPage");
+        //    }
+
+        //    return View(model);
+        //}
+        public ActionResult Create()
         {
-            ViewBag.Message = "Egister ig är ör att li edlem";
             return View();
         }
+
+        [HttpPost]
+        public ActionResult Create(Person model)
+        {
+
+            if (ModelState.IsValid)
+            {
+                db.Person.Add(model);
+                db.SaveChanges();
+
+
+
+                FormsAuthentication.SetAuthCookie(model.Id.ToString(), false);
+
+                return RedirectToAction("MyPage", model);
+            }
+            else
+            {
+                return View(model);
+            }
+        }
+
+
         public ActionResult Login()
         {
             ViewBag.Message = "Logga in här";
@@ -32,8 +72,8 @@ namespace golf.Controllers
         public ActionResult LogOff()
         {
             FormsAuthentication.SignOut();
-            
-            return View();
+
+            return Redirect(Url.Content("~/"));
         }
 
         public ActionResult Submit()
