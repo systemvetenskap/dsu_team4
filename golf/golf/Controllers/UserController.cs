@@ -25,6 +25,14 @@ namespace golf.Controllers
             return View(pr);
         }
 
+        public ActionResult Index(Person P)
+        {
+            List<Person> pr = new List<Person>();
+            pr.Add(P);
+
+            return View(pr);
+        }
+
         //
         // GET: /User/Details/5
 
