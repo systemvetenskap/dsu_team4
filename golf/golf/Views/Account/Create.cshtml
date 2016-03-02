@@ -62,9 +62,10 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.gender_ID)
+            @Html.Label("Kön")
         </div>
         <div class="editor-field">
+            @Html.DropDownListFor()
             @Html.EditorFor(model => model.gender_ID)
             @Html.ValidationMessageFor(model => model.gender_ID)
         </div>
