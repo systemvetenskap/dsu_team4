@@ -22,6 +22,7 @@ namespace golf.Models
         public int Id { get; set; }
         public int TeeDate_ID { get; set; }
         public int TeeTime_ID { get; set; }
+        public Nullable<bool> Disabled { get; set; }
     
         public virtual TeeDate TeeDate { get; set; }
         public virtual TeeTime TeeTime { get; set; }
