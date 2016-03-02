@@ -105,24 +105,24 @@
 
         var cDiv = document.getElementById("timeWrapper");
         var innerDivs = cDiv.getElementsByTagName("DIV");
-        for (var i = 0; i < innerDivs.length; i++) {
 
+        for(var i = 0; i < innerDivs.length; i++) 
+        {
+            
             @foreach(var thing in Model.TeeTimeDate)
-                    {
+               {
                          
-                      var id = thing.TeeTime_ID.ToString();
-                      @: var cid = innerDivs[i].id;
+                  var id = thing.TeeTime_ID.ToString();
+                   @: var cid = innerDivs[i].id;
 
-                           @: if(cid == @id)
-                                           {
-                               @: document.getElementById(cid).style.background = 'grey';
-          
-                           
+                      @: if(cid == @id)
+                         {   
+                          
+                             @: document.getElementById(cid).style.background = 'grey';
+                                   
+                         }
+                        
                  }
-         
-                 
-                 }
-
 
         }
 
