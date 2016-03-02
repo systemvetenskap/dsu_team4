@@ -23,7 +23,11 @@ namespace golf.Controllers
                 foreach(TeeTime t in databas.TeeTime)
                 {
                     cl.TeeTime.Add(t);
-                }           
+                }
+                foreach(TeeTimeDate td in databas.TeeTimeDate)
+                {
+                    cl.TeeTimeDate.Add(td);
+                }
                 cl.currDate = DateTime.Today;
                 cl.dateString = cl.currDate.ToShortDateString();
                 return View(cl);
