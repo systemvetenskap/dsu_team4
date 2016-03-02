@@ -48,13 +48,27 @@ namespace golf.Controllers
 
             Person person = db.Person.Find(id);
             ViewBag.User = person.firstName +" "+ person.lastName;
-          
+
             return View(person);
         }
+        //public ActionResult MyPage(Person P)
+        //{
+
+        //    int id = Convert.ToInt32(User.Identity.Name);
+
+        //    Person person = db.Person.Find(id);
+
+        //    //List<Person> pr = new List<Person>();
+        //    //pr.Add(person);
+
+
+        //    return View(P);
+        //}
+
 
         public ActionResult LogInCheck(Person model)
         {
-            
+
             String email = model.email;
             String PW = model.PW;
             foreach (Person P in db.Person)
@@ -62,7 +76,7 @@ namespace golf.Controllers
                 if (P.email == email && P.PW == PW)
                 {
                     FormsAuthentication.SetAuthCookie(P.Id.ToString(), false);
-                    
+
                     //List<Person> tempP = new List<Person>();
 
                     ////ICollection ic = new ICollection
