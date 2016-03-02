@@ -48,7 +48,7 @@ namespace golf.Controllers
 
 
 
-                //FormsAuthentication.SetAuthCookie(P.Id.ToString(), false);
+                FormsAuthentication.SetAuthCookie(model.Id.ToString(), false);
 
                 return RedirectToAction("MyPage", model);
             }
@@ -72,8 +72,8 @@ namespace golf.Controllers
         public ActionResult LogOff()
         {
             FormsAuthentication.SignOut();
-            
-            return View();
+
+            return RedirectToAction("Login");
         }
 
         public ActionResult Submit()
