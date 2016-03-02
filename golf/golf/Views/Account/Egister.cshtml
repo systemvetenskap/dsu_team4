@@ -21,6 +21,9 @@
 
         <fieldset>
             <legend>Person</legend>
+            @using (Html.BeginForm("RegisterNew", "Controllers"))
+            {
+
 
             <div class="editor-label">
                 @Html.Label("Förnamn")
@@ -75,6 +78,7 @@
             <p>
                 <input type="submit" value="Skapa ny användare" />
             </p>
+            }
         </fieldset>
     }
 

@@ -16,8 +16,21 @@ namespace golf.Controllers
         private dsuteam4Entities1 db = new dsuteam4Entities1();
         public ActionResult Egister()
         {
-            ViewBag.Message = "Egister ig är ör att li edlem";
+            ViewBag.Message = "Registrera dig här för att bli medlem";
             return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RegisterNew(Person person)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Person.Add(person);
+                db.SaveChanges();
+                return RedirectToAction("MyPage");
+            }
+
+            return View(person);
         }
         public ActionResult Login()
         {
