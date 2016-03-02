@@ -43,10 +43,10 @@ namespace golf.Controllers
                 if (P.email == email && P.PW == PW)
                 {
                     FormsAuthentication.SetAuthCookie(model.email, true);
-                    return View("~/Views/Home/Index.cshtml");
+                    return View("~/Views/User/Index.cshtml", P);
                 }
             }
-            return View("~/Views/Log/Index.cshtml");
+            return View("~/Views/Account/Login.cshtml");
         }
     }
 }
