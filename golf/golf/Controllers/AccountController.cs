@@ -35,6 +35,37 @@ namespace golf.Controllers
             
             return View();
         }
+
+        public ActionResult Submit()
+        {
+            // do something
+            return Redirect(Request.UrlReferrer.ToString());
+        }
+        public ActionResult MyPage()
+        {
+
+            int id = Convert.ToInt32(User.Identity.Name);
+
+            Person person = db.Person.Find(id);
+            ViewBag.User = person.firstName +" "+ person.lastName;
+
+            return View(person);
+        }
+        //public ActionResult MyPage(Person P)
+        //{
+
+        //    int id = Convert.ToInt32(User.Identity.Name);
+
+        //    Person person = db.Person.Find(id);
+
+        //    //List<Person> pr = new List<Person>();
+        //    //pr.Add(person);
+
+
+        //    return View(P);
+        //}
+
+
         public ActionResult LogInCheck(Person model)
         {
 
@@ -44,29 +75,29 @@ namespace golf.Controllers
             {
                 if (P.email == email && P.PW == PW)
                 {
-                    FormsAuthentication.SetAuthCookie(P.Id.ToString(), true);
+                    FormsAuthentication.SetAuthCookie(P.Id.ToString(), false);
 
-                    List<Person> tempP = new List<Person>();
-                    
-                    //ICollection ic = new ICollection
-                    Golfer g = new Golfer();
+                    //List<Person> tempP = new List<Person>();
 
-                    foreach (Golfer golf in db.Golfer)
-                    {
-                        if (golf.Person_ID == P.Id)
-                        {
-                            P.Golfer.Add(g);
-                        }
-                    }
+                    ////ICollection ic = new ICollection
+                    //Golfer g = new Golfer();
+
+                    //foreach (Golfer golf in db.Golfer)
+                    //{
+                    //    if (golf.Person_ID == P.Id)
+                    //    {
+                    //        P.Golfer.Add(g);
+                    //    }
+                    //}
 
 
-                    tempP.Add(P);
+                    //tempP.Add(P);
 
-                    
-                    return View("~/Views/User/Index.cshtml", tempP);
+
+                    return RedirectToAction("MyPage");
                 }
             }
-            return View("~/Views/Account/Login.cshtml");
+            return View("~/Shared/Error.cshtml");
         }
     }
 }

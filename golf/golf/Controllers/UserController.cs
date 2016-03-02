@@ -21,20 +21,22 @@ namespace golf.Controllers
         {
 
             int id = Convert.ToInt32(User.Identity.Name);
+
             Person person = db.Person.Find(id);
-            List<Person> pr = new List<Person>();
-            pr.Add(person);
+
+            //List<Person> pr = new List<Person>();
+            //pr.Add(person);
             
 
-            return View(pr);
+            return View(person);
         }
 
-        public ActionResult IndexLogin(List<Person> P)
-        {
+        //public ActionResult IndexLogin(List<Person> P)
+        //{
 
 
-            return View("~/Views/User/Index.cshtml", P);
-        }
+        //    return View("~/Views/User/Index.cshtml", P);
+        //}
 
         //
         // GET: /User/Details/5

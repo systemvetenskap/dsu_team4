@@ -1,5 +1,170 @@
-﻿@{
-    ViewBag.Title = "MyPage";
+﻿@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h2>@ViewBag.Message</h2>
+            </hgroup>
+            <p>
+                Detta är mina sidor.
+                
+            </p>
+        </div>
+    </section>
+}
+@model golf.Models.Person
+
+@{
+    ViewBag.Title = "Mina personuppgifter";
 }
 
-<h2>MyPage</h2>
+<h2>Mina personuppgifter</h2>
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+<div class="MyPageLoggedIn">
+    <tr>
+        <th id="myPageth">
+            @Html.Label("Förnamn")
+        </th>
+        <th>
+            @Html.Label("Efternamn")
+        </th>
+        <th>
+            @Html.Label("Adress")
+        </th>
+        <th>
+            @Html.Label("Postnummer")
+        </th>
+        <th>
+            @Html.Label("Stad")
+        </th>
+        <th>
+            @Html.Label("E-postadress")
+        </th>
+        <th>
+            @Html.Label("Kön")
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.memberType_ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PW)
+            </th>*@
+        <th></th>
+    </tr>
+
+
+    @*<tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.firstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.lastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.streetAddres)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.postalCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.city)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.gender_ID)
+                Fixa så if gender==1 visa man
+            </td>
+            <td>
+                @Html.ActionLink("Ändra", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Detaljer", "Details", new { id = item.Id })
+                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            </td>
+        </tr>*@
+    <fieldset>
+        <legend>Person</legend>
+
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.firstName)
+        </div>
+        <div class="editor-field">
+            @Html.DisplayFor(model => model.firstName)
+            @Html.ValidationMessageFor(model => model.firstName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.lastName)
+        </div>
+        <div class="editor-field">
+            @Html.DisplayFor(model => model.lastName)
+            @Html.ValidationMessageFor(model => model.lastName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.streetAddres)
+        </div>
+        <div class="editor-field">
+            @Html.DisplayFor(model => model.streetAddres)
+            @Html.ValidationMessageFor(model => model.streetAddres)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.postalCode)
+        </div>
+        <div class="editor-field">
+            @Html.DisplayFor(model => model.postalCode)
+            @Html.ValidationMessageFor(model => model.postalCode)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.city)
+        </div>
+        <div class="editor-field">
+            @Html.DisplayFor(model => model.city)
+            @Html.ValidationMessageFor(model => model.city)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.email)
+        </div>
+        <div class="editor-field">
+            @Html.DisplayFor(model => model.email)
+            @Html.ValidationMessageFor(model => model.email)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.gender_ID)
+        </div>
+        <div class="editor-field">
+            @Html.DisplayFor(model => model.gender_ID)
+            @Html.ValidationMessageFor(model => model.gender_ID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.memberType_ID)
+        </div>
+        <div class="editor-field">
+            @Html.DisplayFor(model => model.memberType_ID)
+            @Html.ValidationMessageFor(model => model.memberType_ID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PW)
+        </div>
+        <div class="editor-field">
+            @Html.DisplayFor(model => model.PW)
+            @Html.ValidationMessageFor(model => model.PW)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+
+
+</div>
