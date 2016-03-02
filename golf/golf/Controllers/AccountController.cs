@@ -54,6 +54,20 @@ namespace golf.Controllers
 
             return View(person);
         }
+        //public ActionResult MyPage(Person P)
+        //{
+
+        //    int id = Convert.ToInt32(User.Identity.Name);
+
+        //    Person person = db.Person.Find(id);
+
+        //    //List<Person> pr = new List<Person>();
+        //    //pr.Add(person);
+
+
+        //    return View(P);
+        //}
+
 
         public ActionResult LogInCheck(Person model)
         {
@@ -83,7 +97,7 @@ namespace golf.Controllers
                     //tempP.Add(P);
 
 
-                    return View("~/Views/Account/MyPage.cshtml");
+                    return View("~/Views/Account/MyPage.cshtml", P);
                 }
             }
             return View("~/Shared/Error.cshtml");
