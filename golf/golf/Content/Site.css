@@ -257,7 +257,7 @@ ol.round {
 
     ol.round li {
         margin: 25px 0;
-        padding-left: 45px;
+        /*padding-left: 45px;*/
       
     }
 
@@ -287,17 +287,22 @@ aside {
 }
 
 /* login page */
+        div.MyPageLoggedIn
+        {
+            background-color:#fff;
+            color: black;
+            border: 15px;
+            max-width: 900px;
+            border-collapse: separate;
+            border-spacing: 10px 50px;
+}
+
 #loginForm {
     border-right: solid 2px #c8c8c8;
     float: left;
     width: 55%;
 }
-        .MyPageLoggedIn
-        {
-    color: white;
-    background-color:yellow;
-    
-}
+
 
     #loginForm .validation-error {
         display: block;
@@ -491,11 +496,15 @@ input[type="checkbox"].input-validation-error {
 
 /* tables
 ----------------------------------------------------------*/
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
+table  {
+    text-align: center;
+    background-color: #fff;
+    max-width: 900px;
+    border-collapse: separate;
+    border-spacing: 20px;
     margin-top: 0.75em;
     border: 0 none;
+    
 }
 
 th {

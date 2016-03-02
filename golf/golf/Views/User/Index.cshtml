@@ -22,6 +22,7 @@
     @Html.ActionLink("Create New", "Create")
 </p>*@
 <div class="MyPageLoggedIn">
+    <table>
         <tr>
             <th id="myPageth">
                 @Html.Label("Förnamn")
@@ -50,12 +51,12 @@
                 <th>
                     @Html.DisplayNameFor(model => model.PW)
                 </th>*@
-            <th></th>
+
         </tr>
 
         @foreach (var item in Model)
         {
-            @*<tr>
+            <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.firstName)
                 </td>
@@ -76,95 +77,13 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.gender_ID)
-                    Fixa så if gender==1 visa man 
+                    Fixa så if gender==1 visa man
                 </td>
                 <td>
-                    @Html.ActionLink("Ändra", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Detaljer", "Details", new { id = item.Id })
-                    @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+                    @Html.ActionLink("Ändra", "Edit", new { id = item.Id })
                 </td>
-            </tr>*@
-                <fieldset>
-                    <legend>Person</legend>
+            </tr>
 
-                    @Html.HiddenFor(model => item.Id)
-
-                    <div class="editor-label">
-                        @Html.LabelFor(model => item.firstName)
-                    </div>
-                    <div class="editor-field">
-                        @Html.EditorFor(model => item.firstName)
-                        @Html.ValidationMessageFor(model => item.firstName)
-                    </div>
-
-                    <div class="editor-label">
-                        @Html.LabelFor(model => item.lastName)
-                    </div>
-                    <div class="editor-field">
-                        @Html.EditorFor(model => item.lastName)
-                        @Html.ValidationMessageFor(model => item.lastName)
-                    </div>
-
-                    <div class="editor-label">
-                        @Html.LabelFor(model => item.streetAddres)
-                    </div>
-                    <div class="editor-field">
-                        @Html.EditorFor(model => item.streetAddres)
-                        @Html.ValidationMessageFor(model => item.streetAddres)
-                    </div>
-
-                    <div class="editor-label">
-                        @Html.LabelFor(model => item.postalCode)
-                    </div>
-                    <div class="editor-field">
-                        @Html.EditorFor(model => item.postalCode)
-                        @Html.ValidationMessageFor(model => item.postalCode)
-                    </div>
-
-                    <div class="editor-label">
-                        @Html.LabelFor(model => item.city)
-                    </div>
-                    <div class="editor-field">
-                        @Html.EditorFor(model => item.city)
-                        @Html.ValidationMessageFor(model => item.city)
-                    </div>
-
-                    <div class="editor-label">
-                        @Html.LabelFor(model => item.email)
-                    </div>
-                    <div class="editor-field">
-                        @Html.EditorFor(model => item.email)
-                        @Html.ValidationMessageFor(model => item.email)
-                    </div>
-
-                    <div class="editor-label">
-                        @Html.LabelFor(model => item.gender_ID)
-                    </div>
-                    <div class="editor-field">
-                        @Html.LabelFor(model => item.gender_ID)
-                        @Html.ValidationMessageFor(model => item.gender_ID)
-                    </div>
-
-                    <div class="editor-label">
-                        @Html.LabelFor(model => item.memberType_ID)
-                    </div>
-                    <div class="editor-field">
-                        @Html.EditorFor(model => item.memberType_ID)
-                        @Html.ValidationMessageFor(model => item.memberType_ID)
-                    </div>
-
-                    <div class="editor-label">
-                        @Html.LabelFor(model => item.PW)
-                    </div>
-                    <div class="editor-field">
-                        @Html.EditorFor(model => item.PW)
-                        @Html.ValidationMessageFor(model => item.PW)
-                    </div>
-
-                    <p>
-                        <input type="submit" value="Save" />
-                    </p>
-                </fieldset>
         }
-
+    </table>
 </div>
