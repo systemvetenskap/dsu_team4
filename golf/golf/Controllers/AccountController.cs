@@ -73,7 +73,7 @@ namespace golf.Controllers
         {
             FormsAuthentication.SignOut();
 
-            return RedirectToAction("Login");
+            return Redirect(Url.Content("~/"));
         }
 
         public ActionResult Submit()
