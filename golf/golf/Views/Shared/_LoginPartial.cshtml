@@ -4,12 +4,13 @@
         @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" })) {
             @Html.AntiForgeryToken()
             <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+        @Html.ActionLink("Mina sidor", "Index", "User")
         }
     </text>
 } else {
     <ul>
         @Html.ActionLink("Registrera", "Egister", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
         @Html.ActionLink("Logga in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
-        @Html.ActionLink("Mina sidor", "Index", "User")
+
     </ul>
 }

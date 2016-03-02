@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using golf.Models;
+using System.Collections;
 
 namespace golf.Controllers
 {
@@ -42,11 +43,25 @@ namespace golf.Controllers
             {
                 if (P.email == email && P.PW == PW)
                 {
-                    FormsAuthentication.SetAuthCookie(model.email, true);
+                    FormsAuthentication.SetAuthCookie(P.Id.ToString(), true);
 
                     List<Person> tempP = new List<Person>();
+                    
+                    //ICollection ic = new ICollection
+                    Golfer g = new Golfer();
+
+                    foreach (Golfer golf in db.Golfer)
+                    {
+                        if (golf.Person_ID == P.Id)
+                        {
+                            P.Golfer.Add(g);
+                        }
+                    }
+
+
                     tempP.Add(P);
 
+                    
                     return View("~/Views/User/Index.cshtml", tempP);
                 }
             }

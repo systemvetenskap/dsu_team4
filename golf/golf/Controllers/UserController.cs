@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using golf.Models;
+using System.Web.Security;
 
 namespace golf.Controllers
 {
@@ -18,7 +19,9 @@ namespace golf.Controllers
 
         public ActionResult Index()
         {
-            Person person = db.Person.Find(2);
+
+            int id = Convert.ToInt32(User.Identity.Name);
+            Person person = db.Person.Find(id);
             List<Person> pr = new List<Person>();
             pr.Add(person);
             
@@ -26,11 +29,11 @@ namespace golf.Controllers
             return View(pr);
         }
 
-        public ActionResult Index(List<Person> P)
+        public ActionResult IndexLogin(List<Person> P)
         {
-            
 
-            return View(P);
+
+            return View("~/Views/User/Index.cshtml", P);
         }
 
         //
