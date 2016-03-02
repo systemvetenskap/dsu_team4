@@ -21,6 +21,7 @@ namespace golf.Controllers
             Person person = db.Person.Find(2);
             List<Person> pr = new List<Person>();
             pr.Add(person);
+            
 
             return View(pr);
         }
