@@ -32,6 +32,7 @@ namespace golf.Controllers
         public ActionResult LogOff()
         {
             FormsAuthentication.SignOut();
+            
             return View();
         }
         public ActionResult LogInCheck(Person model)
