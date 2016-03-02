@@ -18,6 +18,8 @@
         <AssociationConnector Association="dsuteam4Model1.FK_TeeTimeDateGolfer_ToTeeTimeDate" />
         <EntityTypeShape EntityType="dsuteam4Model1.TeeTime" Width="1.5" PointX="3.875" PointY="5.25" />
         <AssociationConnector Association="dsuteam4Model1.FK_TeeTimeDate_ToTeeTime" />
+        <EntityTypeShape EntityType="dsuteam4Model1.Gender" Width="1.5" PointX="0.75" PointY="3.75" />
+        <AssociationConnector Association="dsuteam4Model1.FK_Person_ToGender" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
