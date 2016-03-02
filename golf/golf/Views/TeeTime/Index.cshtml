@@ -8,6 +8,13 @@
     <link href="@Url.Content("~/Content/TeeTime.css")" rel="stylesheet" type="text/css" />
 }
 
+<script type="text/javascript" language="javascript">
+    function onTimeDivClick() {
+        
+        document.getElementById('details').style.display = 'block';
+        
+    }
+</script>
     
     
 <div class="test">
@@ -47,30 +54,25 @@
                 if (checkMinute == "0")
                 {
                     <div class="hourAndMinutes">
-                        <div class="timedivHour" id=@item.Id time=@item.teeTime1[3]>
+                        <div class="timedivHour" onclick="onTimeDivClick()" id=@item.Id time=@item.teeTime1[3]>
                             @Html.DisplayFor(modelItem => item.teeTime1)
                         </div>
                         @foreach (var o in Model.TeeTime)
                         {
                             if (o.teeTime1[0].ToString() + o.teeTime1[1].ToString() == checkHour && o.teeTime1[3].ToString() != "0")
                             {
-                            <div class="timedivMin" id=@o.Id >
-                                @Html.DisplayFor(modelItem => o.teeTime1)
-                            </div>
-                                
+                                <div class="timedivMin" onclick="onTimeDivClick()" id=@o.Id>
+
+                                    @Html.DisplayFor(modelItem => o.teeTime1)
+                                </div>
+
                             }
                         }
 
                     </div>
                 }
 
-                    @*else
-                    {
 
-                    <div class="timedivMin" id=@item.Id time=@item.teeTime1[3]>
-                        @Html.DisplayFor(modelItem => item.teeTime1)
-                    </div>
-                    }*@
 
                     }
 
@@ -81,6 +83,9 @@
 
 
                     }
-</div>
 
+    <div id="details" class="TeeDetails">
+        <p>En div för TeeTime-detaljer</p>
+    </div>
+</div>
 
