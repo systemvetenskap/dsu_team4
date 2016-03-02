@@ -14,19 +14,25 @@
         document.getElementById('details').style.display = 'block';
         
     }
-    function checkDivs(id) {
-        
 
-        var cDiv = document.getElementById("timeWrapper");
-        var innerDivs = cDiv.getElementsByTagName("DIV");
-        for (var i = 0; i < innerDivs.length; i++) {
-            if(innerDivs[i].id == id)
-            {
-                document.getElementById(id).style.background = 'grey';
-            }
-        }
+    //function cDiv() {
 
-    }
+       
+    //    var id = 3;
+    //     if (id == 3) {
+
+    //         alert("test");
+    //        }
+
+    //    var cDiv = document.getElementById("timeWrapper");
+    //    var innerDivs = cDiv.getElementsByTagName("DIV");
+    //    for (var i = 0; i < innerDivs.length; i++) {
+
+    //        alert("loopar divar nu");
+    //    }
+
+    //}
+    
 </script>
     
     
@@ -91,19 +97,54 @@
         }
 
 }
-    <input type="button" onclick="checkDivs()" value="Tets" />
-@foreach(var thing in Model.TeeTimeDate)
-{
-    var id = thing.Id.ToString();
-    @:checkDivs('@id');
+
+    <script>
+
+    function checkDiv() {
+
+
+        var cDiv = document.getElementById("timeWrapper");
+        var innerDivs = cDiv.getElementsByTagName("DIV");
+        for (var i = 0; i < innerDivs.length; i++) {
+
+            @foreach(var thing in Model.TeeTimeDate)
+                    {
+                         
+                      var id = thing.TeeTime_ID.ToString();
+                      @: var cid = innerDivs[i].id;
+
+                           @: if(cid == @id)
+                                           {
+                               @: document.getElementById('866').style.background = 'grey';
+          
+                           
+                 }
+         
+                 
+                 }
+
+
+        }
+
+
+    }
+
+    checkDiv();
+
+
+
+
+    </script>
+
+
     
-}
-
-   
 
 
-    <div id="details" class="TeeDetails">
-        <p>En div för TeeTime-detaljer</p>
-    </div>
+
+
+
+        <div id="details" class="TeeDetails">
+            <p>En div för TeeTime-detaljer</p>
+        </div>
 </div>
 
