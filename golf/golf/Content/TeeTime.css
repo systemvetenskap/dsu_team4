@@ -40,3 +40,57 @@
     margin-left: 1%;
     float: left;
 }
+.dateselection{
+    float: left;
+    display: block;
+    
+    
+    width: 100%;
+
+    
+}
+.buttonprev{
+
+    position:relative;
+    margin-bottom: 1%;
+    text-align:center;
+    float: left;
+    border-radius: 10%;
+
+    width: 20%;
+    height: 100%; 
+    display: block;
+}
+.selectedDate{
+
+    position:relative;
+    width: 60%;
+    float: left;
+    display: block;
+    border: 3px, solid black;   
+
+
+}
+.buttonnext{
+
+    position:relative;
+    text-align:center;
+    float: left;
+    display: block;
+    border-radius: 10%;
+    margin-bottom: 1%;
+    width: 20%;
+    height: 100%; 
+    
+}
+.dateselection nb{
+
+   width: 100%;
+
+
+
+}
+.dateselection pb{
+    
+
+}

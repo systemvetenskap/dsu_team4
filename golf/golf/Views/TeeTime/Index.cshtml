@@ -1,4 +1,4 @@
-﻿@model IEnumerable<golf.Models.TeeTime>
+﻿@model golf.Models.CalendarClass
 @{
     ViewBag.Title = "Index";
     
@@ -15,9 +15,25 @@
 </div>
 <h2>Index</h2>
 <div class="timeWrapper">
+
+    <div class="dateselection">
+
+       
+        <div class="buttonprev" type="submit" text-align="center">
+            <input  type="submit" value="<">
+        </div>      
+        <p class="selectedDate" align="center">@Html.DisplayFor(m => m.dateString)</p>
+          
+        <div class="buttonnext" type="submit" text-align="center">
+            <input type="submit" value="<">
+
+    </div>
+    
+    </div>
+    
     @for (int i = 0; i < 6; i++)
     {
-        foreach (var item in Model)
+        foreach (var item in Model.TeeTime)
         {
             string saveTime = item.teeTime1;
             
@@ -34,7 +50,7 @@
                         <div class="timedivHour" id=@item.Id time=@item.teeTime1[3]>
                             @Html.DisplayFor(modelItem => item.teeTime1)
                         </div>
-                        @foreach (var o in Model)
+                        @foreach (var o in Model.TeeTime)
                         {
                             if (o.teeTime1[0].ToString() + o.teeTime1[1].ToString() == checkHour && o.teeTime1[3].ToString() != "0")
                             {

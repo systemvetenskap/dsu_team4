@@ -204,6 +204,7 @@
     <Compile Include="Models\AdminPerson.cs">
       <DependentUpon>PersonModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CalendarClass.cs" />
     <Compile Include="Models\Golfer.cs">
       <DependentUpon>PersonModel.tt</DependentUpon>
     </Compile>

@@ -18,11 +18,6 @@ namespace golf.Models
         {
             this.TeeTimeDateGolfer = new HashSet<TeeTimeDateGolfer>();
         }
-
-        public Golfer(Person P)
-        {
-            this.TeeTimeDateGolfer = new HashSet<TeeTimeDateGolfer>();
-        }
     
         public int Id { get; set; }
         public string golfID { get; set; }

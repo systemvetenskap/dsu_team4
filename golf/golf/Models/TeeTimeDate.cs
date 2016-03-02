@@ -25,7 +25,7 @@ namespace golf.Models
         public Nullable<bool> Disabled { get; set; }
     
         public virtual TeeDate TeeDate { get; set; }
-        public virtual TeeTime TeeTime { get; set; }
         public virtual ICollection<TeeTimeDateGolfer> TeeTimeDateGolfer { get; set; }
+        public virtual TeeTime TeeTime { get; set; }
     }
 }
