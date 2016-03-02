@@ -20,13 +20,21 @@ namespace golf.Controllers
                 string date = DateTime.Today.ToShortDateString();
                 CalendarClass cl = new CalendarClass();
 
-                foreach(TeeTime t in databas.TeeTime)
+                foreach(TeeTime tt in databas.TeeTime)
                 {
-                    cl.TeeTime.Add(t);
+                    cl.TeeTime.Add(tt);
                 }
-                foreach(TeeTimeDate td in databas.TeeTimeDate)
+                foreach(TeeTimeDate ttd in databas.TeeTimeDate)
                 {
-                    cl.TeeTimeDate.Add(td);
+                    cl.TeeTimeDate.Add(ttd);
+                }
+                foreach (TeeDate td in databas.TeeDate)
+                {
+                    cl.TeeDate.Add(td);
+                }
+                foreach (TeeTimeDateGolfer ttdg in databas.TeeTimeDateGolfer)
+                {
+                    cl.TeeTimeDateGolfer.Add(ttdg);
                 }
                 cl.currDate = DateTime.Today;
                 cl.dateString = cl.currDate.ToShortDateString();
