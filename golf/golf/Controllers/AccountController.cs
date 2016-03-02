@@ -43,7 +43,11 @@ namespace golf.Controllers
                 if (P.email == email && P.PW == PW)
                 {
                     FormsAuthentication.SetAuthCookie(model.email, true);
-                    return View("~/Views/User/Index.cshtml", P);
+
+                    List<Person> tempP = new List<Person>();
+                    tempP.Add(P);
+
+                    return View("~/Views/User/Index.cshtml", tempP);
                 }
             }
             return View("~/Views/Account/Login.cshtml");

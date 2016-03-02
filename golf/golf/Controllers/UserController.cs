@@ -25,12 +25,11 @@ namespace golf.Controllers
             return View(pr);
         }
 
-        public ActionResult Index(Person P)
+        public ActionResult Index(List<Person> P)
         {
-            List<Person> pr = new List<Person>();
-            pr.Add(P);
+            
 
-            return View(pr);
+            return View(P);
         }
 
         //
