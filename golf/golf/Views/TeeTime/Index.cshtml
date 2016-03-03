@@ -10,74 +10,35 @@
 
 <script type="text/javascript" language="javascript">
 
-    function onTimeDivClick() {
+    function onTimeDivClick(id) {
         
-        document.getElementById('details').style.display = 'block';
- 
-    }
-
-    @*function testDiv() {
-
-       
-        var arr = [];
-        var arr2 = [];
-        var arr3 = [];
-        @foreach(var id in Model.TeeTimeDateGolfer){
-            @:arr.push(@id.TeeTimeDate_ID);
-
-                }
-        @foreach(var id2 in Model.TeeTimeDate){
-
-            @:arr2.push(@id2.TeeTime_ID);
-            @:arr3.push(@id2.Id);
-
-                        }
-
-        var cDiv = document.getElementById("timeWrapper");
-        var innerDivs = cDiv.getElementsByTagName("DIV");
-    
-        for (var i = 0; i <= innerDivs.length; i++) {
-            
-            for(var z = 0; z <= arr2.length; z++){
-                
-                
-                if (arr2[z] == innerDivs[i].id) {
-                    
-                    document.getElementById(arr2[z]).style.background = 'grey';
-
-                }
-                  
-                }
-            }
-
         
-
-
-        }*@
-      
-
-
-    
-
-    @*function checkDiv() {
-
-        var cDiv = document.getElementById("timeWrapper");
-        var innerDivs = cDiv.getElementsByTagName("DIV");
-
-        for (var i = 0; i < innerDivs.length; i++) {
-
-            @foreach(var thing in Model.TeeTimeDate)
+        @foreach (var ttd in Model.TeeTimeDate)
+        {
+            @:if (id == @ttd.TeeTime_ID)
+        {
+            var TTD_ID = ttd.Id;
+            foreach (var ttdg in Model.TeeTimeDateGolfer)
             {
-
-                @:var id = thing.TeeTime_ID.ToString();
-                @:var cid = innerDivs[i].id;
-                @:if(cid == id) {
+                if (TTD_ID == ttdg.TeeTimeDate_ID)
+                {
+                    foreach (var g in Model.Golfer)
+                    {
+                        if (g.Id == ttdg.Golfer_ID)
+                        {
+                            var gPID = g.Person_ID;
+                            Model.BookedPersons.Add(gPID);
+    }
+                }
+                        }
+                }
+                }
+            }
+        @:document.getElementById('details').style.display = 'block';
 
                 }
 
-            }
-        }
-    }*@
+    
 </script>
     
     
@@ -126,7 +87,7 @@
                         {
                             if (o.teeTime1[0].ToString() + o.teeTime1[1].ToString() == checkHour && o.teeTime1[3].ToString() != "0")
                             {
-                                <div class="timedivMin" onclick="onTimeDivClick()" id=@o.Id booked="@Model.changeColor(o.Id, Model.selDate)">
+                                <div class="timedivMin" onclick="onTimeDivClick(@o.Id)" id=@o.Id booked="@Model.changeColor(o.Id, Model.selDate)">
 
                                     @Html.DisplayFor(modelItem => o.teeTime1)<br />
                                     @Model.number
