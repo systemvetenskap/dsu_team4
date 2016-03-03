@@ -11,28 +11,72 @@
 <script type="text/javascript" language="javascript">
     function onTimeDivClick() {
         
-        document.getElementById('details').style.display = 'block';
+        //document.getElementById(arr2).style.display = 'block';
         
     }
 
-    //function cDiv() {
+    function testDiv() {
 
        
-    //    var id = 3;
-    //     if (id == 3) {
+        var arr = [];
+        var arr2 = [];
+        var arr3 = [];
+        @foreach(var id in Model.TeeTimeDateGolfer){
+            @:arr.push(@id.TeeTimeDate_ID);
 
-    //         alert("test");
-    //        }
+                }
+        @foreach(var id2 in Model.TeeTimeDate){
 
-    //    var cDiv = document.getElementById("timeWrapper");
-    //    var innerDivs = cDiv.getElementsByTagName("DIV");
-    //    for (var i = 0; i < innerDivs.length; i++) {
+            @:arr2.push(@id2.TeeTime_ID);
+            @:arr3.push(@id2.Id);
 
-    //        alert("loopar divar nu");
-    //    }
+                        }
 
-    //}
+        var cDiv = document.getElementById("timeWrapper");
+        var innerDivs = cDiv.getElementsByTagName("DIV");
     
+        for (var i = 0; i <= innerDivs.length; i++) {
+            
+            for(var z = 0; z <= arr2.length; z++){
+                
+                
+                if (arr2[z] == innerDivs[i].id) {
+                    
+                    document.getElementById(arr2[z]).style.background = 'grey';
+
+                }
+                  
+                }
+            }
+
+        
+
+
+        }
+      
+
+
+    
+
+    @*function checkDiv() {
+
+        var cDiv = document.getElementById("timeWrapper");
+        var innerDivs = cDiv.getElementsByTagName("DIV");
+
+        for (var i = 0; i < innerDivs.length; i++) {
+
+            @foreach(var thing in Model.TeeTimeDate)
+            {
+
+                @:var id = thing.TeeTime_ID.ToString();
+                @:var cid = innerDivs[i].id;
+                @:if(cid == id) {
+
+                }
+
+            }
+        }
+    }*@
 </script>
     
     
@@ -101,7 +145,7 @@
     <script>
 
 
-    </script>
+    <input type="button" onclick="testDiv()" value="TESTA KNAPPEN" /> >
 
 
     
