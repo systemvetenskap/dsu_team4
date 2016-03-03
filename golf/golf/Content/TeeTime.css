@@ -17,7 +17,7 @@
 }
 .timedivHour{
     width:100%;
-    background-color: lightgreen;
+    /*background-color: lightgreen;*/
     font-weight: bold;
     padding-bottom: 50%;
     margin-left: 10%;
@@ -27,7 +27,7 @@
 }
 .timedivMin{
     width:100%;
-    background-color: lightgreen;
+    /*background-color: lightgreen;*/
     padding-bottom: 50%;
     margin-left: 10%;
     margin-bottom: 10%;

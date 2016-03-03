@@ -17,6 +17,54 @@ namespace golf.Models
         public List<TeeDate> TeeDate = new List<TeeDate>();
         public List<TeeTimeDateGolfer> TeeTimeDateGolfer = new List<TeeTimeDateGolfer>();
         public string dateString { get; set; }
+
+        public bool bookable(int TTD_ID)
+        {
+            int counter = 0;
+            foreach (TeeTimeDateGolfer TTDG in TeeTimeDateGolfer)
+            {
+                if (TTD_ID == TTDG.TeeTimeDate_ID)
+                {
+                    counter++;
+                }
+
+            }
+            if (counter > 3)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public string changeColor(int TT_ID)
+        {
+            string Color;
+            int counter = 0;
+            foreach (TeeTimeDate TTD in TeeTimeDate)
+            {
+                if (TTD.TeeTime_ID == TT_ID)
+                {
+                    foreach (TeeTimeDateGolfer TTDG in TeeTimeDateGolfer)
+                    {
+                        if(TTDG.TeeTimeDate_ID == TTD.Id)
+                        {
+                            counter++;
+                        }
+                    }
+                }
+            }
+            if (counter > 3)
+            {
+                Color = "gray";
+            }
+            else
+            {
+                Color = "lightgreen";
+            }
+            return Color;
+        }
        
 
 
