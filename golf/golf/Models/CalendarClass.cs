@@ -13,12 +13,17 @@ namespace golf.Models
         public DateTime nextDate { get; set; }
         public DateTime prevDate { get; set; }
         public DateTime selDate { get; set; }
-
         public string number { get; set; }
+
+        public List<int> BookedPersons = new List<int>();
+
         public List<TeeTime> TeeTime = new List<TeeTime>();
         public List<TeeTimeDate> TeeTimeDate = new List<TeeTimeDate>();
         public List<TeeDate> TeeDate = new List<TeeDate>();
         public List<TeeTimeDateGolfer>  TeeTimeDateGolfer = new List<TeeTimeDateGolfer> ();
+        public List<Golfer> Golfer = new List<Golfer>();
+        public List<Person> Person = new List<Person>();
+
   
         public string dateString { get; set; }
 

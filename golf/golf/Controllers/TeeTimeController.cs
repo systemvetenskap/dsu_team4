@@ -37,6 +37,15 @@ namespace golf.Controllers
                 {
                     cl.TeeTimeDateGolfer.Add(ttdg);
                 }
+                foreach (Golfer g in databas.Golfer)
+                {
+                    cl.Golfer.Add(g);
+                }
+                foreach (Person p in databas.Person)
+                {
+                    cl.Person.Add(p);
+                }
+
                 cl.currDate = DateTime.Today;
                 cl.dateString = cl.currDate.ToShortDateString();
                 cl.selDate = DateTime.Today;
