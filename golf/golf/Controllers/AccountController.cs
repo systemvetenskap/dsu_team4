@@ -29,6 +29,11 @@ namespace golf.Controllers
             return View(CM);
         }
 
+        public ActionResult Index()
+        {
+            return RedirectToAction("MyPage");
+        }
+
 
         [HttpPost]
         public ActionResult Create(CreateMember model)
