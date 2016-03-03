@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
+using Newtonsoft.Json;
+
 
 namespace golf.Models
 {
@@ -14,7 +16,10 @@ namespace golf.Models
         public DateTime prevDate { get; set; }
         public DateTime selDate { get; set; }
         public string number { get; set; }
-        public List<int> BookedPerson = new List<int>();
+        
+        public List<int> bookingId = new List<int>();
+
+        public List<BookingInfo> bNames = new List<BookingInfo>();
 
         public IEnumerable<TeeTime> TeeTime = new List<TeeTime>();
         public IEnumerable<TeeTimeDate> TeeTimeDate = new List<TeeTimeDate>();
@@ -23,6 +28,7 @@ namespace golf.Models
         public IEnumerable<Golfer> Golfer = new List<Golfer>();
         public IEnumerable<Person> Person = new List<Person>();
 
+        
 
      public string dateString { get; set; }
 

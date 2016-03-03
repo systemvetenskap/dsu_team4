@@ -23,6 +23,7 @@ namespace golf
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
+  
         }
         //public static void RegisterRoutes(RouteCollection routes)
         //{

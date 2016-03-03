@@ -8,15 +8,35 @@
     <link href="@Url.Content("~/Content/TeeTime.css")" rel="stylesheet" type="text/css" />
 }
 
-<script type="text/javascript" language="javascript">
-
+<script type="text/javascript">
     function onTimeDivClick(id) {
+       
+        @using Newtonsoft.Json;
+        var arr = [];
+        var personids = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.bNames, Formatting.Indented));
+        for(var i in personids)
+        {
+            arr.push(JSON.stringify(personids[i]));
+            //alert(i + " " + JSON.stringify(personids[i]))
+           
+        }
+        
+        alert(arr);
+
+         
         
         
+
+    }
+
+
+        @*function onTimeDivClick(id) {
+
+
         @foreach (var ttd in Model.TeeTimeDate)
         {
             @:if (id == @ttd.TeeTime_ID)
-        {
+                                {
             var TTD_ID = ttd.Id;
             foreach (var ttdg in Model.TeeTimeDateGolfer)
             {
@@ -27,18 +47,21 @@
                         if (g.Id == ttdg.Golfer_ID)
                         {
                             var gPID = g.Person_ID;
-                            Model.BookedPersons.Add(gPID);
+                            Model.BookedPerson.Add(gPID);
     }
                 }
                         }
                 }
                 }
             }
-        @:document.getElementById('details').style.display = 'block';
+            :document.getElementById('details').style.display = 'block';
 
-                }
 
-    
+
+        }*@
+
+
+
 </script>
     
     

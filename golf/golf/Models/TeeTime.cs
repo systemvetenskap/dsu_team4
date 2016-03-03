@@ -11,6 +11,7 @@ namespace golf.Models
 {
     using System;
     using System.Collections.Generic;
+    using Newtonsoft.Json;
     
     public partial class TeeTime
     {
@@ -21,7 +22,8 @@ namespace golf.Models
     
         public int Id { get; set; }
         public string teeTime1 { get; set; }
-    
+        
+        [JsonIgnore]
         public virtual ICollection<TeeTimeDate> TeeTimeDate { get; set; }
     }
 }
