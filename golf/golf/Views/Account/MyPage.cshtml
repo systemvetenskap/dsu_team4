@@ -87,9 +87,6 @@
     <fieldset>
         <legend>Person</legend>
 
-        @Html.HiddenFor(model => model.Id)
-        @Html.ActionLink("Ändra", "Edit", new { id = Model.Id})
-
         <div class="editor-label">
             @Html.Raw("Förnamn")
         </div>
@@ -144,6 +141,11 @@
         <div class="editor-field">
             @Html.DisplayFor(model => model.gender_ID)
             @Html.ValidationMessageFor(model => model.gender_ID)
+        </div>
+
+        <div class="edit-link">
+            @Html.HiddenFor(model => model.Id)
+            @Html.ActionLink("Ändra", "Edit", new { id = Model.Id })
         </div>
 
 
