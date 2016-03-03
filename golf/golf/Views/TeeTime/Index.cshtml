@@ -20,13 +20,15 @@
 
         var arr = [];
         var arr2 = [];
+        var arr3 = [];
         @foreach(var id in Model.TeeTimeDateGolfer){
             @:arr.push(@id.TeeTimeDate_ID);
                    
                 }
         @foreach(var id2 in Model.TeeTimeDate){
             
-            @:arr2.push(@id2.Id);
+            @:arr2.push(@id2.TeeTime_ID);
+            @:arr3.push(@id2.Id);
                    
                         }
 
@@ -37,7 +39,7 @@
             
             for(var z = 0; z <= arr2.length; z++){
                 
-                alert(arr[z]);
+                
                 if (arr2[z] == innerDivs[i].id) {
                     
                     document.getElementById(arr2[z]).style.background = 'grey';
