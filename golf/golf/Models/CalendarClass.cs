@@ -15,10 +15,12 @@ namespace golf.Models
         public DateTime selDate { get; set; }
 
         public string number { get; set; }
-        public List<TeeTime> TeeTime = new List<TeeTime>();
-        public List<TeeTimeDate> TeeTimeDate = new List<TeeTimeDate>();
-        public List<TeeDate> TeeDate = new List<TeeDate>();
-        public List<TeeTimeDateGolfer>  TeeTimeDateGolfer = new List<TeeTimeDateGolfer> ();
+        public List<int> BookedPerson = new List<int>();
+
+        public IEnumerable<TeeTime> TeeTime = new List<TeeTime>();
+        public IEnumerable<TeeTimeDate> TeeTimeDate = new List<TeeTimeDate>();
+        public IEnumerable<TeeDate> TeeDate = new List<TeeDate>();
+        public IEnumerable<TeeTimeDateGolfer> TeeTimeDateGolfer = new List<TeeTimeDateGolfer>();
   
         public string dateString { get; set; }
 
