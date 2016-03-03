@@ -9,6 +9,7 @@ using System.Collections;
 using System.Data.Entity;
 using System.Data;
 using System.Web.UI.WebControls;
+using System.Diagnostics;
 
 namespace golf.Controllers
 {
@@ -110,7 +111,10 @@ namespace golf.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(person).State = EntityState.Modified;
+                
                 db.SaveChanges();
+                
+
                 return RedirectToAction("Index");
             }
             return View(person);
