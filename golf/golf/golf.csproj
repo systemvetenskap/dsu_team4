@@ -195,6 +195,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LogController.cs" />
     <Compile Include="Controllers\MemberManagementController.cs" />
+    <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\TeeTimeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -222,6 +223,7 @@
     <Compile Include="Models\NewsArticleImage.cs">
       <DependentUpon>PersonModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\NewsClass.cs" />
     <Compile Include="Models\Person.cs">
       <DependentUpon>PersonModel.tt</DependentUpon>
     </Compile>
@@ -387,6 +389,8 @@
     <Content Include="Views\Account\MyPage.cshtml" />
     <Content Include="Views\Account\Create.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
+    <Content Include="Views\News\Index.cshtml" />
+    <Content Include="Views\News\AddNews.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
