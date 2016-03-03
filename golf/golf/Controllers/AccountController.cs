@@ -110,6 +110,7 @@ namespace golf.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(person).State = EntityState.Modified;
+
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

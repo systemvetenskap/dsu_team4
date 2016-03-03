@@ -11,7 +11,6 @@ namespace golf.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.Web.Mvc;
     
     public partial class Person
     {
