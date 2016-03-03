@@ -20,18 +20,11 @@ namespace golf.Models
         public IEnumerable<TeeTimeDate> TeeTimeDate = new List<TeeTimeDate>();
         public IEnumerable<TeeDate> TeeDate = new List<TeeDate>();
         public IEnumerable<TeeTimeDateGolfer> TeeTimeDateGolfer = new List<TeeTimeDateGolfer>();
+        public IEnumerable<Golfer> Golfer = new List<Golfer>();
+        public IEnumerable<Person> Person = new List<Person>();
 
-        public List<int> BookedPersons = new List<int>();
 
-        public List<TeeTime> TeeTime = new List<TeeTime>();
-        public List<TeeTimeDate> TeeTimeDate = new List<TeeTimeDate>();
-        public List<TeeDate> TeeDate = new List<TeeDate>();
-        public List<TeeTimeDateGolfer>  TeeTimeDateGolfer = new List<TeeTimeDateGolfer> ();
-        public List<Golfer> Golfer = new List<Golfer>();
-        public List<Person> Person = new List<Person>();
-
-  
-        public string dateString { get; set; }
+     public string dateString { get; set; }
 
         public bool bookable(int TTD_ID)
         {

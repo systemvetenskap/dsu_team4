@@ -25,25 +25,9 @@ namespace golf.Controllers
                 cl.TeeTimeDate = databas.TeeTimeDate.ToList();
                 cl.TeeDate = databas.TeeDate.ToList();
                 cl.TeeTimeDateGolfer = databas.TeeTimeDateGolfer.ToList();
-        
-                    cl.TeeTimeDate.Add(ttd);
-                }
-                foreach (TeeDate td in databas.TeeDate)
-                {
-                    cl.TeeDate.Add(td);
-                }
-                foreach (TeeTimeDateGolfer ttdg in databas.TeeTimeDateGolfer)
-                {
-                    cl.TeeTimeDateGolfer.Add(ttdg);
-                }
-                foreach (Golfer g in databas.Golfer)
-                {
-                    cl.Golfer.Add(g);
-                }
-                foreach (Person p in databas.Person)
-                {
-                    cl.Person.Add(p);
-                }
+                cl.Golfer = databas.Golfer.ToList();
+                cl.Person = databas.Person.ToList();
+ 
 
                 cl.currDate = DateTime.Today;
                 cl.dateString = cl.currDate.ToShortDateString();
