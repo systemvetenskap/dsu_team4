@@ -16,7 +16,7 @@ namespace golf.Models
         public List<TeeTimeDate> TeeTimeDate = new List<TeeTimeDate>();
         public List<TeeDate> TeeDate = new List<TeeDate>();
         public List<TeeTimeDateGolfer>  TeeTimeDateGolfer = new List<TeeTimeDateGolfer> ();
-       
+  
         public string dateString { get; set; }
 
         public bool bookable(int TTD_ID)

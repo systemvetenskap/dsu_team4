@@ -69,7 +69,7 @@
             @*@Html.DropDownListFor(model => model.p.Gender, Model.GenderL)*@
             @*@Html.EditorFor(model => model.gender_ID)
             @Html.ValidationMessageFor(model => model.gender_ID)*@
-            @Html.DropDownListFor(model => model.p.Gender.Id, Model.GListan)
+            @*@Html.DropDownListFor(model => model.p.Gender.Id, Model.GListan)*@
         </div>
 
         <div class="editor-label">
@@ -87,6 +87,11 @@
             @Html.EditorFor(model => model.p.PW)
             @Html.ValidationMessageFor(model => model.p.PW)
         </div>
+        <div>
+           @Html.DropDownListFor(m => m.genderid, new SelectList(Model.genderItems, "Value", "Text"));
+                                
+
+         </div>
 
         <p>
             <input type="submit" value="Create" />

@@ -11,6 +11,8 @@ namespace golf.Models
     {
         public Person p { get; set; }
         public List<Gender> GenderL = new List<Gender>();
-        public IEnumerable<SelectListItem> GListan { get; set; }
+        public int genderid { get; set; }
+        public IEnumerable<SelectListItem> genderItems { get; set; }
+
     }
 }

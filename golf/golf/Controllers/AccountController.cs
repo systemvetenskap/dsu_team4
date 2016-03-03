@@ -17,92 +17,37 @@ namespace golf.Controllers
         //
         // GET: /Account/
         private dsuteam4Entities1 db = new dsuteam4Entities1();
-        //public ActionResult Egister()
-        //{
-        //    ViewBag.Message = "Registrera dig här för att bli medlem";
-        //    return View();
-        //}
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult RegisterNew(Person model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Person.Add(model);
-        //        db.SaveChanges();
-        //        return RedirectToAction("MyPage");
-        //    }
 
-        //    return View(model);
-        //}
         public ActionResult Create()
         {
             CreateMember CM = new CreateMember();
+            SelectList gender = new SelectList(db.Gender.ToList(), "id","genderName");
 
-
-            CM.GListan = db.Gender.ToList().Select(x => new SelectListItem
-            {
-                    Value = x.Id.ToString(),
-                    Text = x.genderName
-                });
-            
-
-
-                
-            //List<Gender> gl = new List<Gender>();
-            ////Person p = new Person();
-            //CreateMember CM = new CreateMember();
-            
-            //List<ListItem> lli = new List<ListItem>();
-
-            //foreach (Gender g in db.Gender)
-            //{
-
-            //    //CM.Glist = new SelectList;
-            //    //ListItem li = new ListItem();
-            //    //li.Text = g.genderName;
-            //    //li.Value = g.Id.ToString();
-
-            //    //lli.Add(li);
-
-            //    //{
-            //    //    Text = g.genderName,
-            //    //    Value = g.Id.ToString()
-            //    //};
-                
-                
-            //}
-
-            
-
-            //ViewBag.TheGenderList = gl;
-            //ViewBag.GenderList = new SelectList(db.Gender, "Id", "GenderName");
-
-
+           
+            CM.genderItems = gender;
 
             return View(CM);
         }
 
+
         [HttpPost]
-        public ActionResult Create(CreateMember CM)
+        public ActionResult Create(CreateMember model)
         {
 
             if (ModelState.IsValid)
             {
-                //model.gender_ID = model.Gender.Id;
-                CM.p.gender_ID = CM.p.Gender.Id;
-                db.Person.Add(CM.p);
+  
+                model.p.gender_ID = model.genderid;           
+                db.Person.Add(model.p);
                 db.SaveChanges();
 
+                FormsAuthentication.SetAuthCookie(model.p.Id.ToString(), false);
 
-
-                FormsAuthentication.SetAuthCookie(CM.p.Id.ToString(), false);
-
-                return RedirectToAction("MyPage", CM.p);
+                return RedirectToAction("MyPage", model.p);
             }
             else
             {
-                return View(CM.p);
+                return View(model.p);
             }
         }
 
@@ -165,19 +110,6 @@ namespace golf.Controllers
             }
             return View(person);
         }
-        //public ActionResult MyPage(Person P)
-        //{
-
-        //    int id = Convert.ToInt32(User.Identity.Name);
-
-        //    Person person = db.Person.Find(id);
-
-        //    //List<Person> pr = new List<Person>();
-        //    //pr.Add(person);
-
-
-        //    return View(P);
-        //}
 
 
         public ActionResult LogInCheck(Person model)
@@ -191,21 +123,6 @@ namespace golf.Controllers
                 {
                     FormsAuthentication.SetAuthCookie(P.Id.ToString(), false);
 
-                    //List<Person> tempP = new List<Person>();
-
-                    ////ICollection ic = new ICollection
-                    //Golfer g = new Golfer();
-
-                    //foreach (Golfer golf in db.Golfer)
-                    //{
-                    //    if (golf.Person_ID == P.Id)
-                    //    {
-                    //        P.Golfer.Add(g);
-                    //    }
-                    //}
-
-
-                    //tempP.Add(P);
 
 
                     return RedirectToAction("MyPage");
