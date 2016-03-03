@@ -29,8 +29,9 @@ namespace golf.Models
         public DbSet<Person> Person { get; set; }
         public DbSet<AdminPerson> AdminPerson { get; set; }
         public DbSet<TeeDate> TeeDate { get; set; }
-        public DbSet<TeeTime> TeeTime { get; set; }
-        public DbSet<TeeTimeDate> TeeTimeDate { get; set; }
         public DbSet<TeeTimeDateGolfer> TeeTimeDateGolfer { get; set; }
+        public DbSet<TeeTimeDate> TeeTimeDate { get; set; }
+        public DbSet<TeeTime> TeeTime { get; set; }
+        public DbSet<Gender> Gender { get; set; }
     }
 }

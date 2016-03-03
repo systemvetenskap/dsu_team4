@@ -3,6 +3,8 @@
 
 .timeWrapper{
     width: 100%;
+    display:block;
+    margin-bottom:3%;
     
     
     
@@ -15,7 +17,7 @@
 }
 .timedivHour{
     width:100%;
-    background-color: lightgreen;
+    /*background-color: lightgreen;*/
     font-weight: bold;
     padding-bottom: 50%;
     margin-left: 10%;
@@ -25,13 +27,27 @@
 }
 .timedivMin{
     width:100%;
-    background-color: lightgreen;
+    /*background-color: lightgreen;*/
     padding-bottom: 50%;
     margin-left: 10%;
     margin-bottom: 10%;
     float: left;
     display: block;
 
+}
+.timedivMin:hover{
+    cursor: pointer;
+    cursor: hand;
+    font-weight: bold;
+    color: white;
+    background-color: rgb(30, 196, 30);
+}
+.timedivHour:hover{
+    cursor: pointer;
+    cursor: hand;
+    font-weight: bold;
+    color: white;
+    background-color: rgb(30, 196, 30);
 }
 .timedivEmpty{
     width:7%;
@@ -40,3 +56,71 @@
     margin-left: 1%;
     float: left;
 }
+.dateselection{
+    float: left;
+    display: block;
+    
+    
+    width: 100%;
+
+    
+}
+.buttonprev{
+
+    position:relative;
+    margin-bottom: 1%;
+    text-align:center;
+    float: left;
+    border-radius: 10%;
+
+    width: 20%;
+    height: 100%; 
+    display: block;
+}
+.selectedDate{
+
+    position:relative;
+    width: 60%;
+    float: left;
+    display: block;
+    border: 3px, solid black;   
+
+
+}
+.buttonnext{
+
+    position:relative;
+    text-align:center;
+    float: left;
+    display: block;
+    border-radius: 10%;
+    margin-bottom: 1%;
+    width: 20%;
+    height: 100%; 
+    
+}
+.dateselection nb{
+
+   width: 100%;
+
+
+
+}
+.dateselection pb{
+    
+
+}
+.TeeDetails{
+    float:left;
+    top:0px;
+    left:0px;
+    display: none;
+    width:97%;
+    height:150px;
+    font-family:verdana;
+    font-size:13px;
+    padding:10px;
+    background-color:white;
+    border:2px solid grey;
+    
+    }

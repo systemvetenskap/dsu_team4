@@ -1,4 +1,4 @@
-﻿@model IEnumerable<golf.Models.TeeTime>
+﻿@model golf.Models.CalendarClass
 @{
     ViewBag.Title = "Index";
     
@@ -8,16 +8,103 @@
     <link href="@Url.Content("~/Content/TeeTime.css")" rel="stylesheet" type="text/css" />
 }
 
+<script type="text/javascript" language="javascript">
+    function onTimeDivClick() {
+        
+        //document.getElementById(arr2).style.display = 'block';
+        
+    }
+
+    function testDiv() {
+
+       
+        var arr = [];
+        var arr2 = [];
+        var arr3 = [];
+        @foreach(var id in Model.TeeTimeDateGolfer){
+            @:arr.push(@id.TeeTimeDate_ID);
+
+                }
+        @foreach(var id2 in Model.TeeTimeDate){
+
+            @:arr2.push(@id2.TeeTime_ID);
+            @:arr3.push(@id2.Id);
+
+                        }
+
+        var cDiv = document.getElementById("timeWrapper");
+        var innerDivs = cDiv.getElementsByTagName("DIV");
+    
+        for (var i = 0; i <= innerDivs.length; i++) {
+            
+            for(var z = 0; z <= arr2.length; z++){
+                
+                
+                if (arr2[z] == innerDivs[i].id) {
+                    
+                    document.getElementById(arr2[z]).style.background = 'grey';
+
+                }
+                  
+                }
+            }
+
+        
+
+
+        }
+      
+
+
+    
+
+    @*function checkDiv() {
+
+        var cDiv = document.getElementById("timeWrapper");
+        var innerDivs = cDiv.getElementsByTagName("DIV");
+
+        for (var i = 0; i < innerDivs.length; i++) {
+
+            @foreach(var thing in Model.TeeTimeDate)
+            {
+
+                @:var id = thing.TeeTime_ID.ToString();
+                @:var cid = innerDivs[i].id;
+                @:if(cid == id) {
+
+                }
+
+            }
+        }
+    }*@
+</script>
     
     
 <div class="test">
 
 </div>
 <h2>Index</h2>
-<div class="timeWrapper">
+<div class="timeWrapper" id="timeWrapper">
+
+    <div class="dateselection">
+
+       
+        <div class="buttonprev" type="submit" text-align="center">
+            <input  type="submit" value="<">
+        </div>      
+        <p class="selectedDate" align="center">@Html.DisplayFor(m => m.dateString)</p>
+          
+        <div class="buttonnext" type="submit" text-align="center">
+            <input type="submit" value="<">
+
+    </div>
+    
+    </div>
+    
     @for (int i = 0; i < 6; i++)
     {
-        foreach (var item in Model)
+      
+        foreach (var item in Model.TeeTime)
         {
             string saveTime = item.teeTime1;
             
@@ -31,40 +118,44 @@
                 if (checkMinute == "0")
                 {
                     <div class="hourAndMinutes">
-                        <div class="timedivHour" id=@item.Id time=@item.teeTime1[3]>
+                        <div class="timedivHour" onclick="onTimeDivClick()" id=@item.Id time=@item.teeTime1[3] style="background-color: @Model.changeColor(item.Id)">
                             @Html.DisplayFor(modelItem => item.teeTime1)
                         </div>
-                        @foreach (var o in Model)
+                        @foreach (var o in Model.TeeTime)
                         {
                             if (o.teeTime1[0].ToString() + o.teeTime1[1].ToString() == checkHour && o.teeTime1[3].ToString() != "0")
                             {
-                            <div class="timedivMin" id=@o.Id >
-                                @Html.DisplayFor(modelItem => o.teeTime1)
-                            </div>
-                                
+                                <div class="timedivMin" onclick="onTimeDivClick()" id=@o.Id style="background-color: @Model.changeColor(o.Id)">
+
+                                    @Html.DisplayFor(modelItem => o.teeTime1)
+                                </div>
+
                             }
                         }
 
                     </div>
                 }
 
-                    @*else
-                    {
+           }
+           
+        }
 
-                    <div class="timedivMin" id=@item.Id time=@item.teeTime1[3]>
-                        @Html.DisplayFor(modelItem => item.teeTime1)
-                    </div>
-                    }*@
+}
 
-                    }
+    <script>
 
 
-
-                
-                    }
+    <input type="button" onclick="testDiv()" value="TESTA KNAPPEN" /> >
 
 
-                    }
+    
+
+
+
+
+
+        <div id="details" class="TeeDetails">
+            <p>En div för TeeTime-detaljer</p>
+        </div>
 </div>
-
 

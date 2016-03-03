@@ -33,5 +33,6 @@ namespace golf.Models
     
         public virtual ICollection<AdminPerson> AdminPerson { get; set; }
         public virtual ICollection<Golfer> Golfer { get; set; }
+        public virtual Gender Gender { get; set; }
     }
 }

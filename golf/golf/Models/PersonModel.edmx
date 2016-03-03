@@ -13,6 +13,13 @@
           <Property Name="Person_ID" Type="int" />
           <Property Name="AdminType_ID" Type="int" />
         </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="genderName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Golfer">
           <Key>
             <PropertyRef Name="Id" />
@@ -58,6 +65,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TeeDate_ID" Type="int" Nullable="false" />
           <Property Name="TeeTime_ID" Type="int" Nullable="false" />
+          <Property Name="Disabled" Type="bit" />
         </EntityType>
         <EntityType Name="TeeTimeDateGolfer">
           <Key>
@@ -88,6 +96,18 @@
             </Principal>
             <Dependent Role="Golfer">
               <PropertyRef Name="Person_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Person_ToGender">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
+          <End Role="Person" Type="Self.Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Person">
+              <PropertyRef Name="gender_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -141,6 +161,7 @@
         </Association>
         <EntityContainer Name="dsuteam4Model1StoreContainer">
           <EntitySet Name="AdminPerson" EntityType="Self.AdminPerson" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Golfer" EntityType="Self.Golfer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TeeDate" EntityType="Self.TeeDate" Schema="dbo" store:Type="Tables" />
@@ -154,6 +175,10 @@
           <AssociationSet Name="FK_Golfer_ToPerson" Association="Self.FK_Golfer_ToPerson">
             <End Role="Person" EntitySet="Person" />
             <End Role="Golfer" EntitySet="Golfer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Person_ToGender" Association="Self.FK_Person_ToGender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Person" EntitySet="Person" />
           </AssociationSet>
           <AssociationSet Name="FK_TeeTimeDate_ToTeeDate" Association="Self.FK_TeeTimeDate_ToTeeDate">
             <End Role="TeeDate" EntitySet="TeeDate" />
@@ -203,14 +228,13 @@
           <Property Name="PW" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AdminPerson" Relationship="dsuteam4Model1.FK_AdminPerson_ToPerson" FromRole="Person" ToRole="AdminPerson" />
           <NavigationProperty Name="Golfer" Relationship="dsuteam4Model1.FK_Golfer_ToPerson" FromRole="Person" ToRole="Golfer" />
+          <NavigationProperty Name="Gender" Relationship="dsuteam4Model1.FK_Person_ToGender" FromRole="Person" ToRole="Gender" />
         </EntityType>
         <EntityContainer Name="dsuteam4Entities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Golfer" EntityType="Self.Golfer" />
           <EntitySet Name="Person" EntityType="Self.Person" />
           <EntitySet Name="AdminPerson" EntityType="dsuteam4Model1.AdminPerson" />
           <EntitySet Name="TeeDate" EntityType="dsuteam4Model1.TeeDate" />
-          <EntitySet Name="TeeTime" EntityType="dsuteam4Model1.TeeTime" />
-          <EntitySet Name="TeeTimeDate" EntityType="dsuteam4Model1.TeeTimeDate" />
           <EntitySet Name="TeeTimeDateGolfer" EntityType="dsuteam4Model1.TeeTimeDateGolfer" />
           <AssociationSet Name="FK_AdminPerson_ToPerson" Association="dsuteam4Model1.FK_AdminPerson_ToPerson">
             <End Role="Person" EntitySet="Person" />
@@ -224,17 +248,24 @@
             <End Role="Golfer" EntitySet="Golfer" />
             <End Role="TeeTimeDateGolfer" EntitySet="TeeTimeDateGolfer" />
           </AssociationSet>
+          <EntitySet Name="TeeTimeDate" EntityType="dsuteam4Model1.TeeTimeDate" />
           <AssociationSet Name="FK_TeeTimeDate_ToTeeDate" Association="dsuteam4Model1.FK_TeeTimeDate_ToTeeDate">
             <End Role="TeeDate" EntitySet="TeeDate" />
-            <End Role="TeeTimeDate" EntitySet="TeeTimeDate" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TeeTimeDate_ToTeeTime" Association="dsuteam4Model1.FK_TeeTimeDate_ToTeeTime">
-            <End Role="TeeTime" EntitySet="TeeTime" />
             <End Role="TeeTimeDate" EntitySet="TeeTimeDate" />
           </AssociationSet>
           <AssociationSet Name="FK_TeeTimeDateGolfer_ToTeeTimeDate" Association="dsuteam4Model1.FK_TeeTimeDateGolfer_ToTeeTimeDate">
             <End Role="TeeTimeDate" EntitySet="TeeTimeDate" />
             <End Role="TeeTimeDateGolfer" EntitySet="TeeTimeDateGolfer" />
+          </AssociationSet>
+          <EntitySet Name="TeeTime" EntityType="dsuteam4Model1.TeeTime" />
+          <AssociationSet Name="FK_TeeTimeDate_ToTeeTime" Association="dsuteam4Model1.FK_TeeTimeDate_ToTeeTime">
+            <End Role="TeeTime" EntitySet="TeeTime" />
+            <End Role="TeeTimeDate" EntitySet="TeeTimeDate" />
+          </AssociationSet>
+          <EntitySet Name="Gender" EntityType="dsuteam4Model1.Gender" />
+          <AssociationSet Name="FK_Person_ToGender" Association="dsuteam4Model1.FK_Person_ToGender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Person" EntitySet="Person" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="AdminPerson">
@@ -253,25 +284,6 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="teeDate1" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="TeeTimeDate" Relationship="dsuteam4Model1.FK_TeeTimeDate_ToTeeDate" FromRole="TeeDate" ToRole="TeeTimeDate" />
-        </EntityType>
-        <EntityType Name="TeeTime">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="teeTime1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="TeeTimeDate" Relationship="dsuteam4Model1.FK_TeeTimeDate_ToTeeTime" FromRole="TeeTime" ToRole="TeeTimeDate" />
-        </EntityType>
-        <EntityType Name="TeeTimeDate">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TeeDate_ID" Type="Int32" Nullable="false" />
-          <Property Name="TeeTime_ID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="TeeDate" Relationship="dsuteam4Model1.FK_TeeTimeDate_ToTeeDate" FromRole="TeeTimeDate" ToRole="TeeDate" />
-          <NavigationProperty Name="TeeTime" Relationship="dsuteam4Model1.FK_TeeTimeDate_ToTeeTime" FromRole="TeeTimeDate" ToRole="TeeTime" />
-          <NavigationProperty Name="TeeTimeDateGolfer" Relationship="dsuteam4Model1.FK_TeeTimeDateGolfer_ToTeeTimeDate" FromRole="TeeTimeDate" ToRole="TeeTimeDateGolfer" />
         </EntityType>
         <EntityType Name="TeeTimeDateGolfer">
           <Key>
@@ -319,6 +331,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="TeeTimeDate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TeeDate_ID" Type="Int32" Nullable="false" />
+          <Property Name="TeeTime_ID" Type="Int32" Nullable="false" />
+          <Property Name="Disabled" Type="Boolean" />
+          <NavigationProperty Name="TeeDate" Relationship="dsuteam4Model1.FK_TeeTimeDate_ToTeeDate" FromRole="TeeTimeDate" ToRole="TeeDate" />
+          <NavigationProperty Name="TeeTimeDateGolfer" Relationship="dsuteam4Model1.FK_TeeTimeDateGolfer_ToTeeTimeDate" FromRole="TeeTimeDate" ToRole="TeeTimeDateGolfer" />
+          <NavigationProperty Name="TeeTime" Relationship="dsuteam4Model1.FK_TeeTimeDate_ToTeeTime" FromRole="TeeTimeDate" ToRole="TeeTime" />
+        </EntityType>
         <Association Name="FK_TeeTimeDate_ToTeeDate">
           <End Type="dsuteam4Model1.TeeDate" Role="TeeDate" Multiplicity="1" />
           <End Type="dsuteam4Model1.TeeTimeDate" Role="TeeTimeDate" Multiplicity="*" />
@@ -331,6 +355,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TeeTimeDateGolfer_ToTeeTimeDate">
+          <End Type="dsuteam4Model1.TeeTimeDate" Role="TeeTimeDate" Multiplicity="1" />
+          <End Type="dsuteam4Model1.TeeTimeDateGolfer" Role="TeeTimeDateGolfer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TeeTimeDate">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TeeTimeDateGolfer">
+              <PropertyRef Name="TeeTimeDate_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TeeTime">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="teeTime1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TeeTimeDate" Relationship="dsuteam4Model1.FK_TeeTimeDate_ToTeeTime" FromRole="TeeTime" ToRole="TeeTimeDate" />
+        </EntityType>
         <Association Name="FK_TeeTimeDate_ToTeeTime">
           <End Type="dsuteam4Model1.TeeTime" Role="TeeTime" Multiplicity="1" />
           <End Type="dsuteam4Model1.TeeTimeDate" Role="TeeTimeDate" Multiplicity="*" />
@@ -343,15 +387,23 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TeeTimeDateGolfer_ToTeeTimeDate">
-          <End Type="dsuteam4Model1.TeeTimeDate" Role="TeeTimeDate" Multiplicity="1" />
-          <End Type="dsuteam4Model1.TeeTimeDateGolfer" Role="TeeTimeDateGolfer" Multiplicity="*" />
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="genderName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Person" Relationship="dsuteam4Model1.FK_Person_ToGender" FromRole="Gender" ToRole="Person" />
+        </EntityType>
+        <Association Name="FK_Person_ToGender">
+          <End Type="dsuteam4Model1.Gender" Role="Gender" Multiplicity="0..1" />
+          <End Type="dsuteam4Model1.Person" Role="Person" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="TeeTimeDate">
+            <Principal Role="Gender">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="TeeTimeDateGolfer">
-              <PropertyRef Name="TeeTimeDate_ID" />
+            <Dependent Role="Person">
+              <PropertyRef Name="gender_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -404,6 +456,25 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="TeeTimeDateGolfer">
+            <EntityTypeMapping TypeName="dsuteam4Model1.TeeTimeDateGolfer">
+              <MappingFragment StoreEntitySet="TeeTimeDateGolfer">
+                <ScalarProperty Name="Golfer_ID" ColumnName="Golfer_ID" />
+                <ScalarProperty Name="TeeTimeDate_ID" ColumnName="TeeTimeDate_ID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TeeTimeDate">
+            <EntityTypeMapping TypeName="dsuteam4Model1.TeeTimeDate">
+              <MappingFragment StoreEntitySet="TeeTimeDate">
+                <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+                <ScalarProperty Name="TeeTime_ID" ColumnName="TeeTime_ID" />
+                <ScalarProperty Name="TeeDate_ID" ColumnName="TeeDate_ID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="TeeTime">
             <EntityTypeMapping TypeName="dsuteam4Model1.TeeTime">
               <MappingFragment StoreEntitySet="TeeTime">
@@ -412,20 +483,10 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TeeTimeDate">
-            <EntityTypeMapping TypeName="dsuteam4Model1.TeeTimeDate">
-              <MappingFragment StoreEntitySet="TeeTimeDate">
-                <ScalarProperty Name="TeeTime_ID" ColumnName="TeeTime_ID" />
-                <ScalarProperty Name="TeeDate_ID" ColumnName="TeeDate_ID" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TeeTimeDateGolfer">
-            <EntityTypeMapping TypeName="dsuteam4Model1.TeeTimeDateGolfer">
-              <MappingFragment StoreEntitySet="TeeTimeDateGolfer">
-                <ScalarProperty Name="Golfer_ID" ColumnName="Golfer_ID" />
-                <ScalarProperty Name="TeeTimeDate_ID" ColumnName="TeeTimeDate_ID" />
+          <EntitySetMapping Name="Gender">
+            <EntityTypeMapping TypeName="dsuteam4Model1.Gender">
+              <MappingFragment StoreEntitySet="Gender">
+                <ScalarProperty Name="genderName" ColumnName="genderName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
