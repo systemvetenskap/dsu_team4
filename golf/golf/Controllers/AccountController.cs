@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using golf.Models;
 using System.Collections;
+using System.Web.UI.WebControls;
 
 namespace golf.Controllers
 {
@@ -34,13 +35,44 @@ namespace golf.Controllers
         //}
         public ActionResult Create()
         {
-            List<Gender> gl = new List<Gender>();
-            //Person p = new Person();
             CreateMember CM = new CreateMember();
-            foreach (Gender g in db.Gender)
-            {
+
+
+            CM.GListan = db.Gender.ToList().Select(x => new SelectListItem
+                {
+                    Value = x.Id.ToString(),
+                    Text = x.genderName
+                });
+            
+
+
+
+            //List<Gender> gl = new List<Gender>();
+            ////Person p = new Person();
+            //CreateMember CM = new CreateMember();
+            
+            //List<ListItem> lli = new List<ListItem>();
+
+            //foreach (Gender g in db.Gender)
+            //{
+
+            //    //CM.Glist = new SelectList;
+            //    //ListItem li = new ListItem();
+            //    //li.Text = g.genderName;
+            //    //li.Value = g.Id.ToString();
+
+            //    //lli.Add(li);
+
+            //    //{
+            //    //    Text = g.genderName,
+            //    //    Value = g.Id.ToString()
+            //    //};
                 
-            }
+                
+            //}
+
+            
+
             //ViewBag.TheGenderList = gl;
             //ViewBag.GenderList = new SelectList(db.Gender, "Id", "GenderName");
 
@@ -50,24 +82,25 @@ namespace golf.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Person model)
+        public ActionResult Create(CreateMember CM)
         {
 
             if (ModelState.IsValid)
             {
                 //model.gender_ID = model.Gender.Id;
-                db.Person.Add(model);
+                CM.p.gender_ID = CM.p.Gender.Id;
+                db.Person.Add(CM.p);
                 db.SaveChanges();
 
 
 
-                FormsAuthentication.SetAuthCookie(model.Id.ToString(), false);
+                FormsAuthentication.SetAuthCookie(CM.p.Id.ToString(), false);
 
-                return RedirectToAction("MyPage", model);
+                return RedirectToAction("MyPage", CM.p);
             }
             else
             {
-                return View(model);
+                return View(CM.p);
             }
         }
 
