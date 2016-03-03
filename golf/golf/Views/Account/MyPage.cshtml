@@ -87,8 +87,8 @@
     <fieldset>
         <legend>Person</legend>
 
-        @*@Html.HiddenFor(model => model.Id)
-        @Html.ActionLink("Ändra", "Edit", new { model = User.Identity.Name})*@
+        @Html.HiddenFor(model => model.Id)
+        @Html.ActionLink("Ändra", "Edit", new { id = Model.Id})
 
         <div class="editor-label">
             @Html.Raw("Förnamn")
@@ -107,7 +107,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.streetAddres)
+            @Html.Raw("Gatuadress")
         </div>
         <div class="editor-field">
             @Html.DisplayFor(model => model.streetAddres)
@@ -115,7 +115,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.postalCode)
+            @Html.Raw("Postadress")
         </div>
         <div class="editor-field">
             @Html.DisplayFor(model => model.postalCode)
@@ -123,7 +123,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.city)
+            @Html.Raw("Stad")
         </div>
         <div class="editor-field">
             @Html.DisplayFor(model => model.city)
@@ -131,7 +131,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.email)
+            @Html.Raw("E-postadress")
         </div>
         <div class="editor-field">
             @Html.DisplayFor(model => model.email)
@@ -139,14 +139,15 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.gender_ID)
+            @Html.Raw("Kön")
         </div>
         <div class="editor-field">
             @Html.DisplayFor(model => model.gender_ID)
             @Html.ValidationMessageFor(model => model.gender_ID)
         </div>
 
-        <div class="editor-label">
+
+        @*<div class="editor-label">
             @Html.LabelFor(model => model.memberType_ID)
         </div>
         <div class="editor-field">
@@ -159,13 +160,13 @@
         </div>
         <div class="editor-field">
             @Html.DisplayFor(model => model.PW)
-            @Html.ValidationMessageFor(model => model.PW)
+            @Html.ValidationMessageFor(model => model.PW)*@
             
-        </div>
+        @*</div>*@
 
-        <p>
+        @*<p>
             <input type="submit" value="Save" />
-        </p>
+        </p>*@
     </fieldset>
 
 

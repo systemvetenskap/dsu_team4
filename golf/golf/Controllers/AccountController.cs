@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using System.Web.Security;
 using golf.Models;
 using System.Collections;
+using System.Data.Entity;
+using System.Data;
 using System.Web.UI.WebControls;
 
 namespace golf.Controllers
@@ -39,14 +41,14 @@ namespace golf.Controllers
 
 
             CM.GListan = db.Gender.ToList().Select(x => new SelectListItem
-                {
+            {
                     Value = x.Id.ToString(),
                     Text = x.genderName
                 });
             
 
 
-
+                
             //List<Gender> gl = new List<Gender>();
             ////Person p = new Person();
             //CreateMember CM = new CreateMember();
@@ -135,6 +137,32 @@ namespace golf.Controllers
             Person person = db.Person.Find(id);
             ViewBag.User = person.firstName +" "+ person.lastName;
 
+            return View(person);
+        }
+
+        public ActionResult Edit(int id = 0)
+        {
+            Person person = db.Person.Find(id);
+            if (person == null)
+            {
+                return HttpNotFound();
+            }
+            return View(person);
+        }
+
+        //
+        // POST: /User/Edit/5
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(Person person)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(person).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
             return View(person);
         }
         //public ActionResult MyPage(Person P)
