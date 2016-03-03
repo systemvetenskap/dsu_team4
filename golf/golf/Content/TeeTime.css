@@ -27,13 +27,18 @@
 }
 .timedivMin{
     width:100%;
-    /*background-color: lightgreen;*/
     padding-bottom: 50%;
     margin-left: 10%;
     margin-bottom: 10%;
     float: left;
     display: block;
 
+}
+.timedivMin[booked = "grey"]{
+    background-color: grey;
+}
+.timedivMin[booked = "lightgreen"]{
+    background-color:lightgreen;
 }
 .timedivMin:hover{
     cursor: pointer;

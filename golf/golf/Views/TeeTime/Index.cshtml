@@ -119,14 +119,14 @@
                 if (checkMinute == "0")
                 {
                     <div class="hourAndMinutes">
-                        <div class="timedivHour" onclick="onTimeDivClick()" id=@item.Id time=@item.teeTime1[3] style="background-color: @Model.changeColor(item.Id)">
+                        <div class="timedivHour" onclick="onTimeDivClick()" id=@item.Id time=@item.teeTime1[3] style="background-color: @Model.changeColor(item.Id, 3)">
                             @Html.DisplayFor(modelItem => item.teeTime1)
                         </div>
                         @foreach (var o in Model.TeeTime)
                         {
                             if (o.teeTime1[0].ToString() + o.teeTime1[1].ToString() == checkHour && o.teeTime1[3].ToString() != "0")
                             {
-                                <div class="timedivMin" onclick="onTimeDivClick()" id=@o.Id style="background-color: @Model.changeColor(o.Id)">
+                                <div class="timedivMin" onclick="onTimeDivClick()" id=@o.Id booked="@Model.changeColor(o.Id, 3)">
 
                                     @Html.DisplayFor(modelItem => o.teeTime1)
                                 </div>

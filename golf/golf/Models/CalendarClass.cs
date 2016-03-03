@@ -39,13 +39,13 @@ namespace golf.Models
                 return false;
             }
         }
-        public string changeColor(int TT_ID)
+        public string changeColor(int TT_ID, int TD_ID)
         {
             string Color;
             int counter = 0;
             foreach (TeeTimeDate TTD in TeeTimeDate)
             {
-                if (TTD.TeeTime_ID == TT_ID)
+                if (TTD.TeeTime_ID == TT_ID && TTD.TeeDate_ID == TD_ID)
                 {
                     foreach (TeeTimeDateGolfer TTDG in TeeTimeDateGolfer)
                     {
@@ -58,7 +58,7 @@ namespace golf.Models
             }
             if (counter > 3)
             {
-                Color = "gray";
+                Color = "grey";
             }
             else
             {
