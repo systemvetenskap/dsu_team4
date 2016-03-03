@@ -65,7 +65,7 @@
             @Html.Label("Kön")
         </div>
         <div class="editor-field">
-            @Html.DropDownList("GenderList", string.Empty)
+            @*@Html.DropDownList("GenderList", string.Empty)*@
             @*@Html.DropDownListFor(model => model.p.Gender, Model.GenderL)*@
             @*@Html.EditorFor(model => model.gender_ID)
             @Html.ValidationMessageFor(model => model.gender_ID)*@
@@ -86,6 +86,11 @@
             @Html.EditorFor(model => model.p.PW)
             @Html.ValidationMessageFor(model => model.p.PW)
         </div>
+        <div>
+           @Html.DropDownListFor(m => m.genderid, new SelectList(Model.genderItems, "Value", "Text"));
+                                
+
+         </div>
 
         <p>
             <input type="submit" value="Create" />

@@ -37,33 +37,39 @@ namespace golf.Controllers
             //List<string> gl = new List<string>();
             //Person p = new Person();
             CreateMember CM = new CreateMember();
-            foreach (Gender g in db.Gender)
-            {
-                CM.GenderL.Add(g);
-            }
+            SelectList gender = new SelectList(db.Gender.ToList(), "id","genderName");
+
+           
+            CM.genderItems = gender;
+
             //ViewBag.TheGenderList = gl;
-            ViewBag.GenderList = new SelectList(db.Gender, "Id", "GenderName");
+            ViewBag.GenderList = new SelectList(db.Gender, "ide", "GenderName");
 
 
 
             return View(CM);
         }
 
+
         [HttpPost]
-        public ActionResult Create(Person model)
+        public ActionResult Create(CreateMember model)
         {
 
             if (ModelState.IsValid)
             {
+                string tst = model.genderid.ToString();
+                string tst2 = model.p.gender_ID.ToString();
+
+                model.p.gender_ID = model.genderid;
                 //model.gender_ID = model.Gender.Id;
-                db.Person.Add(model);
+                db.Person.Add(model.p);
                 db.SaveChanges();
 
 
 
-                FormsAuthentication.SetAuthCookie(model.Id.ToString(), false);
+                FormsAuthentication.SetAuthCookie(model.p.Id.ToString(), false);
 
-                return RedirectToAction("MyPage", model);
+                return RedirectToAction("MyPage", model.p);
             }
             else
             {
@@ -104,6 +110,7 @@ namespace golf.Controllers
 
             return View(person);
         }
+
         //public ActionResult MyPage(Person P)
         //{
 
