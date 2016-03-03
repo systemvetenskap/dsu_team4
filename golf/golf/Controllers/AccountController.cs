@@ -17,24 +17,7 @@ namespace golf.Controllers
         //
         // GET: /Account/
         private dsuteam4Entities1 db = new dsuteam4Entities1();
-        //public ActionResult Egister()
-        //{
-        //    ViewBag.Message = "Registrera dig här för att bli medlem";
-        //    return View();
-        //}
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult RegisterNew(Person model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Person.Add(model);
-        //        db.SaveChanges();
-        //        return RedirectToAction("MyPage");
-        //    }
 
-        //    return View(model);
-        //}
         public ActionResult Create()
         {
             CreateMember CM = new CreateMember();
@@ -42,11 +25,6 @@ namespace golf.Controllers
 
            
             CM.genderItems = gender;
-
-            //ViewBag.TheGenderList = gl;
-            //ViewBag.GenderList = new SelectList(db.Gender, "Id", "GenderName");
-
-
 
             return View(CM);
         }
@@ -58,15 +36,10 @@ namespace golf.Controllers
 
             if (ModelState.IsValid)
             {
-                string tst = model.genderid.ToString();
-                string tst2 = model.p.gender_ID.ToString();
-
-                model.p.gender_ID = model.genderid;
-                //model.gender_ID = model.Gender.Id;
+  
+                model.p.gender_ID = model.genderid;           
                 db.Person.Add(model.p);
                 db.SaveChanges();
-
-
 
                 FormsAuthentication.SetAuthCookie(model.p.Id.ToString(), false);
 
@@ -74,7 +47,7 @@ namespace golf.Controllers
             }
             else
             {
-                return View(CM.p);
+                return View(model.p);
             }
         }
 
@@ -138,20 +111,6 @@ namespace golf.Controllers
             return View(person);
         }
 
-        //public ActionResult MyPage(Person P)
-        //{
-
-        //    int id = Convert.ToInt32(User.Identity.Name);
-
-        //    Person person = db.Person.Find(id);
-
-        //    //List<Person> pr = new List<Person>();
-        //    //pr.Add(person);
-
-
-        //    return View(P);
-        //}
-
 
         public ActionResult LogInCheck(Person model)
         {
@@ -164,21 +123,6 @@ namespace golf.Controllers
                 {
                     FormsAuthentication.SetAuthCookie(P.Id.ToString(), false);
 
-                    //List<Person> tempP = new List<Person>();
-
-                    ////ICollection ic = new ICollection
-                    //Golfer g = new Golfer();
-
-                    //foreach (Golfer golf in db.Golfer)
-                    //{
-                    //    if (golf.Person_ID == P.Id)
-                    //    {
-                    //        P.Golfer.Add(g);
-                    //    }
-                    //}
-
-
-                    //tempP.Add(P);
 
 
                     return RedirectToAction("MyPage");
