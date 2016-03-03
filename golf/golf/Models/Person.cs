@@ -11,7 +11,6 @@ namespace golf.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.Web.Mvc;
     
     public partial class Person
     {
@@ -19,6 +18,7 @@ namespace golf.Models
         {
             this.AdminPerson = new HashSet<AdminPerson>();
             this.Golfer = new HashSet<Golfer>();
+            this.NewsArticle = new HashSet<NewsArticle>();
         }
     
         public int Id { get; set; }
@@ -35,5 +35,6 @@ namespace golf.Models
         public virtual ICollection<AdminPerson> AdminPerson { get; set; }
         public virtual ICollection<Golfer> Golfer { get; set; }
         public virtual Gender Gender { get; set; }
+        public virtual ICollection<NewsArticle> NewsArticle { get; set; }
     }
 }
