@@ -12,6 +12,9 @@ namespace golf.Models
         public DateTime currDate {get; set;}
         public DateTime nextDate { get; set; }
         public DateTime prevDate { get; set; }
+        public DateTime selDate { get; set; }
+
+        public string number { get; set; }
         public List<TeeTime> TeeTime = new List<TeeTime>();
         public List<TeeTimeDate> TeeTimeDate = new List<TeeTimeDate>();
         public List<TeeDate> TeeDate = new List<TeeDate>();
@@ -39,19 +42,28 @@ namespace golf.Models
                 return false;
             }
         }
-        public string changeColor(int TT_ID, DateTime TD_ID)
+
+        public string changeColor(int TT_ID, DateTime d)
         {
-            string Color;
+       
+            string Color = "";
+      
             int counter = 0;
+            number = "";
             foreach (TeeTimeDate TTD in TeeTimeDate)
             {
-                if (TTD.TeeTime_ID == TT_ID && TTD.bookingDate == TD_ID)
+                if (TTD.TeeTime_ID == TT_ID && TTD.bookingDate == d)
                 {
                     foreach (TeeTimeDateGolfer TTDG in TeeTimeDateGolfer)
                     {
                         if(TTDG.TeeTimeDate_ID == TTD.Id)
                         {
                             counter++;
+                            if(counter > 0)
+                            {
+                                number = counter.ToString();
+                            }
+                           
                         }
                     }
                 }
@@ -63,9 +75,16 @@ namespace golf.Models
             else
             {
                 Color = "lightgreen";
+
+
             }
+
+            
+           
+
             return Color;
         }
+
        
 
 

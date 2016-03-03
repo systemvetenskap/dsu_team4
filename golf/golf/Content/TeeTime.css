@@ -32,6 +32,15 @@
     margin-bottom: 10%;
     float: left;
     display: block;
+    overflow: hidden;
+    
+    
+}
+.timedivMin nrLbl{
+    overflow: hidden;
+    margin-bottom: 0px;
+    padding: 0px;
+    display: inline;
 
 }
 .timedivMin[booked = "grey"]{
