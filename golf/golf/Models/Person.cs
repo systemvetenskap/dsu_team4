@@ -28,8 +28,8 @@ namespace golf.Models
         public string postalCode { get; set; }
         public string city { get; set; }
         public string email { get; set; }
-        public Nullable<int> gender_ID { get; set; }
-        public Nullable<int> memberType_ID { get; set; }
+        public int gender_ID { get; set; }
+        public int memberType_ID { get; set; }
         public string PW { get; set; }
     
         public virtual ICollection<AdminPerson> AdminPerson { get; set; }

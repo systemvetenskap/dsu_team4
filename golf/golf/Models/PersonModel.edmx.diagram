@@ -6,7 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="38a258cb9ea4494b969d7a5162453a91" Name="Diagram1">
         <EntityTypeShape EntityType="dsuteam4Model1.Golfer" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dsuteam4Model1.Person" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dsuteam4Model1.Person" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="dsuteam4Model1.AdminPerson" Width="1.5" PointX="5" PointY="8.5" />
         <EntityTypeShape EntityType="dsuteam4Model1.TeeDate" Width="1.5" PointX="5.375" PointY="1.25" />
         <EntityTypeShape EntityType="dsuteam4Model1.TeeTimeDateGolfer" Width="1.5" PointX="9.875" PointY="1" />
@@ -16,9 +16,9 @@
         <EntityTypeShape EntityType="dsuteam4Model1.TeeTimeDate" Width="1.5" PointX="7.625" PointY="2.875" />
         <AssociationConnector Association="dsuteam4Model1.FK_TeeTimeDate_ToTeeDate" />
         <AssociationConnector Association="dsuteam4Model1.FK_TeeTimeDateGolfer_ToTeeTimeDate" />
-        <EntityTypeShape EntityType="dsuteam4Model1.TeeTime" Width="1.5" PointX="3.875" PointY="5.25" />
+        <EntityTypeShape EntityType="dsuteam4Model1.TeeTime" Width="1.5" PointX="5.375" PointY="5.25" />
         <AssociationConnector Association="dsuteam4Model1.FK_TeeTimeDate_ToTeeTime" />
-        <EntityTypeShape EntityType="dsuteam4Model1.Gender" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="dsuteam4Model1.Gender" Width="1.5" PointX="0.5" PointY="3.75" />
         <AssociationConnector Association="dsuteam4Model1.FK_Person_ToGender" />
         <EntityTypeShape EntityType="dsuteam4Model1.Images" Width="1.5" PointX="5" PointY="14.75" />
         <EntityTypeShape EntityType="dsuteam4Model1.NewsArticle" Width="1.5" PointX="5" PointY="11.375" />
