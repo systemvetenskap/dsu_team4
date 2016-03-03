@@ -23,7 +23,7 @@
         @Html.ActionLink("Create New", "Create")
     </p>*@
 <div class="MyPageLoggedIn">
-    <tr>
+    @*<tr>
         <th id="myPageth">
             @Html.Label("Förnamn")
         </th>
@@ -44,15 +44,15 @@
         </th>
         <th>
             @Html.Label("Kön")
-        </th>
+        </th>*@
         @*<th>
                 @Html.DisplayNameFor(model => model.memberType_ID)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.PW)
             </th>*@
-        <th></th>
-    </tr>
+        @*<th></th>
+    </tr>*@
 
 
     @*<tr>
@@ -87,10 +87,11 @@
     <fieldset>
         <legend>Person</legend>
 
-        @Html.HiddenFor(model => model.Id)
+        @*@Html.HiddenFor(model => model.Id)
+        @Html.ActionLink("Ändra", "Edit", new { model = User.Identity.Name})*@
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.firstName)
+            @Html.Raw("Förnamn")
         </div>
         <div class="editor-field">
             @Html.DisplayFor(model => model.firstName)
@@ -98,7 +99,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.lastName)
+            @Html.Raw("Efternamn")
         </div>
         <div class="editor-field">
             @Html.DisplayFor(model => model.lastName)
@@ -159,6 +160,7 @@
         <div class="editor-field">
             @Html.DisplayFor(model => model.PW)
             @Html.ValidationMessageFor(model => model.PW)
+            
         </div>
 
         <p>
