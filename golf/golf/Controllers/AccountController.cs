@@ -34,7 +34,19 @@ namespace golf.Controllers
         //}
         public ActionResult Create()
         {
-            return View();
+            //List<string> gl = new List<string>();
+            //Person p = new Person();
+            CreateMember CM = new CreateMember();
+            foreach (Gender g in db.Gender)
+            {
+                CM.GenderL.Add(g);
+            }
+            //ViewBag.TheGenderList = gl;
+            ViewBag.GenderList = new SelectList(db.Gender, "Id", "GenderName");
+
+
+
+            return View(CM);
         }
 
         [HttpPost]
@@ -43,6 +55,7 @@ namespace golf.Controllers
 
             if (ModelState.IsValid)
             {
+                //model.gender_ID = model.Gender.Id;
                 db.Person.Add(model);
                 db.SaveChanges();
 
