@@ -12,35 +12,35 @@
 
     function onTimeDivClick(id)
     {
-
+        
 
         @foreach (var ttd in Model.TeeTimeDate)
         {
             @:if (id == @ttd.TeeTime_ID)
-                        {
+        {
                 @:var TTD_ID = ttd.Id;
-                foreach (var ttdg in Model.TeeTimeDateGolfer)
-                {
+            foreach (var ttdg in Model.TeeTimeDateGolfer)
+            {
                     @:if (TTD_ID == ttdg.TeeTimeDate_ID)
+                {
+                    foreach (var g in Model.Golfer)
                     {
-                        foreach (var g in Model.Golfer)
+                        if (g.Id == ttdg.Golfer_ID)
                         {
-                            if (g.Id == ttdg.Golfer_ID)
-                            {
-                                var gPID = g.Person_ID;
-                                Model.BookedPersons.Add(gPID);
-                            }
+                            var gPID = g.Person_ID;
+                            Model.BookedPersons.Add(gPID);
                         }
                     }
                 }
             }
         }
+        }
         document.getElementById('details').style.display = 'block';
         }
 
+        
 
-
-
+    
 </script>
     
     
