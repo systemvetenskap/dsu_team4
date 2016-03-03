@@ -102,7 +102,7 @@ namespace golf.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(person);
+            return RedirectToAction("MyPage", person);
         }
 
         //
