@@ -22,11 +22,22 @@ namespace golf.Controllers
             }
             return View(na);
         }
-
         public ActionResult AddNews()
         {
             return View();
         }
-
+        [HttpPost]
+        public ActionResult AddNews(NewsArticle na)
+        {
+            if (ModelState.IsValid)
+            {
+                na.Person_ID = Convert.ToInt32(User.Identity.Name);
+                na.newsDate = DateTime.Now.Date;
+                db.NewsArticle.Add(na);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View();            
+        }
     }
 }
