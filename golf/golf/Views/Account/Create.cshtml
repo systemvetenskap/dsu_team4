@@ -1,4 +1,4 @@
-﻿@model golf.Models.Person
+﻿@model golf.Models.CreateMember
 
 @{
     ViewBag.Title = "Create";
@@ -14,76 +14,78 @@
         <legend>Person</legend>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.firstName)
+            @Html.LabelFor(model => model.p.firstName)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.firstName)
-            @Html.ValidationMessageFor(model => model.firstName)
+            @Html.EditorFor(model => model.p.firstName)
+            @Html.ValidationMessageFor(model => model.p.firstName)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.lastName)
+            @Html.LabelFor(model => model.p.lastName)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.lastName)
-            @Html.ValidationMessageFor(model => model.lastName)
+            @Html.EditorFor(model => model.p.lastName)
+            @Html.ValidationMessageFor(model => model.p.lastName)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.streetAddres)
+            @Html.LabelFor(model => model.p.streetAddres)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.streetAddres)
-            @Html.ValidationMessageFor(model => model.streetAddres)
+            @Html.EditorFor(model => model.p.streetAddres)
+            @Html.ValidationMessageFor(model => model.p.streetAddres)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.postalCode)
+            @Html.LabelFor(model => model.p.postalCode)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.postalCode)
-            @Html.ValidationMessageFor(model => model.postalCode)
+            @Html.EditorFor(model => model.p.postalCode)
+            @Html.ValidationMessageFor(model => model.p.postalCode)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.city)
+            @Html.LabelFor(model => model.p.city)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.city)
-            @Html.ValidationMessageFor(model => model.city)
+            @Html.EditorFor(model => model.p.city)
+            @Html.ValidationMessageFor(model => model.p.city)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.email)
+            @Html.LabelFor(model => model.p.email)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.email)
-            @Html.ValidationMessageFor(model => model.email)
+            @Html.EditorFor(model => model.p.email)
+            @Html.ValidationMessageFor(model => model.p.email)
         </div>
 
         <div class="editor-label">
             @Html.Label("Kön")
         </div>
         <div class="editor-field">
-            @*@Html.DropDownListFor()*@
-            @Html.EditorFor(model => model.gender_ID)
-            @Html.ValidationMessageFor(model => model.gender_ID)
+            @*@Html.DropDownList("GenderList", string.Empty)*@
+            @*@Html.DropDownListFor(model => model.p.Gender, Model.GenderL)*@
+            @*@Html.EditorFor(model => model.gender_ID)
+            @Html.ValidationMessageFor(model => model.gender_ID)*@
+            @Html.DropDownListFor(model => Model.p.Gender,Model.GList)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.memberType_ID)
+            @Html.LabelFor(model => model.p.memberType_ID)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.memberType_ID)
-            @Html.ValidationMessageFor(model => model.memberType_ID)
+            @Html.EditorFor(model => model.p.memberType_ID)
+            @Html.ValidationMessageFor(model => model.p.memberType_ID)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.PW)
+            @Html.LabelFor(model => model.p.PW)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.PW)
-            @Html.ValidationMessageFor(model => model.PW)
+            @Html.EditorFor(model => model.p.PW)
+            @Html.ValidationMessageFor(model => model.p.PW)
         </div>
 
         <p>
