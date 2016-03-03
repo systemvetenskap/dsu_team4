@@ -20,6 +20,12 @@
         <AssociationConnector Association="dsuteam4Model1.FK_TeeTimeDate_ToTeeTime" />
         <EntityTypeShape EntityType="dsuteam4Model1.Gender" Width="1.5" PointX="0.75" PointY="3.75" />
         <AssociationConnector Association="dsuteam4Model1.FK_Person_ToGender" />
+        <EntityTypeShape EntityType="dsuteam4Model1.Images" Width="1.5" PointX="5" PointY="14.75" />
+        <EntityTypeShape EntityType="dsuteam4Model1.NewsArticle" Width="1.5" PointX="5" PointY="11.375" />
+        <EntityTypeShape EntityType="dsuteam4Model1.NewsArticleImage" Width="1.5" PointX="7.25" PointY="11.625" />
+        <AssociationConnector Association="dsuteam4Model1.FK_NewsArticleImage_Image" />
+        <AssociationConnector Association="dsuteam4Model1.FK_NewsArticle_ToPerson" />
+        <AssociationConnector Association="dsuteam4Model1.FK_NewsArticleImage_ToNewsArticle" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

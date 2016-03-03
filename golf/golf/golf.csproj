@@ -213,6 +213,15 @@
     <Compile Include="Models\Golfer.cs">
       <DependentUpon>PersonModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Images.cs">
+      <DependentUpon>PersonModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NewsArticle.cs">
+      <DependentUpon>PersonModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NewsArticleImage.cs">
+      <DependentUpon>PersonModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Person.cs">
       <DependentUpon>PersonModel.tt</DependentUpon>
     </Compile>
