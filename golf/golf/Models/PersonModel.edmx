@@ -29,6 +29,31 @@
           <Property Name="HCP" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Person_ID" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Images">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="imgURL" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="NewsArticle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="header" Type="nvarchar" MaxLength="200" />
+          <Property Name="content" Type="nvarchar(max)" />
+          <Property Name="Person_ID" Type="int" />
+          <Property Name="newsDate" Type="date" />
+        </EntityType>
+        <EntityType Name="NewsArticleImage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NewsArticle_ID" Type="int" />
+          <Property Name="Images_ID" Type="int" />
+        </EntityType>
         <EntityType Name="Person">
           <Key>
             <PropertyRef Name="Id" />
@@ -99,6 +124,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_NewsArticle_ToPerson">
+          <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+          <End Role="NewsArticle" Type="Self.NewsArticle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsArticle">
+              <PropertyRef Name="Person_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NewsArticleImage_Image">
+          <End Role="Images" Type="Self.Images" Multiplicity="0..1" />
+          <End Role="NewsArticleImage" Type="Self.NewsArticleImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Images">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsArticleImage">
+              <PropertyRef Name="Images_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NewsArticleImage_ToNewsArticle">
+          <End Role="NewsArticle" Type="Self.NewsArticle" Multiplicity="0..1" />
+          <End Role="NewsArticleImage" Type="Self.NewsArticleImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsArticle">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsArticleImage">
+              <PropertyRef Name="NewsArticle_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Person_ToGender">
           <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
           <End Role="Person" Type="Self.Person" Multiplicity="*" />
@@ -163,6 +224,9 @@
           <EntitySet Name="AdminPerson" EntityType="Self.AdminPerson" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Golfer" EntityType="Self.Golfer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Images" EntityType="Self.Images" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NewsArticle" EntityType="Self.NewsArticle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NewsArticleImage" EntityType="Self.NewsArticleImage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TeeDate" EntityType="Self.TeeDate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TeeTime" EntityType="Self.TeeTime" Schema="dbo" store:Type="Tables" />
@@ -175,6 +239,18 @@
           <AssociationSet Name="FK_Golfer_ToPerson" Association="Self.FK_Golfer_ToPerson">
             <End Role="Person" EntitySet="Person" />
             <End Role="Golfer" EntitySet="Golfer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NewsArticle_ToPerson" Association="Self.FK_NewsArticle_ToPerson">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="NewsArticle" EntitySet="NewsArticle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NewsArticleImage_Image" Association="Self.FK_NewsArticleImage_Image">
+            <End Role="Images" EntitySet="Images" />
+            <End Role="NewsArticleImage" EntitySet="NewsArticleImage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NewsArticleImage_ToNewsArticle" Association="Self.FK_NewsArticleImage_ToNewsArticle">
+            <End Role="NewsArticle" EntitySet="NewsArticle" />
+            <End Role="NewsArticleImage" EntitySet="NewsArticleImage" />
           </AssociationSet>
           <AssociationSet Name="FK_Person_ToGender" Association="Self.FK_Person_ToGender">
             <End Role="Gender" EntitySet="Gender" />
@@ -229,6 +305,7 @@
           <NavigationProperty Name="AdminPerson" Relationship="dsuteam4Model1.FK_AdminPerson_ToPerson" FromRole="Person" ToRole="AdminPerson" />
           <NavigationProperty Name="Golfer" Relationship="dsuteam4Model1.FK_Golfer_ToPerson" FromRole="Person" ToRole="Golfer" />
           <NavigationProperty Name="Gender" Relationship="dsuteam4Model1.FK_Person_ToGender" FromRole="Person" ToRole="Gender" />
+          <NavigationProperty Name="NewsArticle" Relationship="dsuteam4Model1.FK_NewsArticle_ToPerson" FromRole="Person" ToRole="NewsArticle" />
         </EntityType>
         <EntityContainer Name="dsuteam4Entities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Golfer" EntityType="Self.Golfer" />
@@ -266,6 +343,21 @@
           <AssociationSet Name="FK_Person_ToGender" Association="dsuteam4Model1.FK_Person_ToGender">
             <End Role="Gender" EntitySet="Gender" />
             <End Role="Person" EntitySet="Person" />
+          </AssociationSet>
+          <EntitySet Name="Images" EntityType="dsuteam4Model1.Images" />
+          <EntitySet Name="NewsArticle" EntityType="dsuteam4Model1.NewsArticle" />
+          <EntitySet Name="NewsArticleImage" EntityType="dsuteam4Model1.NewsArticleImage" />
+          <AssociationSet Name="FK_NewsArticleImage_Image" Association="dsuteam4Model1.FK_NewsArticleImage_Image">
+            <End Role="Images" EntitySet="Images" />
+            <End Role="NewsArticleImage" EntitySet="NewsArticleImage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NewsArticle_ToPerson" Association="dsuteam4Model1.FK_NewsArticle_ToPerson">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="NewsArticle" EntitySet="NewsArticle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NewsArticleImage_ToNewsArticle" Association="dsuteam4Model1.FK_NewsArticleImage_ToNewsArticle">
+            <End Role="NewsArticle" EntitySet="NewsArticle" />
+            <End Role="NewsArticleImage" EntitySet="NewsArticleImage" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="AdminPerson">
@@ -407,6 +499,72 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Images">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="imgURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="NewsArticleImage" Relationship="dsuteam4Model1.FK_NewsArticleImage_Image" FromRole="Images" ToRole="NewsArticleImage" />
+        </EntityType>
+        <EntityType Name="NewsArticle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="header" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Person_ID" Type="Int32" />
+          <Property Name="newsDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Person" Relationship="dsuteam4Model1.FK_NewsArticle_ToPerson" FromRole="NewsArticle" ToRole="Person" />
+          <NavigationProperty Name="NewsArticleImage" Relationship="dsuteam4Model1.FK_NewsArticleImage_ToNewsArticle" FromRole="NewsArticle" ToRole="NewsArticleImage" />
+        </EntityType>
+        <EntityType Name="NewsArticleImage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NewsArticle_ID" Type="Int32" />
+          <Property Name="Images_ID" Type="Int32" />
+          <NavigationProperty Name="Images" Relationship="dsuteam4Model1.FK_NewsArticleImage_Image" FromRole="NewsArticleImage" ToRole="Images" />
+          <NavigationProperty Name="NewsArticle" Relationship="dsuteam4Model1.FK_NewsArticleImage_ToNewsArticle" FromRole="NewsArticleImage" ToRole="NewsArticle" />
+        </EntityType>
+        <Association Name="FK_NewsArticleImage_Image">
+          <End Type="dsuteam4Model1.Images" Role="Images" Multiplicity="0..1" />
+          <End Type="dsuteam4Model1.NewsArticleImage" Role="NewsArticleImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Images">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsArticleImage">
+              <PropertyRef Name="Images_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NewsArticle_ToPerson">
+          <End Type="dsuteam4Model1.Person" Role="Person" Multiplicity="0..1" />
+          <End Type="dsuteam4Model1.NewsArticle" Role="NewsArticle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsArticle">
+              <PropertyRef Name="Person_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NewsArticleImage_ToNewsArticle">
+          <End Type="dsuteam4Model1.NewsArticle" Role="NewsArticle" Multiplicity="0..1" />
+          <End Type="dsuteam4Model1.NewsArticleImage" Role="NewsArticleImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsArticle">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsArticleImage">
+              <PropertyRef Name="NewsArticle_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -487,6 +645,34 @@
             <EntityTypeMapping TypeName="dsuteam4Model1.Gender">
               <MappingFragment StoreEntitySet="Gender">
                 <ScalarProperty Name="genderName" ColumnName="genderName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Images">
+            <EntityTypeMapping TypeName="dsuteam4Model1.Images">
+              <MappingFragment StoreEntitySet="Images">
+                <ScalarProperty Name="imgURL" ColumnName="imgURL" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NewsArticle">
+            <EntityTypeMapping TypeName="dsuteam4Model1.NewsArticle">
+              <MappingFragment StoreEntitySet="NewsArticle">
+                <ScalarProperty Name="newsDate" ColumnName="newsDate" />
+                <ScalarProperty Name="Person_ID" ColumnName="Person_ID" />
+                <ScalarProperty Name="content" ColumnName="content" />
+                <ScalarProperty Name="header" ColumnName="header" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NewsArticleImage">
+            <EntityTypeMapping TypeName="dsuteam4Model1.NewsArticleImage">
+              <MappingFragment StoreEntitySet="NewsArticleImage">
+                <ScalarProperty Name="Images_ID" ColumnName="Images_ID" />
+                <ScalarProperty Name="NewsArticle_ID" ColumnName="NewsArticle_ID" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
