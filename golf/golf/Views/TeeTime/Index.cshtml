@@ -31,16 +31,16 @@
 
 
         @*function onTimeDivClick(id) {
-
-
+        
+        
         @foreach (var ttd in Model.TeeTimeDate)
         {
             @:if (id == @ttd.TeeTime_ID)
-                                {
-            var TTD_ID = ttd.Id;
+        {
+                @:var TTD_ID = ttd.Id;
             foreach (var ttdg in Model.TeeTimeDateGolfer)
             {
-                if (TTD_ID == ttdg.TeeTimeDate_ID)
+                    @:if (TTD_ID == ttdg.TeeTimeDate_ID)
                 {
                     foreach (var g in Model.Golfer)
                     {
@@ -61,7 +61,7 @@
         }*@
 
 
-
+    
 </script>
     
     
@@ -103,7 +103,7 @@
                 if (checkMinute == "0")
                 {
                     <div class="hourAndMinutes">
-                        <div class="timedivHour" onclick="onTimeDivClick()" id=@item.Id time=@item.teeTime1[3] style="background-color: @Model.changeColor(item.Id, Model.selDate)">
+                        <div class="timedivHour" onclick="onTimeDivClick(@item.Id)" id=@item.Id time=@item.teeTime1[3] style="background-color: @Model.changeColor(item.Id, Model.selDate)">
                             @Html.DisplayFor(modelItem => item.teeTime1)
                         </div>
                         @foreach (var o in Model.TeeTime)
