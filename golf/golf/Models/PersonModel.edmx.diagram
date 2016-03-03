@@ -13,11 +13,7 @@
         <AssociationConnector Association="dsuteam4Model1.FK_AdminPerson_ToPerson" />
         <AssociationConnector Association="dsuteam4Model1.FK_Golfer_ToPerson" />
         <AssociationConnector Association="dsuteam4Model1.FK_TeeTimeDateGolfer_ToGolfer" />
-        <EntityTypeShape EntityType="dsuteam4Model1.TeeTimeDate" Width="1.5" PointX="7.625" PointY="2.875" />
-        <AssociationConnector Association="dsuteam4Model1.FK_TeeTimeDate_ToTeeDate" />
-        <AssociationConnector Association="dsuteam4Model1.FK_TeeTimeDateGolfer_ToTeeTimeDate" />
         <EntityTypeShape EntityType="dsuteam4Model1.TeeTime" Width="1.5" PointX="5.375" PointY="5.25" />
-        <AssociationConnector Association="dsuteam4Model1.FK_TeeTimeDate_ToTeeTime" />
         <EntityTypeShape EntityType="dsuteam4Model1.Gender" Width="1.5" PointX="0.5" PointY="3.75" />
         <AssociationConnector Association="dsuteam4Model1.FK_Person_ToGender" />
         <EntityTypeShape EntityType="dsuteam4Model1.Images" Width="1.5" PointX="5" PointY="14.75" />
@@ -26,6 +22,9 @@
         <AssociationConnector Association="dsuteam4Model1.FK_NewsArticleImage_Image" />
         <AssociationConnector Association="dsuteam4Model1.FK_NewsArticle_ToPerson" />
         <AssociationConnector Association="dsuteam4Model1.FK_NewsArticleImage_ToNewsArticle" />
+        <EntityTypeShape EntityType="dsuteam4Model1.TeeTimeDate" Width="1.5" PointX="7.625" PointY="5" />
+        <AssociationConnector Association="dsuteam4Model1.FK_TeeTimeDate_ToTeeTime" />
+        <AssociationConnector Association="dsuteam4Model1.FK_TeeTimeDateGolfer_ToTeeTimeDate" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

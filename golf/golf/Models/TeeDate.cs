@@ -14,14 +14,7 @@ namespace golf.Models
     
     public partial class TeeDate
     {
-        public TeeDate()
-        {
-            this.TeeTimeDate = new HashSet<TeeTimeDate>();
-        }
-    
         public int Id { get; set; }
         public System.DateTime teeDate1 { get; set; }
-    
-        public virtual ICollection<TeeTimeDate> TeeTimeDate { get; set; }
     }
 }
