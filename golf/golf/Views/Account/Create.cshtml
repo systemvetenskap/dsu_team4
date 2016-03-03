@@ -65,10 +65,11 @@
             @Html.Label("Kön")
         </div>
         <div class="editor-field">
-            @Html.DropDownList("GenderList", string.Empty)
+            @*@Html.DropDownList("GenderList", string.Empty)*@
             @*@Html.DropDownListFor(model => model.p.Gender, Model.GenderL)*@
             @*@Html.EditorFor(model => model.gender_ID)
             @Html.ValidationMessageFor(model => model.gender_ID)*@
+            @Html.DropDownListFor(model => Model.p.Gender,Model.GList)
         </div>
 
         <div class="editor-label">

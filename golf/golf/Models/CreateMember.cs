@@ -11,9 +11,9 @@ namespace golf.Models
     {
         public Person p { get; set; }
         public List<Gender> GenderL = new List<Gender>();
-        //public SelectListItem GList = new SelectListItem
-        //{
-
-        //};
+        public SelectListItem GList = new SelectListItem
+        {
+            
+        };
     }
 }

@@ -34,15 +34,15 @@ namespace golf.Controllers
         //}
         public ActionResult Create()
         {
-            //List<string> gl = new List<string>();
+            List<Gender> gl = new List<Gender>();
             //Person p = new Person();
             CreateMember CM = new CreateMember();
             foreach (Gender g in db.Gender)
             {
-                CM.GenderL.Add(g);
+                
             }
             //ViewBag.TheGenderList = gl;
-            ViewBag.GenderList = new SelectList(db.Gender, "Id", "GenderName");
+            //ViewBag.GenderList = new SelectList(db.Gender, "Id", "GenderName");
 
 
 
