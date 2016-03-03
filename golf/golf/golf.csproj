@@ -377,6 +377,7 @@
     <Content Include="Views\TeeTime\Index.cshtml" />
     <Content Include="Views\Account\MyPage.cshtml" />
     <Content Include="Views\Account\Create.cshtml" />
+    <Content Include="Views\Account\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
