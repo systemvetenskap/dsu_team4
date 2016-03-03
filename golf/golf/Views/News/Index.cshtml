@@ -1,0 +1,24 @@
+﻿@model golf.Models.NewsClass
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h2>@ViewBag.Message</h2>
+            </hgroup>
+            <p>
+                Här kan du följa de senaste nyheterna, och hålla dig updaterad.
+            </p>
+        </div>
+    </section>
+}
+@{
+    ViewBag.Title = "Index";
+}
+<br>
+<a href="/News/AddNews"><button type="submit">Updatera nyheter</button></a>
+
+@foreach (var item in Model.newarticle)
+{
+    @Html.Label(item.header)
+    @Html.TextArea("header", item.content)
+}
