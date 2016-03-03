@@ -1,4 +1,4 @@
-﻿@model golf.Models.NewsClass
+﻿@model golf.Models.NewsArticle
 @section featured {
     <section class="featured">
         <div class="content-wrapper">
@@ -19,8 +19,15 @@
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>NewsClass</legend>
+        <legend>NewsArticle</legend>
+        
+        @Html.LabelFor(m => m.header)
+        @Html.EditorFor(m => m.header)
+        <br />
+        @Html.LabelFor(m => m.content)
+        @Html.TextAreaFor(m => m.content, 10,50, null)
 
+        <br>
         <p>
             <input type="submit" value="Create" />
         </p>
