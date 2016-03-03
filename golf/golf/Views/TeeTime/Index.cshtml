@@ -10,29 +10,71 @@
 
 <script type="text/javascript" language="javascript">
     function onTimeDivClick() {
-        
-        document.getElementById('details').style.display = 'block';
-        
+
+        //document.getElementById(arr2).style.display = 'block';
+
     }
 
-    //function cDiv() {
+    function testDiv() {
+        
 
-       
-    //    var id = 3;
-    //     if (id == 3) {
+        var arr = [];
+        var arr2 = [];
+        @foreach(var id in Model.TeeTimeDateGolfer){
+            @:arr.push(@id.TeeTimeDate_ID);
+                   
+                }
+        @foreach(var id2 in Model.TeeTimeDate){
+            
+            @:arr2.push(@id2.Id);
+                   
+                        }
 
-    //         alert("test");
-    //        }
+        var cDiv = document.getElementById("timeWrapper");
+        var innerDivs = cDiv.getElementsByTagName("DIV");
+        
+        for (var i = 0; i <= innerDivs.length; i++) {
+            
+            for(var z = 0; z <= arr2.length; z++){
+                
+                alert(arr[z]);
+                if (arr2[z] == innerDivs[i].id) {
+                    
+                    document.getElementById(arr2[z]).style.background = 'grey';
 
-    //    var cDiv = document.getElementById("timeWrapper");
-    //    var innerDivs = cDiv.getElementsByTagName("DIV");
-    //    for (var i = 0; i < innerDivs.length; i++) {
+                }
+                  
+                }
+            }
 
-    //        alert("loopar divar nu");
-    //    }
+        
 
-    //}
+
+        }
+      
+
+
     
+
+    @*function checkDiv() {
+
+        var cDiv = document.getElementById("timeWrapper");
+        var innerDivs = cDiv.getElementsByTagName("DIV");
+
+        for (var i = 0; i < innerDivs.length; i++) {
+
+            @foreach(var thing in Model.TeeTimeDate)
+            {
+
+                @:var id = thing.TeeTime_ID.ToString();
+                @:var cid = innerDivs[i].id;
+                @:if(cid == id) {
+
+                }
+
+            }
+        }
+    }*@
 </script>
     
     
@@ -98,71 +140,8 @@
 
 }
 
-    <script>
 
-    function bookingCounter(TTD_ID){
-        var counter = 0;
-        var bol = false;
-        @foreach(var TTDG in Model.TeeTimeDateGolfer)
-            {
-             @:if (TTD_ID == @TTDG.TeeTimeDate_ID)
-                {
-                @:counter++;
-                @:if (counter > 3)
-                    {
-                    @:return bol = true;
-                        
-                    }
-                    @:else
-                    {
-                        @:return bol = false;
-                    }
-                }
-            }
-
-    }
-    function checkDiv() {
-
-
-        var cDiv = document.getElementById("timeWrapper");
-        var innerDivs = cDiv.getElementsByTagName("DIV");
-        var bookingCounter = 0;
-
-
-        for(var i = 0; i < innerDivs.length; i++)
-        {
-
-            @foreach(var thing in Model.TeeTimeDate)
-               {
-
-                  var id = thing.TeeTime_ID.ToString();
-                  @:var cid = innerDivs[i].id;
-
-                       @: if (cid == id)
-                                {
-                                @:if(bookingCounter(@thing.Id))
-                                            {
-                                        @:alert("alert!!");
-
-                                        @:document.getElementById(cid).style.background = 'grey';
-                                    }
-
-                         }
-
-                 }
-
-        }
-
-
-
-    }
-
-    checkDiv();
-
-
-
-
-    </script>
+    <input type="button" onclick="testDiv()" value="TESTA KNAPPEN" /> >
 
 
     
