@@ -206,9 +206,6 @@
     <Compile Include="Models\AdminPerson.cs">
       <DependentUpon>PersonModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\AdminType.cs">
-      <DependentUpon>PersonModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\BookingInfo.cs" />
     <Compile Include="Models\CalendarClass.cs" />
     <Compile Include="Models\CreateMember.cs" />
@@ -365,7 +362,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\MemberHandling.cshtml" />
     <Content Include="Views\Home\TimeScheduling.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />

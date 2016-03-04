@@ -36,6 +36,5 @@ namespace golf.Models
         public DbSet<NewsArticle> NewsArticle { get; set; }
         public DbSet<NewsArticleImage> NewsArticleImage { get; set; }
         public DbSet<TeeTimeDate> TeeTimeDate { get; set; }
-        public DbSet<AdminType> AdminType { get; set; }
     }
 }
