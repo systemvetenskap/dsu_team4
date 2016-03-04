@@ -4,7 +4,18 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h2>@ViewBag.Message</h2>
+            </hgroup>
+            <p>
+                Regitrera dig här
+            </p>
+        </div>
+    </section>
+}
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
@@ -14,7 +25,7 @@
         <legend>Person</legend>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.p.firstName)
+            @Html.Label("Förnamn:")
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.p.firstName)
@@ -22,7 +33,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.p.lastName)
+            @Html.Label("Efternamn:")
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.p.lastName)
@@ -30,7 +41,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.p.streetAddres)
+            @Html.Label("Gatuadress:")
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.p.streetAddres)
@@ -38,7 +49,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.p.postalCode)
+            @Html.Label("Postnummer:")
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.p.postalCode)
@@ -46,7 +57,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.p.city)
+            @Html.Label("Stad:")
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.p.city)
@@ -54,7 +65,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.p.email)
+            @Html.Label("E-post:")
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.p.email)
@@ -62,7 +73,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.Label("Kön")
+            @*@Html.Label("Kön")*@
         </div>
         <div class="editor-field">
             @*@Html.DropDownList("GenderList", string.Empty)*@
@@ -81,20 +92,21 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.p.PW)
+            @Html.Label("Lösenord:")
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.p.PW)
             @Html.ValidationMessageFor(model => model.p.PW)
         </div>
         <div>
+            @Html.Label("Kön:")
            @Html.DropDownListFor(m => m.genderid, new SelectList(Model.genderItems, "Value", "Text"));
                                 
 
          </div>
 
         <p>
-            <input type="submit" value="Create" />
+            <input type="submit" value="Registrera dig" />
         </p>
     </fieldset>
 }

@@ -20,6 +20,10 @@ namespace golf.Controllers
             {
                 na.newarticle.Add(article);
             }
+
+            //Nya nyheter först
+            na.newarticle.Reverse();
+
             return View(na);
         }
         public ActionResult AddNews()
