@@ -7,10 +7,11 @@ namespace golf.Models
 {
     public class BookingInfo
     {
-        public int TeeTime { get; set; }
-        public string Name { get; set; }
-        public int personId { get; set; }
+        public int Golferid { get; set;}
+        public int TeeTime { get; set;}
+        public string Name { get; set;}
+        public int personId { get; set;}
         public string HCP { get; set; }
-        public string gender { get; set; }
+        public string gender { get; set;}
     }
 }
