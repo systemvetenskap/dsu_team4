@@ -16,6 +16,7 @@
 <div class="sectionone">
     <h3>Startsidans innehåll</h3>
     <br>
+    <br>
     Lorem Ipsum är en utfyllnadstext från tryck- och förlagsindustrin.
     Lorem ipsum har varit standard ända sedan 1500-talet, när en okänd
     boksättare tog att antal bokstäver och blandade dem för att göra ett provexemplar av en bok.
@@ -30,7 +31,7 @@
     
     @if(User.Identity.IsAuthenticated)
     {
-        <br />
+
         <a href="/Home/AddNews"><button type="submit">Skapa nytt inlägg</button></a>
     }
    
@@ -38,20 +39,11 @@
     <br />
 
     @foreach (var item in Model.newarticle)
-    {
-        <br/>
-            
+    {   <br>    
         @Html.Label(item.header)
-            @*@Html.TextArea("header", item.content, 10, 50, new { @style = "resize:none;", @readonly = true, @disabled = true })*@
-        @*<br />
-        <pre>s
-            @item.content
-        </pre>*@
-        @Html.Raw(item.content.Replace(Environment.NewLine, "<br/>"))
-        
-        <br />
-            <p>  </p>
-        
+        @Html.Raw(item.content.Replace(Environment.NewLine, "<br/>"))       
+        <br>
+ 
     }
 </div>
 
