@@ -23,7 +23,7 @@
     {
         @Html.Label(item.header)
         <div class="forumpost" id="forumpost">
-            @Html.TextArea("header", item.content, 10, 500, new { @style = "resize:none;", @readonly = true, @disabled = true })
+            @Html.TextArea("header", item.content, new { @style = "resize:none;", @readonly = true, @disabled = true })
         </div>
     }
       

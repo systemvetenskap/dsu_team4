@@ -26,14 +26,28 @@
 
 <div class="sectiontwo">
     <h3>Senaste nytt</h3>
-    <br>
+
+    <br />
+
     <a href="/News/AddNews"><button type="submit">Publicera en nyhet</button></a>
-    <br>
-    <br>
+
+    <br />
+
     @foreach (var item in Model.newarticle)
     {
+        <br/>
+            
         @Html.Label(item.header)
-            @Html.TextArea("header", item.content, 10, 500, new { @style = "resize:none;", @readonly = true, @disabled = true })
+            @*@Html.TextArea("header", item.content, 10, 50, new { @style = "resize:none;", @readonly = true, @disabled = true })*@
+        @*<br />
+        <pre>
+            @item.content
+        </pre>*@
+        @Html.Raw(item.content.Replace(Environment.NewLine, "<br/>"))
+
+        <br />
+            <p>  </p>
+        
     }
 </div>
 
