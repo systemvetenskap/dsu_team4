@@ -1,12 +1,16 @@
 ﻿html {
-    background-color: #fff;
     margin: 0;
     padding-bottom: 10px;
+    background:url(../../Images/wallpaper2.jpg) no-repeat;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 body {
-    background-color: #fff;
-    color: #333;
+    max-width:1000px;
+    margin: 0 auto;
+    color: black;
     font-size: .85em;
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
     padding: 0;
@@ -89,43 +93,29 @@ h5, h6 {
         text-decoration: none;
     }
 
-
 /* main layout
 ----------------------------------------------------------*/
 .content-wrapper {
-    margin: 0 auto;
-    max-width: 900px;
+        background:rgba(255,255,255, 0.7);
+        border-radius:1px;
 }
 
 #body {
-    background-color: #fff;
     clear: both;
 }
 
-    /*.main-content {
-        background: url("../Images/accent.png") no-repeat;
-        padding-left: 10px;
-        padding-top: 20px;
-    }*/
-
-    /*.featured + .main-content {
-        background: url("../Images/heroAccent.png") no-repeat;
-        background-color:#fff;
-        max-width:900px;
-        text-align:justify;
-    }*/
-
 header .content-wrapper {
-    padding-top: 20px; 
+
 }
 
 footer {
-    margin:0 auto;
-    max-width:900px;
+ 
+    max-width:1000px;
     clear: both;
-    background-color: #fff;
-    font-size: .9em;
+    font-size: 1.2em;
+    text-align:center;
     height: 100px;
+    margin:0 auto;
 }
 
 
@@ -218,11 +208,11 @@ ul#menu {
 }
 
     .featured .content-wrapper {
-        background-color: #7ac0da;
+        background:rgba(255,255,255, 0.2);
         color: #3e5667;
         text-align:center;
         padding: 10px 10px 10px 10px; 
-        border-radius:48%; 
+        border-radius:48%;
     }
 
         .featured hgroup.title h1, .featured hgroup.title h2 {
@@ -235,23 +225,26 @@ ul#menu {
 
 div.sectionone
 {
-    max-width:49.5%;
+    max-width:45%;
     float:left;
-    height:auto;
     text-align:justify;
+    padding:2.5%;
+    font-size:120%;
+  
 }
 
 div.sectiontwo
 {
-    max-width:49.5%;
+    max-width:45%;
     float:right;
-    height:auto;
     text-align:justify; 
+    padding:2.5%;
+    font-size:120%;
 
 }
 div.sections
 {
-  background-color:grey;
+
 }
 
 /* page titles */
@@ -282,11 +275,8 @@ ol.round {
     float:left;
     text-align:justify;
 }
-
     ol.round li {
-        margin: 25px 0;
-        /*padding-left: 45px;*/
-      
+        margin: 25px 0;     
     }
 
 /* content */
@@ -304,11 +294,6 @@ aside {
         list-style: none;
         padding: 0;
     }
-
-        /*aside ul li {
-            background: url("../Images/bullet.png") no-repeat 0 50%;
-            padding: 2px 0 2px 20px;
-        }*/
 
 .label {
     font-weight: 700;
@@ -542,14 +527,15 @@ input[type="checkbox"].input-validation-error {
 table  {
     text-align: left;
     max-width: inherit;
-    font-size: 100%;  
+    font-size: 100%; 
+    padding:3%; 
 }
 
 th {
     font-size: .9em;
     text-align: left;
     padding-left: 0px;
-    padding-right: 0px;
+    padding-right: 5%;
 }
 
     th a {
@@ -590,6 +576,7 @@ th {
 
 td {
     padding: 2em 0em 1em 0em;
+        
   
 }
 
@@ -674,10 +661,12 @@ tr.pager td {
     .content-wrapper {
         padding-right: 10px;
         padding-left: 10px;
+        max-width:1000px; 
     }
 
     .featured .content-wrapper {
         padding: 10px;
+        
     }
 
     /* page content */
@@ -735,11 +724,12 @@ tr.pager td {
     footer {
         text-align: center;
         height: auto;
-        padding: 10px 0;
+        margin:0 auto;
     }
 
         footer p {
-            margin: 0;
+                text-align:center;
+                        margin:0 auto;
         }
 
 }
