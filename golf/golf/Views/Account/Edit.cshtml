@@ -63,22 +63,6 @@
             @Html.ValidationMessageFor(model => model.email)
         </div>
 
-        @*<div class="editor-label">
-            @Html.Raw("Dam/Herr")
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.gender_ID)
-            @Html.ValidationMessageFor(model => model.gender_ID)
-        </div>*@
-
-        @*<div class="editor-label">
-            @Html.LabelFor(model => model.memberType_ID)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.memberType_ID)
-            @Html.ValidationMessageFor(model => model.memberType_ID)
-        </div>*@
-
         <div class="editor-label">
             @Html.Raw("Lösenord")
         </div>
@@ -90,6 +74,26 @@
         <p>
             <input type="submit" value="Save" />
         </p>
+
+        <div class="HiddenEdit">
+            <div class="editor-label">
+                @Html.Raw("Dam/Herr")
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.gender_ID)
+                @Html.ValidationMessageFor(model => model.gender_ID)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.memberType_ID)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.memberType_ID)
+                @Html.ValidationMessageFor(model => model.memberType_ID)
+            </div>
+        </div>
+
+
     </fieldset>
 }
 

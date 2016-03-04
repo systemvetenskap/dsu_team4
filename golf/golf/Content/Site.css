@@ -299,6 +299,10 @@ aside {
             border-spacing: 10px 50px;
 }
 
+        .HiddenEdit{
+            visibility: hidden;
+        }
+
 .editor-label{
     font-size: larger;
     font-weight: bold;
