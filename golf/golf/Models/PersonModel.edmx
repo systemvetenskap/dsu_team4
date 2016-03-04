@@ -13,6 +13,13 @@
           <Property Name="Person_ID" Type="int" />
           <Property Name="AdminType_ID" Type="int" />
         </EntityType>
+        <EntityType Name="AdminType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="type" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Gender">
           <Key>
             <PropertyRef Name="Id" />
@@ -100,6 +107,18 @@
           <Property Name="TeeTimeDate_ID" Type="int" Nullable="false" />
           <Property Name="Golfer_ID" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_AdminPerson_ToAdminType">
+          <End Role="AdminType" Type="Self.AdminType" Multiplicity="0..1" />
+          <End Role="AdminPerson" Type="Self.AdminPerson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdminType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AdminPerson">
+              <PropertyRef Name="AdminType_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_AdminPerson_ToPerson">
           <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
           <End Role="AdminPerson" Type="Self.AdminPerson" Multiplicity="*" />
@@ -210,6 +229,7 @@
         </Association>
         <EntityContainer Name="dsuteam4Model1StoreContainer">
           <EntitySet Name="AdminPerson" EntityType="Self.AdminPerson" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AdminType" EntityType="Self.AdminType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Golfer" EntityType="Self.Golfer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Images" EntityType="Self.Images" Schema="dbo" store:Type="Tables" />
@@ -220,6 +240,10 @@
           <EntitySet Name="TeeTime" EntityType="Self.TeeTime" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TeeTimeDate" EntityType="Self.TeeTimeDate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TeeTimeDateGolfer" EntityType="Self.TeeTimeDateGolfer" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AdminPerson_ToAdminType" Association="Self.FK_AdminPerson_ToAdminType">
+            <End Role="AdminType" EntitySet="AdminType" />
+            <End Role="AdminPerson" EntitySet="AdminPerson" />
+          </AssociationSet>
           <AssociationSet Name="FK_AdminPerson_ToPerson" Association="Self.FK_AdminPerson_ToPerson">
             <End Role="Person" EntitySet="Person" />
             <End Role="AdminPerson" EntitySet="AdminPerson" />
@@ -339,6 +363,11 @@
             <End Role="TeeTimeDate" EntitySet="TeeTimeDate" />
             <End Role="TeeTimeDateGolfer" EntitySet="TeeTimeDateGolfer" />
           </AssociationSet>
+          <EntitySet Name="AdminType" EntityType="dsuteam4Model1.AdminType" />
+          <AssociationSet Name="FK_AdminPerson_ToAdminType" Association="dsuteam4Model1.FK_AdminPerson_ToAdminType">
+            <End Role="AdminType" EntitySet="AdminType" />
+            <End Role="AdminPerson" EntitySet="AdminPerson" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="AdminPerson">
           <Key>
@@ -348,6 +377,7 @@
           <Property Name="Person_ID" Type="Int32" />
           <Property Name="AdminType_ID" Type="Int32" />
           <NavigationProperty Name="Person" Relationship="dsuteam4Model1.FK_AdminPerson_ToPerson" FromRole="AdminPerson" ToRole="Person" />
+          <NavigationProperty Name="AdminType" Relationship="dsuteam4Model1.FK_AdminPerson_ToAdminType" FromRole="AdminPerson" ToRole="AdminType" />
         </EntityType>
         <EntityType Name="TeeDate">
           <Key>
@@ -531,6 +561,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="AdminType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AdminPerson" Relationship="dsuteam4Model1.FK_AdminPerson_ToAdminType" FromRole="AdminType" ToRole="AdminPerson" />
+        </EntityType>
+        <Association Name="FK_AdminPerson_ToAdminType">
+          <End Type="dsuteam4Model1.AdminType" Role="AdminType" Multiplicity="0..1" />
+          <End Type="dsuteam4Model1.AdminPerson" Role="AdminPerson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdminType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AdminPerson">
+              <PropertyRef Name="AdminType_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -639,6 +689,14 @@
                 <ScalarProperty Name="bookingDate" ColumnName="bookingDate" />
                 <ScalarProperty Name="Disabled" ColumnName="Disabled" />
                 <ScalarProperty Name="TeeTime_ID" ColumnName="TeeTime_ID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AdminType">
+            <EntityTypeMapping TypeName="dsuteam4Model1.AdminType">
+              <MappingFragment StoreEntitySet="AdminType">
+                <ScalarProperty Name="type" ColumnName="type" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

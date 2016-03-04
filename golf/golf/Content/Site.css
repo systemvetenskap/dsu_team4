@@ -232,7 +232,7 @@ ul#menu {
 div.sectionone
 {
     max-width:49.5%;
-    background-color:red;
+    /*background-color:red;*/
     float:left;
     height:auto;
     text-align:justify;
@@ -241,7 +241,7 @@ div.sectionone
 div.sectiontwo
 {
     max-width:49.5%;
-    background-color:green;
+    /*background-color:green;*/
     float:right;
     height:auto;
     text-align:justify; 

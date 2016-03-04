@@ -12,16 +12,16 @@ namespace golf.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class TeeTime
+    public partial class AdminType
     {
-        public TeeTime()
+        public AdminType()
         {
-            this.TeeTimeDate = new HashSet<TeeTimeDate>();
+            this.AdminPerson = new HashSet<AdminPerson>();
         }
     
         public int Id { get; set; }
-        public string teeTime1 { get; set; }
+        public string type { get; set; }
     
-        public virtual ICollection<TeeTimeDate> TeeTimeDate { get; set; }
+        public virtual ICollection<AdminPerson> AdminPerson { get; set; }
     }
 }

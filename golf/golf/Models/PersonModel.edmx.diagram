@@ -25,6 +25,8 @@
         <EntityTypeShape EntityType="dsuteam4Model1.TeeTimeDate" Width="1.5" PointX="7.625" PointY="5" />
         <AssociationConnector Association="dsuteam4Model1.FK_TeeTimeDate_ToTeeTime" />
         <AssociationConnector Association="dsuteam4Model1.FK_TeeTimeDateGolfer_ToTeeTimeDate" />
+        <EntityTypeShape EntityType="dsuteam4Model1.AdminType" Width="1.5" PointX="0.75" PointY="8.875" />
+        <AssociationConnector Association="dsuteam4Model1.FK_AdminPerson_ToAdminType" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
