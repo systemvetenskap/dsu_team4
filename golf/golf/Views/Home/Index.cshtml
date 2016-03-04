@@ -1,4 +1,5 @@
-﻿@section featured {
+﻿@model golf.Models.NewsClass
+@section featured {
     <section class="featured">
         <div class="content-wrapper">
             <hgroup class="title">
@@ -10,35 +11,30 @@
         </div>
     </section>
 }
-<h3>Startsidans innehåll</h3>
-<ol class="round">
-    <li class="one">
-        <h5>Punkt tvåtusenetthundrafemtvi</h5>
-        Lorem Ipsum är en utfyllnadstext från tryck- och förlagsindustrin. 
-        Lorem ipsum har varit standard ända sedan 1500-talet, när en okänd 
-        boksättare tog att antal bokstäver och blandade dem för att göra ett provexemplar av en bok. 
-        Lorem ipsum har inte bara överlevt fem århundraden, utan även övergången till elektronisk 
-        typografi utan större förändringar. Det blev allmänt känt på 1960-talet i samband med 
-        lanseringen av Letraset-ark med avsnitt av Lorem Ipsum, och senare med mjukvaror som Aldus PageMaker.
-    </li>
 
-    <li class="two">
-        <h5>Punkt två</h5>
-        Lorem Ipsum är en utfyllnadstext från tryck- och förlagsindustrin.
-        Lorem ipsum har varit standard ända sedan 1500-talet, när en okänd
-        boksättare tog att antal bokstäver och blandade dem för att göra ett provexemplar av en bok.
-        Lorem ipsum har inte bara överlevt fem århundraden, utan även övergången till elektronisk
-        typografi utan större förändringar. Det blev allmänt känt på 1960-talet i samband med
-        lanseringen av Letraset-ark med avsnitt av Lorem Ipsum, och senare med mjukvaror som Aldus PageMaker.
-    </li>
 
-    <li class="three">
-        <h5>Punkt tre</h5>
-        Lorem Ipsum är en utfyllnadstext från tryck- och förlagsindustrin.
-        Lorem ipsum har varit standard ända sedan 1500-talet, när en okänd
-        boksättare tog att antal bokstäver och blandade dem för att göra ett provexemplar av en bok.
-        Lorem ipsum har inte bara överlevt fem århundraden, utan även övergången till elektronisk
-        typografi utan större förändringar. Det blev allmänt känt på 1960-talet i samband med
-        lanseringen av Letraset-ark med avsnitt av Lorem Ipsum, och senare med mjukvaror som Aldus PageMaker.
-    </li>
-</ol>
+<div class="sectionone">
+    <h3>Startsidans innehåll</h3>
+    <br>
+    Lorem Ipsum är en utfyllnadstext från tryck- och förlagsindustrin.
+    Lorem ipsum har varit standard ända sedan 1500-talet, när en okänd
+    boksättare tog att antal bokstäver och blandade dem för att göra ett provexemplar av en bok.
+    Lorem ipsum har inte bara överlevt fem århundraden, utan även övergången till elektronisk
+    typografi utan större förändringar. Det blev allmänt känt på 1960-talet i samband med
+    lanseringen av Letraset-ark med avsnitt av Lorem Ipsum, och senare med mjukvaror som Aldus PageMaker.
+</div>
+
+<div class="sectiontwo">
+    <h3>Senaste nytt</h3>
+    <br>
+    <a href="/News/AddNews"><button type="submit">Publicera en nyhet</button></a>
+    <br>
+    <br>
+    @foreach (var item in Model.newarticle)
+    {
+        @Html.Label(item.header)
+            @Html.TextArea("header", item.content, 10, 500, new { @style = "resize:none;", @readonly = true, @disabled = true })
+    }
+</div>
+
+

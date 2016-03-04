@@ -14,11 +14,16 @@
 @{
     ViewBag.Title = "Index";
 }
-<br>
-<a href="/News/AddNews"><button type="submit">Updatera nyheter</button></a>
 
-@foreach (var item in Model.newarticle)
-{
-    @Html.Label(item.header)
-    @Html.TextArea("header", item.content)
-}
+    <br>
+    <a href="/News/AddNews"><button type="submit">Updatera nyheter</button></a>
+    <br>
+    <br>
+    @foreach (var item in Model.newarticle)
+    {
+        @Html.Label(item.header)
+        <div class="forumpost" id="forumpost">
+            @Html.TextArea("header", item.content, 10, 500, new { @style = "resize:none;", @readonly = true, @disabled = true })
+        </div>
+    }
+      

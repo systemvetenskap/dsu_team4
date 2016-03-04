@@ -6,7 +6,7 @@
                 <h2>@ViewBag.Message</h2>
             </hgroup>
             <p>
-                Detta är startsidan, här publiceras de senaste nyheterna.
+                Detta är senaste nytt, här publiceras de senaste nyheterna om golfklubben.
             </p>
         </div>
     </section>
@@ -18,26 +18,27 @@
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>NewsArticle</legend>
-        
-        @Html.LabelFor(m => m.header)
-        @Html.EditorFor(m => m.header)
-        <br />
-        @Html.LabelFor(m => m.content)
-        @Html.TextAreaFor(m => m.content, 10,50, null)
+    <div class="forumpost" id="forumpost">
+        <fieldset>
+            <legend>NewsArticle</legend>
+            <br>
+            @Html.Label("Rubrik på nyheten:")
+            @Html.EditorFor(m => m.header)
+            <br />
+            @Html.Label("Text / inlägg:")
+            @Html.TextAreaFor(m => m.content, 10, 50, null)
+            <br>
+            <p>
+                <input type="submit" value="Publicera nyhet" />
+            </p>
+        </fieldset>
+        </div>
+        }
 
-        <br>
-        <p>
-            <input type="submit" value="Create" />
-        </p>
-    </fieldset>
-}
+        <div>
+            @Html.ActionLink("Tillbaks till senaste nytt", "Index")
+        </div>
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }

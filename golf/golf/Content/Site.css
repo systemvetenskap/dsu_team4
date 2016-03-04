@@ -10,6 +10,7 @@ body {
     font-size: .85em;
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
     padding: 0;
+    overflow-x:hidden;
 }
 
 a {
@@ -133,7 +134,7 @@ footer {
 .site-title {
     color: #c8c8c8;
     font-family: Rockwell, Consolas, "Courier New", Courier, monospace;
-    font-size: 4.0em;
+    font-size: 4.1em;
     margin: 0;
 }
 
@@ -225,8 +226,32 @@ ul#menu {
         }
 
         .featured p {
-            font-size: 1.5em;
+            font-size: 1.4em;
         }
+
+div.sectionone
+{
+    max-width:49.5%;
+    background-color:red;
+    float:left;
+    height:auto;
+    text-align:justify;
+}
+
+div.sectiontwo
+{
+    max-width:49.5%;
+    background-color:green;
+    float:right;
+    height:auto;
+    text-align:justify; 
+
+}
+div.sections
+{
+    /*Kommer inte åt denna*/
+  background-color:grey;
+}
 
 /* page titles */
 hgroup.title {
@@ -253,6 +278,8 @@ section.feature {
 ol.round {
     list-style-type: none;
     padding-left: 0;
+    float:left;
+    text-align:justify;
 }
 
     ol.round li {
@@ -408,7 +435,7 @@ input, textarea {
     border: 1px solid #e2e2e2;
     background: #fff;
     color: #333;
-    font-size: 1.2em;
+    font-size: 1.0em;
     margin: 5px 0 6px 0;
     padding: 5px;
     width: 300px;
