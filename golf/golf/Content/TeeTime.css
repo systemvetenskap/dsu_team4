@@ -138,7 +138,7 @@
     left:0px;
     display: none;
     width:97%;
-    height:150px;
+    height:auto;
     font-family:verdana;
     font-size:13px;
     padding:10px;
@@ -146,3 +146,16 @@
     border:2px solid grey;
     
     }
+ControlDiv{
+    display:block;
+    float: left;
+    width: auto;
+}
+.playerName{
+    max-width:50%;
+    display: block;
+}
+.playerList{
+    max-width: 50%;
+    display: block;
+}
