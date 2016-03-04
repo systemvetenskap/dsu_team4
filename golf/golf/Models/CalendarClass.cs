@@ -59,7 +59,7 @@ namespace golf.Models
             string Color = "";
       
             int counter = 0;
-            number = "";
+            number = "0";
             foreach (TeeTimeDate TTD in TeeTimeDate)
             {
                 if (TTD.TeeTime_ID == TT_ID && TTD.bookingDate == d)

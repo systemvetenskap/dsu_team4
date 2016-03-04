@@ -9,5 +9,7 @@ namespace golf.Models
     {
         public int TeeTime { get; set; }
         public string Name { get; set; }
+        public int personId { get; set; }
+        public string HCP { get; set; }
     }
 }

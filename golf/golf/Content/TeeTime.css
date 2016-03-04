@@ -23,7 +23,13 @@
     margin-left: 10%;
     margin-bottom: 10%;
     float: left;
-    display: block;
+    display: inline-block;
+}
+.timedivHour[booked = "grey"]{
+    background-color: grey;
+}
+.timedivHour[booked = "lightgreen"]{
+    background-color:lightgreen;
 }
 .timedivMin{
     width:100%;
@@ -31,7 +37,7 @@
     margin-left: 10%;
     margin-bottom: 10%;
     float: left;
-    display: block;
+    display: inline-block;
     overflow: hidden;
     
     
@@ -49,6 +55,8 @@
 .timedivMin[booked = "lightgreen"]{
     background-color:lightgreen;
 }
+
+
 .timedivMin:hover{
     cursor: pointer;
     cursor: hand;
