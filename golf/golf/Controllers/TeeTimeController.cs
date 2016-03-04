@@ -35,28 +35,22 @@ namespace golf.Controllers
                 cl.dateString = cl.currDate.ToShortDateString();
                 cl.selDate = DateTime.Today;
 
-            List<TeeTimeDateGolfer> tt = databas.TeeTimeDateGolfer.ToList();
-            List<TeeTimeDate> td = databas.TeeTimeDate.ToList();
-            List<Golfer> namn = databas.Golfer.Include(p => p.TeeTimeDateGolfer).ToList();
-            List<Person> pers = databas.Person.ToList();
-            List<Gender> gend = databas.Gender.ToList();
 
-
-            var join = from tdate in td
-                       join tgolfers in tt
+            var join = from tdate in databas.TeeTimeDate.ToList()
+                       join tgolfers in databas.TeeTimeDateGolfer.ToList()
                        on tdate.Id equals tgolfers.TeeTimeDate_ID
                        select new {TeeTimeID = tdate.TeeTime_ID, Date= tdate.bookingDate, Golferid = tgolfers.Golfer_ID};
 
             var list1 = join.ToList();
 
-            var join2 = from g in namn
+            var join2 = from g in databas.Golfer.Include(p => p.TeeTimeDateGolfer).ToList()
                         join li in list1 on
                         g.Id equals li.Golferid
                         select new { Date = li.Date, Golfid = li.Golferid, TeeTime = li.TeeTimeID, Personid = g.Person_ID, HCP = g.HCP };
 
             var list2 = join2.ToList();
 
-            var join3 = from p in pers
+            var join3 = from p in databas.Person.ToList()
                         join li in list2
                         on p.Id equals li.Personid
                         where li.Date == DateTime.Today
@@ -73,7 +67,7 @@ namespace golf.Controllers
 
             var list3 = join3.ToList();
 
-            var join4 = from g in gend
+            var join4 = from g in databas.Gender.ToList()
                         join p in list3
                         on g.Id equals p.Gender
                         select new
@@ -116,6 +110,7 @@ namespace golf.Controllers
 
             return View();
         }
+
 
 
     }
