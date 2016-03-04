@@ -20,7 +20,7 @@ namespace golf.Models
         }
     
         public int Id { get; set; }
-        public Nullable<int> TeeTime_ID { get; set; }
+        public int TeeTime_ID { get; set; }
         public Nullable<bool> Disabled { get; set; }
         public Nullable<System.DateTime> bookingDate { get; set; }
     

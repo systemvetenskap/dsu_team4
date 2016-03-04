@@ -131,13 +131,7 @@ namespace golf.Controllers
                 {
                     FormsAuthentication.SetAuthCookie(P.Id.ToString(), false);
 
-                    foreach (var item in db.AdminPerson)
-                    {
-                        if (item.Person_ID == P.Id)
-                        {
-                            
-                        }
-                    }
+
 
                     return RedirectToAction("MyPage");
                 }
