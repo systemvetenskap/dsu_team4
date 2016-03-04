@@ -1,0 +1,44 @@
+﻿@model golf.Models.NewsArticle
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h2>@ViewBag.Message</h2>
+            </hgroup>
+            <p>
+                Detta är senaste nytt, här publiceras de senaste nyheterna om golfklubben.
+            </p>
+        </div>
+    </section>
+}
+@{
+    ViewBag.Title = "AddNews";
+}
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div class="forumpost" id="forumpost">
+        <fieldset>
+            <legend>NewsArticle</legend>
+            <br>
+            @Html.Label("Rubrik på nyheten:")
+            @Html.EditorFor(m => m.header)
+            <br />
+            @Html.Label("Text / inlägg:")
+            @Html.TextAreaFor(m => m.content, 10, 50, null)
+            <br>
+            <p>
+                <input type="submit" value="Publicera nyhet" />
+            </p>
+        </fieldset>
+        </div>
+        }
+
+        <div>
+            @Html.ActionLink("Tillbaks till senaste nytt", "Index")
+        </div>
+
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }

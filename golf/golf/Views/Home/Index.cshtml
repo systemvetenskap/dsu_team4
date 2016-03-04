@@ -27,9 +27,13 @@
 <div class="sectiontwo">
     <h3>Senaste nytt</h3>
 
-    <br />
-
-    <a href="/News/AddNews"><button type="submit">Publicera en nyhet</button></a>
+    
+    @if(User.Identity.IsAuthenticated)
+    {
+        <br />
+        <a href="/Home/AddNews"><button type="submit">Skapa nytt inlägg</button></a>
+    }
+   
 
     <br />
 

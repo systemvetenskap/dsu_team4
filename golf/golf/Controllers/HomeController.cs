@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using golf.Models;
+using System.Web.Security;
 
 namespace golf.Controllers
 {
@@ -23,6 +24,26 @@ namespace golf.Controllers
             na.newarticle.Reverse();
 
             return View(na);
+        }
+        public ActionResult AddNews()
+        {
+
+            return View();
+        }
+
+        
+        [HttpPost]
+        public ActionResult AddNews(NewsArticle na)
+        {
+            if (ModelState.IsValid)
+            {
+                    na.Person_ID = Convert.ToInt32(User.Identity.Name);
+                    na.newsDate = DateTime.Now.Date;
+                    db.NewsArticle.Add(na);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+            }
+            return View();
         }
         public ActionResult MemberHandling()
         {
