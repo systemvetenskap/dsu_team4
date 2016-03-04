@@ -50,35 +50,35 @@
             document.getElementById('details').style.display = 'block';
             var D = document.getElementById('details');
 
-            var addControlDiv = document.createElement('div');
-            addControlDiv.setAttribute('id', 'ControlDiv');
-            D.appendChild(addControlDiv);
+            //var addControlDiv = document.createElement('div');
+            //addControlDiv.setAttribute('id', 'ControlDiv');
+            //D.appendChild(addControlDiv);
 
 
-            @using (Html.BeginForm("saveBooking", "TeeTime"))
+            @*@using (Html.BeginForm("saveBooking", "TeeTime"))
             {
                 <input type="button" value="Boka" />
 
 
-            @:var addButton = document.createElement('input');
-            @:addButton.setAttribute('type', 'button');
-            @:addButton.setAttribute('id', 'BookBtn');
-            @:addButton.setAttribute('value', 'Boka')
-            @:document.getElementById('ControlDiv').appendChild(addButton);
 
-                }
-
+                }*@
+            
+            var addButton = document.createElement('input');
+            addButton.setAttribute('type', 'submit');
+            addButton.setAttribute('id', 'BookBtn');
+            addButton.setAttribute('value', 'Boka')
+            document.getElementById('ControlDiv').appendChild(addButton);
 
             var addButton2 = document.createElement('input');
-            addButton2.setAttribute('type', 'button');
+            addButton2.setAttribute('type', 'submit');
             addButton2.setAttribute('id', 'AddGolferBtn');
             addButton2.setAttribute('value', 'Lägg till')
-            document.getElementById('ControlDiv').appendChild(addButton2);
+            document.getElementById('ControlDiv2').appendChild(addButton2);
 
             var addTextInput = document.createElement('input');
             addTextInput.setAttribute('type', 'text');
             addTextInput.setAttribute('id', 'GolferIDInput');
-            document.getElementById('ControlDiv').appendChild(addTextInput);
+            document.getElementById('ControlDiv2').appendChild(addTextInput);
 
 
             //document.getElementById('playerName').innerHTML=arr;
@@ -165,12 +165,26 @@
 
 }
 
-        <div id="details" class="TeeDetails">
-            <p>@Html.Label("Registrerade spelare")</p>
-            <div id="playerName">
-              <ul id="playerList">
-              </ul>
-            </div>
+    <div id="details" class="TeeDetails">
+    <p>@Html.Label("Registrerade spelare")</p>
+        <div id="playerName">
+            <ul id="playerList"></ul>
         </div>
+
+    @using (Html.BeginForm("saveBooking", "TeeTime"))
+        {
+        <div id="ControlDiv">
+         
+        
+        </div>
+        }
+        @using (Html.BeginForm("addGolfer", "TeeTime"))
+        {
+            <div id="ControlDiv2">
+
+
+            </div>
+        }
+    </div>
 </div>
 

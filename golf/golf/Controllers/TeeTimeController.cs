@@ -105,7 +105,7 @@ namespace golf.Controllers
             
         }
         [HttpPost]
-        public ActionResult saveBooking(BookingInfo c)
+        public ActionResult saveBooking(string c)
         {
             //gör nått
             return View();
