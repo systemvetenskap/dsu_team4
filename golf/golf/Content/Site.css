@@ -539,21 +539,16 @@ input[type="checkbox"].input-validation-error {
 /* tables
 ----------------------------------------------------------*/
 table  {
-    text-align: center;
-    background-color: #fff;
-    max-width: 900px;
-    border-collapse: separate;
-    border-spacing: 20px;
-    margin-top: 0.75em;
-    border: 0 none;
-    
+    text-align: left;
+    max-width: inherit;
+    font-size: 100%;  
 }
 
 th {
-    font-size: 1.2em;
+    font-size: .9em;
     text-align: left;
-    border: none 0px;
-    padding-left: 0;
+    padding-left: 0px;
+    padding-right: 0px;
 }
 
     th a {
@@ -593,8 +588,8 @@ th {
     }
 
 td {
-    padding: 0.25em 2em 0.25em 0em;
-    border: 0 none;
+    padding: 2em 0em 1em 0em;
+  
 }
 
 tr.pager td {

@@ -16,8 +16,6 @@
 
 }
 
-<h2>Index</h2>
-
 <p>
     @Html.ActionLink("Lägg till medlem", "Create")
 </p>
@@ -74,8 +72,8 @@
                 @Html.DisplayFor(modelItem => item.PW)
             </td>
             <td>
-                @Html.ActionLink("Ändra", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Visa", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Ändra", "Edit", new { id = item.Id }) 
+                @Html.ActionLink("Visa", "Details", new { id = item.Id }) 
                 @Html.ActionLink("Radera", "Delete", new { id = item.Id })
             </td>
         </tr>

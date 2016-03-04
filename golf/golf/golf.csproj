@@ -320,6 +320,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>PersonModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Images\Wallpaper.jpg" />
     <Content Include="Models\PersonModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>PersonModel.edmx</DependentUpon>
