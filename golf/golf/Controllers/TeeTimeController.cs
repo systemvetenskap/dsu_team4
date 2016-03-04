@@ -43,7 +43,7 @@ namespace golf.Controllers
 
             var list1 = join.ToList();
 
-            var join2 = from g in databas.Golfer.Include(p => p.TeeTimeDateGolfer).ToList()
+            var join2 = from g in databas.Golfer.ToList()
                         join li in list1 on
                         g.Id equals li.Golferid
                         select new { Date = li.Date, Golfid = li.Golferid, TeeTime = li.TeeTimeID, Personid = g.Person_ID, HCP = g.HCP };
