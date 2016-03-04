@@ -35,60 +35,76 @@ namespace golf.Controllers
                 cl.dateString = cl.currDate.ToShortDateString();
                 cl.selDate = DateTime.Today;
 
-                //var bookings = databas.TeeTimeDate.Where(s => s.bookingDate == DateTime.Today).ToList();
-                
-                //IList<TeeTimeDateGolfer> ttd = new List<TeeTimeDateGolfer>();
-                //IList<Golfer> g = new List<Golfer>();
-                //ttd = databas.TeeTimeDateGolfer.ToList();
-                //g = databas.Golfer.ToList();
-
-                //var players = databas.TeeTimeDateGolfer.Join(databas.Golfer, s => s.Golfer_ID, b => b.Id, (s, b) => new { personid = b.Person_ID, hcp = b.HCP }); 
-                
-                //var test = (from s in databas.TeeTimeDateGolfer.Include( b => b.)
-               
-        
-
-                //IList<Person> playerlist = new List<Person>();
-                //playerlist = databas.Person.ToList();
-                //IList<Golfer> golfid = new List<Golfer>();
-                //golfid = databas.Golfer.ToList();
+            List<TeeTimeDateGolfer> tt = databas.TeeTimeDateGolfer.ToList();
+            List<TeeTimeDate> td = databas.TeeTimeDate.ToList();
+            List<Golfer> namn = databas.Golfer.Include(p => p.TeeTimeDateGolfer).ToList();
+            List<Person> pers = databas.Person.ToList();
+            List<Gender> gend = databas.Gender.ToList();
 
 
+            var join = from tdate in td
+                       join tgolfers in tt
+                       on tdate.Id equals tgolfers.TeeTimeDate_ID
+                       select new {TeeTimeID = tdate.TeeTime_ID, Date= tdate.bookingDate, Golferid = tgolfers.Golfer_ID};
 
+            var list1 = join.ToList();
 
-                foreach (var t in databas.TeeTimeDate)
-                {
-                    BookingInfo bf = new BookingInfo();
-                    if (t.bookingDate == DateTime.Today)
-                    {
-                        foreach (var g in databas.TeeTimeDateGolfer)
+            var join2 = from g in namn
+                        join li in list1 on
+                        g.Id equals li.Golferid
+                        select new { Date = li.Date, Golfid = li.Golferid, TeeTime = li.TeeTimeID, Personid = g.Person_ID, HCP = g.HCP };
+
+            var list2 = join2.ToList();
+
+            var join3 = from p in pers
+                        join li in list2
+                        on p.Id equals li.Personid
+                        where li.Date == DateTime.Today
+                        select new
                         {
-                            if (g.TeeTimeDate_ID == t.Id)
-                            {
-                                foreach (var gf in databas.Golfer)
-                                {
-                                    if (gf.Id == g.Golfer_ID)
-                                    {
-                                        foreach (var p in databas.Person)
-                                        {
-                                            if (p.Id == gf.Person_ID)
-                                            {
-                                                bf.Name = p.firstName + " " + p.lastName;
-                                                bf.TeeTime = t.TeeTime_ID;
-                                                bf.personId = p.Id;
-                                                bf.HCP = gf.HCP;
-                                                cl.bNames.Add(bf);
+                            fName = p.firstName,
+                            lName = p.lastName,
+                            Date = li.Date,
+                            TeeTime = li.TeeTime,
+                            Hcp = li.HCP,
+                            Gender = p.gender_ID
+                            
+                        };
+
+            var list3 = join3.ToList();
+
+            var join4 = from g in gend
+                        join p in list3
+                        on g.Id equals p.Gender
+                        select new
+                        {
+
+                            fName = p.fName,
+                            lName = p.lName,
+                            Date = p.Date,
+                            TeeTime = p.TeeTime,
+                            Hcp = p.Hcp,
+                            Gender = g.genderName
+
+                        };
+
+            var list4 = join4.ToList();
+
+            foreach(var o in list4)
+            {
+                BookingInfo b = new BookingInfo();
+                b.Name = o.fName + " " + o.lName;
+                b.TeeTime = o.TeeTime;
+                b.HCP = o.Hcp;
+                b.gender = o.Gender;
+                cl.bNames.Add(b);
+
+            }
+
+            
                                             
-                                            }
-                                        }
-                                    }
-                                }
 
-                            }
-                        }
 
-                    }
-                }
 
                 
                 return View(cl);
