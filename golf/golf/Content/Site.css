@@ -10,7 +10,7 @@ body {
     font-size: .85em;
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
     padding: 0;
-    overflow-x:hidden;
+    overflow-y: scroll;
 }
 
 a {
@@ -212,13 +212,17 @@ ul#menu {
 ----------------------------------------------------------*/
 /* featured */
 .featured {
-    background-color: #fff;
+
+    max-width:1000px;
+    margin: 0 auto;
 }
 
     .featured .content-wrapper {
         background-color: #7ac0da;
         color: #3e5667;
-        padding: 20px 40px 30px 40px;  
+        text-align:center;
+        padding: 10px 10px 10px 10px; 
+        border-radius:48%; 
     }
 
         .featured hgroup.title h1, .featured hgroup.title h2 {
@@ -232,7 +236,6 @@ ul#menu {
 div.sectionone
 {
     max-width:49.5%;
-    /*background-color:red;*/
     float:left;
     height:auto;
     text-align:justify;
@@ -241,7 +244,6 @@ div.sectionone
 div.sectiontwo
 {
     max-width:49.5%;
-    /*background-color:green;*/
     float:right;
     height:auto;
     text-align:justify; 
@@ -249,7 +251,6 @@ div.sectiontwo
 }
 div.sections
 {
-    /*Kommer inte åt denna*/
   background-color:grey;
 }
 
@@ -668,7 +669,6 @@ tr.pager td {
     .main-content,
     .featured + .main-content {
         background-position: 10px 0;
-        background-color:#fff;
     }
 
     .content-wrapper {
