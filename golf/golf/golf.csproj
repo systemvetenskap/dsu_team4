@@ -389,8 +389,6 @@
     <Content Include="Views\Account\MyPage.cshtml" />
     <Content Include="Views\Account\Create.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
-    <Content Include="Views\News\Index.cshtml" />
-    <Content Include="Views\News\AddNews.cshtml" />
     <Content Include="Views\Home\AddNews.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
