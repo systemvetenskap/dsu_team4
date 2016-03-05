@@ -277,7 +277,7 @@ namespace golf.Controllers
             {
 
        
-            string date = DateTime.Today.ToShortDateString();
+            
             CalendarClass cl = new CalendarClass();
 
             cl.TeeTime = databas.TeeTime.ToList();
@@ -385,6 +385,11 @@ namespace golf.Controllers
            return cl;
             }
             
+        }
+
+        public PartialViewResult ChangeSelDate(DateTime newDate)
+        {
+            return null;
         }
         
     }
