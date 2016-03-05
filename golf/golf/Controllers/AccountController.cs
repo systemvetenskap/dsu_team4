@@ -18,6 +18,11 @@ namespace golf.Controllers
         // GET: /Account/
         private dsuteam4Entities1 db = new dsuteam4Entities1();
 
+        public ActionResult AdminPage()
+        {
+            return View();
+        }
+
         public ActionResult Create()
         {
             CreateMember CM = new CreateMember();
@@ -119,7 +124,7 @@ namespace golf.Controllers
             return View(person);
         }
 
-
+       
         public ActionResult LogInCheck(Person model)
         {
 
@@ -131,7 +136,24 @@ namespace golf.Controllers
                 {
                     FormsAuthentication.SetAuthCookie(P.Id.ToString(), false);
 
+                    //if (P.Id == 911)
+                    //{
+                    //    Roles.CreateRole("Admin");
+                    //    Roles.AddUserToRole(P.Id.ToString(), "Admin");
+                    //}
+                    //else
+                    //{
+                    //    Roles.CreateRole("User");
+                    //    Roles.AddUserToRole(P.Id.ToString(), "User");
+                        
+                    //}
+                    //var roles = new List<string> { "Admin", "Author", "Super" };
+                    //var userRoles = Roles.GetRolesForUser(User.Identity.Name);
 
+                    //if (userRoles.Any(u => roles.Contains(u)))
+                    //{
+                    //    //do something
+                    //}
 
                     return RedirectToAction("MyPage");
                 }
