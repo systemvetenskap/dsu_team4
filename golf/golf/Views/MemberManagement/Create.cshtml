@@ -10,7 +10,7 @@
         </div>
     </section>
 }
-@model golf.Models.Person
+@model golf.Models.CreateMember
 
 @{
     ViewBag.Title = "Create";
@@ -29,48 +29,56 @@
             @Html.Label("Förnamn")
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.firstName)
-            @Html.ValidationMessageFor(model => model.firstName)
+            @Html.EditorFor(model => model.p.firstName)
+            @Html.ValidationMessageFor(model => model.p.firstName)
         </div>
 
         <div class="editor-label">
             @Html.Label("Efternamn")
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.lastName)
-            @Html.ValidationMessageFor(model => model.lastName)
+            @Html.EditorFor(model => model.p.lastName)
+            @Html.ValidationMessageFor(model => model.p.lastName)
         </div>
 
         <div class="editor-label">
             @Html.Label("Gatuadress")
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.streetAddres)
-            @Html.ValidationMessageFor(model => model.streetAddres)
+            @Html.EditorFor(model => model.p.streetAddres)
+            @Html.ValidationMessageFor(model => model.p.streetAddres)
         </div>
 
         <div class="editor-label">
             @Html.Label("Postnummer")
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.postalCode)
-            @Html.ValidationMessageFor(model => model.postalCode)
+            @Html.EditorFor(model => model.p.postalCode)
+            @Html.ValidationMessageFor(model => model.p.postalCode)
         </div>
 
         <div class="editor-label">
             @Html.Label("Stad")
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.city)
-            @Html.ValidationMessageFor(model => model.city)
+            @Html.EditorFor(model => model.p.city)
+            @Html.ValidationMessageFor(model => model.p.city)
         </div>
 
         <div class="editor-label">
             @Html.Label("E-post")
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.email)
-            @Html.ValidationMessageFor(model => model.email)
+            @Html.EditorFor(model => model.p.email)
+            @Html.ValidationMessageFor(model => model.p.email)
+        </div>
+        <div class="editor-field">
+            @Html.Label("Lösenord")
+            @Html.EditorFor(model => model.p.PW)
+        </div>
+        <div class="editor-field">
+            @Html.Label("Kön:")
+            @Html.DropDownListFor(m => m.genderid, new SelectList(Model.genderItems, "Value", "Text"));
         </div>
         <p>
             <input type="submit" value="Lägg till medlem" />

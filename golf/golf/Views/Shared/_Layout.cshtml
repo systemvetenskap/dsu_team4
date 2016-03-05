@@ -26,10 +26,15 @@
                     <nav>                        
                         <ul id="menu"> 
                             <li>@Html.ActionLink("Hem", "Index", "Home")</li>
-                            <li>@Html.ActionLink("Medlemshantering", "Index", "MemberManagement")</li>
                             <li>@Html.ActionLink("Tidsbokning", "Index", "TeeTime")</li>
                             <li>@Html.ActionLink("Tävlingar", "Competitions", "Home")</li>
-                            <li>@Html.ActionLink("Statistik", "Statistics", "Home")</li>                                                          
+                            <li>@Html.ActionLink("Statistik", "Statistics", "Home")</li> 
+                           
+                            @if (Request.IsAuthenticated)
+                            {
+                                <li>@Html.ActionLink("Medlemshantering", "Index", "MemberManagement")</li>
+
+                            }
                         </ul>
                     </nav>
                 </div>                
