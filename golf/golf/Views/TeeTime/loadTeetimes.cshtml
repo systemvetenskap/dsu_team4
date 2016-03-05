@@ -161,10 +161,10 @@
     }
   
     function book(g, t, d) {
-        alert('test');
+        
 
         $.ajax({
-            url: '/TeeTime/saveBooking',
+            url: '/TeeTime/loadTeetimes',
             contentType: 'application/html; charset=utf-8',
             data: {golfid : g, teeid : t, date : d},
             type: 'GET',
