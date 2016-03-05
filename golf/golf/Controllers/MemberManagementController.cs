@@ -76,29 +76,40 @@ namespace golf.Controllers
         }
 
 
-        public ActionResult Edit(int id = 0)
+        public ActionResult Edit(int id)
         {
-            Person person = databas.Person.Find(id);
-            if (person == null)
+            CreateMember CM = new CreateMember();
+            CM.p = databas.Person.Find(id);
+            SelectList gender = new SelectList(databas.Gender.ToList(), "id", "genderName");
+
+
+            CM.genderItems = gender;
+            if (CM.p == null)
             {
                 return HttpNotFound();
             }
-            return View(person);
+            return View(CM);
         }
 
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Person person)
+        public ActionResult Edit(CreateMember CM)
         {
             if (ModelState.IsValid)
             {
-                databas.Entry(person).State = EntityState.Modified;
+                
+                SelectList gender = new SelectList(databas.Gender.ToList(), "id", "genderName");
+
+
+                CM.genderItems = gender;
+             
+                databas.Entry(CM.p).State = EntityState.Modified;
                 databas.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(person);
+            return View(CM);
         }
 
 
