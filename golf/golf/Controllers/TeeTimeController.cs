@@ -387,9 +387,16 @@ namespace golf.Controllers
             
         }
 
-        public PartialViewResult ChangeSelDate(DateTime newDate)
+        public PartialViewResult ChangeSelDate(string newDate)
         {
-            return null;
+            DateTime dt = Convert.ToDateTime(newDate);
+
+            CalendarClass cl = loadData();
+
+            cl.selDate = dt;
+
+
+            return PartialView("Index", cl);
         }
         
     }

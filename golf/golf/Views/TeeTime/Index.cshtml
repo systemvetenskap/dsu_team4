@@ -21,6 +21,7 @@
 }
 
 
+
    
     
 <div class="test">
@@ -35,10 +36,10 @@
         <div class="buttonprev" type="submit" text-align="center">
             <input  type="submit" value="<">
         </div>      
-        <p class="selectedDate" align="center">@Html.DisplayFor(m => m.dateString)</p>
+        <p class="selectedDate" align="center">@Html.DisplayFor(m => m.selDate)</p>
           
         <div class="buttonnext" type="submit" text-align="center">
-            <input type="submit" value=">">
+            <input type="submit" value=">" onclick="changeDate('2016-03-03')">
 
     </div>
     
@@ -92,5 +93,26 @@
 
 
     });
+
+
+
+    function changeDate(d) {
+
+
+        $.ajax({
+            url: '/TeeTime/ChangeSelDate',
+            contentType: 'application/html; charset=utf-8',
+            data: {newDate: d},
+            type: 'GET',
+            dataType: 'html'
+
+        })
+        .success(function (result) {
+            $('#teetimes').html(result);
+        })
+        .error(function (xhr, status) {
+            alert(status);
+        })
+    }
 
 </script>
