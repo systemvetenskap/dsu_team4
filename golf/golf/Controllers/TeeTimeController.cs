@@ -265,7 +265,7 @@ namespace golf.Controllers
             
             databas.TeeTimeDateGolfer.Add(TeeTimeDateGolfer1);
             databas.SaveChanges();
-            CalendarClass cl = loadData(DateTime.Today);
+            CalendarClass cl = loadData(Convert.ToDateTime(date));
             return PartialView("loadTeetimes", cl);
 
             }

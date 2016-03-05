@@ -128,7 +128,7 @@
     }
     function addP(id){
 
-        var date = '@Model.dateString';
+        var date = '@Model.selDate';
         var golfid = document.getElementById('golfid').value;
         var getHcp = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Golfer, Formatting.Indented));
         
@@ -164,7 +164,7 @@
         
 
         $.ajax({
-            url: '/TeeTime/loadTeetimes',
+            url: '/TeeTime/saveBooking',
             contentType: 'application/html; charset=utf-8',
             data: {golfid : g, teeid : t, date : d},
             type: 'GET',
