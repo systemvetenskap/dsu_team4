@@ -265,14 +265,14 @@ namespace golf.Controllers
             
             databas.TeeTimeDateGolfer.Add(TeeTimeDateGolfer1);
             databas.SaveChanges();
-            CalendarClass cl = loadData();
-            return PartialView("Index", cl);
+            CalendarClass cl = loadData(DateTime.Today);
+            return PartialView("loadTeetimes", cl);
 
             }
 
             
         }
-        public CalendarClass loadData()
+        public CalendarClass loadData(DateTime c)
         {
             using(dsuteam4Entities1 databas = new dsuteam4Entities1())
             {
@@ -288,7 +288,7 @@ namespace golf.Controllers
             cl.Golfer = databas.Golfer.ToList();
             cl.Person = databas.Person.ToList();
 
-            cl.selDate = DateTime.Today;
+            cl.selDate = c;
             cl.dateString = DateTime.Today.ToShortDateString();
             #region
             var join = from tdate in databas.TeeTimeDate.ToList()
@@ -308,7 +308,7 @@ namespace golf.Controllers
             var join3 = from p in databas.Person.ToList()
                         join li in list2
                         on p.Id equals li.Personid
-                        where li.Date == DateTime.Today
+                        where li.Date == cl.selDate
                         select new
                         {
                             fName = p.firstName,
@@ -392,12 +392,9 @@ namespace golf.Controllers
         {
             DateTime dt = Convert.ToDateTime(newDate);
 
-            CalendarClass cl = loadData();
+            CalendarClass cl = loadData(dt);
 
-            cl.selDate = dt;
-
-
-            return PartialView("Index", cl);
+            return PartialView("loadTeetimes", cl);
         }
         
     }
