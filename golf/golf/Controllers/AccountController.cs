@@ -18,10 +18,6 @@ namespace golf.Controllers
         // GET: /Account/
         private dsuteam4Entities1 db = new dsuteam4Entities1();
 
-        public ActionResult AdminPage()
-        {
-            return View();
-        }
 
         public ActionResult Create()
         {

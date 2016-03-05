@@ -49,18 +49,25 @@ namespace golf.Controllers
         //Öppna skapa View(Vy)
         public ActionResult Create()
         {
-            return View();
+            CreateMember CM = new CreateMember();
+            SelectList gender = new SelectList(databas.Gender.ToList(), "id", "genderName");
+
+
+            CM.genderItems = gender;
+
+            return View(CM);
         }
 
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Person person)
+        public ActionResult Create(CreateMember person)
         {
             if (ModelState.IsValid)
             {
-                databas.Person.Add(person);
+                person.p.gender_ID = person.genderid;     
+                databas.Person.Add(person.p);
                 databas.SaveChanges();
                 return RedirectToAction("Index");
             }
