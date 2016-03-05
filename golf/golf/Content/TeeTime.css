@@ -112,13 +112,13 @@
     top:0px;
     left:0px;
     display: none;
-    width:97%;
+    
     height:auto;
     font-family:verdana;
     font-size:13px;
     padding:10px;
-    background-color:white;
-    border:2px solid grey;
+    
+    /*border:2px solid grey;*/
     
     }
 ControlDiv{
