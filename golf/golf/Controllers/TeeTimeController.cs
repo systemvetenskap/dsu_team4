@@ -20,7 +20,7 @@ namespace golf.Controllers
 
         public ActionResult Index()
         {
-        
+            
                 string date = DateTime.Today.ToShortDateString();
                 CalendarClass cl = new CalendarClass();
                      
@@ -29,13 +29,11 @@ namespace golf.Controllers
                 cl.TeeDate = databas.TeeDate.ToList();
                 cl.TeeTimeDateGolfer = databas.TeeTimeDateGolfer.ToList();
                 cl.Golfer = databas.Golfer.ToList();
-                cl.Person = databas.Person.ToList();
-                
-                cl.currDate = DateTime.Today;
-                cl.dateString = cl.currDate.ToShortDateString();
+                cl.Person = databas.Person.ToList();                              
+            
                 cl.selDate = DateTime.Today;
-
-
+                cl.dateString = DateTime.Today.ToShortDateString();
+#region
             var join = from tdate in databas.TeeTimeDate.ToList()
                        join tgolfers in databas.TeeTimeDateGolfer.ToList()
                        on tdate.Id equals tgolfers.TeeTimeDate_ID
@@ -69,7 +67,7 @@ namespace golf.Controllers
 
             var join4 = from g in databas.Gender.ToList()
                         join p in list3
-                        on g.Id equals p.Gender
+                        on g.Id equals p.Gender                    
                         select new
                         {
 
@@ -84,6 +82,8 @@ namespace golf.Controllers
 
             var list4 = join4.ToList();
 
+
+
             foreach(var o in list4)
             {
                 BookingInfo b = new BookingInfo();
@@ -91,17 +91,42 @@ namespace golf.Controllers
                 b.TeeTime = o.TeeTime;
                 b.HCP = o.Hcp;
                 b.gender = o.Gender;
+                b.date = DateTime.Today.ToShortDateString();
                 cl.bNames.Add(b);
 
             }
+#endregion
+            var vg = from v in databas.Golfer.ToList()
+                              join b in databas.Person.ToList()
+                              on v.Person_ID equals b.Id
+                              select new
+                              {
+                                  Golfid = v.golfID,
+                                  HCP = v.HCP,
+                                  GID = v.Id,
+                                  PID = v.Person_ID,
+                                  Gender = b.gender_ID
 
-            
-                                            
+                              };
+
+            var li1 = vg.ToList();
+
+            var v1 = from v in databas.Gender.ToList()
+                     join u in li1 on v.Id equals u.Gender
+                     select new
+                     {
+                         u.Golfid,
+                         u.HCP,
+                         u.GID,
+                         u.PID,
+                         Gender = v.genderName
+                     };
 
 
+            var viewGolfers = v1.ToList();
 
-                
-                return View(cl);
+                                               
+             return View(cl);
             
         }
         [HttpPost]
@@ -110,6 +135,7 @@ namespace golf.Controllers
             //gör nått
             return View();
         }
+
 
 
 

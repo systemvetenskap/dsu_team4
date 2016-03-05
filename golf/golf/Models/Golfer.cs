@@ -11,6 +11,7 @@ namespace golf.Models
 {
     using System;
     using System.Collections.Generic;
+    using Newtonsoft.Json;
     
     public partial class Golfer
     {
@@ -23,8 +24,10 @@ namespace golf.Models
         public string golfID { get; set; }
         public string HCP { get; set; }
         public int Person_ID { get; set; }
-    
+        
+        [JsonIgnore]
         public virtual Person Person { get; set; }
+        [JsonIgnore]
         public virtual ICollection<TeeTimeDateGolfer> TeeTimeDateGolfer { get; set; }
     }
 }

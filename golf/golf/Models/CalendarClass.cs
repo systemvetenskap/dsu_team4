@@ -11,15 +11,14 @@ namespace golf.Models
 
     public class CalendarClass
     {
-        public DateTime currDate {get; set;}
-        public DateTime nextDate { get; set; }
-        public DateTime prevDate { get; set; }
+
         public DateTime selDate { get; set; }
         public string number { get; set; }
+        public string dateString { get; set; }
         
-        public List<int> bookingId = new List<int>();
-
         public List<BookingInfo> bNames = new List<BookingInfo>();
+        public List<BookingInfo> newBookings = new List<BookingInfo>();
+        
 
         public IEnumerable<TeeTime> TeeTime = new List<TeeTime>();
         public IEnumerable<TeeTimeDate> TeeTimeDate = new List<TeeTimeDate>();
@@ -29,8 +28,9 @@ namespace golf.Models
         public IEnumerable<Person> Person = new List<Person>();
 
         
+        
 
-     public string dateString { get; set; }
+     
 
         public bool bookable(int TTD_ID)
         {
