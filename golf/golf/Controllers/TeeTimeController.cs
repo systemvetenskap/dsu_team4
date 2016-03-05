@@ -267,6 +267,7 @@ namespace golf.Controllers
             databas.SaveChanges();
             CalendarClass cl = loadData();
             return PartialView("Index", cl);
+
             }
 
             

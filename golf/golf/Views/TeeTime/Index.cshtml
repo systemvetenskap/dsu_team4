@@ -23,24 +23,18 @@
 
    
     
-<div class="test">
 
-</div>
 <h2></h2>
 <div class="timeWrapper" id="timeWrapper">
- 
+    
     <div class="dateselection">
-
+     
+        
+        <div class="containPicker">
+            <input type="submit" id="datepicker" class="dp">
+        </div>
        
-        <div class="buttonprev" type="submit" text-align="center">
-            <input  type="submit" value="<">
-        </div>      
-        <p class="selectedDate" align="center">@Html.DisplayFor(m => m.dateString)</p>
           
-        <div class="buttonnext" type="submit" text-align="center">
-            <input type="submit" value=">">
-
-    </div>
     
     </div>
     <div id="teetimes">
@@ -70,9 +64,26 @@
 </div>
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script type="text/javascript">
+
+
     $(document).ready(function () {
+
         loadData();
+        
+
+
+        function loadPicker() {
+
+            $('#datepicker').datepicker();
+            $('#datepicker').datepicker('option', 'dateFormat', 'yy-mm-dd');
+            $('#datepicker').datepicker('setDate', new Date());
+ 
+            
+
+        }
 
         function loadData(){
             $.ajax({
@@ -84,13 +95,24 @@
             })
             .success(function (result) {
                 $('#teetimes').html(result);
+                loadPicker();
             })
             .error(function (xhr, status) {
                 alert(status);
             })
         }
+        $(function () {
+            $("#datepicker").datepicker({
+                dateFormat: "yy-mm-dd",
+                onSelect: function () {
+                    var selected = $(this).val();
+                    alert(selected);
+                }
+            });
+        });
 
-
+       
     });
 
 </script>
+

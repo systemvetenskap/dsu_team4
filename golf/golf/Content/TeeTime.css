@@ -87,51 +87,26 @@
 
     
 }
-.buttonprev{
 
-    position:relative;
-    margin-bottom: 1%;
-    text-align:center;
-    float: left;
-    border-radius: 10%;
+.containPicker{
 
-    width: 20%;
-    height: 100%; 
-    display: block;
-}
-.selectedDate{
-
-    position:relative;
-    width: 60%;
-    float: left;
-    display: block;
-    border: 3px, solid black;   
-
-
-}
-.buttonnext{
-
-    position:relative;
-    text-align:center;
-    float: left;
-    display: block;
-    border-radius: 10%;
-    margin-bottom: 1%;
-    width: 20%;
-    height: 100%; 
     
-}
-.dateselection nb{
+    width: 40%;
+    margin-left: 30%;
+    margin-right: 30%;
+    float: left;
 
-   width: 100%;
 
-
-
-}
-.dateselection pb{
-    
 
 }
+.dp{
+    width: 40%;
+    margin-left: 30%;
+    margin-right: 30%;
+    position: center;
+}
+
+
 .TeeDetails{
     float:left;
     top:0px;
@@ -158,4 +133,8 @@ ControlDiv{
 .playerList{
     max-width: 50%;
     display: block;
+}
+.ui-datepicker {   
+        
+  background: #999 none;
 }
