@@ -392,6 +392,7 @@
     <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Views\Home\AddNews.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\TeeTime\loadTeetimes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

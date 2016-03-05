@@ -20,126 +20,15 @@
     <link href="@Url.Content("~/Content/TeeTime.css")" rel="stylesheet" type="text/css" />
 }
 
-<script type="text/javascript">
-    function onTimeDivClick(id) {
 
-        clearLi();
-        @using Newtonsoft.Json;
-        var arr = [];
-        var personids = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.bNames, Formatting.Indented));
-        var c = 0;
-        
-        if(id != null)
-        {
-
-            for(var i in personids)
-            {
-                if(personids[i].TeeTime == id){
-
-                    arr.push(1);
-                    var addLi = document.createElement('li');
-                    addLi.setAttribute('id',personids[i].personId);
-                    var ul = document.getElementById('playerList');
-                    ul.setAttribute('val', id);
-                    ul.appendChild(addLi);
-                    addLi.innerHTML = personids[i].gender +" - HCP: " + personids[i].HCP;
-
-                }
-                else{
-
-                }
-
-            }
-            
-            document.getElementById('details').style.display = 'block';
-            var D = document.getElementById('details');
-
-
-            if(arr.length < 4)
-            {
-                var addButton = document.createElement('input');
-                addButton.setAttribute('type', 'button');
-                addButton.setAttribute('id', 'addP');
-                addButton.setAttribute('value', 'Lägg till spelare')
-                addButton.setAttribute('onclick', 'addP('+id+')')
-                document.getElementById('ControlDiv').appendChild(addButton);
-
-                var field = document.createElement('input');
-                field.setAttribute('type', 'text');
-                field.setAttribute('id', 'golfid');
-                document.getElementById('ControlDiv').appendChild(field);
-
-            }
- 
-
-            var addButton2 = document.createElement('input');
-            addButton2.setAttribute('type', 'button');
-            addButton2.setAttribute('onclick','addP('+id+')')
-            addButton2.setAttribute('id', 'book');
-            addButton2.setAttribute('value', 'Boka')
-            document.getElementById('ControlDiv2').appendChild(addButton2);
-
-            //var addTextInput = document.createElement('input');
-            //addTextInput.setAttribute('type', 'text');
-            //addTextInput.setAttribute('id', 'GolferIDInput');
-            //document.getElementById('ControlDiv2').appendChild(addTextInput);
-
-
-            //document.getElementById('playerName').innerHTML=arr;
-
-
-        }
-        else{
-            document.getElementById('playerName').innerHTML="";
-            document.getElementById('details').style.display = 'none';
-        }
-    }
-    function clearLi(){
-
-        var u = document.getElementById('playerList');
-        var i = document.getElementById('ControlDiv');
-        var x = document.getElementById('ControlDiv2');
-        var z = document.getElementById('addedList');
-        u.innerHTML = '';
-        i.innerHTML = '';
-        z.innerHTML = '';
-        x.innerHTML = '';
-    }
-    function addP(id){
-
-        var date = '@Model.dateString';
-        var golfid = document.getElementById('golfid').value;
-        var getHcp = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Golfer, Formatting.Indented));
-
-        for(var i in getHcp)
-        {
-            if(getHcp[i].golfID == golfid)
-            {
-                var addLi = document.createElement('li');
-                var u = document.getElementById('addedList');   
-              
-                addLi.setAttribute('id',getHcp[i].Id);                 
-                u.appendChild(addLi);
-
-                addLi.innerHTML ="Kön saknas - HCP: " + getHcp[i].HCP;
-            }
-            else
-            {
-                
-            }
-        }
-        
-        
-    }
-</script>
-    
+   
     
 <div class="test">
 
 </div>
 <h2></h2>
 <div class="timeWrapper" id="timeWrapper">
-
+ 
     <div class="dateselection">
 
        
@@ -154,72 +43,54 @@
     </div>
     
     </div>
-    
-    @for (int i = 0; i < 6; i++)
-    {
-      
-        foreach (var item in Model.TeeTime)
-        {
-            string saveTime = item.teeTime1;
-            
-            char getChar = saveTime[3];
-            string checkMinute = getChar.ToString();
-            
-            string checkHour = saveTime[0].ToString() + saveTime[1].ToString(); 
-
-            if (checkMinute == i.ToString())
-            {
-                if (checkMinute == "0")
-                {
-                    <div class="hourAndMinutes">
-                        <div class="timedivHour" onclick="onTimeDivClick(@item.Id)" id=@item.Id time=@item.teeTime1[3] booked="@Model.changeColor(item.Id, Model.selDate)">
-                            @Html.DisplayFor(modelItem => item.teeTime1)<br/>
-                            @Model.number/4
-                        </div>
-                        @foreach (var o in Model.TeeTime)
-                        {
-                            if (o.teeTime1[0].ToString() + o.teeTime1[1].ToString() == checkHour && o.teeTime1[3].ToString() != "0")
-                            {
-                                <div class="timedivMin" onclick="onTimeDivClick(@o.Id)" id=@o.Id booked="@Model.changeColor(o.Id, Model.selDate)">
-
-                                    @Html.DisplayFor(modelItem => o.teeTime1)<br />
-                                    @Model.number/4
-                                  
-                                  
-                                </div>
-
-                            }
-                        }
-
-                    </div>
-                }
-
-           }
-           
-      }
-
-}
-
+    <div id="teetimes">
+        
+    </div>
     <div id="details" class="TeeDetails">
     <p>@Html.Label("Registrerade spelare")</p>
         <div id="playerName">
             <ul id="playerList"></ul>
-            <p>@Html.Label("Tillagda spelare")</p>
+       
             <ul id="addedList"></ul>
         </div>
-
+   
  
         <div id="ControlDiv">
+    
             
-            
-            @Html.ActionLink("Home", "Booking", @Model.newBookings)
+           
 
         </div>
              
             <div id="ControlDiv2">
-      
+              
             </div>
         
     </div>
 </div>
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        loadData();
 
+        function loadData(){
+            $.ajax({
+                url: '/TeeTime/loadTeetimes',
+                contentType: 'application/html; charset=utf-8',
+                type: 'GET',
+                dataType: 'html'
+
+            })
+            .success(function (result) {
+                $('#teetimes').html(result);
+            })
+            .error(function (xhr, status) {
+                alert(status);
+            })
+        }
+
+
+    });
+
+</script>
