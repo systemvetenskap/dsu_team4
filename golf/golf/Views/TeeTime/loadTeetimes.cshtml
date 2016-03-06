@@ -64,11 +64,29 @@
 
                     arr.push(1);
                     var addLi = document.createElement('li');
-                    addLi.setAttribute('id',personids[i].personId);
+                    var addBu = document.createElement('a');
+                    var addT = document.createElement('p');
+
+                    addBu.setAttribute('href', '#');                 
+                    addBu.innerHTML = 'Ta bort';
+                    addBu.setAttribute('onclick','remP('+personids[i].personId+')');
+
+
+                    addLi.setAttribute('class','listobject');
+                    addBu.setAttribute('class','listobjectA');
+                    addBu.setAttribute('class','listobjectP');
+                    
+
+                    addT.innerHTML = personids[i].gender +" - HCP: " + personids[i].HCP;
+
                     var ul = document.getElementById('playerList');
+                   
                     ul.setAttribute('val', id);
+
+                    addLi.appendChild(addT);
+                    addLi.appendChild(addBu);
                     ul.appendChild(addLi);
-                    addLi.innerHTML = personids[i].gender +" - HCP: " + personids[i].HCP;
+                 
 
                 }
                 else{
