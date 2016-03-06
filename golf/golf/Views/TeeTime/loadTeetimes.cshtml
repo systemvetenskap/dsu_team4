@@ -54,7 +54,7 @@
         var arr = [];
         var personids = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.bNames, Formatting.Indented));
         var c = 0;
-
+        @*document.getElementById('timeInfo').innerHTML = 'Registrerade spelare: '+@Model.selDate+' - '+time+' ';*@
         if(id != null)
         {
 
@@ -70,9 +70,10 @@
                     addBu.setAttribute('href', '#');                 
                     addBu.innerHTML = 'Ta bort';
                     addBu.setAttribute('onclick','remP('+personids[i].Golferid+')');
+                    addLi.setAttribute('id',personids[i].Golferid);
 
 
-                    addLi.setAttribute('class','listobject');
+                    addLi.setAttribute('class','clear');
                     addBu.setAttribute('class','listobjectA');
                     addT.setAttribute('class','listobjectP');
                     
@@ -115,15 +116,6 @@
                 document.getElementById('ControlDiv').appendChild(field);
 
             }
-
-
-            //var addButton2 = document.createElement('input');
-            //addButton2.setAttribute('type', 'button');
-            //addButton2.setAttribute('id', 'book');
-            //addButton2.setAttribute('value', 'Boka')
-            //document.getElementById('ControlDiv2').appendChild(addButton2);
-
-
 
 
         }
@@ -182,9 +174,12 @@
         var date = '@Model.selDate';
         
         var tid = document.getElementById('playerList').getAttribute("val");
-        
-      
+
+
         remove(golfid, tid, date);
+
+        
+       
     
 
     }
@@ -201,6 +196,7 @@
         })
         .success(function (result) {
             $('#teetimes').html(result);
+         
         })
         .error(function (xhr, status) {
             alert(status);
@@ -218,11 +214,14 @@
         })
         .success(function (result) {
             $('#teetimes').html(result);
+          
+            onTimeDivClick(t);
         })
         .error(function (xhr, status) {
             alert(status);
         })
     }
+
 
 </script>
 

@@ -43,7 +43,7 @@
         
     </div>
     <div id="details" class="TeeDetails">
-    <p>@Html.Label("Registrerade spelare")</p>
+    <p id="timeInfo">@Html.Label("Registrerade spelare")</p>
         <div id="playerName">
             <ul id="playerList"></ul>
        
@@ -107,8 +107,7 @@
             $("#datepicker").datepicker({
                 dateFormat: "yy-mm-dd",
                 onSelect: function () {
-                    var selected = $(this).val();
-                  
+                    var selected = $(this).val();                 
                     changeDate(selected);
                 }
             });
@@ -132,6 +131,7 @@
                 alert(status);
             })
         }
+
 
     });
 
