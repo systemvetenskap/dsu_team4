@@ -132,16 +132,18 @@ ControlDiv{
 }
 .playerList{
     max-width: 50%;
-    display: block;
+
+    
 }
 .ui-datepicker {   
         
   background: #999 none;
 }
 
-.listobjectA{
-   float: left;
-}
 .listobjectP{
-      float: left;
+    
+    
+}
+.listobjectA{
+    
 }

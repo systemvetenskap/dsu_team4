@@ -174,7 +174,8 @@ namespace golf.Controllers
                                 Date = li.Date,
                                 TeeTime = li.TeeTime,
                                 Hcp = li.HCP,
-                                Gender = p.gender_ID
+                                Gender = p.gender_ID,
+                                Golfid = li.Golfid
 
                             };
 
@@ -191,8 +192,8 @@ namespace golf.Controllers
                                 Date = p.Date,
                                 TeeTime = p.TeeTime,
                                 Hcp = p.Hcp,
-                                Gender = g.genderName
-
+                                Gender = g.genderName,
+                                Golfid = p.Golfid
                             };
 
                 var list4 = join4.ToList();
@@ -207,6 +208,7 @@ namespace golf.Controllers
                     b.HCP = o.Hcp;
                     b.gender = o.Gender;
                     b.date = DateTime.Today.ToShortDateString();
+                    b.Golferid = o.Golfid;
                     cl.bNames.Add(b);
 
                 }
@@ -272,6 +274,46 @@ namespace golf.Controllers
 
             
         }
+        public PartialViewResult deleteBooking(string golfid, string teeid, string date)
+        {
+            using (dsuteam4Entities1 databas = new dsuteam4Entities1())
+            {
+
+
+                int id = 0;
+                var query = from td in databas.TeeTimeDate.ToList()
+                            join tg in databas.TeeTimeDateGolfer.ToList()
+                                on td.Id equals tg.TeeTimeDate_ID
+                                where td.bookingDate == Convert.ToDateTime(date) 
+                                select new{ td.TeeTime_ID, tg.Golfer_ID, tg.Id};
+                
+
+                var query2 = from td in query.ToList()
+                             where td.TeeTime_ID == Convert.ToInt32(teeid)
+                             select new {td.Id , td.Golfer_ID, td.TeeTime_ID};
+
+                var query3 = from td in query2.ToList()
+                             where td.Golfer_ID == Convert.ToInt32(golfid)
+                             select td;
+                var getid = query3.ToList();
+
+                foreach(var i in getid)
+                {
+                    id = i.Id;
+                }
+
+                var TeeTimeDateGolfer1 = databas.TeeTimeDateGolfer.Find(id);
+
+                databas.TeeTimeDateGolfer.Remove(TeeTimeDateGolfer1);
+
+                databas.SaveChanges();
+
+                CalendarClass cl = loadData(Convert.ToDateTime(date));
+                return PartialView("loadTeetimes", cl);
+            }
+
+
+        }
         public CalendarClass loadData(DateTime c)
         {
             using(dsuteam4Entities1 databas = new dsuteam4Entities1())
@@ -317,7 +359,8 @@ namespace golf.Controllers
                             Date = li.Date,
                             TeeTime = li.TeeTime,
                             Hcp = li.HCP,
-                            Gender = p.gender_ID
+                            Gender = p.gender_ID,
+                            Golfid = li.Golfid
 
                         };
 
@@ -334,7 +377,8 @@ namespace golf.Controllers
                             Date = p.Date,
                             TeeTime = p.TeeTime,
                             Hcp = p.Hcp,
-                            Gender = g.genderName
+                            Gender = g.genderName,
+                            Golfid = p.Golfid
 
                         };
 
@@ -350,6 +394,7 @@ namespace golf.Controllers
                 b.HCP = o.Hcp;
                 b.gender = o.Gender;
                 b.date = DateTime.Today.ToShortDateString();
+                b.Golferid = o.Golfid;
                 cl.bNames.Add(b);
 
             }

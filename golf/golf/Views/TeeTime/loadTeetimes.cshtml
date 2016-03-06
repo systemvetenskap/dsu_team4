@@ -69,22 +69,22 @@
 
                     addBu.setAttribute('href', '#');                 
                     addBu.innerHTML = 'Ta bort';
-                    addBu.setAttribute('onclick','remP('+personids[i].personId+')');
+                    addBu.setAttribute('onclick','remP('+personids[i].Golferid+')');
 
 
                     addLi.setAttribute('class','listobject');
                     addBu.setAttribute('class','listobjectA');
-                    addBu.setAttribute('class','listobjectP');
+                    addT.setAttribute('class','listobjectP');
                     
 
-                    addT.innerHTML = personids[i].gender +" - HCP: " + personids[i].HCP;
+                    addT.innerHTML = personids[i].gender +" - HCP: " + personids[i].HCP+" - ";
 
                     var ul = document.getElementById('playerList');
                    
                     ul.setAttribute('val', id);
 
                     addLi.appendChild(addT);
-                    addLi.appendChild(addBu);
+                    addT.appendChild(addBu);
                     ul.appendChild(addLi);
                  
 
@@ -177,10 +177,20 @@
 
 
     }
+    function remP(golfid){
+
+        var date = '@Model.selDate';
+        
+        var tid = document.getElementById('playerList').getAttribute("val");
+        
+      
+        remove(golfid, tid, date);
+    
+
+    }
   
     function book(g, t, d) {
-        
-
+   
         $.ajax({
             url: '/TeeTime/saveBooking',
             contentType: 'application/html; charset=utf-8',
@@ -196,7 +206,23 @@
             alert(status);
         })
     }
+    function remove(g, t, d) {
+   
+        $.ajax({
+            url: '/TeeTime/deleteBooking',
+            contentType: 'application/html; charset=utf-8',
+            data: {golfid : g, teeid : t, date : d},
+            type: 'GET',
+            dataType: 'html'
 
+        })
+        .success(function (result) {
+            $('#teetimes').html(result);
+        })
+        .error(function (xhr, status) {
+            alert(status);
+        })
+    }
 
 </script>
 
