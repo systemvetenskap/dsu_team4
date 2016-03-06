@@ -31,7 +31,7 @@
 
        
         <div class="containPicker">
-            <input type="submit" id="datepicker" class="dp">
+            <input type="submit" id="datepicker" class="dp" value="@Model.dateString">
         </div>      
   
           
@@ -40,7 +40,7 @@
     
     </div>
     <div id="teetimes">
-        
+
     </div>
     <div id="details" class="TeeDetails">
     <p id="timeInfo">@Html.Label("Registrerade spelare")</p>
@@ -73,8 +73,8 @@
 
     $(document).ready(function () {
 
-        //loadData();
-
+        loadData();
+        
 
 
         function loadPicker() {
@@ -98,6 +98,7 @@
             .success(function (result) {
                 $('#teetimes').html(result);
                 loadPicker();
+              
             })
             .error(function (xhr, status) {
                 alert(status);

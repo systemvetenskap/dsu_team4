@@ -24,12 +24,12 @@ namespace golf.Controllers
                 string date = DateTime.Today.ToShortDateString();
                 CalendarClass cl = new CalendarClass();
 
-                cl.TeeTime = databas.TeeTime.ToList();
+              
                 cl.TeeTimeDate = databas.TeeTimeDate.ToList();
-                cl.TeeDate = databas.TeeDate.ToList();
+            
                 cl.TeeTimeDateGolfer = databas.TeeTimeDateGolfer.ToList();
                 cl.Golfer = databas.Golfer.ToList();
-                cl.Person = databas.Person.ToList();
+            
 
                 cl.selDate = DateTime.Today;
                 cl.dateString = DateTime.Today.ToShortDateString();
@@ -136,15 +136,14 @@ namespace golf.Controllers
      
             using (dsuteam4Entities1 databas = new dsuteam4Entities1())
             {
-                string date = DateTime.Today.ToShortDateString();
+                
                 CalendarClass cl = new CalendarClass();
 
                 cl.TeeTime = databas.TeeTime.ToList();
-                cl.TeeTimeDate = databas.TeeTimeDate.ToList();
-                cl.TeeDate = databas.TeeDate.ToList();
+                cl.TeeTimeDate = databas.TeeTimeDate.ToList();        
                 cl.TeeTimeDateGolfer = databas.TeeTimeDateGolfer.ToList();
                 cl.Golfer = databas.Golfer.ToList();
-                cl.Person = databas.Person.ToList();
+             
 
                 cl.selDate = DateTime.Today;
                 cl.dateString = DateTime.Today.ToShortDateString();
@@ -323,13 +322,11 @@ namespace golf.Controllers
             
             CalendarClass cl = new CalendarClass();
 
-            cl.TeeTime = databas.TeeTime.ToList();
             cl.TeeTimeDate = databas.TeeTimeDate.ToList();
-            cl.TeeDate = databas.TeeDate.ToList();
+            cl.TeeTime = databas.TeeTime.ToList();
             cl.TeeTimeDateGolfer = databas.TeeTimeDateGolfer.ToList();
             cl.Golfer = databas.Golfer.ToList();
-            cl.Person = databas.Person.ToList();
-
+         
             cl.selDate = c;
             
             cl.dateString = DateTime.Today.ToShortDateString();

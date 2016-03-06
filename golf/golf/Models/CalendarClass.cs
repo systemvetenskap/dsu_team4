@@ -18,14 +18,14 @@ namespace golf.Models
         
         public List<BookingInfo> bNames = new List<BookingInfo>();
         public List<BookingInfo> newBookings = new List<BookingInfo>();
-        
+
 
         public IEnumerable<TeeTime> TeeTime = new List<TeeTime>();
         public IEnumerable<TeeTimeDate> TeeTimeDate = new List<TeeTimeDate>();
-        public IEnumerable<TeeDate> TeeDate = new List<TeeDate>();
+        
         public IEnumerable<TeeTimeDateGolfer> TeeTimeDateGolfer = new List<TeeTimeDateGolfer>();
         public IEnumerable<Golfer> Golfer = new List<Golfer>();
-        public IEnumerable<Person> Person = new List<Person>();
+        //public IEnumerable<Person> Person = new List<Person>();
 
         
         
