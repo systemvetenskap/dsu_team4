@@ -17,7 +17,7 @@
             if (checkMinute == "0")
             {
                 <div class="hourAndMinutes">
-                    <div class="timedivHour" onclick="onTimeDivClick(@item.Id)" id=@item.Id time=@item.teeTime1[3] booked="@Model.changeColor(item.Id, Model.selDate)">
+                    <div class="timedivHour" onclick="onTimeDivClick(@item.Id)" id=@item.Id time=@item.teeTime1[3] ctime="@item.teeTime1" booked="@Model.changeColor(item.Id, Model.selDate)" cdate="@Model.dateString">
                         @Html.DisplayFor(modelItem => item.teeTime1)<br />
                         @Model.number/4
                     </div>
@@ -25,11 +25,11 @@
                     {
                         if (o.teeTime1[0].ToString() + o.teeTime1[1].ToString() == checkHour && o.teeTime1[3].ToString() != "0")
                         {
-                            <div class="timedivMin" onclick="onTimeDivClick(@o.Id)" id=@o.Id booked="@Model.changeColor(o.Id, Model.selDate)">
+                            <div class="timedivMin" onclick="onTimeDivClick(@o.Id)" id=@o.Id booked="@Model.changeColor(o.Id, Model.selDate)" ctime="@o.teeTime1" cdate="@Model.dateString">
 
                                 @Html.DisplayFor(modelItem => o.teeTime1)<br />
                                 @Model.number/4
-                                
+
 
                             </div>
 
@@ -54,10 +54,14 @@
         var arr = [];
         var personids = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.bNames, Formatting.Indented));
         var c = 0;
-        @*document.getElementById('timeInfo').innerHTML = 'Registrerade spelare: '+@Model.selDate+' - '+time+' ';*@
+        
+       
         if(id != null)
         {
-
+            var date = document.getElementById(id).getAttribute("cdate");
+            var ctime = document.getElementById(id).getAttribute("ctime");
+            document.getElementById('timeInfo').innerHTML = 'Registrerade spelare: '+date+' - '+ctime;
+         
             for(var i in personids)
             {
                 if(personids[i].TeeTime == id){
