@@ -229,8 +229,8 @@ namespace golf.Controllers
             cl.Golfer = databas.Golfer.ToList();
          
             cl.selDate = c;
-            
-            cl.dateString = DateTime.Today.ToShortDateString();
+
+            cl.dateString = c.ToShortDateString();
             #region
             var join = from tdate in databas.TeeTimeDate.ToList()
                        join tgolfers in databas.TeeTimeDateGolfer.ToList()
