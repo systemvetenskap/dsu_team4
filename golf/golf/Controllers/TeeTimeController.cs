@@ -289,6 +289,7 @@ namespace golf.Controllers
             cl.Person = databas.Person.ToList();
 
             cl.selDate = c;
+            
             cl.dateString = DateTime.Today.ToShortDateString();
             #region
             var join = from tdate in databas.TeeTimeDate.ToList()
