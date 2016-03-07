@@ -22,8 +22,7 @@ namespace golf.Controllers
             if (Request.IsAuthenticated)
             {
                 string id = User.Identity.Name;
-                if (IsAdmin(id))
-                {
+              
                     ViewBag.Message = "Tidsbokning";
                     string date = DateTime.Today.ToShortDateString();
                     CalendarClass cl = new CalendarClass();
@@ -31,24 +30,8 @@ namespace golf.Controllers
                     cl.dateString = DateTime.Today.ToShortDateString();
 
                     return View(cl);
-                }
-                else
-                {
-                ViewBag.Message = "Tidsbokning";
-                string date = DateTime.Today.ToShortDateString();
-                CalendarClass cl = new CalendarClass();
-                cl.selDate = DateTime.Today;
-                cl.dateString = DateTime.Today.ToShortDateString();
-                DateTime max = DateTime.Today.AddMonths(1);
-                      
-                cl.maxDate = max.ToShortDateString();
-
-                return View(cl);
-            
-                }
-            
-            
-
+           
+           
         }
             else
         {
@@ -79,14 +62,14 @@ namespace golf.Controllers
                 var join = from tdate in databas.TeeTimeDate.ToList()
                            join tgolfers in databas.TeeTimeDateGolfer.ToList()
                            on tdate.Id equals tgolfers.TeeTimeDate_ID
-                           select new { TeeTimeID = tdate.TeeTime_ID, Date = tdate.bookingDate, Golferid = tgolfers.Golfer_ID };
+                           select new { TeeTimeID = tdate.TeeTime_ID, Date = tdate.bookingDate, Golferid = tgolfers.Golfer_ID, Admin = tgolfers.Person_IDa };
 
                 var list1 = join.ToList();
 
                 var join2 = from g in databas.Golfer.ToList()
                             join li in list1 on
                             g.Id equals li.Golferid
-                            select new { Date = li.Date, Golfid = li.Golferid, TeeTime = li.TeeTimeID, Personid = g.Person_ID, HCP = g.HCP };
+                            select new { Date = li.Date, Golfid = li.Golferid, TeeTime = li.TeeTimeID, Personid = g.Person_ID, HCP = g.HCP, li.Admin };
 
                 var list2 = join2.ToList();
 
@@ -102,7 +85,9 @@ namespace golf.Controllers
                                 TeeTime = li.TeeTime,
                                 Hcp = li.HCP,
                                 Gender = p.gender_ID,
-                                Golfid = li.Golfid
+                                Golfid = li.Golfid,
+                                li.Admin
+                               
 
                             };
 
@@ -120,7 +105,8 @@ namespace golf.Controllers
                                 TeeTime = p.TeeTime,
                                 Hcp = p.Hcp,
                                 Gender = g.genderName,
-                                Golfid = p.Golfid
+                                Golfid = p.Golfid,
+                                p.Admin
                             };
 
                 var list4 = join4.ToList();
@@ -136,6 +122,7 @@ namespace golf.Controllers
                     b.gender = o.Gender;
                     b.date = DateTime.Today.ToShortDateString();
                     b.Golferid = o.Golfid;
+                    b.admin = o.Admin;
                     cl.bNames.Add(b);
 
                 }
@@ -169,14 +156,24 @@ namespace golf.Controllers
 
                 var viewGolfers = v1.ToList();
 
+                string id = User.Identity.Name;
+                if(IsAdmin(id))
+                {
+                    cl.userId = Convert.ToInt32(id);
+                    return PartialView("loadTeetimesMember", cl);
+                }
+                else
+                {
+                    return PartialView(cl);
+                }
 
-                return PartialView(cl);
+                
             }
 
            
         }
        
-        public PartialViewResult saveBooking(string golfid, string teeid, string date)
+        public PartialViewResult saveBooking(string golfid, string teeid, string date, string personid)
         {
             using( dsuteam4Entities1 databas = new dsuteam4Entities1())
             {
@@ -190,11 +187,13 @@ namespace golf.Controllers
 
             var id = TeeTimeDate1.Id;
 
-            var TeeTimeDateGolfer1 = new TeeTimeDateGolfer() { Golfer_ID = Convert.ToInt32(golfid), TeeTimeDate_ID = id };
+            var TeeTimeDateGolfer1 = new TeeTimeDateGolfer() { Golfer_ID = Convert.ToInt32(golfid), TeeTimeDate_ID = id, Person_IDa = Convert.ToInt32(personid) };
             
             databas.TeeTimeDateGolfer.Add(TeeTimeDateGolfer1);
             databas.SaveChanges();
             CalendarClass cl = loadData(Convert.ToDateTime(date));
+            
+            
             return PartialView("loadTeetimes", cl);
 
             }
@@ -387,6 +386,17 @@ namespace golf.Controllers
             return false;
 
     }
+        public string loadTeetimesAorM(string id)
+        {
+            if (IsAdmin(id))
+            {
+                return "loadTeetimes";
+            }
+            else
+            {
+               return "loadTeetimesMember";
+            }
+        }
     }
     
 }
