@@ -20,6 +20,7 @@
                     <div class="timedivHour" onclick="onTimeDivClick(@item.Id)" id=@item.Id time=@item.teeTime1[3] ctime="@item.teeTime1" booked="@Model.changeColor(item.Id, Model.selDate)" cdate="@Model.dateString">
                         @Html.DisplayFor(modelItem => item.teeTime1)<br />
                         @Model.number/4
+                    
                     </div>
                     @foreach (var o in Model.TeeTime)
                     {
@@ -154,7 +155,7 @@
         var date = '@Model.selDate';
         var golfid = document.getElementById('golfid').value;
         var getHcp = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Golfer, Formatting.Indented));
-        
+        var personid = '@User.Identity.Name';
 
 
         for(var i in getHcp)
@@ -171,7 +172,7 @@
 
                 var gident = getHcp[i].Id;
 
-                book(gident, id, date);
+                book(gident, id, date, personid);
 
 
             }
@@ -193,12 +194,12 @@
 
     }
 
-    function book(g, t, d) {
+    function book(g, t, d, p) {
 
         $.ajax({
             url: '/TeeTime/saveBooking',
             contentType: 'application/html; charset=utf-8',
-            data: {golfid : g, teeid : t, date : d},
+            data: {golfid : g, teeid : t, date : d, personid: p},
             type: 'GET',
             dataType: 'html'
 

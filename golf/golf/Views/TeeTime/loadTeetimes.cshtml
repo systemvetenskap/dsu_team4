@@ -20,6 +20,7 @@
                     <div class="timedivHour" onclick="onTimeDivClick(@item.Id)" id=@item.Id time=@item.teeTime1[3] ctime="@item.teeTime1" booked="@Model.changeColor(item.Id, Model.selDate)" cdate="@Model.dateString">
                         @Html.DisplayFor(modelItem => item.teeTime1)<br />
                         @Model.number/4
+                        @Html.Label("Personal");
                     </div>
                     @foreach (var o in Model.TeeTime)
                     {
