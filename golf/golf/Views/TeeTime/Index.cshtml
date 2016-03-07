@@ -30,8 +30,8 @@
     <div class="dateselection">
 
        
-        <div class="containPicker">
-            <input type="submit" id="datepicker" class="dp" value="@Model.dateString" onclick="show()">
+        <div class="containPicker" id="cP">
+            <input type="submit" id="datepicker" class="dp" value="@Model.dateString">
         </div>      
   
           
@@ -75,7 +75,7 @@
 
         loadData();
         
-        
+
 
         function loadPicker() {
 
@@ -83,7 +83,7 @@
             $('#datepicker').datepicker('option', 'dateFormat', 'yy-mm-dd');
             $('#datepicker').datepicker('setDate', new Date());
             document.getElementById('ui-datepicker').style.display = block;
-           
+
         }
 
         function loadData(){
@@ -102,6 +102,7 @@
             .error(function (xhr, status) {
                 alert(status);
             })
+            
         }
         $(function () {
             $("#datepicker").datepicker({
@@ -116,6 +117,8 @@
         function changeDate(d) {
 
          
+            document.getElementById('details').style.display = 'none';
+         
             $.ajax({
                 url: '/TeeTime/ChangeSelDate',
                 contentType: 'application/html; charset=utf-8',
@@ -124,12 +127,14 @@
                 dataType: 'html'
 
             })
+            
             .success(function (result) {
                 $('#teetimes').html(result);
             })
             .error(function (xhr, status) {
                 alert(status);
             })
+            
         }
 
 
