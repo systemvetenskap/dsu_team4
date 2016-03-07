@@ -19,7 +19,7 @@ namespace golf.Controllers
         public ActionResult Index()
         {
 
-      
+                ViewBag.Message = "Tidsbokning";
                 string date = DateTime.Today.ToShortDateString();
                 CalendarClass cl = new CalendarClass();
                 cl.selDate = DateTime.Today;
