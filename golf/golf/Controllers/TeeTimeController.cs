@@ -443,8 +443,9 @@ namespace golf.Controllers
                            };
                 var ltu = list.ToList();
                
-                var listp = ltu.Where(l => l.fName.Contains(searchstring) || l.lName.Contains(searchstring)).ToList();
+                var listp = ltu.Where(l => l.fName.Contains(searchstring) || l.lName.Contains(searchstring);
 
+                var res = listp.ToList();
 
                 foreach(var i in listp)
                 {
