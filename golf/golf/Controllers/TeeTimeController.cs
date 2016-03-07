@@ -173,8 +173,11 @@ namespace golf.Controllers
             using( dsuteam4Entities1 databas = new dsuteam4Entities1())
             {
                 List<TeeTimeDate> test = new List<TeeTimeDate>();
-               
-                test  = databas.TeeTimeDate.Where(t=> t.bookingDate == Convert.ToDateTime(date)).Where( t=> t.TeeTime_ID == Convert.ToInt32(teeid)).ToList();
+
+                DateTime d = Convert.ToDateTime(date);
+                int tid = Convert.ToInt16(teeid);
+
+                test  = databas.TeeTimeDate.Where(t=> t.bookingDate == d).Where( t=> t.TeeTime_ID == tid).ToList();
                 if (test.Count != 0)
                 {
                     foreach(var i in test)
