@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using golf.Models;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
@@ -14,27 +15,48 @@ namespace golf.Controllers
     public class TeeTimeController : Controller
     {
 
-
+        
      
         public ActionResult Index()
         {
+            if (Request.IsAuthenticated)
+            {
+                string id = User.Identity.Name;
+                if (IsAdmin(id))
+                {
+                    ViewBag.Message = "Tidsbokning";
+                    string date = DateTime.Today.ToShortDateString();
+                    CalendarClass cl = new CalendarClass();
+                    cl.selDate = DateTime.Today;
+                    cl.dateString = DateTime.Today.ToShortDateString();
 
-                ViewBag.Message = "Tidsbokning";
-                string date = DateTime.Today.ToShortDateString();
-                CalendarClass cl = new CalendarClass();
-                cl.selDate = DateTime.Today;
-                cl.dateString = DateTime.Today.ToShortDateString();
+                    return View(cl);
+                }
+                else
+                {
+                    ViewBag.Message = "Tidsbokning";
+                    string date = DateTime.Today.ToShortDateString();
+                    CalendarClass cl = new CalendarClass();
+                    cl.selDate = DateTime.Today;
+                    cl.dateString = DateTime.Today.ToShortDateString();
+
+                    return View(cl);
+
+                }
+
                       
 
-                return View(cl);
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account" );
+            }
             
             
             
         }
         public PartialViewResult loadTeetimes()
         {
-          
-     
             using (dsuteam4Entities1 databas = new dsuteam4Entities1())
             {
                 
@@ -340,7 +362,24 @@ namespace golf.Controllers
 
             return PartialView("loadTeetimes", cl);
         }
+
+        public bool IsAdmin(string id)
+        {
+            using(dsuteam4Entities1 databas = new dsuteam4Entities1()){
+
+                foreach (AdminPerson AP in databas.AdminPerson)
+                {
+                    if (Convert.ToInt16(id) == AP.Person_ID)
+                    {
+                        return true;
+                    }
+
+                }
+            }
         
+            return false;
+
+        }
     }
     
 }
