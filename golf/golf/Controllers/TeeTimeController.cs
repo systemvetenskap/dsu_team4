@@ -276,7 +276,7 @@ namespace golf.Controllers
             cl.Golfer = databas.Golfer.ToList();
             
          
-            cl.maxDate = max.ToShortDateString();
+            
             cl.selDate = c;
 
             cl.dateString = c.ToShortDateString();
