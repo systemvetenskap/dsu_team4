@@ -118,7 +118,7 @@
             var D = document.getElementById('details');
 
 
-            if(arr.length < 4)
+            if((arr.length < 4) || (arr.length == null))
             {
 
                 var addButton = document.createElement('input');
@@ -134,22 +134,35 @@
                 field.setAttribute('id', 'golfid');
                 field.setAttribute('placeholder', 'GolfID');
                 document.getElementById('ControlDiv').appendChild(field);
-                var count = 0;
+                //var count = 0;
                 
-                for(var i = 0; i <= arr.length; i++)
-                {
-                    if(arr[i] != currentUserId)
+
+
+
+                
+                //for(var i = 0; i <= arr.length; i++)
+                //{
+                    //if(arr[i] = currentUserId)
+                    //{
+                    //    break;
+                    //}
+
+                                                  
+
+                    if($.inArray(currentUserId, arr) !== -1)
                     {
-                        count++;
-                        if(count == arr.length)
-                        {
-                            var button = document.createElement('input');
-                            button.setAttribute('type', 'button');
-                            button.setAttribute('value', 'Boka in dig själv');
-                            button.setAttribute('onclick', 'addSelf('+id+','+GolfId+')');
-                            document.getElementById('ControlDiv').appendChild(button);
-                        }
+                     alert("finns i arr")
                     }
+                    else
+                    {
+                        alert("finns inte i arr")
+                        var button = document.createElement('input');
+                        button.setAttribute('type', 'button');
+                        button.setAttribute('value', 'Boka in dig själv');
+                        button.setAttribute('onclick', 'addSelf('+id+','+GolfId+')');
+                        document.getElementById('ControlDiv').appendChild(button);
+                    }
+                    //}
 
                 }
 
@@ -158,7 +171,6 @@
             }
 
 
-        }
         else{
             document.getElementById('playerName').innerHTML="";
             document.getElementById('details').style.display = 'none';
