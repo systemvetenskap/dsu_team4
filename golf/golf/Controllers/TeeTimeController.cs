@@ -15,7 +15,7 @@ namespace golf.Controllers
     {
 
 
-     
+       
         public ActionResult Index()
         {
 
@@ -24,7 +24,9 @@ namespace golf.Controllers
                 CalendarClass cl = new CalendarClass();
                 cl.selDate = DateTime.Today;
                 cl.dateString = DateTime.Today.ToShortDateString();
-                      
+                DateTime max = DateTime.Today.AddMonths(1);
+
+                cl.maxDate = max.ToShortDateString();
 
                 return View(cl);
             
@@ -44,7 +46,9 @@ namespace golf.Controllers
                 cl.TeeTimeDate = databas.TeeTimeDate.ToList();        
                 cl.TeeTimeDateGolfer = databas.TeeTimeDateGolfer.ToList();
                 cl.Golfer = databas.Golfer.ToList();
-             
+                DateTime max = DateTime.Today.AddMonths(1);
+
+                cl.maxDate = max.ToShortDateString();
 
                 cl.selDate = DateTime.Today;
                 cl.dateString = DateTime.Today.ToShortDateString();
@@ -227,7 +231,9 @@ namespace golf.Controllers
             cl.TeeTime = databas.TeeTime.ToList();
             cl.TeeTimeDateGolfer = databas.TeeTimeDateGolfer.ToList();
             cl.Golfer = databas.Golfer.ToList();
-         
+            DateTime max = DateTime.Today.AddMonths(1);
+
+            cl.maxDate = max.ToShortDateString();
             cl.selDate = c;
 
             cl.dateString = c.ToShortDateString();

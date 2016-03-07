@@ -393,6 +393,7 @@
     <Content Include="Views\Home\AddNews.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\TeeTime\loadTeetimes.cshtml" />
+    <Content Include="Views\TeeTime\IndexMember.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

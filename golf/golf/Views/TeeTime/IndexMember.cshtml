@@ -65,8 +65,10 @@
         
     </div>
 </div>
-
-
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script type="text/javascript">
 
 
@@ -74,11 +76,11 @@
 
         loadData();
         
-        function loadPicker() {
-      
-            var maxDate = @Model.maxDate;
-            $('#datepicker').datepicker();
 
+
+        function loadPicker() {
+
+            $('#datepicker').datepicker();
             $.datepicker.regional['sv'] = {
                 closeText: 'Stäng',
                 prevText: '< Föregående',
@@ -98,11 +100,8 @@
             };
             $.datepicker.setDefaults($.datepicker.regional['sv']);
 
- 
             $('#datepicker').datepicker('option', 'dateFormat', 'yy-mm-dd');
             $('#datepicker').datepicker('setDate', new Date());
-            $('#datepicker').datepicker("option", "minDate", 0);
-            $('#datepicker').datepicker("option", "maxDate", "+1m");
             //document.getElementById('ui-datepicker').style.display = block;
 
         }
@@ -127,7 +126,7 @@
         }
         $(function () {
             $("#datepicker").datepicker({
-                //dateFormat: "yy-mm-dd",
+                dateFormat: "yy-mm-dd",
                 onSelect: function () {
                     var selected = $(this).val();                 
                     changeDate(selected);
