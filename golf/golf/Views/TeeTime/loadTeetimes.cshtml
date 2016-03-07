@@ -155,13 +155,13 @@
         {
             if(getHcp[i].golfID == golfid)
             {
-                var addLi = document.createElement('li');
-                var u = document.getElementById('playerList');
+                //var addLi = document.createElement('li');
+                //var u = document.getElementById('playerList');
 
-                addLi.setAttribute('id',getHcp[i].Id);
-                u.appendChild(addLi);
+                //addLi.setAttribute('id',getHcp[i].Id);
+                //u.appendChild(addLi);
 
-                addLi.innerHTML = "HCP: " + getHcp[i].HCP;
+                //addLi.innerHTML = "HCP: " + getHcp[i].HCP;
 
                 var gident = getHcp[i].Id;
 
@@ -199,7 +199,7 @@
         })
         .success(function (result) {
             $('#teetimes').html(result);
-
+                onTimeDivClick(t);
         })
         .error(function (xhr, status) {
             alert(status);
