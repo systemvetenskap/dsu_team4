@@ -29,12 +29,14 @@ namespace golf.Models
         public DbSet<Person> Person { get; set; }
         public DbSet<AdminPerson> AdminPerson { get; set; }
         public DbSet<TeeDate> TeeDate { get; set; }
-        public DbSet<TeeTimeDateGolfer> TeeTimeDateGolfer { get; set; }
         public DbSet<TeeTime> TeeTime { get; set; }
         public DbSet<Gender> Gender { get; set; }
         public DbSet<Images> Images { get; set; }
         public DbSet<NewsArticle> NewsArticle { get; set; }
         public DbSet<NewsArticleImage> NewsArticleImage { get; set; }
+        public DbSet<AdminType> AdminType { get; set; }
+        public DbSet<MemberType> MemberType { get; set; }
+        public DbSet<TeeTimeDateGolfer> TeeTimeDateGolfer { get; set; }
         public DbSet<TeeTimeDate> TeeTimeDate { get; set; }
     }
 }

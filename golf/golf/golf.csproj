@@ -206,6 +206,9 @@
     <Compile Include="Models\AdminPerson.cs">
       <DependentUpon>PersonModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AdminType.cs">
+      <DependentUpon>PersonModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\BookingInfo.cs" />
     <Compile Include="Models\CalendarClass.cs" />
     <Compile Include="Models\CreateMember.cs" />
@@ -216,6 +219,9 @@
       <DependentUpon>PersonModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Images.cs">
+      <DependentUpon>PersonModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MemberType.cs">
       <DependentUpon>PersonModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\NewsArticle.cs">
