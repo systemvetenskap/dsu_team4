@@ -4,7 +4,7 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+<h2>Ändra personuppgifter</h2>
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
@@ -62,17 +62,17 @@
             @Html.EditorFor(model => model.p.email)
             @Html.ValidationMessageFor(model => model.p.email)
         </div>
-        <div class="editor-field">
+        @*<div class="editor-field">
             @Html.Label("Lösenord")
             @Html.EditorFor(model => model.p.PW)
-        </div>
+        </div>*@
         <div class="editor-field">
             @Html.Label("Kön:")
             @Html.DropDownListFor(m => m.genderid, new SelectList(Model.genderItems, "Value", "Text"));
         </div>
 
         <p>
-            <input type="submit" value="Save" />
+            <input type="submit" value="Spara" />
         </p>
     </fieldset>
 }
