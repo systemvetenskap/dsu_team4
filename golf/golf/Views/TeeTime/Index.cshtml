@@ -30,7 +30,7 @@
     <div class="dateselection">
 
        
-        <div class="containPicker">
+        <div class="containPicker" id="cP">
             <input type="submit" id="datepicker" class="dp" value="@Model.dateString">
         </div>      
   
@@ -103,6 +103,7 @@
             .error(function (xhr, status) {
                 alert(status);
             })
+            
         }
         $(function () {
             $("#datepicker").datepicker({
@@ -115,7 +116,9 @@
         });
 
         function changeDate(d) {
-
+            
+            
+            document.getElementById('details').style.display = 'none';
          
             $.ajax({
                 url: '/TeeTime/ChangeSelDate',
@@ -125,12 +128,14 @@
                 dataType: 'html'
 
             })
+            
             .success(function (result) {
                 $('#teetimes').html(result);
             })
             .error(function (xhr, status) {
                 alert(status);
             })
+            
         }
 
 
