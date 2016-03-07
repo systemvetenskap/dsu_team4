@@ -424,6 +424,45 @@ namespace golf.Controllers
                return "loadTeetimesMember";
             }
         }
+        public PartialViewResult searchPerson(string searchstring)
+        {
+            using(dsuteam4Entities1 databas = new dsuteam4Entities1())
+            {
+                List<PersonGolfer> result = new List<PersonGolfer>();
+      
+                var list = from t in databas.Person.ToList()
+                           join g in databas.Golfer.ToList()
+                           on t.Id equals g.Person_ID
+                           select new
+                           {
+                               fName = t.firstName,
+                               lName = t.lastName,
+                               Golfstring = g.golfID,
+                               HCP = g.HCP
+
+                           };
+                var ltu = list.ToList();
+               
+                var listp = ltu.Where(l => l.fName.Contains(searchstring) || l.lName.Contains(searchstring)).ToList();
+
+
+                foreach(var i in listp)
+                {
+                    PersonGolfer pg = new PersonGolfer();
+                    pg.firstName = i.fName;
+                    pg.lastName = i.lName;
+                    pg.HCP = i.HCP;
+                    pg.golfstring = i.Golfstring;
+                    result.Add(pg);
+                }
+                
+               
+
+                return PartialView("searchPerson", result);
+            }
+            
+
+        }
     }
     
 }

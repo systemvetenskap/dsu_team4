@@ -20,7 +20,7 @@
                     <div class="timedivHour" onclick="onTimeDivClick(@item.Id)" id=@item.Id time=@item.teeTime1[3] ctime="@item.teeTime1" booked="@Model.changeColor(item.Id, Model.selDate)" cdate="@Model.dateString">
                         @Html.DisplayFor(modelItem => item.teeTime1)<br />
                         @Model.number/4
-                        @Html.Label("Personal");
+                       
                     </div>
                     @foreach (var o in Model.TeeTime)
                     {
@@ -135,12 +135,12 @@
 
         var u = document.getElementById('playerList');
         var i = document.getElementById('ControlDiv');
-        var x = document.getElementById('ControlDiv2');
+
         var z = document.getElementById('addedList');
         u.innerHTML = '';
         i.innerHTML = '';
         z.innerHTML = '';
-        x.innerHTML = '';
+    
     }
     function addP(id){
 
@@ -272,6 +272,28 @@
             alert(status);
         })
             
+    }
+    function soP(d) {
+        alert("test");
+        var s = document.getElementById('searchField').value;
+
+        $.ajax({
+            url: '/TeeTime/searchPerson',
+            contentType: 'application/html; charset=utf-8',
+            data: { searchstring: s },
+            type: 'GET',
+            dataType: 'html'
+
+        })
+
+        .success(function (result) {
+            $('#searchDiv').html(result);
+        })
+        .error(function (xhr, status) {
+            alert(status);
+        })
+
+
     }
 
 

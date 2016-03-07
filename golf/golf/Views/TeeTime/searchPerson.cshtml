@@ -1,0 +1,22 @@
+﻿@model IEnumerable<golf.Models.PersonGolfer>
+<table>
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.firstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HCP)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.golfstring)
+        </td>
+
+    </tr>
+}
+
+</table>
