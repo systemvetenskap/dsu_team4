@@ -59,7 +59,7 @@
         var GolfId = '';
         if(id != null)
         {
-            alert(currentUserId);
+            
             var date = document.getElementById(id).getAttribute("cdate");
             var ctime = document.getElementById(id).getAttribute("ctime");
             document.getElementById('timeInfo').innerHTML = 'Registrerade spelare: '+date+' - '+ctime;
@@ -95,6 +95,8 @@
                     addLi.appendChild(addT);
 
                     ul.appendChild(addLi);
+
+                    alert($.inArray(currentUserId, arr));
 
                     if(personids[i].admin == currentUserId)
                     {
@@ -134,160 +136,150 @@
                 field.setAttribute('id', 'golfid');
                 field.setAttribute('placeholder', 'GolfID');
                 document.getElementById('ControlDiv').appendChild(field);
-                //var count = 0;
                 
+                if(contains(arr, currentUserId) == false){
 
-
-
-                
-                //for(var i = 0; i <= arr.length; i++)
-                //{
-                    //if(arr[i] = currentUserId)
-                    //{
-                    //    break;
-                    //}
-
-                                                  
-
-                    if($.inArray(currentUserId, arr) !== -1)
-                    {
-                     alert("finns i arr")
-                    }
-                    else
-                    {
-                        alert("finns inte i arr")
-                        var button = document.createElement('input');
-                        button.setAttribute('type', 'button');
-                        button.setAttribute('value', 'Boka in dig själv');
-                        button.setAttribute('onclick', 'addSelf('+id+','+GolfId+')');
-                        document.getElementById('ControlDiv').appendChild(button);
-                    }
-                    //}
-
+                    var button = document.createElement('input');
+                    button.setAttribute('type', 'button');
+                    button.setAttribute('value', 'Boka in dig själv');
+                    button.setAttribute('onclick', 'addSelf('+id+','+GolfId+')');
+                    document.getElementById('ControlDiv').appendChild(button);
                 }
 
 
+                
+
+
 
             }
 
 
-        else{
-            document.getElementById('playerName').innerHTML="";
-            document.getElementById('details').style.display = 'none';
-        }
-    }
-
-    function clearLi(){
-
-        var u = document.getElementById('playerList');
-        var i = document.getElementById('ControlDiv');
-        var x = document.getElementById('ControlDiv2');
-        var z = document.getElementById('addedList');
-        u.innerHTML = '';
-        i.innerHTML = '';
-        z.innerHTML = '';
-        x.innerHTML = '';
-    }
-    function addSelf(id, golfid){
-        var date = '@Model.selDate';
-        var getHcp = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Golfer, Formatting.Indented));
-        var personid = '@User.Identity.Name';
-
-        for(var i in getHcp)
-        {
-            if(getHcp[i].golfID == golfid)
-            {
-
-                var gident = getHcp[i].Id;
-
-                book(gident, id, date, personid);
-
-
-            }
-            else
-            {
-
+            else{
+                document.getElementById('playerName').innerHTML="";
+                document.getElementById('details').style.display = 'none';
             }
         }
 
-
-
-    }
-    function addP(id){
-
-        var date = '@Model.selDate';
-        var golfid = document.getElementById('golfid').value;
-        var getHcp = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Golfer, Formatting.Indented));
-        var personid = '@User.Identity.Name';
-
-
-        for(var i in getHcp)
-        {
-            if(getHcp[i].golfID == golfid)
-            {
-
-                var gident = getHcp[i].Id;
-
-                book(gident, id, date, personid);
-
-
+        function contains(a, b) {
+            for (var i = 0; i < a.length; i++) {
+                if (a[i] == b) {
+                    return true;
+                }
             }
-            else
-            {
-
-            }
+            return false;
         }
 
+        function clearLi(){
+
+            var u = document.getElementById('playerList');
+            var i = document.getElementById('ControlDiv');
+            var x = document.getElementById('ControlDiv2');
+            var z = document.getElementById('addedList');
+            u.innerHTML = '';
+            i.innerHTML = '';
+            z.innerHTML = '';
+            x.innerHTML = '';
+        }
+        function addSelf(id, golfid){
+            var date = '@Model.selDate';
+            var getHcp = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Golfer, Formatting.Indented));
+            var personid = '@User.Identity.Name';
+
+            for(var i in getHcp)
+            {
+                if(getHcp[i].golfID == golfid)
+                {
+
+                    var gident = getHcp[i].Id;
+
+                    book(gident, id, date, personid);
+
+
+                }
+                else
+                {
+
+                }
+            }
+
+
+
+        }
+        function addP(id){
+
+            var date = '@Model.selDate';
+            var golfid = document.getElementById('golfid').value;
+            var getHcp = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Golfer, Formatting.Indented));
+            var personid = '@User.Identity.Name';
+
+
+            for(var i in getHcp)
+            {
+                if(getHcp[i].golfID == golfid)
+                {
+
+                    var gident = getHcp[i].Id;
+
+                    book(gident, id, date, personid);
+
+
+                }
+                else
+                {
+
+                }
+            }
+
+
+        }
+        function remP(golfid){
+
+            var date = '@Model.selDate';
+
+            var tid = document.getElementById('playerList').getAttribute("val");
+
+            remove(golfid, tid, date);
+
+        }
+
+        function book(g, t, d, p) {
+
+            $.ajax({
+                url: '/TeeTime/saveBooking',
+                contentType: 'application/html; charset=utf-8',
+                data: {golfid : g, teeid : t, date : d, personid: p},
+                type: 'GET',
+                dataType: 'html'
+
+            })
+            .success(function (result) {
+                $('#teetimes').html(result);
+                onTimeDivClick(t);
+            })
+            .error(function (xhr, status) {
+                alert(status);
+            })
+        }
+        function remove(g, t, d) {
+
+            $.ajax({
+                url: '/TeeTime/deleteBooking',
+                contentType: 'application/html; charset=utf-8',
+                data: {golfid : g, teeid : t, date : d},
+                type: 'GET',
+                dataType: 'html'
+
+            })
+            .success(function (result) {
+                $('#teetimes').html(result);
+
+                onTimeDivClick(t);
+            })
+            .error(function (xhr, status) {
+                alert(status);
+            })
+        }
 
     }
-    function remP(golfid){
-
-        var date = '@Model.selDate';
-
-        var tid = document.getElementById('playerList').getAttribute("val");
-
-        remove(golfid, tid, date);
-
-    }
-
-    function book(g, t, d, p) {
-
-        $.ajax({
-            url: '/TeeTime/saveBooking',
-            contentType: 'application/html; charset=utf-8',
-            data: {golfid : g, teeid : t, date : d, personid: p},
-            type: 'GET',
-            dataType: 'html'
-
-        })
-        .success(function (result) {
-            $('#teetimes').html(result);
-            onTimeDivClick(t);
-        })
-        .error(function (xhr, status) {
-            alert(status);
-        })
-    }
-    function remove(g, t, d) {
-
-        $.ajax({
-            url: '/TeeTime/deleteBooking',
-            contentType: 'application/html; charset=utf-8',
-            data: {golfid : g, teeid : t, date : d},
-            type: 'GET',
-            dataType: 'html'
-
-        })
-        .success(function (result) {
-            $('#teetimes').html(result);
-
-            onTimeDivClick(t);
-        })
-        .error(function (xhr, status) {
-            alert(status);
-        })
-    }
-
-
 </script>
 
