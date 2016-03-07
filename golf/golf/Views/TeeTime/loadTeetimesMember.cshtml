@@ -96,7 +96,7 @@
 
                     ul.appendChild(addLi);
 
-                    alert($.inArray(currentUserId, arr));
+           
 
                     if(personids[i].admin == currentUserId)
                     {
@@ -128,7 +128,7 @@
                 addButton.setAttribute('id', 'addP');
                 addButton.setAttribute('tee', id);
                 addButton.setAttribute('value', 'Lägg till spelare')
-                addButton.setAttribute('onclick', 'addP('+id+')')
+                addButton.setAttribute('onclick', 'addP('+id+','+arr+')')
                 document.getElementById('ControlDiv').appendChild(addButton);
 
                 var field = document.createElement('input');
@@ -206,30 +206,36 @@
 
 
     }
-    function addP(id){
+    function addP(id, arr){
 
         var date = '@Model.selDate';
         var golfid = document.getElementById('golfid').value;
         var getHcp = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Golfer, Formatting.Indented));
         var personid = '@User.Identity.Name';
 
-
-        for(var i in getHcp)
+        if(contains(arr, personid) == false)
         {
-            if(getHcp[i].golfID == golfid)
+            for(var i in getHcp)
             {
+                if(getHcp[i].golfID == golfid)
+                {
 
-                var gident = getHcp[i].Id;
+                    var gident = getHcp[i].Id;
 
-                book(gident, id, date, personid);
+                    book(gident, id, date, personid);
 
 
+                }
+ 
             }
-            else
-            {
 
-            }
         }
+        else {
+
+            alert("Spelaren är redan bokad till vald tid");
+
+        }
+
 
 
     }
