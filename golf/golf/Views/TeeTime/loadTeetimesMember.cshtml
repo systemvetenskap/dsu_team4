@@ -59,7 +59,7 @@
         var GolfId = '';
         if(id != null)
         {
-            alert(currentUserId);
+            
             var date = document.getElementById(id).getAttribute("cdate");
             var ctime = document.getElementById(id).getAttribute("ctime");
             document.getElementById('timeInfo').innerHTML = 'Registrerade spelare: '+date+' - '+ctime;
@@ -96,6 +96,8 @@
 
                     ul.appendChild(addLi);
 
+                    alert($.inArray(currentUserId, arr));
+
                     if(personids[i].admin == currentUserId)
                     {
                         var addBu = document.createElement('a');
@@ -117,7 +119,7 @@
             document.getElementById('details').style.display = 'block';
             var D = document.getElementById('details');
 
-
+   
             if(arr.length < 4)
             {
 
@@ -134,24 +136,18 @@
                 field.setAttribute('id', 'golfid');
                 field.setAttribute('placeholder', 'GolfID');
                 document.getElementById('ControlDiv').appendChild(field);
-                var count = 0;
-                
-                for(var i = 0; i <= arr.length; i++)
-                {
-                    if(arr[i] != currentUserId)
-                    {
-                        count++;
-                        if(count == arr.length)
-                        {
-                            var button = document.createElement('input');
-                            button.setAttribute('type', 'button');
-                            button.setAttribute('value', 'Boka in dig själv');
-                            button.setAttribute('onclick', 'addSelf('+id+','+GolfId+')');
-                            document.getElementById('ControlDiv').appendChild(button);
-                        }
-                    }
+       
+                if(contains(arr, currentUserId) == false){
 
+                    var button = document.createElement('input');
+                    button.setAttribute('type', 'button');
+                    button.setAttribute('value', 'Boka in dig själv');
+                    button.setAttribute('onclick', 'addSelf('+id+','+GolfId+')');
+                    document.getElementById('ControlDiv').appendChild(button);
                 }
+
+
+                
 
 
 
@@ -163,6 +159,15 @@
             document.getElementById('playerName').innerHTML="";
             document.getElementById('details').style.display = 'none';
         }
+    }
+
+    function contains(a, b) {
+        for (var i = 0; i < a.length; i++) {
+            if (a[i] == b) {
+                return true;
+            }
+        }
+        return false;
     }
 
     function clearLi(){
