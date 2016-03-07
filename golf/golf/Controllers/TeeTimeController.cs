@@ -386,6 +386,17 @@ namespace golf.Controllers
             return false;
 
     }
+        public string loadTeetimesAorM(string id)
+        {
+            if (IsAdmin(id))
+            {
+                return "loadTeetimes";
+            }
+            else
+            {
+               return "loadTeetimesMember";
+            }
+        }
     }
     
 }
