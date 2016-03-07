@@ -96,8 +96,9 @@
     margin-right: 30%;
     float: left;
 
-
-
+}
+#cP{
+    display:none;
 }
 .dp{
     width: 40%;
@@ -136,8 +137,10 @@ ControlDiv{
     
 }
 .ui-datepicker {   
-        
+   
+  display: none;     
   background: #999 none;
+  display: none;
 }
 
 .listobjectP{
@@ -147,9 +150,10 @@ ControlDiv{
 .listobjectA{
     
 }
-.timeInfo{
+.details timeInfo{
     
     font: bold;
-    font-size: 16px;
+    font-size: 18px;
 
 }
+

@@ -5,7 +5,7 @@
                 <h2>@ViewBag.Message</h2>
             </hgroup>
             <p>
-                Boka tid
+                
             </p>
         </div>
     </section>
@@ -17,6 +17,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section Styles {
+
     <link href="@Url.Content("~/Content/TeeTime.css")" rel="stylesheet" type="text/css" />
 }
 
@@ -30,7 +31,7 @@
     <div class="dateselection">
 
        
-        <div class="containPicker">
+        <div class="containPicker" id="cP">
             <input type="submit" id="datepicker" class="dp" value="@Model.dateString">
         </div>      
   
@@ -43,7 +44,7 @@
 
     </div>
     <div id="details" class="TeeDetails">
-    <p id="timeInfo">@Html.Label("Registrerade spelare")</p>
+    <p id="timeInfo" class="timeInfo"></p>
         <div id="playerName">
             <ul id="playerList"></ul>
        
@@ -80,10 +81,28 @@
         function loadPicker() {
 
             $('#datepicker').datepicker();
+            $.datepicker.regional['sv'] = {
+                closeText: 'Stäng',
+                prevText: '< Föregående',
+                nextText: 'Nästa >',
+                currentText: 'Nu',
+                monthNames: ['Januari', 'Februari', 'Mars', 'April', 'Maj', 'Juni', 'Juli', 'Augusti', 'September', 'Oktober', 'November', 'December'],
+                monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'Maj', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dec'],
+                dayNamesShort: ['Sön', 'Mån', 'Tis', 'Ons', 'Tor', 'Fre', 'Lör'],
+                dayNames: ['Söndag', 'Måndag', 'Tisdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lördag'],
+                dayNamesMin: ['Sö', 'Må', 'Ti', 'On', 'To', 'Fr', 'Lö'],
+                weekHeader: 'Не',
+                dateFormat: 'yy-mm-dd',
+                firstDay: 1,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: ''
+            };
+            $.datepicker.setDefaults($.datepicker.regional['sv']);
+
             $('#datepicker').datepicker('option', 'dateFormat', 'yy-mm-dd');
             $('#datepicker').datepicker('setDate', new Date());
- 
-            
+            //document.getElementById('ui-datepicker').style.display = block;
 
         }
 
@@ -103,6 +122,7 @@
             .error(function (xhr, status) {
                 alert(status);
             })
+            
         }
         $(function () {
             $("#datepicker").datepicker({
@@ -117,6 +137,8 @@
         function changeDate(d) {
 
          
+            document.getElementById('details').style.display = 'none';
+         
             $.ajax({
                 url: '/TeeTime/ChangeSelDate',
                 contentType: 'application/html; charset=utf-8',
@@ -125,12 +147,14 @@
                 dataType: 'html'
 
             })
+            
             .success(function (result) {
                 $('#teetimes').html(result);
             })
             .error(function (xhr, status) {
                 alert(status);
             })
+            
         }
 
 

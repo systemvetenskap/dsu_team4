@@ -42,11 +42,13 @@
         }
 
     }
-
 }
+
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 <script type="text/javascript">
+    document.getElementById('cP').style.display = 'block';
+
     function onTimeDivClick(id) {
 
         clearLi();
@@ -54,14 +56,14 @@
         var arr = [];
         var personids = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.bNames, Formatting.Indented));
         var c = 0;
-        
-       
+
+
         if(id != null)
         {
             var date = document.getElementById(id).getAttribute("cdate");
             var ctime = document.getElementById(id).getAttribute("ctime");
             document.getElementById('timeInfo').innerHTML = 'Registrerade spelare: '+date+' - '+ctime;
-         
+
             for(var i in personids)
             {
                 if(personids[i].TeeTime == id){
@@ -71,7 +73,7 @@
                     var addBu = document.createElement('a');
                     var addT = document.createElement('p');
 
-                    addBu.setAttribute('href', '#');                 
+                    addBu.setAttribute('href', '#');
                     addBu.innerHTML = 'Ta bort';
                     addBu.setAttribute('onclick','remP('+personids[i].Golferid+')');
                     addLi.setAttribute('id',personids[i].Golferid);
@@ -80,18 +82,18 @@
                     addLi.setAttribute('class','clear');
                     addBu.setAttribute('class','listobjectA');
                     addT.setAttribute('class','listobjectP');
-                    
+
 
                     addT.innerHTML = personids[i].gender +" - HCP: " + personids[i].HCP+" - ";
 
                     var ul = document.getElementById('playerList');
-                   
+
                     ul.setAttribute('val', id);
 
                     addLi.appendChild(addT);
                     addT.appendChild(addBu);
                     ul.appendChild(addLi);
-                 
+
 
                 }
                 else{
@@ -117,6 +119,7 @@
                 var field = document.createElement('input');
                 field.setAttribute('type', 'text');
                 field.setAttribute('id', 'golfid');
+                field.setAttribute('placeholder', 'GolfID');
                 document.getElementById('ControlDiv').appendChild(field);
 
             }
@@ -147,23 +150,24 @@
         var getHcp = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Golfer, Formatting.Indented));
         
 
+
         for(var i in getHcp)
         {
             if(getHcp[i].golfID == golfid)
             {
-                var addLi = document.createElement('li');
-                var u = document.getElementById('playerList');
+                //var addLi = document.createElement('li');
+                //var u = document.getElementById('playerList');
 
-                addLi.setAttribute('id',getHcp[i].Id);
-                u.appendChild(addLi);
+                //addLi.setAttribute('id',getHcp[i].Id);
+                //u.appendChild(addLi);
 
-                addLi.innerHTML ="Kön saknas - HCP: " + getHcp[i].HCP;
+                //addLi.innerHTML = "HCP: " + getHcp[i].HCP;
 
                 var gident = getHcp[i].Id;
 
                 book(gident, id, date);
-     
-                
+
+
             }
             else
             {
@@ -176,20 +180,15 @@
     function remP(golfid){
 
         var date = '@Model.selDate';
-        
-        var tid = document.getElementById('playerList').getAttribute("val");
 
+        var tid = document.getElementById('playerList').getAttribute("val");
 
         remove(golfid, tid, date);
 
-        
-       
-    
-
     }
-  
+
     function book(g, t, d) {
-   
+
         $.ajax({
             url: '/TeeTime/saveBooking',
             contentType: 'application/html; charset=utf-8',
@@ -200,14 +199,14 @@
         })
         .success(function (result) {
             $('#teetimes').html(result);
-         
+                onTimeDivClick(t);
         })
         .error(function (xhr, status) {
             alert(status);
         })
     }
     function remove(g, t, d) {
-   
+
         $.ajax({
             url: '/TeeTime/deleteBooking',
             contentType: 'application/html; charset=utf-8',
@@ -218,7 +217,7 @@
         })
         .success(function (result) {
             $('#teetimes').html(result);
-          
+
             onTimeDivClick(t);
         })
         .error(function (xhr, status) {

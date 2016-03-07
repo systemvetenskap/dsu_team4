@@ -102,9 +102,12 @@ namespace golf.Controllers
                 
                 SelectList gender = new SelectList(databas.Gender.ToList(), "id", "genderName");
 
-
+                //Hårdkodad for now, måste göra droplist eller om vi baserar det på ålder
+                CM.p.memberType_ID = 1;
+                
+                
                 CM.genderItems = gender;
-             
+                CM.p.gender_ID = CM.genderid;
                 databas.Entry(CM.p).State = EntityState.Modified;
                 databas.SaveChanges();
                 return RedirectToAction("Index");
