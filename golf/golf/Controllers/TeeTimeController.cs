@@ -79,6 +79,7 @@ namespace golf.Controllers
                             where li.Date == DateTime.Today
                             select new
                             {
+                                Personid = p.Id,
                                 fName = p.firstName,
                                 lName = p.lastName,
                                 Date = li.Date,
@@ -99,7 +100,7 @@ namespace golf.Controllers
                             on g.Id equals p.Gender
                             select new
                             {
-
+                                p.Personid,
                                 fName = p.fName,
                                 lName = p.lName,
                                 Date = p.Date,
@@ -118,6 +119,7 @@ namespace golf.Controllers
                 foreach (var o in list4)
                 {
                     BookingInfo b = new BookingInfo();
+                    b.personId = o.Personid;
                     b.Name = o.fName + " " + o.lName;
                     b.TeeTime = o.TeeTime;
                     b.HCP = o.Hcp;
@@ -272,7 +274,7 @@ namespace golf.Controllers
             cl.TeeTime = databas.TeeTime.ToList();
             cl.TeeTimeDateGolfer = databas.TeeTimeDateGolfer.ToList();
             cl.Golfer = databas.Golfer.ToList();
-            DateTime max = DateTime.Today.AddMonths(1);
+            
          
             cl.maxDate = max.ToShortDateString();
             cl.selDate = c;
@@ -299,6 +301,7 @@ namespace golf.Controllers
                         where li.Date == cl.selDate
                         select new
                         {
+                            Personid = p.Id,
                             fName = p.firstName,
                             lName = p.lastName,
                             Date = li.Date,
@@ -307,6 +310,7 @@ namespace golf.Controllers
                             Gender = p.gender_ID,
                             Golfid = li.Golfid,
                             li.golfID
+
 
                         };
 
@@ -317,7 +321,7 @@ namespace golf.Controllers
                         on g.Id equals p.Gender
                         select new
                         {
-
+                            Personid = p.Personid,
                             fName = p.fName,
                             lName = p.lName,
                             Date = p.Date,
@@ -336,6 +340,7 @@ namespace golf.Controllers
             foreach (var o in list4)
             {
                 BookingInfo b = new BookingInfo();
+                b.personId = o.Personid;
                 b.Name = o.fName + " " + o.lName;
                 b.TeeTime = o.TeeTime;
                 b.HCP = o.Hcp;
