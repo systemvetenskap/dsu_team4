@@ -69,7 +69,7 @@ namespace golf.Controllers
                 var join2 = from g in databas.Golfer.ToList()
                             join li in list1 on
                             g.Id equals li.Golferid
-                            select new { Date = li.Date, Golfid = li.Golferid, TeeTime = li.TeeTimeID, Personid = g.Person_ID, HCP = g.HCP, li.Admin };
+                            select new { Date = li.Date, Golfid = li.Golferid, TeeTime = li.TeeTimeID, Personid = g.Person_ID, HCP = g.HCP, li.Admin, g.golfID };
 
                 var list2 = join2.ToList();
 
@@ -86,7 +86,8 @@ namespace golf.Controllers
                                 Hcp = li.HCP,
                                 Gender = p.gender_ID,
                                 Golfid = li.Golfid,
-                                li.Admin
+                                li.Admin,
+                                li.golfID
                                
 
                             };
@@ -106,7 +107,8 @@ namespace golf.Controllers
                                 Hcp = p.Hcp,
                                 Gender = g.genderName,
                                 Golfid = p.Golfid,
-                                p.Admin
+                                p.Admin,
+                                Golf_ID = p.golfID
                             };
 
                 var list4 = join4.ToList();
@@ -123,6 +125,7 @@ namespace golf.Controllers
                     b.date = DateTime.Today.ToShortDateString();
                     b.Golferid = o.Golfid;
                     b.admin = o.Admin;
+                    b.Golfer_ID = o.Golf_ID;
                     cl.bNames.Add(b);
 
                 }
@@ -156,16 +159,8 @@ namespace golf.Controllers
 
                 var viewGolfers = v1.ToList();
 
-                string id = User.Identity.Name;
-                if(IsAdmin(id))
-                {
-                    cl.userId = Convert.ToInt32(id);
-                    return PartialView("loadTeetimesMember", cl);
-                }
-                else
-                {
-                    return PartialView(cl);
-                }
+               
+                return PartialView(loadTeetimesAorM(User.Identity.Name), cl);
 
                 
             }
@@ -177,15 +172,25 @@ namespace golf.Controllers
         {
             using( dsuteam4Entities1 databas = new dsuteam4Entities1())
             {
+                List<TeeTimeDate> test = new List<TeeTimeDate>();
+               
+                test  = databas.TeeTimeDate.Where(t=> t.bookingDate == Convert.ToDateTime(date)).Where( t=> t.TeeTime_ID == Convert.ToInt32(teeid)).ToList();
+                if (test.Count != 0)
+                {
+                    test.
+                }
+                     
+               else
+               {
+                   var TeeTimeDate1 = new TeeTimeDate() { TeeTime_ID = Convert.ToInt32(teeid), bookingDate = Convert.ToDateTime(date) };
 
-           
-            var TeeTimeDate1 = new TeeTimeDate() { TeeTime_ID = Convert.ToInt32(teeid), bookingDate = Convert.ToDateTime(date) };
-            
-            databas.TeeTimeDate.Add(TeeTimeDate1);
+                   databas.TeeTimeDate.Add(TeeTimeDate1);
 
-            databas.SaveChanges();
+                   databas.SaveChanges();
 
-            var id = TeeTimeDate1.Id;
+                   var id = TeeTimeDate1.Id;
+               }
+   
 
             var TeeTimeDateGolfer1 = new TeeTimeDateGolfer() { Golfer_ID = Convert.ToInt32(golfid), TeeTimeDate_ID = id, Person_IDa = Convert.ToInt32(personid) };
             
@@ -194,7 +199,7 @@ namespace golf.Controllers
             CalendarClass cl = loadData(Convert.ToDateTime(date));
             
             
-            return PartialView("loadTeetimes", cl);
+            return PartialView(loadTeetimesAorM(User.Identity.Name), cl);
 
             }
 
@@ -235,7 +240,7 @@ namespace golf.Controllers
                 databas.SaveChanges();
 
                 CalendarClass cl = loadData(Convert.ToDateTime(date));
-                return PartialView("loadTeetimes", cl);
+                return PartialView(loadTeetimesAorM(User.Identity.Name), cl);
             }
 
 
@@ -270,7 +275,7 @@ namespace golf.Controllers
             var join2 = from g in databas.Golfer.ToList()
                         join li in list1 on
                         g.Id equals li.Golferid
-                        select new { Date = li.Date, Golfid = li.Golferid, TeeTime = li.TeeTimeID, Personid = g.Person_ID, HCP = g.HCP };
+                        select new { Date = li.Date, Golfid = li.Golferid, TeeTime = li.TeeTimeID, Personid = g.Person_ID, HCP = g.HCP, g.golfID };
 
             var list2 = join2.ToList();
 
@@ -286,7 +291,8 @@ namespace golf.Controllers
                             TeeTime = li.TeeTime,
                             Hcp = li.HCP,
                             Gender = p.gender_ID,
-                            Golfid = li.Golfid
+                            Golfid = li.Golfid,
+                            li.golfID
 
                         };
 
@@ -304,7 +310,8 @@ namespace golf.Controllers
                             TeeTime = p.TeeTime,
                             Hcp = p.Hcp,
                             Gender = g.genderName,
-                            Golfid = p.Golfid
+                            Golfid = p.Golfid,
+                            Golfer_ID = p.golfID
 
                         };
 
@@ -321,6 +328,7 @@ namespace golf.Controllers
                 b.gender = o.Gender;
                 b.date = DateTime.Today.ToShortDateString();
                 b.Golferid = o.Golfid;
+                b.Golfer_ID = o.Golfer_ID;
                 cl.bNames.Add(b);
 
             }

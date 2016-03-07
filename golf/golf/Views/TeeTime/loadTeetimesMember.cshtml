@@ -55,47 +55,52 @@
         var arr = [];
         var personids = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.bNames, Formatting.Indented));
         var c = 0;
-        var currentUserId = @Model.userId;
-
+        var currentUserId = '@User.Identity.Name';
+        var GolfId = '';
         if(id != null)
         {
+            alert(currentUserId);
             var date = document.getElementById(id).getAttribute("cdate");
             var ctime = document.getElementById(id).getAttribute("ctime");
             document.getElementById('timeInfo').innerHTML = 'Registrerade spelare: '+date+' - '+ctime;
 
             for(var i in personids)
             {
+                if(personids[i].personId == currentUserId)
+                {
+                    GolfId = personids[i].Golfer_ID;
+                }
                 if(personids[i].TeeTime == id){
 
-                    arr.push(1);
+                    arr.push(personids[i].personId);
                     var addLi = document.createElement('li');
-                  
+
                     var addT = document.createElement('p');
 
-                
+
                     addLi.setAttribute('id',personids[i].Golferid);
 
 
                     addLi.setAttribute('class','clear');
-                    
+
                     addT.setAttribute('class','listobjectP');
 
 
-                    addT.innerHTML = personids[i].gender +" - HCP: " + personids[i].HCP+" - ";
+                    addT.innerHTML = personids[i].gender +" - HCP: " + personids[i].HCP;
 
                     var ul = document.getElementById('playerList');
 
                     ul.setAttribute('val', id);
 
                     addLi.appendChild(addT);
-                    
+
                     ul.appendChild(addLi);
 
                     if(personids[i].admin == currentUserId)
                     {
                         var addBu = document.createElement('a');
                         addBu.setAttribute('href', '#');
-                        addBu.innerHTML = 'Ta bort';
+                        addBu.innerHTML = ' - Ta bort';
                         addBu.setAttribute('onclick','remP('+personids[i].Golferid+')');
                         addBu.setAttribute('class','listobjectA');
                         addT.appendChild(addBu);
@@ -115,6 +120,7 @@
 
             if(arr.length < 4)
             {
+
                 var addButton = document.createElement('input');
                 addButton.setAttribute('type', 'button');
                 addButton.setAttribute('id', 'addP');
@@ -128,6 +134,25 @@
                 field.setAttribute('id', 'golfid');
                 field.setAttribute('placeholder', 'GolfID');
                 document.getElementById('ControlDiv').appendChild(field);
+                var count = 0;
+                for(var i = 0; i <= arr.length; i++)
+                {
+                    if(arr[i] != currentUserId)
+                    {
+                        count++;
+                        if(count == arr.length)
+                        {
+                            var button = document.createElement('input');
+                            button.setAttribute('type', 'button');
+                            button.setAttribute('value', 'Boka in dig själv');
+                            button.setAttribute('onclick', 'addSelf('+id+','+GolfId+')');
+                            document.getElementById('ControlDiv').appendChild(button);
+                        }
+                    }
+
+                }
+
+
 
             }
 
@@ -150,6 +175,31 @@
         z.innerHTML = '';
         x.innerHTML = '';
     }
+    function addSelf(id, golfid){
+        var date = '@Model.selDate';
+        var getHcp = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Golfer, Formatting.Indented));
+        var personid = '@User.Identity.Name';
+
+        for(var i in getHcp)
+        {
+            if(getHcp[i].golfID == golfid)
+            {
+
+                var gident = getHcp[i].Id;
+
+                book(gident, id, date, personid);
+
+
+            }
+            else
+            {
+
+            }
+        }
+
+
+
+    }
     function addP(id){
 
         var date = '@Model.selDate';
@@ -162,13 +212,6 @@
         {
             if(getHcp[i].golfID == golfid)
             {
-                //var addLi = document.createElement('li');
-                //var u = document.getElementById('playerList');
-
-                //addLi.setAttribute('id',getHcp[i].Id);
-                //u.appendChild(addLi);
-
-                //addLi.innerHTML = "HCP: " + getHcp[i].HCP;
 
                 var gident = getHcp[i].Id;
 
@@ -206,7 +249,7 @@
         })
         .success(function (result) {
             $('#teetimes').html(result);
-                onTimeDivClick(t);
+            onTimeDivClick(t);
         })
         .error(function (xhr, status) {
             alert(status);

@@ -8,6 +8,7 @@ namespace golf.Models
     public class BookingInfo
     {
         public int Golferid { get; set;}
+        public string Golfer_ID { get; set; }
         public int TeeTime { get; set;}
         public string Name { get; set;}
         public int personId { get; set;}
