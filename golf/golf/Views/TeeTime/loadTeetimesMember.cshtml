@@ -47,16 +47,16 @@
 
 <script type="text/javascript">
     document.getElementById('cP').style.display = 'block';
-
+    var arr = [];
     function onTimeDivClick(id) {
 
         clearLi();
         @using Newtonsoft.Json;
-        var arr = [];
+        var arrDiv = [];
         var personids = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.bNames, Formatting.Indented));
         var c = 0;
         var currentUserId = '@User.Identity.Name';
-        var GolfId = '';
+        var GolfId;
         if(id != null)
         {
             
@@ -72,7 +72,7 @@
                 }
                 if(personids[i].TeeTime == id){
 
-                    arr.push(personids[i].personId);
+                    arrDiv.push(personids[i].personId);
                     var addLi = document.createElement('li');
 
                     var addT = document.createElement('p');
@@ -119,6 +119,7 @@
             document.getElementById('details').style.display = 'block';
             var D = document.getElementById('details');
 
+            arr = arrDiv;
    
             if((arr.length < 4) || (arr.length == null))
             {
@@ -127,8 +128,8 @@
                 addButton.setAttribute('type', 'button');
                 addButton.setAttribute('id', 'addP');
                 addButton.setAttribute('tee', id);
-                addButton.setAttribute('value', 'Lägg till spelare')
-                addButton.setAttribute('onclick', 'addP('+id+','+arr+')')
+                addButton.setAttribute('value', 'Lägg till en annan spelare')
+                addButton.setAttribute('onclick', 'addP('+id+');');
                 document.getElementById('ControlDiv').appendChild(addButton);
 
                 var field = document.createElement('input');
@@ -142,7 +143,9 @@
                     var button = document.createElement('input');
                     button.setAttribute('type', 'button');
                     button.setAttribute('value', 'Boka in dig själv');
-                    button.setAttribute('onclick', 'addSelf('+id+','+GolfId+')');
+                    button.setAttribute('class', 'selfbutton');
+                    //button.setAttribute('onclick', 'addSelf('+id+','+GolfId+');');
+                    button.setAttribute('onclick', 'addSelf('+id+');');
                     document.getElementById('ControlDiv').appendChild(button);
                 }
 
@@ -154,12 +157,13 @@
             }
 
 
-        else{
-            document.getElementById('playerName').innerHTML="";
-            document.getElementById('details').style.display = 'none';
+            else{
+                document.getElementById('playerName').innerHTML="";
+                document.getElementById('details').style.display = 'none';
+            }
         }
-    }
 
+    }
     function contains(a, b) {
         for (var i = 0; i < a.length; i++) {
             if (a[i] == b) {
@@ -180,14 +184,15 @@
         z.innerHTML = '';
         x.innerHTML = '';
     }
-    function addSelf(id, golfid){
+    function addSelf(id){
+        alert(id);
         var date = '@Model.selDate';
         var getHcp = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Golfer, Formatting.Indented));
         var personid = '@User.Identity.Name';
 
         for(var i in getHcp)
         {
-            if(getHcp[i].golfID == golfid)
+            if(getHcp[i].Person_ID == personid)
             {
 
                 var gident = getHcp[i].Id;
@@ -205,15 +210,14 @@
 
 
     }
-    function addP(id, arr){
+    function addP(id){
 
         var date = '@Model.selDate';
         var golfid = document.getElementById('golfid').value;
         var getHcp = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Golfer, Formatting.Indented));
         var personid = '@User.Identity.Name';
-
-        if(contains(arr, personid) == false)
-        {
+       
+        
         for(var i in getHcp)
         {
             if(getHcp[i].golfID == golfid)
@@ -229,15 +233,11 @@
             }
 
         }
-        else {
-
-            alert("Spelaren är redan bokad till vald tid");
-
-        }
 
 
 
-    }
+
+    
     function remP(golfid){
 
         var date = '@Model.selDate';
@@ -286,6 +286,6 @@
         })
     }
 
-    }
+  
 </script>
 
