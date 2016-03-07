@@ -15,7 +15,7 @@ namespace golf.Controllers
     public class TeeTimeController : Controller
     {
 
-        
+
      
         public ActionResult Index()
         {
@@ -34,26 +34,29 @@ namespace golf.Controllers
                 }
                 else
                 {
-                    ViewBag.Message = "Tidsbokning";
-                    string date = DateTime.Today.ToShortDateString();
-                    CalendarClass cl = new CalendarClass();
-                    cl.selDate = DateTime.Today;
-                    cl.dateString = DateTime.Today.ToShortDateString();
-
-                    return View(cl);
-
-                }
-
+                ViewBag.Message = "Tidsbokning";
+                string date = DateTime.Today.ToShortDateString();
+                CalendarClass cl = new CalendarClass();
+                cl.selDate = DateTime.Today;
+                cl.dateString = DateTime.Today.ToShortDateString();
+                DateTime max = DateTime.Today.AddMonths(1);
                       
+                cl.maxDate = max.ToShortDateString();
 
-            }
+                return View(cl);
+            
+                }
+            
+            
+
+        }
             else
-            {
+        {
                 return RedirectToAction("Login", "Account" );
             }
             
-            
-            
+          
+     
         }
         public PartialViewResult loadTeetimes()
         {
@@ -66,7 +69,9 @@ namespace golf.Controllers
                 cl.TeeTimeDate = databas.TeeTimeDate.ToList();        
                 cl.TeeTimeDateGolfer = databas.TeeTimeDateGolfer.ToList();
                 cl.Golfer = databas.Golfer.ToList();
+                DateTime max = DateTime.Today.AddMonths(1);
              
+                cl.maxDate = max.ToShortDateString();
 
                 cl.selDate = DateTime.Today;
                 cl.dateString = DateTime.Today.ToShortDateString();
@@ -249,7 +254,9 @@ namespace golf.Controllers
             cl.TeeTime = databas.TeeTime.ToList();
             cl.TeeTimeDateGolfer = databas.TeeTimeDateGolfer.ToList();
             cl.Golfer = databas.Golfer.ToList();
+            DateTime max = DateTime.Today.AddMonths(1);
          
+            cl.maxDate = max.ToShortDateString();
             cl.selDate = c;
 
             cl.dateString = c.ToShortDateString();
@@ -379,7 +386,7 @@ namespace golf.Controllers
         
             return false;
 
-        }
+    }
     }
     
 }

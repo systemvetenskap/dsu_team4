@@ -13,9 +13,12 @@ namespace golf.Models
     {
 
         public DateTime selDate { get; set; }
+        
         public string number { get; set; }
         public string dateString { get; set; }
-        
+        public string maxDate { get; set; }
+        public int userId { get; set; }
+
         public List<BookingInfo> bNames = new List<BookingInfo>();
         public List<BookingInfo> newBookings = new List<BookingInfo>();
 

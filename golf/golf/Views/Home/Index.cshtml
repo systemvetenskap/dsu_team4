@@ -38,10 +38,18 @@
 
     <br />
 
-    @foreach (var item in Model.newarticle)
+    @foreach (var a in Model.newarticle)
     {   <br>    
-        @Html.Label(item.header)
-        @Html.Raw(item.content.Replace(Environment.NewLine, "<br/>"))       
+        @Html.Label(a.header)
+        @Html.Raw(a.content.Replace(Environment.NewLine, "<br/>"))
+        foreach (var ai in Model.ArticleImages)
+        {
+            if (a.Id == ai.NewsArticle_ID)
+            {
+                <img src="@Url.Content(ai.Images.imgURL)" alt="Alternate Text" width="100%" height="100%"/>
+            }
+        }
+
         <br>
  
     }
