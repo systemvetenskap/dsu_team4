@@ -14,5 +14,6 @@ namespace golf.Models
         public string HCP { get; set; }
         public string gender { get; set;}
         public string date { get; set; }
+        public int admin { get; set; }
     }
 }

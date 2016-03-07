@@ -222,7 +222,59 @@
             alert(status);
         })
     }
+    function loadData(){
+        $.ajax({
+            url: '/TeeTime/loadTeetimes',
+            contentType: 'application/html; charset=utf-8',
+            type: 'GET',
+            dataType: 'html'
 
+        })
+        .success(function (result) {
+            $('#teetimes').html(result);
+            loadPicker();
+              
+        })
+        .error(function (xhr, status) {
+            alert(status);
+        })
+            
+    }
+    $(function () {
+        $("#datepicker").datepicker({
+            //dateFormat: "yy-mm-dd",
+            onSelect: function () {
+                var selected = $(this).val();                 
+                changeDate(selected);
+            }
+        });
+    });
+
+    function changeDate(d) {
+
+         
+        document.getElementById('details').style.display = 'none';
+         
+        $.ajax({
+            url: '/TeeTime/ChangeSelDate',
+            contentType: 'application/html; charset=utf-8',
+            data: {newDate: d },
+            type: 'GET',
+            dataType: 'html'
+
+        })
+            
+        .success(function (result) {
+            $('#teetimes').html(result);
+        })
+        .error(function (xhr, status) {
+            alert(status);
+        })
+            
+    }
+
+
+    
 
 </script>
 

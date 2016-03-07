@@ -54,7 +54,7 @@
         var arr = [];
         var personids = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.bNames, Formatting.Indented));
         var c = 0;
-
+        var currentUserId = @Model.userId;
 
         if(id != null)
         {
@@ -68,17 +68,15 @@
 
                     arr.push(1);
                     var addLi = document.createElement('li');
-                    var addBu = document.createElement('a');
+                  
                     var addT = document.createElement('p');
 
-                    addBu.setAttribute('href', '#');
-                    addBu.innerHTML = 'Ta bort';
-                    addBu.setAttribute('onclick','remP('+personids[i].Golferid+')');
+                
                     addLi.setAttribute('id',personids[i].Golferid);
 
 
                     addLi.setAttribute('class','clear');
-                    addBu.setAttribute('class','listobjectA');
+                    
                     addT.setAttribute('class','listobjectP');
 
 
@@ -89,8 +87,18 @@
                     ul.setAttribute('val', id);
 
                     addLi.appendChild(addT);
-                    addT.appendChild(addBu);
+                    
                     ul.appendChild(addLi);
+
+                    if(personids[i].admin == currentUserId)
+                    {
+                        var addBu = document.createElement('a');
+                        addBu.setAttribute('href', '#');
+                        addBu.innerHTML = 'Ta bort';
+                        addBu.setAttribute('onclick','remP('+personids[i].Golferid+')');
+                        addBu.setAttribute('class','listobjectA');
+                        addT.appendChild(addBu);
+                    }
 
 
                 }
