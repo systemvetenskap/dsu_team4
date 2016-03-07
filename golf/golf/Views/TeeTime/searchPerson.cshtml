@@ -15,6 +15,14 @@
         <td>
             @Html.DisplayFor(modelItem => item.golfstring)
         </td>
+        <td>
+            var addBu = document.createElement('a');
+            addBu.setAttribute('href', '#');
+            addBu.innerHTML = ' - Ta bort';
+            addBu.setAttribute('onclick','remP('+personids[i].Golferid+')');
+            addBu.setAttribute('class','listobjectA');
+            addT.appendChild(addBu);
+        </td>
 
     </tr>
 }
