@@ -1,4 +1,5 @@
-﻿@model golf.Models.NewsArticle
+﻿@model golf.Models.NewsClass
+    
 @section featured {
     <section class="featured">
         <div class="content-wrapper">
@@ -20,15 +21,20 @@
 
     <div class="forumpost" id="forumpost">
         <fieldset>
-            <legend>NewsArticle</legend>
+            <legend>NewsClass</legend>
             <br>
             @Html.Label("Rubrik på nyheten:")
-            @Html.EditorFor(m => m.header)
+            @Html.EditorFor(m => m.NA.header)
             <br />
             @Html.Label("Text / inlägg:")
-            @Html.TextAreaFor(m => m.content, 10, 50, null)
+            @Html.TextAreaFor(m => m.NA.content, 10, 40, htmlAttributes: new { style = "width: 90%; resize:none" })
+            <br>
+            @Html.Label("Välj en bild att ladda upp:")
+            <input id="b" name="b" type="file" required>
             <br>
             <p>
+                @Html.EditorFor(m=> m.bild.imgURL)
+                <br>
                 <input type="submit" value="Publicera nyhet" />
             </p>
         </fieldset>
