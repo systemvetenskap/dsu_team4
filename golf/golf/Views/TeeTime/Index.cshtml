@@ -17,6 +17,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section Styles {
+
     <link href="@Url.Content("~/Content/TeeTime.css")" rel="stylesheet" type="text/css" />
 }
 
@@ -98,9 +99,10 @@
                 yearSuffix: ''
             };
             $.datepicker.setDefaults($.datepicker.regional['sv']);
+
             $('#datepicker').datepicker('option', 'dateFormat', 'yy-mm-dd');
             $('#datepicker').datepicker('setDate', new Date());
-            document.getElementById('ui-datepicker').style.display = block;
+            //document.getElementById('ui-datepicker').style.display = block;
 
         }
 
