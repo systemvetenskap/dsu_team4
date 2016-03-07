@@ -10,5 +10,7 @@ namespace golf.Models
         public List<NewsArticle> newarticle = new List<NewsArticle>();
         public List<Images> images = new List<Images>();
         public List<NewsArticleImage> ArticleImages = new List<NewsArticleImage>();
+        public Images bild { get; set; }
+        public NewsArticle NA  { get; set; }
     }
 }

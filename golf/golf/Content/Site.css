@@ -107,6 +107,18 @@ h5, h6 {
 header .content-wrapper {
 
 }
+.forumpost
+{
+    padding:2%;
+}
+.login
+{
+    padding:2%;
+}
+.create
+{
+    padding:2%;
+}
 
 footer {
  
@@ -142,7 +154,7 @@ footer {
     display: block;
     font-size: .85em;
     margin: 0 0 10px;
-    text-align: right;
+    text-align: left;
 }
 
     #login a {
