@@ -96,7 +96,7 @@
 
                     ul.appendChild(addLi);
 
-           
+
 
                     if(personids[i].admin == currentUserId)
                     {
@@ -120,7 +120,7 @@
             var D = document.getElementById('details');
 
    
-            if(arr.length < 4)
+            if((arr.length < 4) || (arr.length == null))
             {
 
                 var addButton = document.createElement('input');
@@ -154,7 +154,6 @@
             }
 
 
-        }
         else{
             document.getElementById('playerName').innerHTML="";
             document.getElementById('details').style.display = 'none';
@@ -215,18 +214,18 @@
 
         if(contains(arr, personid) == false)
         {
-            for(var i in getHcp)
+        for(var i in getHcp)
+        {
+            if(getHcp[i].golfID == golfid)
             {
-                if(getHcp[i].golfID == golfid)
-                {
 
-                    var gident = getHcp[i].Id;
+                var gident = getHcp[i].Id;
 
-                    book(gident, id, date, personid);
+                book(gident, id, date, personid);
 
 
-                }
- 
+            }
+
             }
 
         }
@@ -287,6 +286,6 @@
         })
     }
 
-
+    }
 </script>
 
