@@ -4,7 +4,7 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+<h2>Ändra personuppgifter</h2>
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
@@ -16,7 +16,7 @@
         @Html.HiddenFor(model => model.p.Id)
         
         <div class="editor-label">
-            @Html.LabelFor(model => model.p.firstName)
+            @Html.Raw("Förnamn")
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.p.firstName)
@@ -24,7 +24,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.p.lastName)
+            @Html.Raw("Efternamn")
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.p.lastName)
@@ -32,7 +32,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.p.streetAddres)
+            @Html.Raw("Gatuadress")
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.p.streetAddres)
@@ -40,7 +40,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.p.postalCode)
+            @Html.Raw("Postadress")
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.p.postalCode)
@@ -48,7 +48,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.p.city)
+            @Html.Raw("Stad")
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.p.city)
@@ -56,23 +56,23 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.p.email)
+            @Html.Raw("E-postadress")
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.p.email)
             @Html.ValidationMessageFor(model => model.p.email)
         </div>
-        <div class="editor-field">
+        @*<div class="editor-field">
             @Html.Label("Lösenord")
             @Html.EditorFor(model => model.p.PW)
-        </div>
+        </div>*@
         <div class="editor-field">
             @Html.Label("Kön:")
             @Html.DropDownListFor(m => m.genderid, new SelectList(Model.genderItems, "Value", "Text"));
         </div>
 
         <p>
-            <input type="submit" value="Save" />
+            <input type="submit" value="Spara" />
         </p>
     </fieldset>
 }

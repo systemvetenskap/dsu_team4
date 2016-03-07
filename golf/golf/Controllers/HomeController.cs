@@ -19,7 +19,15 @@ namespace golf.Controllers
             {
                 na.newarticle.Add(article);
             }
-
+            foreach (Images i in db.Images)
+            {
+                na.images.Add(i);
+            }
+            foreach (NewsArticleImage ai in db.NewsArticleImage)
+            {
+                na.ArticleImages.Add(ai);
+            }
+         
             //Nya nyheter först
             na.newarticle.Reverse();
 
