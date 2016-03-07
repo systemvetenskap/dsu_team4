@@ -19,6 +19,7 @@ namespace golf.Models
             this.AdminPerson = new HashSet<AdminPerson>();
             this.Golfer = new HashSet<Golfer>();
             this.NewsArticle = new HashSet<NewsArticle>();
+            this.TeeTimeDateGolfer = new HashSet<TeeTimeDateGolfer>();
         }
     
         public int Id { get; set; }
@@ -36,5 +37,7 @@ namespace golf.Models
         public virtual ICollection<Golfer> Golfer { get; set; }
         public virtual Gender Gender { get; set; }
         public virtual ICollection<NewsArticle> NewsArticle { get; set; }
+        public virtual MemberType MemberType { get; set; }
+        public virtual ICollection<TeeTimeDateGolfer> TeeTimeDateGolfer { get; set; }
     }
 }

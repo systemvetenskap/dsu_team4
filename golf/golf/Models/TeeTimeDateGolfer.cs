@@ -17,8 +17,10 @@ namespace golf.Models
         public int Id { get; set; }
         public int TeeTimeDate_ID { get; set; }
         public int Golfer_ID { get; set; }
+        public int Person_IDa { get; set; }
     
         public virtual Golfer Golfer { get; set; }
+        public virtual Person Person { get; set; }
         public virtual TeeTimeDate TeeTimeDate { get; set; }
     }
 }
