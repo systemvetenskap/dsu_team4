@@ -31,7 +31,7 @@
 
        
         <div class="containPicker">
-            <input type="submit" id="datepicker" class="dp" value="@Model.dateString">
+            <input type="submit" id="datepicker" class="dp" value="@Model.dateString" onclick="show()">
         </div>      
   
           
@@ -75,16 +75,15 @@
 
         loadData();
         
-
+        
 
         function loadPicker() {
 
             $('#datepicker').datepicker();
             $('#datepicker').datepicker('option', 'dateFormat', 'yy-mm-dd');
             $('#datepicker').datepicker('setDate', new Date());
- 
-            
-
+            document.getElementById('ui-datepicker').style.display = block;
+           
         }
 
         function loadData(){
