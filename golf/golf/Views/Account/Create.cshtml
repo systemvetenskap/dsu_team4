@@ -1,0 +1,123 @@
+﻿@model golf.Models.CreateMember
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h2>@ViewBag.Message</h2>
+            </hgroup>
+            <p>
+                Regitrera dig här
+            </p>
+        </div>
+    </section>
+}
+<div class="create" id="create">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <fieldset>
+            <legend>Person</legend>
+
+            <div class="editor-label">
+                @Html.Label("Förnamn:")
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.p.firstName)
+                @Html.ValidationMessageFor(model => model.p.firstName)
+            </div>
+
+            <div class="editor-label">
+                @Html.Label("Efternamn:")
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.p.lastName)
+                @Html.ValidationMessageFor(model => model.p.lastName)
+            </div>
+
+            <div class="editor-label">
+                @Html.Label("Gatuadress:")
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.p.streetAddres)
+                @Html.ValidationMessageFor(model => model.p.streetAddres)
+            </div>
+
+            <div class="editor-label">
+                @Html.Label("Postnummer:")
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.p.postalCode)
+                @Html.ValidationMessageFor(model => model.p.postalCode)
+            </div>
+
+            <div class="editor-label">
+                @Html.Label("Stad:")
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.p.city)
+                @Html.ValidationMessageFor(model => model.p.city)
+            </div>
+
+            <div class="editor-label">
+                @Html.Label("E-post:")
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.p.email)
+                @Html.ValidationMessageFor(model => model.p.email)
+            </div>
+
+            <div class="editor-label">
+                @*@Html.Label("Kön")*@
+            </div>
+            <div class="editor-field">
+                @*@Html.DropDownList("GenderList", string.Empty)*@
+                @*@Html.DropDownListFor(model => model.p.Gender, Model.GenderL)*@
+                @*@Html.EditorFor(model => model.gender_ID)
+                    @Html.ValidationMessageFor(model => model.gender_ID)*@
+                @*@Html.DropDownListFor(model => model.p.Gender.Id, Model.GListan)*@
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.p.memberType_ID)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.p.memberType_ID)
+                @Html.ValidationMessageFor(model => model.p.memberType_ID)
+            </div>
+
+            <div class="editor-label">
+                @Html.Label("Lösenord:")
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.p.PW)
+                @Html.ValidationMessageFor(model => model.p.PW)
+            </div>
+            <div>
+                @Html.Label("Kön:")
+                @Html.DropDownListFor(m => m.genderid, new SelectList(Model.genderItems, "Value", "Text"));
+
+
+            </div>
+
+            <p>
+                <input type="submit" value="Registrera dig" />
+            </p>
+        </fieldset>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+</div>
+
+        @*@section Scripts {
+                @Scripts.Render("~/bundles/jqueryval")
+            }*@

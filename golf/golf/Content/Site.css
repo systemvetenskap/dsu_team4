@@ -1,17 +1,20 @@
 ﻿html {
-    background-color: #e2e2e2;
     margin: 0;
-    padding: 0;
+    padding-bottom: 10px;
+    background:url(../../Images/wallpaper2.jpg) no-repeat;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 body {
-    background-color: #fff;
-    border-top: solid 10px #000;
-    color: #333;
+    max-width:1000px;
+    margin: 0 auto;
+    color: black;
     font-size: .85em;
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
-    margin: 0;
     padding: 0;
+    overflow-y: scroll;
 }
 
 a {
@@ -19,7 +22,7 @@ a {
     outline: none;
     padding-left: 3px;
     padding-right: 3px;
-    text-decoration: underline;
+    text-decoration: none;
 }
 
     a:link, a:visited,
@@ -28,7 +31,7 @@ a {
     }
 
     a:hover {
-        background-color: #c7d1d6;
+        color: yellowgreen;
     }
 
 header, footer, hgroup,
@@ -90,39 +93,41 @@ h5, h6 {
         text-decoration: none;
     }
 
-
 /* main layout
 ----------------------------------------------------------*/
 .content-wrapper {
-    margin: 0 auto;
-    max-width: 960px;
+        background:rgba(255,255,255, 0.7);
+        border-radius:1px;
 }
 
 #body {
-    background-color: #efeeef;
     clear: both;
-    padding-bottom: 35px;
 }
 
-    .main-content {
-        background: url("../Images/accent.png") no-repeat;
-        padding-left: 10px;
-        padding-top: 30px;
-    }
-
-    .featured + .main-content {
-        background: url("../Images/heroAccent.png") no-repeat;
-    }
-
 header .content-wrapper {
-    padding-top: 20px; 
+
+}
+.forumpost
+{
+    padding:2%;
+}
+.login
+{
+    padding:2%;
+}
+.create
+{
+    padding:2%;
 }
 
 footer {
+ 
+    max-width:1000px;
     clear: both;
-    background-color: #e2e2e2;
-    font-size: .8em;
+    font-size: 1.2em;
+    text-align:center;
     height: 100px;
+    margin:0 auto;
 }
 
 
@@ -131,13 +136,13 @@ footer {
 .site-title {
     color: #c8c8c8;
     font-family: Rockwell, Consolas, "Courier New", Courier, monospace;
-    font-size: 2.3em;
+    font-size: 4.1em;
     margin: 0;
 }
 
 .site-title a, .site-title a:hover, .site-title a:active {
     background: none;
-    color: #c8c8c8;
+    color: black;
     outline: none;
     text-decoration: none;
 }
@@ -149,7 +154,7 @@ footer {
     display: block;
     font-size: .85em;
     margin: 0 0 10px;
-    text-align: right;
+    text-align: left;
 }
 
     #login a {
@@ -182,7 +187,7 @@ footer {
 ul#menu {
     font-size: 1.3em;
     font-weight: 600;
-    margin: 0 0 5px;
+    margin: 0 0 0 0px;
     padding: 0;
     text-align: right;
 }
@@ -200,7 +205,7 @@ ul#menu {
         }
 
         ul#menu li a:hover {
-            color: #333;
+            color: yellowgreen;
             text-decoration: none;
         }
 
@@ -209,18 +214,17 @@ ul#menu {
 ----------------------------------------------------------*/
 /* featured */
 .featured {
-    background-color: #fff;
+
+    max-width:1000px;
+    margin: 0 auto;
 }
 
     .featured .content-wrapper {
-        background-color: #7ac0da;
-        background-image: -ms-linear-gradient(left, #7ac0da 0%, #a4d4e6 100%);
-        background-image: -o-linear-gradient(left, #7ac0da 0%, #a4d4e6 100%);
-        background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #7ac0da), color-stop(1, #a4d4e6));
-        background-image: -webkit-linear-gradient(left, #7ac0da 0%, #a4d4e6 100%);
-        background-image: linear-gradient(left, #7ac0da 0%, #a4d4e6 100%);
+        background:rgba(255,255,255, 0.2);
         color: #3e5667;
-        padding: 20px 40px 30px 40px;
+        text-align:center;
+        padding: 10px 10px 10px 10px; 
+        border-radius:48%;
     }
 
         .featured hgroup.title h1, .featured hgroup.title h2 {
@@ -228,8 +232,32 @@ ul#menu {
         }
 
         .featured p {
-            font-size: 1.1em;
+            font-size: 1.4em;
         }
+
+div.sectionone
+{
+    max-width:45%;
+    float:left;
+    text-align:justify;
+    padding:2.5%;
+    font-size:120%;
+  
+}
+
+div.sectiontwo
+{
+    max-width:45%;
+    float:right;
+    text-align:justify; 
+    padding:2.5%;
+    font-size:120%;
+
+}
+div.sections
+{
+
+}
 
 /* page titles */
 hgroup.title {
@@ -256,52 +284,12 @@ section.feature {
 ol.round {
     list-style-type: none;
     padding-left: 0;
+    float:left;
+    text-align:justify;
 }
-
     ol.round li {
-        margin: 25px 0;
-        padding-left: 45px;
+        margin: 25px 0;     
     }
-
-        ol.round li.zero {
-            background: url("../Images/orderedList0.png") no-repeat;
-        }
-
-        ol.round li.one {
-            background: url("../Images/orderedList1.png") no-repeat;
-        }
-
-        ol.round li.two {
-            background: url("../Images/orderedList2.png") no-repeat;
-        }
-
-        ol.round li.three {
-            background: url("../Images/orderedList3.png") no-repeat;
-        }
-
-        ol.round li.four {
-            background: url("../Images/orderedList4.png") no-repeat;
-        }
-
-        ol.round li.five {
-            background: url("../Images/orderedList5.png") no-repeat;
-        }
-
-        ol.round li.six {
-            background: url("../Images/orderedList6.png") no-repeat;
-        }
-
-        ol.round li.seven {
-            background: url("../Images/orderedList7.png") no-repeat;
-        }
-
-        ol.round li.eight {
-            background: url("../Images/orderedList8.png") no-repeat;
-        }
-
-        ol.round li.nine {
-            background: url("../Images/orderedList9.png") no-repeat;
-        }
 
 /* content */
 article {
@@ -319,21 +307,42 @@ aside {
         padding: 0;
     }
 
-        aside ul li {
-            background: url("../Images/bullet.png") no-repeat 0 50%;
-            padding: 2px 0 2px 20px;
-        }
-
 .label {
     font-weight: 700;
 }
 
 /* login page */
+
+
+        div.MyPageLoggedIn
+        {
+            background-color:#fff;
+            color: black;
+            border: 15px;
+            max-width: 900px;
+            border-collapse: separate;
+            border-spacing: 10px 50px;
+}
+
+        .HiddenEdit{
+            visibility: hidden;
+        }
+
+.editor-label{
+    font-size: larger;
+    font-weight: bold;
+}
+
+.edit-link{
+    font-weight: bold;
+}
+
 #loginForm {
     border-right: solid 2px #c8c8c8;
     float: left;
     width: 55%;
 }
+
 
     #loginForm .validation-error {
         display: block;
@@ -428,7 +437,7 @@ input, textarea {
     border: 1px solid #e2e2e2;
     background: #fff;
     color: #333;
-    font-size: 1.2em;
+    font-size: 1.0em;
     margin: 5px 0 6px 0;
     padding: 5px;
     width: 300px;
@@ -527,18 +536,18 @@ input[type="checkbox"].input-validation-error {
 
 /* tables
 ----------------------------------------------------------*/
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-    margin-top: 0.75em;
-    border: 0 none;
+table  {
+    text-align: left;
+    max-width: inherit;
+    font-size: 100%; 
+    padding:3%; 
 }
 
 th {
-    font-size: 1.2em;
+    font-size: .9em;
     text-align: left;
-    border: none 0px;
-    padding-left: 0;
+    padding-left: 0px;
+    padding-right: 5%;
 }
 
     th a {
@@ -578,8 +587,9 @@ th {
     }
 
 td {
-    padding: 0.25em 2em 0.25em 0em;
-    border: 0 none;
+    padding: 2em 0em 1em 0em;
+        
+  
 }
 
 tr.pager td {
@@ -663,10 +673,12 @@ tr.pager td {
     .content-wrapper {
         padding-right: 10px;
         padding-left: 10px;
+        max-width:1000px; 
     }
 
     .featured .content-wrapper {
         padding: 10px;
+        
     }
 
     /* page content */
@@ -675,29 +687,6 @@ tr.pager td {
         width: 100%;
     }
 
-    /* ordered list */
-    ol.round {
-        list-style-type: none;
-        padding-left: 0;
-    }
-
-        ol.round li {
-            padding-left: 10px;
-            margin: 25px 0;
-        }
-
-            ol.round li.zero,
-            ol.round li.one,
-            ol.round li.two,
-            ol.round li.three,
-            ol.round li.four,
-            ol.round li.five,
-            ol.round li.six,
-            ol.round li.seven,
-            ol.round li.eight,
-            ol.round li.nine {
-                background: none;
-            }
 
      /* features */
      section.feature {
@@ -747,10 +736,14 @@ tr.pager td {
     footer {
         text-align: center;
         height: auto;
-        padding: 10px 0;
+        margin:0 auto;
     }
 
         footer p {
-            margin: 0;
+                text-align:center;
+                        margin:0 auto;
         }
+
 }
+
+

@@ -1,0 +1,91 @@
+﻿@model golf.Models.Person
+@{
+    ViewBag.Title = "Create";
+}
+
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h2>@ViewBag.Message</h2>
+            </hgroup>
+            <p>
+                Registrera dig här!
+            </p>
+        </div>
+    </section>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <fieldset>
+            <legend>Person</legend>
+            @using (Html.BeginForm("RegisterNew", "Account"))
+            {
+
+
+            <div class="editor-label">
+                @Html.Label("Förnamn")
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.firstName)
+                @Html.ValidationMessageFor(model => model.firstName)
+            </div>
+
+            <div class="editor-label">
+                @Html.Label("Efternamn")
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.lastName)
+                @Html.ValidationMessageFor(model => model.lastName)
+            </div>
+
+            <div class="editor-label">
+                @Html.Label("Gatuadress")
+            </div>
+            <div class="editor-field">
+               @Html.TextBoxFor(model => model.streetAddres)
+                @Html.ValidationMessageFor(model => model.streetAddres)
+            </div>
+
+            <div class="editor-label">
+                @Html.Label("Postnummer")
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.postalCode)
+                @Html.ValidationMessageFor(model => model.postalCode)
+            </div>
+
+            <div class="editor-label">
+                @Html.Label("stad")
+            </div>
+            <div class="editor-field">
+               @Html.TextBoxFor(model => model.city)
+                @Html.ValidationMessageFor(model => model.city)
+            </div>
+
+            <div class="editor-label">
+                @Html.Label("E-post")
+            </div>
+            <div class="editor-field">
+              @Html.TextBoxFor(model => model.email)
+                @Html.ValidationMessageFor(model => model.email)
+            </div>
+
+
+
+            <p>
+                <input type="submit" value="Skapa ny användare" />
+            </p>
+            }
+        </fieldset>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+    @*@section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }*@

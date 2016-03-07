@@ -1,0 +1,82 @@
+﻿@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h2>@ViewBag.Message</h2>
+            </hgroup>
+            <p>
+                Detta är medlemshanteringen.
+            </p>
+        </div>
+    </section>
+}
+@model IEnumerable<golf.Models.Person>
+
+@{
+
+}
+
+<p>
+    @Html.ActionLink("Lägg till medlem", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.Label("Förnamn")
+        </th>
+        <th>
+            @Html.Label("Efternamn")
+        </th>
+        <th>
+            @Html.Label("Adress")
+        </th>
+        <th>
+            @Html.Label("Postnummer")
+        </th>
+        <th>
+            @Html.Label("Ort")
+        </th>
+        <th>
+            @Html.Label("E-post")
+        </th>
+        <th>
+            @Html.Label("Lösenord")
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.firstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.lastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.streetAddres)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.postalCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.city)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.PW)
+            </td>
+            <td>
+                @Html.ActionLink("Ändra", "Edit", new { id = item.Id }) 
+                @Html.ActionLink("Visa", "Details", new { id = item.Id }) 
+                @Html.ActionLink("Radera", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

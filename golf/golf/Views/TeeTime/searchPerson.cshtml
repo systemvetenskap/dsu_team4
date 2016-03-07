@@ -1,0 +1,30 @@
+﻿@model IEnumerable<golf.Models.PersonGolfer>
+<table>
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.firstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HCP)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.golfstring)
+        </td>
+        <td>
+            var addBu = document.createElement('a');
+            addBu.setAttribute('href', '#');
+            addBu.innerHTML = ' - Ta bort';
+            addBu.setAttribute('onclick','remP('+personids[i].Golferid+')');
+            addBu.setAttribute('class','listobjectA');
+            addT.appendChild(addBu);
+        </td>
+
+    </tr>
+}
+
+</table>

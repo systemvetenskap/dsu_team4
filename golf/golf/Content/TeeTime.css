@@ -1,0 +1,159 @@
+﻿body {
+}
+
+.timeWrapper{
+    width: 100%;
+    display:block;
+    margin-bottom:3%;
+    
+    
+    
+}
+.hourAndMinutes{
+    width:7%;
+    float: left;
+    margin-left: 1%;
+    
+}
+.timedivHour{
+    width:100%;
+    /*background-color: lightgreen;*/
+    font-weight: bold;
+    padding-bottom: 50%;
+    margin-left: 10%;
+    margin-bottom: 10%;
+    float: left;
+    display: inline-block;
+}
+.timedivHour[booked = "grey"]{
+    background-color: grey;
+}
+.timedivHour[booked = "lightgreen"]{
+    background-color:lightgreen;
+}
+.timedivMin{
+    width:100%;
+    padding-bottom: 50%;
+    margin-left: 10%;
+    margin-bottom: 10%;
+    float: left;
+    display: inline-block;
+    overflow: hidden;
+    
+    
+}
+.timedivMin nrLbl{
+    overflow: hidden;
+    margin-bottom: 0px;
+    padding: 0px;
+    display: inline;
+
+}
+.timedivMin[booked = "grey"]{
+    background-color: grey;
+}
+.timedivMin[booked = "lightgreen"]{
+    background-color:lightgreen;
+}
+
+
+.timedivMin:hover{
+    cursor: pointer;
+    cursor: hand;
+    font-weight: bold;
+    color: white;
+    background-color: rgb(30, 196, 30);
+}
+.timedivHour:hover{
+    cursor: pointer;
+    cursor: hand;
+    font-weight: bold;
+    color: white;
+    background-color: rgb(30, 196, 30);
+}
+.timedivEmpty{
+    width:7%;
+    background-color: lightgreen;
+    padding-bottom: 2%;
+    margin-left: 1%;
+    float: left;
+}
+.dateselection{
+    float: left;
+    display: block;
+    
+    
+    width: 100%;
+
+    
+}
+
+.containPicker{
+
+    
+    width: 40%;
+    margin-left: 30%;
+    margin-right: 30%;
+    float: left;
+
+}
+#cP{
+    display:none;
+}
+.dp{
+    width: 40%;
+    margin-left: 30%;
+    margin-right: 30%;
+    position: center;
+}
+
+
+.TeeDetails{
+    float:left;
+    top:0px;
+    left:0px;
+    display: none;
+    
+    height:auto;
+    font-family:verdana;
+    font-size:13px;
+    padding:10px;
+    
+    /*border:2px solid grey;*/
+    
+    }
+ControlDiv{
+    display:block;
+    float: left;
+    width: auto;
+}
+.playerName{
+    max-width:50%;
+    display: block;
+}
+.playerList{
+    max-width: 50%;
+
+    
+}
+.ui-datepicker {   
+   
+  display: none;     
+  background: #999 none;
+  display: none;
+}
+
+.listobjectP{
+    
+    
+}
+.listobjectA{
+    
+}
+.details timeInfo{
+    
+    font: bold;
+    font-size: 18px;
+
+}
+
