@@ -177,7 +177,15 @@ namespace golf.Controllers
                 test  = databas.TeeTimeDate.Where(t=> t.bookingDate == Convert.ToDateTime(date)).Where( t=> t.TeeTime_ID == Convert.ToInt32(teeid)).ToList();
                 if (test.Count != 0)
                 {
-                    test.
+                    foreach(var i in test)
+                    {
+                        int id = i.Id;
+                        var TeeTimeDateGolfer1 = new TeeTimeDateGolfer() { Golfer_ID = Convert.ToInt32(golfid), TeeTimeDate_ID = id, Person_IDa = Convert.ToInt32(personid) };
+
+                        databas.TeeTimeDateGolfer.Add(TeeTimeDateGolfer1);
+                        databas.SaveChanges();
+
+                    }
                 }
                      
                else
@@ -189,13 +197,16 @@ namespace golf.Controllers
                    databas.SaveChanges();
 
                    var id = TeeTimeDate1.Id;
+
+                   var TeeTimeDateGolfer1 = new TeeTimeDateGolfer() { Golfer_ID = Convert.ToInt32(golfid), TeeTimeDate_ID = id, Person_IDa = Convert.ToInt32(personid) };
+
+                   databas.TeeTimeDateGolfer.Add(TeeTimeDateGolfer1);
+                   databas.SaveChanges();
+                   
                }
    
 
-            var TeeTimeDateGolfer1 = new TeeTimeDateGolfer() { Golfer_ID = Convert.ToInt32(golfid), TeeTimeDate_ID = id, Person_IDa = Convert.ToInt32(personid) };
-            
-            databas.TeeTimeDateGolfer.Add(TeeTimeDateGolfer1);
-            databas.SaveChanges();
+
             CalendarClass cl = loadData(Convert.ToDateTime(date));
             
             
