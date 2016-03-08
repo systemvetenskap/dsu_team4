@@ -52,7 +52,6 @@
 
         </div>
    
-    </div>
     <div id="TeeDetailsB" class="TeeDetailsB">
         <input id="searchButton" type="submit" onclick="soP(1)" value="Sök" />
         <input id="searchField" type="text" value="sökfält" />
@@ -61,6 +60,7 @@
 
 
         </div>
+    </div>
     </div>
 </div>
 
@@ -139,6 +139,7 @@
 
          
             document.getElementById('details').style.display = 'none';
+            document.getElementById('TeeDetailsB').style.display = 'none';
          
             $.ajax({
                 url: '/TeeTime/ChangeSelDate',

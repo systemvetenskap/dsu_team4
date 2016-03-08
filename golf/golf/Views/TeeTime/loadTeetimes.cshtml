@@ -102,6 +102,7 @@
             }
 
             document.getElementById('details').style.display = 'block';
+            document.getElementById('TeeDetailsB').style.display = 'block';
             var D = document.getElementById('details');
 
 
@@ -128,6 +129,7 @@
         else{
             document.getElementById('playerName').innerHTML="";
             document.getElementById('details').style.display = 'none';
+            document.getElementById('TeeDetailsB').style.display = 'none';
         }
     }
 
@@ -256,6 +258,7 @@
 
          
         document.getElementById('details').style.display = 'none';
+        document.getElementById('TeeDetailsB').style.display = 'none';
          
         $.ajax({
             url: '/TeeTime/ChangeSelDate',

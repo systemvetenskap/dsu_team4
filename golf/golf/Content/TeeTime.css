@@ -125,12 +125,12 @@
     
     }
 .TeeDetailsB{
-    float: right;
+    float: left;
     top:0px;
     left:0px;
     display: none;
     width: 45%;
-    display: block;
+  
     height:auto;
     font-family:verdana;
     font-size:13px;
