@@ -187,11 +187,12 @@
     }
 
     function book(g, t, d) {
-
+        
+        var p = '@User.Identity.Name';
         $.ajax({
             url: '/TeeTime/saveBooking',
             contentType: 'application/html; charset=utf-8',
-            data: {golfid : g, teeid : t, date : d},
+            data: {golfid : g, teeid : t, date : d, personid: p},
             type: 'GET',
             dataType: 'html'
 
@@ -274,7 +275,7 @@
             
     }
     function soP(d) {
-        alert("test");
+   
         var s = document.getElementById('searchField').value;
 
         $.ajax({
@@ -295,6 +296,33 @@
 
 
     }
+    function soPf(s) {
+   
+        //var s = document.getElementById('searchField').value;
+
+        $.ajax({
+            url: '/TeeTime/searchPerson',
+            contentType: 'application/html; charset=utf-8',
+            data: { searchstring: s },
+            type: 'GET',
+            dataType: 'html'
+
+        })
+
+        .success(function (result) {
+            $('#searchDiv').html(result);
+        })
+        .error(function (xhr, status) {
+            alert(status);
+        })
+
+
+    }
+    $('#searchField').keyup(function () { 
+        var s = document.getElementById('searchField').value;
+        soPf(s);
+         });
+
 
 
     
