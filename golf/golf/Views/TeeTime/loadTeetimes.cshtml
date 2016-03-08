@@ -47,7 +47,7 @@
 
 <script type="text/javascript">
     document.getElementById('cP').style.display = 'block';
-
+    var selectedDiv;
     function onTimeDivClick(id) {
 
         clearLi();
@@ -55,7 +55,7 @@
         var arr = [];
         var personids = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.bNames, Formatting.Indented));
         var c = 0;
-
+        selectedDiv = id;
 
         if(id != null)
         {
@@ -143,6 +143,36 @@
         i.innerHTML = '';
         z.innerHTML = '';
     
+    }
+    function addFoundP(golfid){
+
+     
+        var personids = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.bNames, Formatting.Indented));
+        if(containsGolfid(personids, golfid) == false)
+        {
+            var date = '@Model.selDate';
+
+            book(golfid, selectedDiv, date);
+        }
+        else{
+
+            alert("Spelaren är redan bokad");
+        }
+    }
+    function containsGolfid(obj, id){
+
+        for(var i in obj)
+        {
+            if(obj[i].Golferid == id)
+            {
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+
+
     }
     function addP(id){
 
