@@ -1,5 +1,19 @@
 ﻿@model IEnumerable<golf.Models.PersonGolfer>
 <table>
+    <tr>
+        <td>
+         <label style="font-weight:bold; margin-right: 5px">Förnamn</label>
+        </td>
+        <td>
+            <label style ="font-weight:bold; margin-right: 5px">Efternamn</label>
+        </td>
+        <td>
+            <label style="font-weight:bold; margin-right: 5px">Handikap</label>
+        </td>
+        <td>
+            <label style="font-weight:bold; margin-right: 5px">GolfID</label>
+        </td>
+    </tr>
 @foreach (var item in Model)
 {
     @Html.HiddenFor(modelitem => item.golfid)
