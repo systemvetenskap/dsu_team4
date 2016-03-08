@@ -13,6 +13,9 @@
         <td>
             <label style="font-weight:bold; margin-right: 5px">GolfID</label>
         </td>
+        <td>
+            <label style="font-weight:bold; margin-right: 5px">Lägg till</label>
+        </td>
     </tr>
 @foreach (var item in Model)
 {
@@ -31,7 +34,7 @@
             @Html.DisplayFor(modelItem => item.golfstring)
         </td>
         <td>
-            <p id="@item.golfid"><a href="#" onclick="addFoundP(@item.golfid)" value="Lägg till"></a>   </p>
+            <p id="@item.golfid"><a href="#" onclick="addFoundP(@item.golfid)" >Lägg till</a></p>
       
         </td>
 
