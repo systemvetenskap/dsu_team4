@@ -284,14 +284,14 @@ namespace golf.Controllers
             var join = from tdate in databas.TeeTimeDate.ToList()
                        join tgolfers in databas.TeeTimeDateGolfer.ToList()
                        on tdate.Id equals tgolfers.TeeTimeDate_ID
-                       select new { TeeTimeID = tdate.TeeTime_ID, Date = tdate.bookingDate, Golferid = tgolfers.Golfer_ID };
+                       select new { TeeTimeID = tdate.TeeTime_ID, Date = tdate.bookingDate, Golferid = tgolfers.Golfer_ID, tgolfers.Person_IDa };
 
             var list1 = join.ToList();
 
             var join2 = from g in databas.Golfer.ToList()
                         join li in list1 on
                         g.Id equals li.Golferid
-                        select new { Date = li.Date, Golfid = li.Golferid, TeeTime = li.TeeTimeID, Personid = g.Person_ID, HCP = g.HCP, g.golfID };
+                        select new { Date = li.Date, Golfid = li.Golferid, TeeTime = li.TeeTimeID, Personid = g.Person_ID, HCP = g.HCP, g.golfID, li.Person_IDa };
 
             var list2 = join2.ToList();
 
@@ -309,7 +309,8 @@ namespace golf.Controllers
                             Hcp = li.HCP,
                             Gender = p.gender_ID,
                             Golfid = li.Golfid,
-                            li.golfID
+                            li.golfID,
+                            li.Person_IDa
 
 
                         };
@@ -329,7 +330,8 @@ namespace golf.Controllers
                             Hcp = p.Hcp,
                             Gender = g.genderName,
                             Golfid = p.Golfid,
-                            Golfer_ID = p.golfID
+                            Golfer_ID = p.golfID,
+                            Admin = p.Person_IDa
 
                         };
 
@@ -348,6 +350,7 @@ namespace golf.Controllers
                 b.date = DateTime.Today.ToShortDateString();
                 b.Golferid = o.Golfid;
                 b.Golfer_ID = o.Golfer_ID;
+                b.admin = o.Admin;
                 cl.bNames.Add(b);
 
             }
