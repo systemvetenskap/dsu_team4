@@ -443,7 +443,7 @@ namespace golf.Controllers
                            };
                 var ltu = list.ToList();
                
-                var listp = ltu.Where(l => l.fName.Contains(searchstring) || l.lName.Contains(searchstring));
+                var listp = ltu.Where(l => l.fName.ToLower().Contains(searchstring.ToLower()) || l.lName.ToLower().Contains(searchstring.ToLower()));
 
                 var res = listp.ToList();
 
