@@ -46,6 +46,7 @@
 }
 
 <script type="text/javascript">
+
     document.getElementById('cP').style.display = 'block';
     var arr = [];
     function onTimeDivClick(id) {
@@ -285,28 +286,7 @@
             alert(status);
         })
     }
-    function soP(d) {
-        alert("test");
-        //var s = document.getElementById('searchField').value;
 
-        $.ajax({
-            url: '/TeeTime/searchPerson',
-            contentType: 'application/html; charset=utf-8',
-            data: { searchstring: s },
-            type: 'GET',
-            dataType: 'html'
-
-        })
-
-        .success(function (result) {
-            $('#searchDiv').html(result);
-        })
-        .error(function (xhr, status) {
-            alert(status);
-        })
-
-
-    }
   
 </script>
 

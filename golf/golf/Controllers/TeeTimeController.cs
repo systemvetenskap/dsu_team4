@@ -435,6 +435,7 @@ namespace golf.Controllers
                            on t.Id equals g.Person_ID
                            select new
                            {
+                               Golfid = g.Id,
                                fName = t.firstName,
                                lName = t.lastName,
                                Golfstring = g.golfID,
@@ -450,6 +451,7 @@ namespace golf.Controllers
                 foreach(var i in listp)
                 {
                     PersonGolfer pg = new PersonGolfer();
+                    pg.golfid = i.Golfid;
                     pg.firstName = i.fName;
                     pg.lastName = i.lName;
                     pg.HCP = i.HCP;

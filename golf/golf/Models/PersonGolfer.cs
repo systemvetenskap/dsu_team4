@@ -7,6 +7,7 @@ namespace golf.Models
 {
     public class PersonGolfer
     {
+        public int golfid { get; set; }
         public string firstName { get; set; }
         public string lastName { get; set; }
         public string HCP { get; set; }
