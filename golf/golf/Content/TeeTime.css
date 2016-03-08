@@ -174,4 +174,10 @@ ControlDiv{
     font-size: 18px;
 
 }
+#searchField{
+    max-width: 100%
+}
+#golf{
+    max-width: 100%
+}
 
