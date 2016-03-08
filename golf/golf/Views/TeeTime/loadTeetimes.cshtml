@@ -353,7 +353,15 @@
     }
     $('#searchField').keyup(function () { 
         var s = document.getElementById('searchField').value;
-        soPf(s);
+        if(s == '')
+        {
+            var div = document.getElementById('searchDiv');
+            div.innerHTML = '';
+        }
+        else{
+            soPf(s);
+        }
+        
          });
 
 
