@@ -41,15 +41,32 @@ namespace golf.Controllers
 
         
         [HttpPost]
-        public ActionResult AddNews(NewsArticle na)
+        public ActionResult AddNews(NewsClass news)
         {
             if (ModelState.IsValid)
             {
-                    na.Person_ID = Convert.ToInt32(User.Identity.Name);
-                    na.newsDate = DateTime.Now.Date;
-                    db.NewsArticle.Add(na);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
+                NewsArticle newA = new NewsArticle();
+                Images newI = new Images();
+
+                newA.header = news.NA.header;
+                newA.content = news.NA.content;
+                newA.newsDate = DateTime.Today.Date;
+                newA.Person_ID = Convert.ToInt32(User.Identity.Name);
+                newI.imgURL = news.bild.imgURL;
+
+                db.NewsArticle.Add(newA);
+                db.Images.Add(newI);                                        
+                 db.SaveChanges();
+
+                NewsArticleImage nai = new NewsArticleImage();
+
+                nai.Images_ID = newI.Id;
+                nai.NewsArticle_ID = newA.Id;
+
+                db.NewsArticleImage.Add(nai);
+                db.SaveChanges();
+
+               return RedirectToAction("Index");
             }
             return View();
         }
