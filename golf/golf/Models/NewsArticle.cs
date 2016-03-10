@@ -25,7 +25,7 @@ namespace golf.Models
         public Nullable<int> Person_ID { get; set; }
         public Nullable<System.DateTime> newsDate { get; set; }
     
-        public virtual Person Person { get; set; }
         public virtual ICollection<NewsArticleImage> NewsArticleImage { get; set; }
+        public virtual Person Person { get; set; }
     }
 }
