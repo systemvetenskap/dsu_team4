@@ -20,6 +20,18 @@ namespace golf.Controllers
 
             return View(cc);
         }
+        //public ActionResult saveComp(Competition cc)
+        //{
+        //    //using( dsuteam4Entities1 databas = new dsuteam4Entities1())
+        //    //{
+        //    //    databas.Competition.Add(cc);
+        //    //    databas.SaveChanges();
+        //    //    return View
+                
+        //    //}
+
+
+        //}
         public void getData()
         {
 

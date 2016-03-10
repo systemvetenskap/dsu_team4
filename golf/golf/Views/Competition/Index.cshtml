@@ -63,6 +63,10 @@
 }
 
 <h2>Skapa ny tävling</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
 <div class="cNew">
     <fieldset>
         <legend>Person</legend>
@@ -76,7 +80,26 @@
             @Html.EditorFor(model => model.newComp.name)
             @Html.ValidationMessageFor(model => model.newComp.name)
         </div>
-
+        <div class="editor-label">
+            @Html.Raw("Antal höl")
+        </div>
+        <div class="editor-field">
+            @{List<SelectListItem> holes = new List<SelectListItem>();
+              holes.Add(new SelectListItem { Text = "9", Value = "9" });
+              holes.Add(new SelectListItem { Text = "18", Value = "18" });
+}
+            @Html.DropDownListFor(model => model.newComp.NumberOfHoles, holes, "--Antal höl--")
+        </div>
+        <div class="editor-label">
+            @Html.Raw("Antal spelare")
+        </div>
+        <div class="editor-field">
+            @{List<SelectListItem> players = new List<SelectListItem>();
+            players.Add(new SelectListItem { Text = "3", Value = "3" });
+            players.Add(new SelectListItem { Text = "4", Value = "4" });
+            }
+            @Html.DropDownListFor(model => model.newComp.playersPerTime, players, "--Spelare per starttid--")
+        </div>
         <div class="editor-label">
             @Html.Raw("Tävlingsdatum")
         </div>
@@ -118,6 +141,7 @@
         </p>
         </fieldset>
 </div>
+}
 <div class="showComp">
 
 </div>
