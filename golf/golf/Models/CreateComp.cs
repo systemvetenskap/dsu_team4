@@ -9,5 +9,6 @@ namespace golf.Models
     {
         public List<Competition> complist = new List<Competition>();
         public Competition newComp { get; set; }
+        public DateTime currentDate { get; set; }
     }
 }
