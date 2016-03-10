@@ -20,6 +20,18 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="type" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Competition">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="cDate" Type="datetime" Nullable="false" />
+          <Property Name="info" Type="nvarchar(max)" />
+          <Property Name="signUpFrom" Type="datetime" Nullable="false" />
+          <Property Name="signUpTo" Type="datetime" Nullable="false" />
+          <Property Name="Person_IDc" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Gender">
           <Key>
             <PropertyRef Name="Id" />
@@ -139,6 +151,18 @@
             </Principal>
             <Dependent Role="AdminPerson">
               <PropertyRef Name="Person_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Competition_ToPerson">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="Competition" Type="Self.Competition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Competition">
+              <PropertyRef Name="Person_IDc" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -265,6 +289,7 @@
         <EntityContainer Name="dsuteam4Model1StoreContainer">
           <EntitySet Name="AdminPerson" EntityType="Self.AdminPerson" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AdminType" EntityType="Self.AdminType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Competition" EntityType="Self.Competition" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Golfer" EntityType="Self.Golfer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Images" EntityType="Self.Images" Schema="dbo" store:Type="Tables" />
@@ -283,6 +308,10 @@
           <AssociationSet Name="FK_AdminPerson_ToPerson" Association="Self.FK_AdminPerson_ToPerson">
             <End Role="Person" EntitySet="Person" />
             <End Role="AdminPerson" EntitySet="AdminPerson" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Competition_ToPerson" Association="Self.FK_Competition_ToPerson">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Competition" EntitySet="Competition" />
           </AssociationSet>
           <AssociationSet Name="FK_Golfer_ToPerson" Association="Self.FK_Golfer_ToPerson">
             <End Role="Person" EntitySet="Person" />
@@ -401,6 +430,11 @@
           <AssociationSet Name="FK_TeeTimeDateGolfer_ToPerson" Association="dsuteam4Model1.FK_TeeTimeDateGolfer_ToPerson">
             <End Role="Person" EntitySet="Person" />
             <End Role="TeeTimeDateGolfer" EntitySet="TeeTimeDateGolfer" />
+          </AssociationSet>
+          <EntitySet Name="Competition" EntityType="dsuteam4Model1.Competition" />
+          <AssociationSet Name="FK_Competition_ToPerson" Association="dsuteam4Model1.FK_Competition_ToPerson">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Competition" EntitySet="Competition" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="AdminPerson">
@@ -600,6 +634,7 @@
           <NavigationProperty Name="MemberType" Relationship="dsuteam4Model1.FK_Person_ToMemberType" FromRole="Person" ToRole="MemberType" />
           <NavigationProperty Name="NewsArticle" Relationship="dsuteam4Model1.FK_NewsArticle_ToPerson" FromRole="Person" ToRole="NewsArticle" />
           <NavigationProperty Name="TeeTimeDateGolfer" Relationship="dsuteam4Model1.FK_TeeTimeDateGolfer_ToPerson" FromRole="Person" ToRole="TeeTimeDateGolfer" />
+          <NavigationProperty Name="Competition" Relationship="dsuteam4Model1.FK_Competition_ToPerson" FromRole="Person" ToRole="Competition" />
         </EntityType>
         <Association Name="FK_AdminPerson_ToPerson">
           <End Type="dsuteam4Model1.Person" Role="Person" Multiplicity="0..1" />
@@ -670,6 +705,31 @@
             </Principal>
             <Dependent Role="TeeTimeDateGolfer">
               <PropertyRef Name="Person_IDa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Competition">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="cDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="info" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="signUpFrom" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="signUpTo" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Person_IDc" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Person" Relationship="dsuteam4Model1.FK_Competition_ToPerson" FromRole="Competition" ToRole="Person" />
+        </EntityType>
+        <Association Name="FK_Competition_ToPerson">
+          <End Type="dsuteam4Model1.Person" Role="Person" Multiplicity="1" />
+          <End Type="dsuteam4Model1.Competition" Role="Competition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Competition">
+              <PropertyRef Name="Person_IDc" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -801,6 +861,19 @@
                 <ScalarProperty Name="streetAddres" ColumnName="streetAddres" />
                 <ScalarProperty Name="lastName" ColumnName="lastName" />
                 <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Competition">
+            <EntityTypeMapping TypeName="dsuteam4Model1.Competition">
+              <MappingFragment StoreEntitySet="Competition">
+                <ScalarProperty Name="Person_IDc" ColumnName="Person_IDc" />
+                <ScalarProperty Name="signUpTo" ColumnName="signUpTo" />
+                <ScalarProperty Name="signUpFrom" ColumnName="signUpFrom" />
+                <ScalarProperty Name="info" ColumnName="info" />
+                <ScalarProperty Name="cDate" ColumnName="cDate" />
+                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
