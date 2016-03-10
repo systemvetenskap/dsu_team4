@@ -17,18 +17,18 @@
     </section>
 }
 <div class="login" id="login">
-
     @using (Html.BeginForm("LogInCheck", "Account"))
     {
         @Html.Label("E-post")
         @Html.TextBoxFor(m => m.email, new { ID="email"})
         <br />
         @Html.Label("Lösenord")
-        @Html.PasswordFor(m => m.PW, new { ID="password"})
+        @Html.TextBoxFor(m => m.PW, new { ID="password"})
+        <br>
+        <p>Inloggningen misslyckades, försök igen</p>
         <br>
         <br>
-        <br>
-        <input type="submit" value="Logga in" id="loginbutton" @*onclick="CheckEmpty()"*@/>
+        <input type="submit" value="Logga in" id="loginbutton" onclick="CheckEmpty()"/>
     }
 </div>
 <script type="text/javascript">
@@ -48,7 +48,7 @@
         }
     });
 </script>
-@*<script type="text/javascript">
+<script type="text/javascript">
 
     var email = document.getElementById('email').value;
     var password = document.getElementById('password').value;
@@ -61,6 +61,6 @@
             return false;
         }      
     }
-</script>*@
+</script>
 
 
