@@ -14,6 +14,11 @@ namespace golf.Models
     
     public partial class Competition
     {
+        public Competition()
+        {
+            this.CompetitionGolfer = new HashSet<CompetitionGolfer>();
+        }
+    
         public int Id { get; set; }
         public string name { get; set; }
         public System.DateTime cDate { get; set; }
@@ -21,7 +26,12 @@ namespace golf.Models
         public System.DateTime signUpFrom { get; set; }
         public System.DateTime signUpTo { get; set; }
         public int Person_IDc { get; set; }
+        public int playersPerTime { get; set; }
+        public int CompeteClass_ID { get; set; }
+        public int NumberOfHoles { get; set; }
     
+        public virtual CompeteClass CompeteClass { get; set; }
         public virtual Person Person { get; set; }
+        public virtual ICollection<CompetitionGolfer> CompetitionGolfer { get; set; }
     }
 }

@@ -212,7 +212,13 @@
     </Compile>
     <Compile Include="Models\BookingInfo.cs" />
     <Compile Include="Models\CalendarClass.cs" />
+    <Compile Include="Models\CompeteClass.cs">
+      <DependentUpon>PersonModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Competition.cs">
+      <DependentUpon>PersonModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CompetitionGolfer.cs">
       <DependentUpon>PersonModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CreateMember.cs" />
@@ -220,6 +226,12 @@
       <DependentUpon>PersonModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Golfer.cs">
+      <DependentUpon>PersonModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Hole.cs">
+      <DependentUpon>PersonModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HoleStats.cs">
       <DependentUpon>PersonModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Images.cs">
