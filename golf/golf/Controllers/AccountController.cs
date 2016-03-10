@@ -87,7 +87,7 @@ namespace golf.Controllers
 
             Person person = db.Person.Find(id);
             ViewBag.User = person.firstName +" "+ person.lastName;
-
+            //Komentar
             return View(person);
         }
 

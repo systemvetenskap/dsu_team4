@@ -1,0 +1,57 @@
+﻿@model IEnumerable<golf.Models.PersonGolfer>
+<table>
+    <tr>
+        <td>
+         <label style="font-weight:bold; margin-right: 5px">Förnamn</label>
+        </td>
+        <td>
+            <label style ="font-weight:bold; margin-right: 5px">Efternamn</label>
+        </td>
+        <td>
+            <label style="font-weight:bold; margin-right: 5px">Handikap</label>
+        </td>
+        <td>
+            <label style="font-weight:bold; margin-right: 5px">GolfID</label>
+        </td>
+        <td>
+            <label style="font-weight:bold; margin-right: 5px">Lägg till</label>
+        </td>
+    </tr>
+@foreach (var item in Model)
+{
+    @Html.HiddenFor(modelitem => item.golfid)
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.firstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HCP)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.golfstring)
+        </td>
+        <td>
+            <p id="@item.golfid"><a href="#" onclick="addFoundP(@item.golfid)" >Lägg till</a></p>
+      
+        </td>
+
+    </tr>
+}
+
+</table>
+@*<script>
+    var elem = document.getElementById('searchAdd');
+    var addButton = document.createElement('a');
+    addButton.setAttribute('href', '#');
+    addButton.setAttribute('id', 'addP');
+    addButton.setAttribute('tee', id);
+    addButton.setAttribute('value', 'Lägg till spelare')
+    addButton.setAttribute('onclick', 'addP(' + id + ')')
+    elem.appendChild(addButton);
+
+
+
+</script>*@

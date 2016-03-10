@@ -20,7 +20,7 @@
                     <div class="timedivHour" onclick="onTimeDivClick(@item.Id)" id=@item.Id time=@item.teeTime1[3] ctime="@item.teeTime1" booked="@Model.changeColor(item.Id, Model.selDate)" cdate="@Model.dateString">
                         @Html.DisplayFor(modelItem => item.teeTime1)<br />
                         @Model.number/4
-                       
+                    
                     </div>
                     @foreach (var o in Model.TeeTime)
                     {
@@ -46,52 +46,69 @@
 }
 
 <script type="text/javascript">
+
     document.getElementById('cP').style.display = 'block';
-    var selectedDiv;
+    var arr = [];
     function onTimeDivClick(id) {
 
         clearLi();
         @using Newtonsoft.Json;
-        var arr = [];
+        var arrDiv = [];
         var personids = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.bNames, Formatting.Indented));
         var c = 0;
-        selectedDiv = id;
-
+        var currentUserId = '@User.Identity.Name';
+        var GolfId;
         if(id != null)
         {
+
             var date = document.getElementById(id).getAttribute("cdate");
             var ctime = document.getElementById(id).getAttribute("ctime");
             document.getElementById('timeInfo').innerHTML = 'Registrerade spelare: '+date+' - '+ctime;
 
             for(var i in personids)
             {
+               
+                if(personids[i].personId == currentUserId)
+                {
+                    GolfId = personids[i].Golfer_ID;
+                }
                 if(personids[i].TeeTime == id){
 
-                    arr.push(1);
+                    arrDiv.push(personids[i].personId);
                     var addLi = document.createElement('li');
-                    var addBu = document.createElement('a');
+
                     var addT = document.createElement('p');
 
-                    addBu.setAttribute('href', '#');
-                    addBu.innerHTML = 'Ta bort';
-                    addBu.setAttribute('onclick','remP('+personids[i].Golferid+')');
+
                     addLi.setAttribute('id',personids[i].Golferid);
 
 
                     addLi.setAttribute('class','clear');
-                    addBu.setAttribute('class','listobjectA');
+
                     addT.setAttribute('class','listobjectP');
 
 
-                    addT.innerHTML = personids[i].gender +" - HCP: " + personids[i].HCP+" - ";
+                    addT.innerHTML = personids[i].gender +" - HCP: " + personids[i].HCP;
 
                     var ul = document.getElementById('playerList');
 
                     ul.setAttribute('val', id);
 
                     addLi.appendChild(addT);
-                    addT.appendChild(addBu);
+
                     ul.appendChild(addLi);
+
+
+
+                    if(personids[i].admin == currentUserId || personids[i].personId == currentUserId)
+                    {
+                        var addBu = document.createElement('a');
+                        addBu.setAttribute('href', '#');
+                        addBu.innerHTML = ' - Ta bort';
+                        addBu.setAttribute('onclick','remP('+personids[i].Golferid+')');
+                        addBu.setAttribute('class','listobjectA');
+                        addT.appendChild(addBu);
+                    }
 
 
                 }
@@ -102,18 +119,19 @@
             }
 
             document.getElementById('details').style.display = 'block';
-            document.getElementById('TeeDetailsB').style.display = 'block';
             var D = document.getElementById('details');
 
+            arr = arrDiv;
 
-            if(arr.length < 4)
+            if((arr.length < 4) || (arr.length == null))
             {
+
                 var addButton = document.createElement('input');
                 addButton.setAttribute('type', 'button');
                 addButton.setAttribute('id', 'addP');
                 addButton.setAttribute('tee', id);
-                addButton.setAttribute('value', 'Lägg till spelare')
-                addButton.setAttribute('onclick', 'addP('+id+')')
+                addButton.setAttribute('value', 'Lägg till en annan spelare')
+                addButton.setAttribute('onclick', 'addP('+id+');');
                 document.getElementById('ControlDiv').appendChild(addButton);
 
                 var field = document.createElement('input');
@@ -122,81 +140,64 @@
                 field.setAttribute('placeholder', 'GolfID');
                 document.getElementById('ControlDiv').appendChild(field);
 
+                if(contains(arr, currentUserId) == false){
+
+                    var button = document.createElement('input');
+                    button.setAttribute('type', 'button');
+                    button.setAttribute('value', 'Boka in dig själv');
+                    button.setAttribute('class', 'selfbutton');
+                    //button.setAttribute('onclick', 'addSelf('+id+','+GolfId+');');
+                    button.setAttribute('onclick', 'addSelf('+id+');');
+                    document.getElementById('ControlDiv').appendChild(button);
+                }
+
+
+
+
+
+
             }
 
 
+            else{
+                document.getElementById('playerName').innerHTML="";
+                document.getElementById('details').style.display = 'none';
+            }
         }
-        else{
-            document.getElementById('playerName').innerHTML="";
-            document.getElementById('details').style.display = 'none';
-            document.getElementById('TeeDetailsB').style.display = 'none';
+
+    }
+    function contains(a, b) {
+        for (var i = 0; i < a.length; i++) {
+            if (a[i] == b) {
+                return true;
+            }
         }
+        return false;
     }
 
     function clearLi(){
 
         var u = document.getElementById('playerList');
         var i = document.getElementById('ControlDiv');
-
         var z = document.getElementById('addedList');
         u.innerHTML = '';
         i.innerHTML = '';
         z.innerHTML = '';
-    
     }
-    function addFoundP(golfid){
-
-     
-        var personids = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.bNames, Formatting.Indented));
-        if(containsGolfid(personids, golfid) == false)
-        {
-            var date = '@Model.selDate';
-
-            book(golfid, selectedDiv, date);
-        }
-        else{
-
-            alert("Spelaren är redan bokad");
-        }
-    }
-    function containsGolfid(obj, id){
-
-        for(var i in obj)
-        {
-            if(obj[i].Golferid == id)
-            {
-                return true;
-            }
-            else{
-                return false;
-            }
-        }
-
-
-    }
-    function addP(id){
-
-        var date = '@Model.selDate';
-        var golfid = document.getElementById('golfid').value;
-        var getHcp = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Golfer, Formatting.Indented));
+    function addSelf(id){
         
-
+        var date = '@Model.selDate';
+        var getHcp = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Golfer, Formatting.Indented));
+        var personid = '@User.Identity.Name';
 
         for(var i in getHcp)
         {
-            if(getHcp[i].golfID == golfid)
+            if(getHcp[i].Person_ID == personid)
             {
-                //var addLi = document.createElement('li');
-                //var u = document.getElementById('playerList');
-
-                //addLi.setAttribute('id',getHcp[i].Id);
-                //u.appendChild(addLi);
-
-                //addLi.innerHTML = "HCP: " + getHcp[i].HCP;
 
                 var gident = getHcp[i].Id;
 
-                book(gident, id, date);
+                book(gident, id, date, personid);
 
 
             }
@@ -206,6 +207,52 @@
             }
         }
 
+
+
+    }
+    function addP(id){
+
+        var date = '@Model.selDate';
+        var golfid = document.getElementById('golfid').value;
+        var getHcp = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Golfer, Formatting.Indented));
+        var personid = '@User.Identity.Name';
+
+        if(containsP(golfid,id) == false)
+        {
+            for(var i in getHcp)
+            {
+                if(getHcp[i].golfID == golfid)
+                {
+
+                    var gident = getHcp[i].Id;
+
+                    book(gident, id, date, personid);
+
+
+                }
+
+            }
+
+        }
+        else{
+            alert("Spelaren är redan bokad");
+        }
+
+
+        }
+    function containsP(golfid, tid){
+
+        var g = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.bNames, Formatting.Indented));
+        for(var i in g)
+        {
+            alert(g[i].golfid);
+            if(g[i].Golfer_ID == golfid && g[i].TeeTime == tid) 
+            {
+                return true;
+            }
+   
+        }
+        return false;
 
     }
     function remP(golfid){
@@ -218,9 +265,8 @@
 
     }
 
-    function book(g, t, d) {
-        
-        var p = '@User.Identity.Name';
+    function book(g, t, d, p) {
+
         $.ajax({
             url: '/TeeTime/saveBooking',
             contentType: 'application/html; charset=utf-8',
@@ -231,7 +277,7 @@
         })
         .success(function (result) {
             $('#teetimes').html(result);
-                onTimeDivClick(t);
+            onTimeDivClick(t);
         })
         .error(function (xhr, status) {
             alert(status);
@@ -256,117 +302,7 @@
             alert(status);
         })
     }
-    function loadData(){
-        $.ajax({
-            url: '/TeeTime/loadTeetimes',
-            contentType: 'application/html; charset=utf-8',
-            type: 'GET',
-            dataType: 'html'
 
-        })
-        .success(function (result) {
-            $('#teetimes').html(result);
-            loadPicker();
-              
-        })
-        .error(function (xhr, status) {
-            alert(status);
-        })
-            
-    }
-    $(function () {
-        $("#datepicker").datepicker({
-            //dateFormat: "yy-mm-dd",
-            onSelect: function () {
-                var selected = $(this).val();                 
-                changeDate(selected);
-            }
-        });
-    });
-
-    function changeDate(d) {
-
-         
-        document.getElementById('details').style.display = 'none';
-        document.getElementById('TeeDetailsB').style.display = 'none';
-         
-        $.ajax({
-            url: '/TeeTime/ChangeSelDate',
-            contentType: 'application/html; charset=utf-8',
-            data: {newDate: d },
-            type: 'GET',
-            dataType: 'html'
-
-        })
-            
-        .success(function (result) {
-            $('#teetimes').html(result);
-        })
-        .error(function (xhr, status) {
-            alert(status);
-        })
-            
-    }
-    function soP(d) {
-   
-        var s = document.getElementById('searchField').value;
-
-        $.ajax({
-            url: '/TeeTime/searchPerson',
-            contentType: 'application/html; charset=utf-8',
-            data: { searchstring: s },
-            type: 'GET',
-            dataType: 'html'
-
-        })
-
-        .success(function (result) {
-            $('#searchDiv').html(result);
-        })
-        .error(function (xhr, status) {
-            alert(status);
-        })
-
-
-    }
-    function soPf(s) {
-   
-        //var s = document.getElementById('searchField').value;
-
-        $.ajax({
-            url: '/TeeTime/searchPerson',
-            contentType: 'application/html; charset=utf-8',
-            data: { searchstring: s },
-            type: 'GET',
-            dataType: 'html'
-
-        })
-
-        .success(function (result) {
-            $('#searchDiv').html(result);
-        })
-        .error(function (xhr, status) {
-            alert(status);
-        })
-
-
-    }
-    $('#searchField').keyup(function () { 
-        var s = document.getElementById('searchField').value;
-        if(s == '')
-        {
-            var div = document.getElementById('searchDiv');
-            div.innerHTML = '';
-        }
-        else{
-            soPf(s);
-        }
-        
-         });
-
-
-
-    
 
 </script>
 

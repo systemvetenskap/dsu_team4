@@ -18,21 +18,23 @@
     </section>
 }
 
-@using (Html.BeginForm("LogInCheck", "Account"))
-{ 
-    @Html.Label("E-post")
-    @Html.TextBoxFor(m => m.email)
-    <br />
-    @Html.Label("Lösenord")    
-    @Html.TextBoxFor(m => m.PW)
-    <br>
-    <input type="submit" value="Logga in" />
-    
-    
-}
-<p>
-    
-    @*@Html.ActionLink("Logga in", "LogInCheck", "Log")
-    <input type="button" value="Logga in" onclick="@("window.location.href='" + @Url.Action("Index ", "Log") + "'");" />*@
-</p>
+<div class="login" id="login">
+    @using (Html.BeginForm("LogInCheck", "Account"))
+    {
+        @Html.Label("E-post")
+        @Html.TextBoxFor(m => m.email)
+        <br />
+        @Html.Label("Lösenord")
+        @Html.TextBoxFor(m => m.PW)
+        <br>
+        <input type="submit" value="Logga in" />
+
+
+    }
+</div>
+    <p>
+
+        @*@Html.ActionLink("Logga in", "LogInCheck", "Log")
+            <input type="button" value="Logga in" onclick="@("window.location.href='" + @Url.Action("Index ", "Log") + "'");" />*@
+    </p>
 

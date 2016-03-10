@@ -206,6 +206,9 @@
     <Compile Include="Models\AdminPerson.cs">
       <DependentUpon>PersonModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AdminType.cs">
+      <DependentUpon>PersonModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\BookingInfo.cs" />
     <Compile Include="Models\CalendarClass.cs" />
     <Compile Include="Models\CreateMember.cs" />
@@ -218,6 +221,9 @@
     <Compile Include="Models\Images.cs">
       <DependentUpon>PersonModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MemberType.cs">
+      <DependentUpon>PersonModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\NewsArticle.cs">
       <DependentUpon>PersonModel.tt</DependentUpon>
     </Compile>
@@ -228,6 +234,7 @@
     <Compile Include="Models\Person.cs">
       <DependentUpon>PersonModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PersonGolfer.cs" />
     <Compile Include="Models\PersonModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -393,6 +400,8 @@
     <Content Include="Views\Home\AddNews.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\TeeTime\loadTeetimes.cshtml" />
+    <Content Include="Views\TeeTime\loadTeetimesMember.cshtml" />
+    <Content Include="Views\TeeTime\searchPerson.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
