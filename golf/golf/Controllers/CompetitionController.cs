@@ -20,24 +20,27 @@ namespace golf.Controllers
 
             return View(cc);
         }
-        public PartialViewResult saveComp(CreateComp ccomp)
+        public PartialViewResult saveComp(CreateComp cc)
         {
             using( dsuteam4Entities1 databas = new dsuteam4Entities1())
             {
-                Competition cc = ccomp.newComp;
+                var comp = cc.newComp;
 
-                cc.Person_IDc = 1;
-                cc.CompeteClass_ID = 1;
-            
-                databas.Competition.Add(cc);
-                try
-                {
-                    databas.SaveChanges();
-                }
-               catch(System.Data.Entity.Infrastructure.DbUpdateException e)
-                {
-                    string s = e.ToString();
-                }
+
+
+                //HÄR HÅRDKODAS DET------->
+                comp.Person_IDc = 25;
+                comp.CompeteClass_ID = 1;
+                //HÄR HÅRDKODAS DET-------<
+
+             
+                databas.Competition.Add(comp);
+
+               
+              
+                databas.SaveChanges();
+                
+   
 
      
 
