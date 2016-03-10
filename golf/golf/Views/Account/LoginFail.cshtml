@@ -23,12 +23,12 @@
         @Html.TextBoxFor(m => m.email, new { ID="email"})
         <br />
         @Html.Label("Lösenord")
-        @Html.TextBoxFor(m => m.PW, new { ID="password"})
+        @Html.PasswordFor(m => m.PW, new { ID="password"})
         <br>
         <p>Inloggningen misslyckades, försök igen</p>
         <br>
         <br>
-        <input type="submit" value="Logga in" id="loginbutton" onclick="CheckEmpty()"/>
+        <input type="submit" value="Logga in" id="loginbutton" @*onclick="CheckEmpty()"*@/>
     }
 </div>
 <script type="text/javascript">
