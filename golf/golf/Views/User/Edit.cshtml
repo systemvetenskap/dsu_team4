@@ -87,6 +87,14 @@
             @Html.ValidationMessageFor(model => model.PW)
         </div>
 
+        <div class="editor-label">
+            @Html.Raw("Betalat")
+        </div>
+        <div class="editor-field">
+            @Html.DisplayFor(model => model.Payed)
+            @Html.ValidationMessageFor(model => model.email)
+        </div>
+
         <p>
             <input type="submit" value="Save" />
         </p>
