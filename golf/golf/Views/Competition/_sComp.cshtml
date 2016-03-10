@@ -1,0 +1,30 @@
+﻿@model golf.Models.CreateComp
+
+<table>
+    @foreach (var item in Model.complist)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => item.name)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => item.cDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.signUpFrom)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.signUpTo)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.NumberOfHoles)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.playersPerTime)
+                </td>
+            </tr>
+
+        }
+
+</table>

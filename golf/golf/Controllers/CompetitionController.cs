@@ -20,18 +20,39 @@ namespace golf.Controllers
 
             return View(cc);
         }
-        //public ActionResult saveComp(Competition cc)
-        //{
-        //    //using( dsuteam4Entities1 databas = new dsuteam4Entities1())
-        //    //{
-        //    //    databas.Competition.Add(cc);
-        //    //    databas.SaveChanges();
-        //    //    return View
-                
-        //    //}
+        public PartialViewResult saveComp(CreateComp ccomp)
+        {
+            using( dsuteam4Entities1 databas = new dsuteam4Entities1())
+            {
+                Competition cc = ccomp.newComp;
 
+                cc.Person_IDc = 1;
+                cc.CompeteClass_ID = 1;
+            
+                databas.Competition.Add(cc);
+                try
+                {
+                    databas.SaveChanges();
+                }
+               catch(System.Data.Entity.Infrastructure.DbUpdateException e)
+                {
+                    string s = e.ToString();
+                }
 
-        //}
+     
+
+            }
+            using( dsuteam4Entities1 ndatabas = new dsuteam4Entities1())
+            {
+                CreateComp c = new CreateComp();
+
+                c.complist = ndatabas.Competition.ToList();
+                c.currentDate = DateTime.Today;
+
+                return PartialView("_sComp", c);
+            }
+
+        }
         public void getData()
         {
 

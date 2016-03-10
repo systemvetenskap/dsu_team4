@@ -11,6 +11,8 @@
     $(document).ready(function () {
 
         $('.dt').datepicker();
+        $('.dt2').datepicker();
+        $('.dt3').datepicker();
         
 
         $('#dt').datepicker('option', 'dateFormat', 'yy-mm-dd');
@@ -63,7 +65,7 @@
 }
 
 <h2>Skapa ny tävling</h2>
-@using (Html.BeginForm())
+@using (Html.BeginForm("saveComp", "Competition", FormMethod.Post, null))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
@@ -114,7 +116,7 @@
             @Html.Raw("Första anmälningsdatum")
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.newComp.cDate, new { @class = "dt", placeholder = "Välj första anmälningsdag.." })
+            @Html.TextBoxFor(model => model.newComp.signUpFrom, new { @class = "dt", placeholder = "Välj första anmälningsdag.." })
             @Html.ValidationMessageFor(model => model.newComp.signUpFrom)
             
         </div>
@@ -123,7 +125,7 @@
             @Html.Raw("Sista anmälningsdatum")
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.newComp.cDate, new { @class = "dt", placeholder = "Välj sista anmälningsdag.." })
+            @Html.TextBoxFor(model => model.newComp.signUpTo, new { @class = "dt", placeholder = "Välj sista anmälningsdag.." })
             @Html.ValidationMessageFor(model => model.newComp.signUpTo)
           
         </div>
@@ -144,5 +146,6 @@
 }
 <div class="showComp">
 
+    @Html.Partial("_sComp", Model);
 </div>
 
