@@ -130,7 +130,7 @@
             @Html.Raw("Tävlingsklass")
         </div>
         <div class="editor-field">
-            @Html.DropDownListFor(model => model.classList, new SelectList(Model.classList, "Id", "firstName"))
+            @Html.DropDownListFor(model => model.classList, new SelectList(Model.classList, "Id", "Name"))
         </div>
 
         <div class="editor-label">

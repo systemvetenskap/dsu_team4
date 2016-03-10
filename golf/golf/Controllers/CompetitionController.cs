@@ -18,18 +18,14 @@ namespace golf.Controllers
            CreateComp cc = new CreateComp();
 
            cc.currentDate = DateTime.Today;
-            //using (dsuteam4Entities1 databas = new dsuteam4Entities1())
-            //{
-            //   foreach(Person p in databas.Person)
-            //   {
-            //       cc.contactlist.Add(p);
-            //   }
-            //   foreach (CompeteClass c in databas.CompeteClass)
-            //   {
-            //       cc.classList.Add(c);
-            //   }
+            using (dsuteam4Entities1 databas = new dsuteam4Entities1())
+            {
+                
+                cc.classList = databas.CompeteClass.ToList();
+                //cc.contactlist = databas.Person.ToList();
 
-            //}
+            }
+            
 
             return View(cc);
         }
