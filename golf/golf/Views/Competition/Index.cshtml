@@ -1,7 +1,10 @@
-﻿@{
+﻿@model golf.Models.CreateComp
+
+@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 @section featured {
     <section class="featured">
         <div class="content-wrapper">
@@ -9,45 +12,134 @@
                 <h2>@ViewBag.Message</h2>
             </hgroup>
             <p>
-               Skapa ny tävling.
+                Skapa ny tävling.
             </p>
         </div>
     </section>
 }
+
 <h2>Skapa ny tävling</h2>
 <div class="cNew">
-    <table>
-        <tr>
-            <th>
-                @Html.Label("Namn")
-            </th>
-            <th>
-                @Html.Label("Start")
-            </th>
-            <th>
-                @Html.Label("Slut")
-            </th>
-            <th>
-                @Html.Label("Sista anmälningsdag")
-            </th>
-            <th>
-                @Html.Label("Antal tävlande")
-            </th>
-    
-            <th>
-                @Html.Label("")
-            </th>
-            @*<th>
-                    @Html.DisplayNameFor(model => model.memberType_ID)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PW)
-                </th>*@
+    <fieldset>
+        <legend>Person</legend>
+        
+            @Html.HiddenFor(model => model.newComp.Id)
 
-        </tr>
+        <div class="editor-label">
+            @Html.Raw("Namn")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.newComp.name)
+            @Html.ValidationMessageFor(model => model.newComp.name)
+        </div>
 
-    </table>
+        <div class="editor-label">
+            @Html.Raw("Tävlingsdatum")
+        </div>
+        <div class="editor-field">
+            <input type="submit" id="datepickerC" class="dp">
+
+        </div>
+
+        <div class="editor-label">
+            @Html.Raw("Första anmälningsdatum")
+        </div>
+        <div class="editor-field">
+            <input type="submit" id="datepickerS" class="dp">
+     
+        </div>
+
+        <div class="editor-label">
+            @Html.Raw("Sista anmälningsdatum")
+        </div>
+        <div class="editor-field">
+            <input type="submit" id="datepickerT" class="dp">
+        </div>
+
+        <div class="editor-label">
+            @Html.Raw("Beskrivning/Övrig info")
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.newComp.info)
+            @Html.ValidationMessageFor(model => model.newComp.info)
+        </div>
+
+
+
+        <p>
+            <input type="submit" value="Spara" />
+        </p>
+        </fieldset>
 </div>
 <div class="showComp">
 
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        loadPicker();
+
+        $(function () {
+            $("#datepickerS").datepicker({
+                onSelect: function () {
+                    var selected = $(this).val();
+                    alert(selected);
+                }
+            });
+        });
+
+        $(function () {
+            $("#datepickerC").datepicker({
+                onSelect: function () {
+                    var selected = $(this).val();
+                    alert(selected);
+                }
+            });
+        });
+        $(function () {
+            $("#datepickerT").datepicker({
+                onSelect: function () {
+                    var selected = $(this).val();
+                    alert(selected);
+                }
+            });
+        });
+        function loadPicker() {
+
+
+            $('#datepickerS').datepicker();
+            $('#datepickerT').datepicker();
+            $('#datepickerC').datepicker();
+
+            $.datepicker.regional['sv'] = {
+                closeText: 'Stäng',
+                prevText: '< Föregående',
+                nextText: 'Nästa >',
+                currentText: 'Nu',
+                monthNames: ['Januari', 'Februari', 'Mars', 'April', 'Maj', 'Juni', 'Juli', 'Augusti', 'September', 'Oktober', 'November', 'December'],
+                monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'Maj', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dec'],
+                dayNamesShort: ['Sön', 'Mån', 'Tis', 'Ons', 'Tor', 'Fre', 'Lör'],
+                dayNames: ['Söndag', 'Måndag', 'Tisdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lördag'],
+                dayNamesMin: ['Sö', 'Må', 'Ti', 'On', 'To', 'Fr', 'Lö'],
+                weekHeader: 'Не',
+                dateFormat: 'yy-mm-dd',
+                firstDay: 1,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: ''
+            };
+            $.datepicker.setDefaults($.datepicker.regional['sv']);
+            $('#datepickerS').datepicker('option', 'dateFormat', 'yy-mm-dd');
+            $('#datepickerS').datepicker('setDate', new Date());
+            $('#datepickerT').datepicker('option', 'dateFormat', 'yy-mm-dd');
+            $('#datepickerT').datepicker('setDate', new Date());
+            $('#datepickerC').datepicker('option', 'dateFormat', 'yy-mm-dd');
+            $('#datepickerC').datepicker('setDate', new Date());
+
+
+            //document.getElementById('ui-datepicker').style.display = block;
+
+        }
+
+    });
+</script>

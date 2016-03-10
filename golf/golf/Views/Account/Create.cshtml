@@ -11,7 +11,7 @@
                 <h2>@ViewBag.Message</h2>
             </hgroup>
             <p>
-                Regitrera dig här
+                Registrera dig här
             </p>
         </div>
     </section>
@@ -72,20 +72,8 @@
                 @Html.EditorFor(model => model.p.email)
                 @Html.ValidationMessageFor(model => model.p.email)
             </div>
-
             <div class="editor-label">
-                @*@Html.Label("Kön")*@
-            </div>
-            <div class="editor-field">
-                @*@Html.DropDownList("GenderList", string.Empty)*@
-                @*@Html.DropDownListFor(model => model.p.Gender, Model.GenderL)*@
-                @*@Html.EditorFor(model => model.gender_ID)
-                    @Html.ValidationMessageFor(model => model.gender_ID)*@
-                @*@Html.DropDownListFor(model => model.p.Gender.Id, Model.GListan)*@
-            </div>
-
-            <div class="editor-label">
-                @Html.LabelFor(model => model.p.memberType_ID)
+                @Html.Label("Medlemstyp:")
             </div>
             <div class="editor-field">
                 @Html.EditorFor(model => model.p.memberType_ID)
@@ -101,23 +89,30 @@
             </div>
             <div>
                 @Html.Label("Kön:")
-                @Html.DropDownListFor(m => m.genderid, new SelectList(Model.genderItems, "Value", "Text"));
-
-
+                @Html.DropDownListFor(m => m.genderid, new SelectList(Model.genderItems, "Value", "Text"))
             </div>
-
             <p>
-                <input type="submit" value="Registrera dig" />
+                <input type="submit" id="registerbutton"value="Registrera dig" />
             </p>
         </fieldset>
     }
-
-    <div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>
+    <script type="text/javascript">
+        $('#registerbutton').click(function () {
+        var isValid = 1;
+        $('input:text').each(function () {
+            if ($(this).val() == '') {
+                $(this).css('border', '2px solid red');
+                isValid = 0;
+            }
+            else {
+                $(this).css('border', '1px solid green');
+            }
+        });
+        if (isValid == 0) {
+            return false;
+        }
+    });
+    </script>
 
 </div>
 
-        @*@section Scripts {
-                @Scripts.Render("~/bundles/jqueryval")
-            }*@
