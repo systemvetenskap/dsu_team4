@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using golf.Models;
 
+
 namespace golf.Controllers
 {
     public class CompetitionController : Controller
@@ -17,6 +18,18 @@ namespace golf.Controllers
            CreateComp cc = new CreateComp();
 
            cc.currentDate = DateTime.Today;
+            //using (dsuteam4Entities1 databas = new dsuteam4Entities1())
+            //{
+            //   foreach(Person p in databas.Person)
+            //   {
+            //       cc.contactlist.Add(p);
+            //   }
+            //   foreach (CompeteClass c in databas.CompeteClass)
+            //   {
+            //       cc.classList.Add(c);
+            //   }
+
+            //}
 
             return View(cc);
         }

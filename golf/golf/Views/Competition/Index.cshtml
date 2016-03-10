@@ -131,6 +131,13 @@
         </div>
 
         <div class="editor-label">
+            @Html.Raw("Tävlingsklass")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.classList, new SelectList(Model.classList, "Id", "firstName"))
+        </div>
+
+        <div class="editor-label">
             @Html.Raw("Beskrivning/Övrig info")
         </div>
         <div class="editor-field">
