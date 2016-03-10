@@ -26,24 +26,14 @@ namespace golf.Controllers
             {
                 var comp = cc.newComp;
 
-
-
                 //HÄR HÅRDKODAS DET------->
                 comp.Person_IDc = 25;
                 comp.CompeteClass_ID = 1;
                 //HÄR HÅRDKODAS DET-------<
-
-             
-                databas.Competition.Add(comp);
-
-               
-              
+            
+                databas.Competition.Add(comp); 
                 databas.SaveChanges();
                 
-   
-
-     
-
             }
             using( dsuteam4Entities1 ndatabas = new dsuteam4Entities1())
             {
