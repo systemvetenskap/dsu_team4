@@ -138,11 +138,19 @@
         <div class="editor-label">
             @Html.Raw("Betalat")
         </div>
-        <div class="editor-field">
+        @*<div class="editor-field">
             @Html.DisplayFor(model => model.Payed)
             @Html.ValidationMessageFor(model => model.email)
-        </div>
+        </div>*@
 
+        @if (Model.Payed == true)
+        {
+            <p>Ja</p>
+        }
+        else
+        {
+            <p>Nej</p>
+        }
         @*<div class="editor-label">
             @Html.Raw("Kön")
         </div>
