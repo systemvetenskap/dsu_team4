@@ -54,9 +54,6 @@
 @section featured {
     <section class="featured">
         <div class="content-wrapper">
-            <hgroup class="title">
-                <h2>@ViewBag.Message</h2>
-            </hgroup>
             <p>
                 Skapa ny tävling.
             </p>
@@ -64,7 +61,6 @@
     </section>
 }
 
-<h2>Skapa ny tävling</h2>
 @using (Html.BeginForm("saveComp", "Competition", FormMethod.Post, null))
 {
     @Html.AntiForgeryToken()

@@ -385,7 +385,6 @@
     <Content Include="Scripts\_references.js" />
     <Content Include="Images\bullet.png" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Home\MemberHandling.cshtml" />
     <Content Include="Views\Home\TimeScheduling.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
