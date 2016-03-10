@@ -211,6 +211,9 @@
     </Compile>
     <Compile Include="Models\BookingInfo.cs" />
     <Compile Include="Models\CalendarClass.cs" />
+    <Compile Include="Models\Competition.cs">
+      <DependentUpon>PersonModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CreateMember.cs" />
     <Compile Include="Models\Gender.cs">
       <DependentUpon>PersonModel.tt</DependentUpon>
