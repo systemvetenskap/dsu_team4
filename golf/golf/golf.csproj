@@ -248,6 +248,7 @@
       <DependentUpon>PersonModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\NewsClass.cs" />
+    <Compile Include="Models\OneNamePerson.cs" />
     <Compile Include="Models\Person.cs">
       <DependentUpon>PersonModel.tt</DependentUpon>
     </Compile>
