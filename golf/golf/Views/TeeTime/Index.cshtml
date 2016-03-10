@@ -35,10 +35,6 @@
             <input type="submit" id="datepicker" class="dp" value="@Model.dateString">
         </div>
 
-
-
-
-
     </div>
     <div id="teetimes">
 
@@ -54,22 +50,21 @@
 
         <div id="ControlDiv">
 
-
-
-
+        </div>
+   
+    <div id="TeeDetailsB" class="TeeDetailsB">
+        <input id="searchButton" type="submit" onclick="soP(1)" value="Sök" />
+        <input id="searchField" type="text" placeholder="sök" />
+        
+        <div id="searchDiv" class="searchDiv">
 
 
         </div>
     </div>
+    </div>
 </div>
-<div id="ControlDiv2">
-    <input id="searchField" type="text" value="sökfält"/>
-    <input id="searchButton" type="submit" onclick="soP(1)" value="Sök" />
-</div>
-<div id="searchDiv">
 
 
-</div>
 
 
 <script type="text/javascript">
@@ -144,6 +139,7 @@
 
          
             document.getElementById('details').style.display = 'none';
+            document.getElementById('TeeDetailsB').style.display = 'none';
          
             $.ajax({
                 url: '/TeeTime/ChangeSelDate',
@@ -162,7 +158,9 @@
             })
             
         }
-      
+        //$('#searchField').on('input', function (e) {
+            
+        //});
 
 
     });

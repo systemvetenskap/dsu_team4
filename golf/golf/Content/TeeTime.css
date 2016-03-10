@@ -113,11 +113,28 @@
     top:0px;
     left:0px;
     display: none;
-    
+    width: 45%;
+
     height:auto;
     font-family:verdana;
     font-size:13px;
-    padding:10px;
+    padding-left:5%;
+
+    
+    /*border:2px solid grey;*/
+    
+    }
+.TeeDetailsB{
+    float: left;
+    top:0px;
+    left:0px;
+    display: none;
+    width: 45%;
+  
+    height:auto;
+    font-family:verdana;
+    font-size:13px;
+    padding:5%;
     
     /*border:2px solid grey;*/
     
@@ -147,13 +164,20 @@ ControlDiv{
     
     
 }
-.listobjectA{
-    
+.searchDiv{
+    float: left;
+
 }
 .details timeInfo{
     
     font: bold;
     font-size: 18px;
 
+}
+#searchField{
+    max-width: 100%
+}
+#golf{
+    max-width: 100%
 }
 

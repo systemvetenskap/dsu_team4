@@ -46,6 +46,7 @@
 }
 
 <script type="text/javascript">
+
     document.getElementById('cP').style.display = 'block';
     var arr = [];
     function onTimeDivClick(id) {
@@ -59,13 +60,14 @@
         var GolfId;
         if(id != null)
         {
-            
+
             var date = document.getElementById(id).getAttribute("cdate");
             var ctime = document.getElementById(id).getAttribute("ctime");
             document.getElementById('timeInfo').innerHTML = 'Registrerade spelare: '+date+' - '+ctime;
 
             for(var i in personids)
             {
+               
                 if(personids[i].personId == currentUserId)
                 {
                     GolfId = personids[i].Golfer_ID;
@@ -98,7 +100,7 @@
 
 
 
-                    if(personids[i].admin == currentUserId)
+                    if(personids[i].admin == currentUserId || personids[i].personId == currentUserId)
                     {
                         var addBu = document.createElement('a');
                         addBu.setAttribute('href', '#');
@@ -120,7 +122,7 @@
             var D = document.getElementById('details');
 
             arr = arrDiv;
-   
+
             if((arr.length < 4) || (arr.length == null))
             {
 
@@ -137,7 +139,7 @@
                 field.setAttribute('id', 'golfid');
                 field.setAttribute('placeholder', 'GolfID');
                 document.getElementById('ControlDiv').appendChild(field);
-       
+
                 if(contains(arr, currentUserId) == false){
 
                     var button = document.createElement('input');
@@ -150,7 +152,7 @@
                 }
 
 
-                
+
 
 
 
@@ -177,15 +179,13 @@
 
         var u = document.getElementById('playerList');
         var i = document.getElementById('ControlDiv');
-        var x = document.getElementById('ControlDiv2');
         var z = document.getElementById('addedList');
         u.innerHTML = '';
         i.innerHTML = '';
         z.innerHTML = '';
-        x.innerHTML = '';
     }
     function addSelf(id){
-        alert(id);
+        
         var date = '@Model.selDate';
         var getHcp = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Golfer, Formatting.Indented));
         var personid = '@User.Identity.Name';
@@ -216,28 +216,45 @@
         var golfid = document.getElementById('golfid').value;
         var getHcp = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Golfer, Formatting.Indented));
         var personid = '@User.Identity.Name';
-       
-        
-        for(var i in getHcp)
+
+        if(containsP(golfid,id) == false)
         {
-            if(getHcp[i].golfID == golfid)
+            for(var i in getHcp)
             {
+                if(getHcp[i].golfID == golfid)
+                {
 
-                var gident = getHcp[i].Id;
+                    var gident = getHcp[i].Id;
 
-                book(gident, id, date, personid);
+                    book(gident, id, date, personid);
 
 
-            }
+                }
 
             }
 
         }
+        else{
+            alert("Spelaren är redan bokad");
+        }
 
 
+        }
+    function containsP(golfid, tid){
 
+        var g = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.bNames, Formatting.Indented));
+        for(var i in g)
+        {
+            alert(g[i].golfid);
+            if(g[i].Golfer_ID == golfid && g[i].TeeTime == tid) 
+            {
+                return true;
+            }
+   
+        }
+        return false;
 
-    
+    }
     function remP(golfid){
 
         var date = '@Model.selDate';
@@ -285,28 +302,7 @@
             alert(status);
         })
     }
-    function soP(d) {
-        alert("test");
-        //var s = document.getElementById('searchField').value;
-
-        $.ajax({
-            url: '/TeeTime/searchPerson',
-            contentType: 'application/html; charset=utf-8',
-            data: { searchstring: s },
-            type: 'GET',
-            dataType: 'html'
-
-        })
-
-        .success(function (result) {
-            $('#searchDiv').html(result);
-        })
-        .error(function (xhr, status) {
-            alert(status);
-        })
 
 
-    }
-  
 </script>
 

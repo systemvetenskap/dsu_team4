@@ -62,18 +62,31 @@
             @Html.EditorFor(model => model.p.email)
             @Html.ValidationMessageFor(model => model.p.email)
         </div>
-        @*<div class="editor-field">
-            @Html.Label("Lösenord")
-            @Html.EditorFor(model => model.p.PW)
-        </div>*@
+
         <div class="editor-field">
             @Html.Label("Kön:")
             @Html.DropDownListFor(m => m.genderid, new SelectList(Model.genderItems, "Value", "Text"));
         </div>
 
+        <div class="editor-label">
+            @Html.Raw("Betalat")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.p.Payed)
+            @Html.ValidationMessageFor(model => model.p.email)
+        </div>
+        
+        
+
         <p>
             <input type="submit" value="Spara" />
         </p>
+
+        <div class="HiddenEdit">
+            @Html.Label("Lösenord")
+            @Html.EditorFor(model => model.p.PW)
+        </div>
+
     </fieldset>
 }
 

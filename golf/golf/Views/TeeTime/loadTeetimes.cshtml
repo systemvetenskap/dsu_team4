@@ -47,7 +47,7 @@
 
 <script type="text/javascript">
     document.getElementById('cP').style.display = 'block';
-
+    var selectedDiv;
     function onTimeDivClick(id) {
 
         clearLi();
@@ -55,7 +55,7 @@
         var arr = [];
         var personids = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.bNames, Formatting.Indented));
         var c = 0;
-
+        selectedDiv = id;
 
         if(id != null)
         {
@@ -102,6 +102,7 @@
             }
 
             document.getElementById('details').style.display = 'block';
+            document.getElementById('TeeDetailsB').style.display = 'block';
             var D = document.getElementById('details');
 
 
@@ -128,6 +129,7 @@
         else{
             document.getElementById('playerName').innerHTML="";
             document.getElementById('details').style.display = 'none';
+            document.getElementById('TeeDetailsB').style.display = 'none';
         }
     }
 
@@ -141,6 +143,36 @@
         i.innerHTML = '';
         z.innerHTML = '';
     
+    }
+    function addFoundP(golfid){
+
+     
+        var personids = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.bNames, Formatting.Indented));
+        if(containsGolfid(personids, golfid) == false)
+        {
+            var date = '@Model.selDate';
+
+            book(golfid, selectedDiv, date);
+        }
+        else{
+
+            alert("Spelaren är redan bokad");
+        }
+    }
+    function containsGolfid(obj, id){
+
+        for(var i in obj)
+        {
+            if(obj[i].Golferid == id)
+            {
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+
+
     }
     function addP(id){
 
@@ -187,11 +219,12 @@
     }
 
     function book(g, t, d) {
-
+        
+        var p = '@User.Identity.Name';
         $.ajax({
             url: '/TeeTime/saveBooking',
             contentType: 'application/html; charset=utf-8',
-            data: {golfid : g, teeid : t, date : d},
+            data: {golfid : g, teeid : t, date : d, personid: p},
             type: 'GET',
             dataType: 'html'
 
@@ -255,6 +288,7 @@
 
          
         document.getElementById('details').style.display = 'none';
+        document.getElementById('TeeDetailsB').style.display = 'none';
          
         $.ajax({
             url: '/TeeTime/ChangeSelDate',
@@ -274,7 +308,7 @@
             
     }
     function soP(d) {
-        alert("test");
+   
         var s = document.getElementById('searchField').value;
 
         $.ajax({
@@ -295,6 +329,41 @@
 
 
     }
+    function soPf(s) {
+   
+        //var s = document.getElementById('searchField').value;
+
+        $.ajax({
+            url: '/TeeTime/searchPerson',
+            contentType: 'application/html; charset=utf-8',
+            data: { searchstring: s },
+            type: 'GET',
+            dataType: 'html'
+
+        })
+
+        .success(function (result) {
+            $('#searchDiv').html(result);
+        })
+        .error(function (xhr, status) {
+            alert(status);
+        })
+
+
+    }
+    $('#searchField').keyup(function () { 
+        var s = document.getElementById('searchField').value;
+        if(s == '')
+        {
+            var div = document.getElementById('searchDiv');
+            div.innerHTML = '';
+        }
+        else{
+            soPf(s);
+        }
+        
+         });
+
 
 
     

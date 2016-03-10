@@ -12,20 +12,14 @@ namespace golf.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class NewsArticle
+    public partial class HoleStats
     {
-        public NewsArticle()
-        {
-            this.NewsArticleImage = new HashSet<NewsArticleImage>();
-        }
-    
         public int Id { get; set; }
-        public string header { get; set; }
-        public string content { get; set; }
-        public Nullable<int> Person_ID { get; set; }
-        public Nullable<System.DateTime> newsDate { get; set; }
+        public int CompetitionGolfer_ID { get; set; }
+        public int Hole_ID { get; set; }
+        public int stroaks { get; set; }
     
-        public virtual ICollection<NewsArticleImage> NewsArticleImage { get; set; }
-        public virtual Person Person { get; set; }
+        public virtual CompetitionGolfer CompetitionGolfer { get; set; }
+        public virtual Hole Hole { get; set; }
     }
 }

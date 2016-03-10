@@ -18,7 +18,7 @@ namespace golf.Models
         public Nullable<int> Person_ID { get; set; }
         public Nullable<int> AdminType_ID { get; set; }
     
-        public virtual Person Person { get; set; }
         public virtual AdminType AdminType { get; set; }
+        public virtual Person Person { get; set; }
     }
 }
