@@ -72,14 +72,11 @@ namespace golf.Controllers
             using( dsuteam4Entities1 databas = new dsuteam4Entities1())
             {
                 var comp = cc.newComp;
-
-                //HÄR HÅRDKODAS DET------->
-                //comp.Person_IDc = 25;
-                //comp.CompeteClass_ID = 1;
-                //HÄR HÅRDKODAS DET-------<
+                //test = databas.TeeTimeDate.Where(t => t.bookingDate == d).Where(t => t.TeeTime_ID == tid).ToList();
+                var test = databas.TeeTime.Where(t => t.Id >= cc.startTime.Id).Where(t => t.Id <= cc.endTime.Id).ToList();
             
                 databas.Competition.Add(comp); 
-                databas.SaveChanges();
+                //databas.SaveChanges();
                 
             }
             using( dsuteam4Entities1 ndatabas = new dsuteam4Entities1())
