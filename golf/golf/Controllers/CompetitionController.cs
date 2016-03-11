@@ -15,13 +15,13 @@ namespace golf.Controllers
 
         public ActionResult Index()
         {
-           CreateComp cc = new CreateComp();
+            CreateComp cc = new CreateComp();
 
-           cc.currentDate = DateTime.Today;
+            cc.currentDate = DateTime.Today;
             using (dsuteam4Entities1 databas = new dsuteam4Entities1())
             {
 
-                
+
 
                 cc.classList = databas.CompeteClass.ToList();
                 List<Person> p = databas.Person.ToList();
@@ -29,27 +29,43 @@ namespace golf.Controllers
                 foreach (Person i in p)
                 {
                     OneNamePerson onp = new OneNamePerson();
-                    onp.Id            =  i.Id;           
-                    onp.oneName       =  i.firstName + " " + i.lastName;      
-                    onp.firstName     =  i.firstName;    
-                    onp.lastName      =  i.lastName;     
-                    onp.streetAddres  =  i.streetAddres ;
-                    onp.postalCode    =  i.postalCode;  
-                    onp.city          =  i.city;
-                    onp.email         =  i.email;  
-                    onp.gender_ID     =  i.gender_ID;
-                    onp.memberType_ID =  i.memberType_ID;
+                    onp.Id = i.Id;
+                    onp.oneName = i.firstName + " " + i.lastName;
+                    onp.firstName = i.firstName;
+                    onp.lastName = i.lastName;
+                    onp.streetAddres = i.streetAddres;
+                    onp.postalCode = i.postalCode;
+                    onp.city = i.city;
+                    onp.email = i.email;
+                    onp.gender_ID = i.gender_ID;
+                    onp.memberType_ID = i.memberType_ID;
                     op.Add(onp);
                 }
                 cc.contactlist = op.OrderBy(x => x.oneName);
-                
+
+                cc.complist = databas.Competition.ToList();
 
                 //cc.contactlist = databas.Person.ToList();
 
+                return View(cc);
             }
             
 
-            return View(cc);
+            
+        }
+        public ActionResult loadComp()
+        {
+            using( dsuteam4Entities1 databas = new dsuteam4Entities1())
+            {
+
+                CreateComp cc = new CreateComp();
+                cc.complist = databas.Competition.ToList();
+
+
+                return PartialView("_sComp", cc);
+            }
+
+           
         }
         public PartialViewResult saveComp(CreateComp cc)
         {
@@ -81,7 +97,7 @@ namespace golf.Controllers
         {
 
         }
-        public ActionResult registerResult()
+        public ActionResult saveResult()
         {
             int compID = 16;
             int playerID = 666;
@@ -99,12 +115,49 @@ namespace golf.Controllers
             return View(regcomp);
         }
 
-        [HttpPost]
+        
         public ActionResult registerResult(RegisterComp regcomp)
         {
             
 
-            return View();
+            return PartialView("_regResult", regcomp);
+        }
+        public ActionResult createComp()
+        {
+            CreateComp cc = new CreateComp();
+
+            cc.currentDate = DateTime.Today;
+            using (dsuteam4Entities1 databas = new dsuteam4Entities1())
+            {
+
+
+
+                cc.classList = databas.CompeteClass.ToList();
+                List<Person> p = databas.Person.ToList();
+                List<OneNamePerson> op = new List<OneNamePerson>();
+                foreach (Person i in p)
+                {
+                    OneNamePerson onp = new OneNamePerson();
+                    onp.Id = i.Id;
+                    onp.oneName = i.firstName + " " + i.lastName;
+                    onp.firstName = i.firstName;
+                    onp.lastName = i.lastName;
+                    onp.streetAddres = i.streetAddres;
+                    onp.postalCode = i.postalCode;
+                    onp.city = i.city;
+                    onp.email = i.email;
+                    onp.gender_ID = i.gender_ID;
+                    onp.memberType_ID = i.memberType_ID;
+                    op.Add(onp);
+                }
+                cc.contactlist = op.OrderBy(x => x.oneName);
+
+                cc.complist = databas.Competition.ToList();
+
+                //cc.contactlist = databas.Person.ToList();
+
+                return PartialView("_createComp", cc);
+            }
         }
 
     }
