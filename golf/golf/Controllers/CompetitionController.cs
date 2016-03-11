@@ -44,7 +44,7 @@ namespace golf.Controllers
                 cc.contactlist = op.OrderBy(x => x.oneName);
 
                 cc.complist = databas.Competition.ToList();
-
+                cc.sTimes = databas.TeeTime.ToList();
                 //cc.contactlist = databas.Person.ToList();
 
                 return View(cc);
@@ -173,7 +173,8 @@ namespace golf.Controllers
 
                 cc.complist = databas.Competition.ToList();
 
-                //cc.contactlist = databas.Person.ToList();
+                cc.sTimes = databas.TeeTime.ToList();
+             
 
                 return PartialView("_createComp", cc);
             }
@@ -237,6 +238,7 @@ namespace golf.Controllers
                
 
                 Competition c = d.Competition.Find(id);
+                
                 acp.comp = c;
 
                 return PartialView("_addPlayer", acp);
