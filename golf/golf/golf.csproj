@@ -212,15 +212,27 @@
     </Compile>
     <Compile Include="Models\BookingInfo.cs" />
     <Compile Include="Models\CalendarClass.cs" />
+    <Compile Include="Models\CompeteClass.cs">
+      <DependentUpon>PersonModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Competition.cs">
       <DependentUpon>PersonModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CreateComp.cs" />
+    <Compile Include="Models\CompetitionGolfer.cs">
+      <DependentUpon>PersonModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CreateMember.cs" />
     <Compile Include="Models\Gender.cs">
       <DependentUpon>PersonModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Golfer.cs">
+      <DependentUpon>PersonModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Hole.cs">
+      <DependentUpon>PersonModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HoleStats.cs">
       <DependentUpon>PersonModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Images.cs">
@@ -236,6 +248,7 @@
       <DependentUpon>PersonModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\NewsClass.cs" />
+    <Compile Include="Models\OneNamePerson.cs" />
     <Compile Include="Models\Person.cs">
       <DependentUpon>PersonModel.tt</DependentUpon>
     </Compile>
@@ -373,7 +386,6 @@
     <Content Include="Scripts\_references.js" />
     <Content Include="Images\bullet.png" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Home\MemberHandling.cshtml" />
     <Content Include="Views\Home\TimeScheduling.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
@@ -407,8 +419,9 @@
     <Content Include="Views\TeeTime\loadTeetimes.cshtml" />
     <Content Include="Views\TeeTime\loadTeetimesMember.cshtml" />
     <Content Include="Views\TeeTime\searchPerson.cshtml" />
-    <Content Include="Views\Competition\showComp.cshtml" />
     <Content Include="Views\Competition\Index.cshtml" />
+    <Content Include="Views\Account\LoginFail.cshtml" />
+    <Content Include="Views\Competition\_sComp.cshtml" />
     <Content Include="Views\Competition\registerResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
