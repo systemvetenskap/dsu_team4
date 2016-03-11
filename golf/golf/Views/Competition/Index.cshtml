@@ -6,50 +6,7 @@
 }
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<script type="text/javascript">
 
-    $(document).ready(function () {
-
-        $('.dt').datepicker();
-        $('.dt2').datepicker();
-        $('.dt3').datepicker();
-        
-
-        $('#dt').datepicker('option', 'dateFormat', 'yy-mm-dd');
-        $('#dt').datepicker('setDate', new Date());
-     
-
-
-        $(function () {
-            $("#dt1").datepicker({
-                onSelect: function () {
-                    var selected = $(this).val();
-                    
-
-                }
-            });
-        });
-
-        $(function () {
-            $("#dt2").datepicker({
-                onSelect: function () {
-                    var selected = $(this).val();
-                    alert("test2");
-                }
-            });
-        });
-        $(function () {
-            $("#dt3").datepicker({
-                onSelect: function () {
-                    var selected = $(this).val();
-                    alert("test3");
-                }
-            });
-        });
-
-
-    });
-</script>
 
 @section featured {
     <section class="featured">

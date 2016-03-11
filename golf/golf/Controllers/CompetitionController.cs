@@ -44,7 +44,7 @@ namespace golf.Controllers
                 cc.contactlist = op.OrderBy(x => x.oneName);
 
                 cc.complist = databas.Competition.ToList();
-
+                cc.sTimes = databas.TeeTime.ToList();
                 //cc.contactlist = databas.Person.ToList();
 
                 return View(cc);
@@ -173,7 +173,8 @@ namespace golf.Controllers
 
                 cc.complist = databas.Competition.ToList();
 
-                //cc.contactlist = databas.Person.ToList();
+                cc.sTimes = databas.TeeTime.ToList();
+             
 
                 return PartialView("_createComp", cc);
             }
@@ -184,7 +185,7 @@ namespace golf.Controllers
 
             using(dsuteam4Entities1 d = new dsuteam4Entities1())
             {
-            
+
                 Competition c = d.Competition.Find(id);
                 
                 var join = from p in d.Person.ToList()
@@ -239,7 +240,7 @@ namespace golf.Controllers
 
                     if (c.CompeteClass_ID == i.gender_ID || c.CompeteClass_ID == 1)
                     {
-                        acp.golfers.Add(pg);
+                    acp.golfers.Add(pg);
                     }
 
                 }
