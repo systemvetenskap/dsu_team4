@@ -277,7 +277,7 @@ namespace golf.Controllers
 
            
         }
-        public ActionResult RegisterPlayer(int golferid, int competitionid)
+        public ActionResult RegisterPlayer(int golferid , int competitionid)
         {
             CompetitionGolfer CG = new CompetitionGolfer();
             CG.Golfer_ID = golferid;
@@ -288,7 +288,7 @@ namespace golf.Controllers
                 databas.CompetitionGolfer.Add(CG);
             }
 
-            return View("Index");
+            return RedirectToAction("Index");
         }
 
     }
