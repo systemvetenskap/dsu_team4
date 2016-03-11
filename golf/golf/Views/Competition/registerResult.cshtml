@@ -1,15 +1,18 @@
-﻿@{
+﻿@model golf.Models.RegisterComp
+
+@{
     ViewBag.Title = "registerResult";
 }
 
 <h2>registerResult</h2>
-@Html.Label("Vald tävling hårdkodat")
+@Html.LabelFor(m => m.comp.name)
 
 
-@Html.Label("Spelare (hårdkodat)")
+@*@Html.LabelFor(m => m.comp.Person.lastName)*@
 
 
-@for (int i = 0; i < 2; i++)
+
+@foreach (var hole in Model.holes)
 {
-    @Html.Label("HÅLNUMMER HÄR" + "Slag")
+    @Html.Label(hole.Number)
 }
