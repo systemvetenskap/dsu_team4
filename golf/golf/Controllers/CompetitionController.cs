@@ -125,11 +125,21 @@ namespace golf.Controllers
         }
 
         
-        public ActionResult registerResult(RegisterComp regcomp)
+        public ActionResult registerResult(int id)
         {
-            
+            using(dsuteam4Entities1 db = new dsuteam4Entities1())
+            {
+               Competition c = db.Competition.Find(id);
 
-            return PartialView("_regResult", regcomp);
+               RegisterComp rg = new RegisterComp();
+
+               rg.comp = c;
+
+               return PartialView("_regResult", rg);
+
+            }
+
+            
         }
         public ActionResult createComp()
         {

@@ -26,6 +26,15 @@
                 <td>
                     @Html.DisplayFor(model => item.info)
                 </td>
+                <td>
+                    @Ajax.ActionLink("Registrera resultat", "registerResult", new { id = item.Id}, new AjaxOptions()
+                       {
+                           UpdateTargetId = "showComp",
+                           HttpMethod = "GET",
+                           InsertionMode = InsertionMode.Replace
+                       })
+
+                </td>
             </tr>
 
         }
