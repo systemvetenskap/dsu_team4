@@ -79,7 +79,7 @@
         
 
         <p>
-            <input type="submit" value="Spara" />
+            <input type="submit" value="Spara" id="savedetailsbutton" />
         </p>
 
         <div class="HiddenEdit">
@@ -91,9 +91,24 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Tillbaks", "Index")
 </div>
 
-@*@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}*@
+<script type="text/javascript">
+            $('#savedetailsbutton').click(function () {
+        var isValid = 1;
+        $('input:text').each(function () {
+            if ($(this).val() == '') {
+                $(this).css('border', '2px solid red');
+                isValid = 0;
+            }
+            else {
+                $(this).css('border', '1px solid green');
+            }
+        });
+        if (isValid == 0) {
+            return false;
+        }
+    });
+</script>
+

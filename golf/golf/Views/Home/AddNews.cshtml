@@ -26,9 +26,7 @@
             @Html.Label("Text / inlägg:")
             @Html.TextAreaFor(m => m.NA.content, 10, 40, htmlAttributes: new { style = "width: 90%; resize:none" })
             <br>
-            @Html.Label("Välj en bild att ladda upp:")
-            <input id="b" name="b" type="file" required>
-            <br>
+            @Html.Label("Välj en URL för en bild:")
             <p>
                 @Html.EditorFor(m=> m.bild.imgURL)
                 <br>
