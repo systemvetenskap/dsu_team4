@@ -4,29 +4,33 @@
 <h3>@Model.comp.cDate</h3>
 
 <table>
+    @foreach (var item in Model.golfers)
+    {
+        
     <tr>
         <th>
-            @Html.Label("Förnamn")
+            @Html.DisplayFor(o => item.firstName)
         </th>
         <th>
-            @Html.Label("Efternamn")
+            @Html.DisplayFor(o => item.lastName)
         </th>
         <th>
-            @Html.Label("Adress")
+
         </th>
         <th>
-            @Html.Label("Postnummer")
+            
         </th>
         <th>
-            @Html.Label("Ort")
+            
         </th>
         <th>
-            @Html.Label("E-post")
+            
         </th>
         <th>
-            @Html.Label("Betalat")
+            
         </th>
 
         <th></th>
     </tr>
+    }
 </table>
