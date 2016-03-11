@@ -15,8 +15,8 @@ namespace golf.Models
     public partial class NewsArticleImage
     {
         public int Id { get; set; }
-        public Nullable<int> NewsArticle_ID { get; set; }
-        public Nullable<int> Images_ID { get; set; }
+        public int NewsArticle_ID { get; set; }
+        public int Images_ID { get; set; }
     
         public virtual Images Images { get; set; }
         public virtual NewsArticle NewsArticle { get; set; }
