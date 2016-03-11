@@ -286,6 +286,7 @@ namespace golf.Controllers
             using (dsuteam4Entities1 databas = new dsuteam4Entities1())
             {
                 databas.CompetitionGolfer.Add(CG);
+                databas.SaveChanges();
             }
 
             return RedirectToAction("Index");
