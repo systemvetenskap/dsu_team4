@@ -35,6 +35,15 @@
                        })
 
                 </td>
+                <td>
+                    @Ajax.ActionLink("Anmäl spelare", "addPlayer", new { id = item.Id }, new AjaxOptions()
+                       {
+                           UpdateTargetId = "showComp",
+                           HttpMethod = "GET",
+                           InsertionMode = InsertionMode.Replace
+                       })
+
+                </td>
             </tr>
 
         }

@@ -178,6 +178,72 @@ namespace golf.Controllers
                 return PartialView("_createComp", cc);
             }
         }
+        public ActionResult addPlayer(int id)
+        {
+            using(dsuteam4Entities1 d = new dsuteam4Entities1())
+            {
+
+                var join = from p in d.Person.ToList()
+                           join g in d.Golfer.ToList()
+                           on p.Id equals g.Person_ID
+                           select new { 
+                           
+                               p.firstName, 
+                               p.lastName, 
+                               p.Id, 
+                               Golfstring = g.golfID,
+                               g.HCP,
+                               Golfid = g.Id,
+                               p.gender_ID,
+                                                   
+                           };
+
+                var list = join.ToList();
+
+                var persong = from p in list 
+                              join g in d.Gender.ToList() 
+                              on p.gender_ID equals g.Id 
+                              select new 
+                              { 
+                                personid = p.Id,
+                                fName = p.firstName,
+                                lName = p.lastName,
+                                p.Golfstring,
+                                HCP = p.HCP,
+                                Gender = g.genderName,
+                                p.Golfid
+                              
+                              
+                              };
+                var toView = persong.ToList();
+
+                AddCompPlayer acp = new AddCompPlayer();
+                
+                foreach(var i in toView)
+                {
+                    PersonGolfer pg = new PersonGolfer();
+
+                    pg.personid = i.personid;
+                    pg.firstName = i.fName;
+                    pg.lastName = i.lName;
+                    pg.golfstring = i.Golfstring;
+                    pg.HCP = i.HCP;
+                    pg.gender = i.Gender;
+                    pg.golfid = i.Golfid;
+
+                    acp.golfers.Add(pg);
+
+                }
+               
+
+                Competition c = d.Competition.Find(id);
+                acp.comp = c;
+
+                return PartialView("_addPlayer", acp);
+            }
+
+           
+        }
 
     }
 }

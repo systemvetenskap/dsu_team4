@@ -202,6 +202,7 @@
     </Compile>
     <Compile Include="member\person\context.cs" />
     <Compile Include="ModelDb\Context\tt.cs" />
+    <Compile Include="Models\AddCompPlayer.cs" />
     <Compile Include="Models\AdminPerson.cs">
       <DependentUpon>PersonModel.tt</DependentUpon>
     </Compile>
@@ -411,6 +412,7 @@
     <Content Include="Views\Competition\registerResult.cshtml" />
     <Content Include="Views\Competition\_createComp.cshtml" />
     <Content Include="Views\Competition\_regResult.cshtml" />
+    <Content Include="Views\Competition\_addPlayer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

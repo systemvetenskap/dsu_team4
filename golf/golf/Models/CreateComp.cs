@@ -12,6 +12,7 @@ namespace golf.Models
         public IEnumerable<CompeteClass> classList = new List<CompeteClass>();
         public Competition newComp { get; set; }
         public DateTime currentDate { get; set; }
+       
 
        
     }
