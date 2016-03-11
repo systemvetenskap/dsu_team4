@@ -29,6 +29,8 @@ namespace golf.Models
         public int playersPerTime { get; set; }
         public int CompeteClass_ID { get; set; }
         public int NumberOfHoles { get; set; }
+        public string startTime { get; set; }
+        public string endTime { get; set; }
     
         public virtual CompeteClass CompeteClass { get; set; }
         public virtual Person Person { get; set; }

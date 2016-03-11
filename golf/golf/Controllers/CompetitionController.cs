@@ -180,9 +180,13 @@ namespace golf.Controllers
         }
         public ActionResult addPlayer(int id)
         {
+
+
             using(dsuteam4Entities1 d = new dsuteam4Entities1())
             {
-
+            
+                Competition c = d.Competition.Find(id);
+                
                 var join = from p in d.Person.ToList()
                            join g in d.Golfer.ToList()
                            on p.Id equals g.Person_ID
@@ -211,7 +215,8 @@ namespace golf.Controllers
                                 p.Golfstring,
                                 HCP = p.HCP,
                                 Gender = g.genderName,
-                                p.Golfid
+                                p.Golfid,
+                                p.gender_ID
                               
                               
                               };
@@ -230,13 +235,17 @@ namespace golf.Controllers
                     pg.HCP = i.HCP;
                     pg.gender = i.Gender;
                     pg.golfid = i.Golfid;
+                    pg.gender_ID = Convert.ToInt16(i.gender_ID);
 
-                    acp.golfers.Add(pg);
+                    if (c.CompeteClass_ID == i.gender_ID || c.CompeteClass_ID == 1)
+                    {
+                        acp.golfers.Add(pg);
+                    }
 
                 }
                
 
-                Competition c = d.Competition.Find(id);
+                
                 acp.comp = c;
 
                 return PartialView("_addPlayer", acp);
