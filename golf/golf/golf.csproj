@@ -217,10 +217,10 @@
     <Compile Include="Models\Competition.cs">
       <DependentUpon>PersonModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CreateComp.cs" />
     <Compile Include="Models\CompetitionGolfer.cs">
       <DependentUpon>PersonModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CreateComp.cs" />
     <Compile Include="Models\CreateMember.cs" />
     <Compile Include="Models\Gender.cs">
       <DependentUpon>PersonModel.tt</DependentUpon>

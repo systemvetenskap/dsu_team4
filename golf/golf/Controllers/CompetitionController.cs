@@ -67,19 +67,32 @@ namespace golf.Controllers
 
            
         }
-        public PartialViewResult saveComp(CreateComp cc)
+        public ActionResult saveComp(CreateComp cc)
         {
             using( dsuteam4Entities1 databas = new dsuteam4Entities1())
             {
+                List<TeeTime> compStarttimes = new List<TeeTime>();
                 var comp = cc.newComp;
+                int start = Convert.ToInt32(cc.newComp.startTime);
+                int end = Convert.ToInt32(cc.newComp.endTime);
+               
+                compStarttimes = databas.TeeTime.Where(t => t.Id >= start).Where(t => t.Id <= end).ToList();
+                
+                foreach(var i in compStarttimes)
+                {
+                    TeeTimeDate td = new TeeTimeDate();
 
-                //HÄR HÅRDKODAS DET------->
-                //comp.Person_IDc = 25;
-                //comp.CompeteClass_ID = 1;
-                //HÄR HÅRDKODAS DET-------<
-            
-                databas.Competition.Add(comp); 
-                databas.SaveChanges();
+                    td.TeeTime_ID = i.Id;
+                    td.bookingDate = cc.newComp.cDate;
+                    td.Disabled = true;
+
+                    databas.TeeTimeDate.Add(td);
+
+                }
+                
+  
+               databas.Competition.Add(comp); 
+               databas.SaveChanges();
                 
             }
             using( dsuteam4Entities1 ndatabas = new dsuteam4Entities1())
@@ -89,13 +102,23 @@ namespace golf.Controllers
                 c.complist = ndatabas.Competition.ToList();
                 c.currentDate = DateTime.Today;
 
-                return PartialView("_sComp", c);
+                return View("Index", c);
             }
 
         }
-        public void getData()
+        public void slumpa(int id)
         {
+            dsuteam4Entities1 databas = new dsuteam4Entities1();
 
+            var list = databas.CompetitionGolfer.ToList();
+            
+            foreach(var i in databas.CompetitionGolfer.ToList())
+            {
+                if(i.Competition_ID == id)
+                {
+                    
+                }
+            }
         }
         public ActionResult saveResult()
         {
@@ -181,9 +204,13 @@ namespace golf.Controllers
         }
         public ActionResult addPlayer(int id)
         {
+
+
             using(dsuteam4Entities1 d = new dsuteam4Entities1())
             {
 
+                Competition c = d.Competition.Find(id);
+                
                 var join = from p in d.Person.ToList()
                            join g in d.Golfer.ToList()
                            on p.Id equals g.Person_ID
@@ -212,7 +239,8 @@ namespace golf.Controllers
                                 p.Golfstring,
                                 HCP = p.HCP,
                                 Gender = g.genderName,
-                                p.Golfid
+                                p.Golfid,
+                                p.gender_ID
                               
                               
                               };
@@ -231,13 +259,16 @@ namespace golf.Controllers
                     pg.HCP = i.HCP;
                     pg.gender = i.Gender;
                     pg.golfid = i.Golfid;
+                    pg.gender_ID = Convert.ToInt16(i.gender_ID);
 
+                    if (c.CompeteClass_ID == i.gender_ID || c.CompeteClass_ID == 1)
+                    {
                     acp.golfers.Add(pg);
+                    }
 
                 }
                
 
-                Competition c = d.Competition.Find(id);
                 
                 acp.comp = c;
 

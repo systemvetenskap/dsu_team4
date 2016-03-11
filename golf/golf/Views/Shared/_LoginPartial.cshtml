@@ -1,18 +1,23 @@
-﻿@if (Request.IsAuthenticated) {
-    
-    <text>
-        Hej, @Html.ActionLink(User.Identity.Name, "Mypage", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "Manage" })!
-        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" })) {
-            @Html.AntiForgeryToken()
-            <a href="javascript:document.getElementById('logoutForm').submit()">Logga ut</a>
-            @Html.ActionLink("Mina sidor", "MyPage", "Account")
-        }
-    </text>
-} else {
-    <ul>
-        @Html.ActionLink("Registrera", "Create", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
-        @Html.ActionLink("Logga in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+﻿
+    @if (Request.IsAuthenticated)
+    {
 
-    </ul>
-}
+        <text>
+            Hej, @Html.ActionLink(User.Identity.Name, "Mypage", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "Manage" })!
+            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+            {
+                @Html.AntiForgeryToken()
+                <a href="javascript:document.getElementById('logoutForm').submit()">Logga ut</a>
+                @Html.ActionLink("Mina sidor", "MyPage", "Account")
+            }
+        </text>
+    }
+    else
+    {
+        <ul>
+            @Html.ActionLink("Registrera", "Create", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
+            @Html.ActionLink("Logga in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+
+        </ul>
+    }
 

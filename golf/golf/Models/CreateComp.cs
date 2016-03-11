@@ -12,8 +12,8 @@ namespace golf.Models
         public IEnumerable<OneNamePerson> contactlist = new List<OneNamePerson>();
         public IEnumerable<CompeteClass> classList = new List<CompeteClass>();
         public IEnumerable<TeeTime> sTimes = new List<TeeTime>();
-        public TeeTime startTime { get; set; }
-        public TeeTime endTime { get; set; }
+        public TeeTime startTime = new TeeTime();
+        public TeeTime endTime = new TeeTime();
         public Competition newComp { get; set; }
         public DateTime currentDate { get; set; }
        

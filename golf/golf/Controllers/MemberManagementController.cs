@@ -22,6 +22,8 @@ namespace golf.Controllers
         //Lista Personer från persontabellen    
         public ActionResult Index()
         {
+            
+  
             return View(databas.Person.ToList());
         }
 
@@ -66,6 +68,8 @@ namespace golf.Controllers
         {
             if (ModelState.IsValid)
             {
+
+
                 person.p.gender_ID = person.genderid;     
                 databas.Person.Add(person.p);
                 databas.SaveChanges();

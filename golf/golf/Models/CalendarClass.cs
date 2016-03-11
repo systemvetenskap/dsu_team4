@@ -60,28 +60,41 @@ namespace golf.Models
         {
        
             string Color = "";
-      
+            bool dis = false; 
             int counter = 0;
             number = "0";
             foreach (TeeTimeDate TTD in TeeTimeDate)
             {
-                if (TTD.TeeTime_ID == TT_ID && TTD.bookingDate == d)
-                {
-                    foreach (TeeTimeDateGolfer TTDG in TeeTimeDateGolfer)
+                
+                    if (TTD.TeeTime_ID == TT_ID && TTD.bookingDate == d)
                     {
-                        if(TTDG.TeeTimeDate_ID == TTD.Id)
-                        {
-                            counter++;
-                            if(counter > 0)
+                           if(TTD.Disabled == true)
                             {
-                                number = counter.ToString();
+                                dis = true;
                             }
-                           
-                        }
+                           else
+                           {
+                               foreach (TeeTimeDateGolfer TTDG in TeeTimeDateGolfer)
+                               {
+                                   if (TTDG.TeeTimeDate_ID == TTD.Id)
+                                   {
+                                       counter++;
+                                       if (counter > 0)
+                                       {
+                                           number = counter.ToString();
+                                       }
+
+                                   }
+
+                               }
+
+                           }
+    
                     }
-                }
+                
+   
             }
-            if (counter > 3)
+            if (counter > 3 || dis == true)
             {
                 Color = "grey";
             }

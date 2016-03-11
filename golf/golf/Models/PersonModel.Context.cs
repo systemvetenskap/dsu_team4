@@ -25,23 +25,23 @@ namespace golf.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<Golfer> Golfer { get; set; }
         public DbSet<AdminPerson> AdminPerson { get; set; }
-        public DbSet<TeeDate> TeeDate { get; set; }
-        public DbSet<TeeTime> TeeTime { get; set; }
-        public DbSet<Gender> Gender { get; set; }
-        public DbSet<Images> Images { get; set; }
-        public DbSet<NewsArticle> NewsArticle { get; set; }
-        public DbSet<NewsArticleImage> NewsArticleImage { get; set; }
         public DbSet<AdminType> AdminType { get; set; }
-        public DbSet<MemberType> MemberType { get; set; }
-        public DbSet<TeeTimeDateGolfer> TeeTimeDateGolfer { get; set; }
-        public DbSet<TeeTimeDate> TeeTimeDate { get; set; }
-        public DbSet<Person> Person { get; set; }
         public DbSet<CompeteClass> CompeteClass { get; set; }
         public DbSet<Competition> Competition { get; set; }
         public DbSet<CompetitionGolfer> CompetitionGolfer { get; set; }
+        public DbSet<Gender> Gender { get; set; }
+        public DbSet<Golfer> Golfer { get; set; }
         public DbSet<Hole> Hole { get; set; }
         public DbSet<HoleStats> HoleStats { get; set; }
+        public DbSet<Images> Images { get; set; }
+        public DbSet<MemberType> MemberType { get; set; }
+        public DbSet<NewsArticle> NewsArticle { get; set; }
+        public DbSet<NewsArticleImage> NewsArticleImage { get; set; }
+        public DbSet<Person> Person { get; set; }
+        public DbSet<TeeDate> TeeDate { get; set; }
+        public DbSet<TeeTime> TeeTime { get; set; }
+        public DbSet<TeeTimeDate> TeeTimeDate { get; set; }
+        public DbSet<TeeTimeDateGolfer> TeeTimeDateGolfer { get; set; }
     }
 }
