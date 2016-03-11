@@ -67,7 +67,7 @@ namespace golf.Controllers
 
            
         }
-        public PartialViewResult saveComp(CreateComp cc)
+        public ActionResult saveComp(CreateComp cc)
         {
             using( dsuteam4Entities1 databas = new dsuteam4Entities1())
             {
@@ -102,7 +102,7 @@ namespace golf.Controllers
                 c.complist = ndatabas.Competition.ToList();
                 c.currentDate = DateTime.Today;
 
-                return PartialView("_sComp", c);
+                return View("Index", c);
             }
 
         }
