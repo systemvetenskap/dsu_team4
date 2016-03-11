@@ -1,9 +1,6 @@
 ﻿@section featured {
     <section class="featured">
         <div class="content-wrapper">
-            <hgroup class="title">
-                <h2>@ViewBag.Message</h2>
-            </hgroup>
             <p>
                 Detta är medlemshanteringen.
             </p>
@@ -83,6 +80,8 @@
                 @Html.ActionLink("Ändra", "Edit", new { id = item.Id }) 
                 @Html.ActionLink("Visa", "Details", new { id = item.Id }) 
                 @Html.ActionLink("Radera", "Delete", new { id = item.Id })
+
+                
             </td>
         </tr>
     }

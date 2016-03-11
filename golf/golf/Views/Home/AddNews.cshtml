@@ -3,9 +3,6 @@
 @section featured {
     <section class="featured">
         <div class="content-wrapper">
-            <hgroup class="title">
-                <h2>@ViewBag.Message</h2>
-            </hgroup>
             <p>
                 Detta är senaste nytt, här publiceras de senaste nyheterna om golfklubben.
             </p>
@@ -24,18 +21,16 @@
             <legend>NewsClass</legend>
             <br>
             @Html.Label("Rubrik på nyheten:")
-            @Html.EditorFor(m => m.NA.header)
+            @Html.TextBoxFor(m => m.NA.header, htmlAttributes: new { ID = "headernews" })
             <br />
             @Html.Label("Text / inlägg:")
-            @Html.TextAreaFor(m => m.NA.content, 10, 40, htmlAttributes: new { style = "width: 90%; resize:none" })
+            @Html.TextAreaFor(m => m.NA.content, 10, 40, htmlAttributes: new { style = "width: 90%; resize:none", ID = "textareainput" })
             <br>
-            @Html.Label("Välj en bild att ladda upp:")
-            <input id="b" name="b" type="file" required>
-            <br>
+            @Html.Label("Välj en URL för en bild:")
             <p>
                 @Html.EditorFor(m=> m.bild.imgURL)
                 <br>
-                <input type="submit" value="Publicera nyhet" />
+                <input type="submit" value="Publicera nyhet" id="publishbutton" />
             </p>
         </fieldset>
         </div>
@@ -45,6 +40,32 @@
             @Html.ActionLink("Tillbaks till senaste nytt", "Index")
         </div>
 
-        @*@section Scripts {
-            @Scripts.Render("~/bundles/jqueryval")
-        }*@
+<script type="text/javascript">
+
+    $('#publishbutton').click(function ()
+    {
+        if ($('#textareainput').val() <= 0 || $('#headernews').val() <= 0)
+        {
+
+        if ($('#textareainput').val() <=0)
+        {
+            $('#textareainput').css('border', '2px solid red');
+        }
+        if ($('#headernews').val() <=0)
+        {
+            $('#headernews').css('border', '2px solid red');
+        }
+        return false;
+  }
+
+    else
+        {
+            $('#textareainput').css('border', '1px solid green');
+            $('#headernews').css('border', '1px solid green');
+        }
+    }
+    );
+
+</script>
+
+

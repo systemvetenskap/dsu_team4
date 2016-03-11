@@ -18,6 +18,7 @@ namespace golf.Models
         public Golfer()
         {
             this.TeeTimeDateGolfer = new HashSet<TeeTimeDateGolfer>();
+            this.CompetitionGolfer = new HashSet<CompetitionGolfer>();
         }
     
         public int Id { get; set; }
@@ -29,5 +30,7 @@ namespace golf.Models
         public virtual ICollection<TeeTimeDateGolfer> TeeTimeDateGolfer { get; set; }
         [JsonIgnore]
         public virtual Person Person { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<CompetitionGolfer> CompetitionGolfer { get; set; }
     }
 }

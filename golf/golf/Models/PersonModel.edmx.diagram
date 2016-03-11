@@ -4,44 +4,44 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="38a258cb9ea4494b969d7a5162453a91" Name="Diagram1" ZoomLevel="47">
-        <EntityTypeShape EntityType="dsuteam4Model1.Golfer" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dsuteam4Model1.AdminPerson" Width="1.5" PointX="5" PointY="8.5" />
-        <EntityTypeShape EntityType="dsuteam4Model1.TeeDate" Width="1.5" PointX="5.375" PointY="1.25" />
-        <EntityTypeShape EntityType="dsuteam4Model1.TeeTime" Width="1.5" PointX="5.375" PointY="5.25" />
-        <EntityTypeShape EntityType="dsuteam4Model1.Gender" Width="1.5" PointX="0.5" PointY="3.75" />
-        <EntityTypeShape EntityType="dsuteam4Model1.Images" Width="1.5" PointX="5" PointY="14.75" />
-        <EntityTypeShape EntityType="dsuteam4Model1.NewsArticle" Width="1.5" PointX="5" PointY="11.375" />
-        <EntityTypeShape EntityType="dsuteam4Model1.NewsArticleImage" Width="1.5" PointX="7.25" PointY="11.625" />
-        <AssociationConnector Association="dsuteam4Model1.FK_NewsArticleImage_Image" />
-        <AssociationConnector Association="dsuteam4Model1.FK_NewsArticleImage_ToNewsArticle" />
-        <EntityTypeShape EntityType="dsuteam4Model1.AdminType" Width="1.5" PointX="2.75" PointY="9.75" />
-        <EntityTypeShape EntityType="dsuteam4Model1.MemberType" Width="1.5" PointX="0.75" PointY="6.875" />
-        <EntityTypeShape EntityType="dsuteam4Model1.TeeTimeDateGolfer" Width="1.5" PointX="9.875" PointY="3.125" />
+      <Diagram DiagramId="38a258cb9ea4494b969d7a5162453a91" Name="Diagram1" ZoomLevel="71">
+        <EntityTypeShape EntityType="dsuteam4Model1.AdminPerson" Width="1.5" PointX="5.25" PointY="8.875" />
+        <EntityTypeShape EntityType="dsuteam4Model1.AdminType" Width="1.5" PointX="3" PointY="11.125" />
+        <EntityTypeShape EntityType="dsuteam4Model1.CompeteClass" Width="1.5" PointX="6" PointY="12.125" />
+        <EntityTypeShape EntityType="dsuteam4Model1.Competition" Width="1.5" PointX="8.25" PointY="10" />
+        <EntityTypeShape EntityType="dsuteam4Model1.CompetitionGolfer" Width="1.5" PointX="10.5" PointY="8.375" />
+        <EntityTypeShape EntityType="dsuteam4Model1.Gender" Width="1.5" PointX="0.75" PointY="7.125" />
+        <EntityTypeShape EntityType="dsuteam4Model1.Golfer" Width="1.5" PointX="5.25" PointY="5.125" />
+        <EntityTypeShape EntityType="dsuteam4Model1.Hole" Width="1.5" PointX="10.5" PointY="4.375" />
+        <EntityTypeShape EntityType="dsuteam4Model1.HoleStats" Width="1.5" PointX="12.75" PointY="8.375" />
+        <EntityTypeShape EntityType="dsuteam4Model1.Images" Width="1.5" PointX="5.25" PointY="19" />
+        <EntityTypeShape EntityType="dsuteam4Model1.MemberType" Width="1.5" PointX="0.75" PointY="3.875" />
+        <EntityTypeShape EntityType="dsuteam4Model1.NewsArticle" Width="1.5" PointX="5.25" PointY="15.625" />
+        <EntityTypeShape EntityType="dsuteam4Model1.NewsArticleImage" Width="1.5" PointX="7.5" PointY="15.875" />
+        <EntityTypeShape EntityType="dsuteam4Model1.Person" Width="1.5" PointX="3" PointY="5.625" />
+        <EntityTypeShape EntityType="dsuteam4Model1.TeeDate" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="dsuteam4Model1.TeeTime" Width="1.5" PointX="3" PointY="1.875" />
+        <EntityTypeShape EntityType="dsuteam4Model1.TeeTimeDate" Width="1.5" PointX="5.25" PointY="1.625" />
+        <EntityTypeShape EntityType="dsuteam4Model1.TeeTimeDateGolfer" Width="1.5" PointX="7.5" PointY="6.5" />
         <AssociationConnector Association="dsuteam4Model1.FK_AdminPerson_ToAdminType" />
-        <AssociationConnector Association="dsuteam4Model1.FK_TeeTimeDateGolfer_ToGolfer" />
-        <EntityTypeShape EntityType="dsuteam4Model1.TeeTimeDate" Width="1.5" PointX="7.625" PointY="5" />
-        <AssociationConnector Association="dsuteam4Model1.FK_TeeTimeDate_ToTeeTime" />
-        <AssociationConnector Association="dsuteam4Model1.FK_TeeTimeDateGolfer_ToTeeTimeDate" />
-        <EntityTypeShape EntityType="dsuteam4Model1.Person" Width="1.5" PointX="3" PointY="3.125" />
         <AssociationConnector Association="dsuteam4Model1.FK_AdminPerson_ToPerson" />
-        <AssociationConnector Association="dsuteam4Model1.FK_Person_ToGender" />
-        <AssociationConnector Association="dsuteam4Model1.FK_Golfer_ToPerson" />
-        <AssociationConnector Association="dsuteam4Model1.FK_Person_ToMemberType" />
-        <AssociationConnector Association="dsuteam4Model1.FK_NewsArticle_ToPerson" />
-        <AssociationConnector Association="dsuteam4Model1.FK_TeeTimeDateGolfer_ToPerson" />
-        <EntityTypeShape EntityType="dsuteam4Model1.CompeteClass" Width="1.5" PointX="14.25" PointY="11.375" />
-        <EntityTypeShape EntityType="dsuteam4Model1.Competition" Width="1.5" PointX="15.375" PointY="6.125" />
-        <EntityTypeShape EntityType="dsuteam4Model1.CompetitionGolfer" Width="1.5" PointX="13.625" PointY="5.375" />
-        <EntityTypeShape EntityType="dsuteam4Model1.Hole" Width="1.5" PointX="11.25" PointY="11.375" />
-        <EntityTypeShape EntityType="dsuteam4Model1.HoleStats" Width="1.5" PointX="11.875" PointY="6" />
         <AssociationConnector Association="dsuteam4Model1.FK_Competition_ToCompeteClass" />
         <AssociationConnector Association="dsuteam4Model1.FK_Competition_ToPerson" />
         <AssociationConnector Association="dsuteam4Model1.FK_CompetitionGolfer_ToCompetition" />
         <AssociationConnector Association="dsuteam4Model1.FK_CompetitionGolfer_ToGolfer" />
         <AssociationConnector Association="dsuteam4Model1.FK_HoleStats_ToCompetitionGolfer" />
+        <AssociationConnector Association="dsuteam4Model1.FK_Person_ToGender" />
+        <AssociationConnector Association="dsuteam4Model1.FK_Golfer_ToPerson" />
+        <AssociationConnector Association="dsuteam4Model1.FK_TeeTimeDateGolfer_ToGolfer" />
         <AssociationConnector Association="dsuteam4Model1.FK_HoleStats_ToHole" />
-        </Diagram>
+        <AssociationConnector Association="dsuteam4Model1.FK_NewsArticleImage_Image" />
+        <AssociationConnector Association="dsuteam4Model1.FK_Person_ToMemberType" />
+        <AssociationConnector Association="dsuteam4Model1.FK_NewsArticle_ToPerson" />
+        <AssociationConnector Association="dsuteam4Model1.FK_NewsArticleImage_ToNewsArticle" />
+        <AssociationConnector Association="dsuteam4Model1.FK_TeeTimeDateGolfer_ToPerson" />
+        <AssociationConnector Association="dsuteam4Model1.FK_TeeTimeDate_ToTeeTime" />
+        <AssociationConnector Association="dsuteam4Model1.FK_TeeTimeDateGolfer_ToTeeTimeDate" />
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

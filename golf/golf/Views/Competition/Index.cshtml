@@ -6,119 +6,37 @@
 }
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<script type="text/javascript">
 
-    $(document).ready(function () {
-
-        $('.dt').datepicker();
-        
-
-        $('#dt').datepicker('option', 'dateFormat', 'yy-mm-dd');
-        $('#dt').datepicker('setDate', new Date());
-     
-
-
-        $(function () {
-            $("#dt1").datepicker({
-                onSelect: function () {
-                    var selected = $(this).val();
-                    
-
-                }
-            });
-        });
-
-        $(function () {
-            $("#dt2").datepicker({
-                onSelect: function () {
-                    var selected = $(this).val();
-                    alert("test2");
-                }
-            });
-        });
-        $(function () {
-            $("#dt3").datepicker({
-                onSelect: function () {
-                    var selected = $(this).val();
-                    alert("test3");
-                }
-            });
-        });
-
-
-    });
-</script>
 
 @section featured {
     <section class="featured">
         <div class="content-wrapper">
-            <hgroup class="title">
-                <h2>@ViewBag.Message</h2>
-            </hgroup>
             <p>
-                Skapa ny tävling.
+                Tävlingar
             </p>
         </div>
     </section>
 }
 
-<h2>Skapa ny tävling</h2>
-<div class="cNew">
-    <fieldset>
-        <legend>Person</legend>
-        
-            @Html.HiddenFor(model => model.newComp.Id)
 
-        <div class="editor-label">
-            @Html.Raw("Namn")
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.newComp.name)
-            @Html.ValidationMessageFor(model => model.newComp.name)
-        </div>
+<div id="showComp" class="showComp">
 
-        <div class="editor-label">
-            @Html.Raw("Tävlingsdatum")
-        </div>
-        <div class="editor-field">
-         
-            @Html.TextBoxFor(model => model.newComp.cDate, new { @class = "dt", placeholder = "Välj tävlingsdatum.." })
-            @Html.ValidationMessageFor(model => model.newComp.cDate)
-            
-        </div>
-
-        <div class="editor-label">
-            @Html.Raw("Första anmälningsdatum")
-        </div>
-        <div class="editor-field">
-            @Html.TextBoxFor(model => model.newComp.cDate, new { @class = "dt", placeholder = "Välj första anmälningsdag.." })
-            @Html.ValidationMessageFor(model => model.newComp.signUpFrom)
-            
-        </div>
-
-        <div class="editor-label">
-            @Html.Raw("Sista anmälningsdatum")
-        </div>
-        <div class="editor-field">
-            @Html.TextBoxFor(model => model.newComp.cDate, new { @class = "dt", placeholder = "Välj sista anmälningsdag.." })
-            @Html.ValidationMessageFor(model => model.newComp.signUpTo)
-          
-        </div>
-
-        <div class="editor-label">
-            @Html.Raw("Beskrivning/Övrig info")
-        </div>
-        <div class="editor-field">
-            @Html.TextAreaFor(model => model.newComp.info)
-            @Html.ValidationMessageFor(model => model.newComp.info)
-        </div>
-
-        <p>
-            <input type="submit" value="Spara" />
-        </p>
-        </fieldset>
+    @Html.Partial("_sComp", Model)
+    
 </div>
-<div class="showComp">
+<div>
+    @Ajax.ActionLink("Visa tävlingar", "loadComp", new AjaxOptions() {
+    UpdateTargetId = "showComp",
+    HttpMethod = "GET",
+    InsertionMode = InsertionMode.Replace
+     })
 
+
+    @Ajax.ActionLink("Skapa tävling", "createComp", new AjaxOptions()
+   {
+       UpdateTargetId = "showComp",
+       HttpMethod = "GET",
+       InsertionMode = InsertionMode.Replace
+   })
 </div>
 

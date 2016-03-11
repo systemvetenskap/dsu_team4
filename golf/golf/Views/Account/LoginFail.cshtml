@@ -14,7 +14,6 @@
     </section>
 }
 <div class="login" id="login">
-
     @using (Html.BeginForm("LogInCheck", "Account"))
     {
         @Html.Label("E-post")
@@ -23,6 +22,7 @@
         @Html.Label("Lösenord")
         @Html.PasswordFor(m => m.PW, new { ID="password"})
         <br>
+        <p>Inloggningen misslyckades, försök igen</p>
         <br>
         <br>
         <input type="submit" value="Logga in" id="loginbutton" @*onclick="CheckEmpty()"*@/>
@@ -45,7 +45,7 @@
         }
     });
 </script>
-@*<script type="text/javascript">
+<script type="text/javascript">
 
     var email = document.getElementById('email').value;
     var password = document.getElementById('password').value;
@@ -58,6 +58,6 @@
             return false;
         }      
     }
-</script>*@
+</script>
 
 

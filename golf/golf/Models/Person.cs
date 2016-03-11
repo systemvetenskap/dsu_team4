@@ -17,10 +17,10 @@ namespace golf.Models
         public Person()
         {
             this.AdminPerson = new HashSet<AdminPerson>();
+            this.Competition = new HashSet<Competition>();
             this.Golfer = new HashSet<Golfer>();
             this.NewsArticle = new HashSet<NewsArticle>();
             this.TeeTimeDateGolfer = new HashSet<TeeTimeDateGolfer>();
-            this.Competition = new HashSet<Competition>();
         }
     
         public int Id { get; set; }
@@ -36,11 +36,11 @@ namespace golf.Models
         public Nullable<bool> Payed { get; set; }
     
         public virtual ICollection<AdminPerson> AdminPerson { get; set; }
+        public virtual ICollection<Competition> Competition { get; set; }
         public virtual Gender Gender { get; set; }
         public virtual ICollection<Golfer> Golfer { get; set; }
         public virtual MemberType MemberType { get; set; }
         public virtual ICollection<NewsArticle> NewsArticle { get; set; }
         public virtual ICollection<TeeTimeDateGolfer> TeeTimeDateGolfer { get; set; }
-        public virtual ICollection<Competition> Competition { get; set; }
     }
 }

@@ -1,0 +1,31 @@
+﻿@model golf.Models.RegisterComp
+
+@{
+    ViewBag.Title = "registerResult";
+}
+
+<h2>registerResult</h2>
+
+@Html.Label(Model.comp.name)
+
+
+
+@*@Html.LabelFor(m => m.comp.Person.lastName)*@
+
+@Html.Label("Hål | Slag")
+
+@*@foreach (var hole in Model.holes)
+{
+    
+    @Html.Label(hole.Number)
+    @Html.EditorFor(m => m.holeStats[hole.Id])
+    <br />
+}*@
+
+
+@for (int i = 0; i < Model.holes.Count; i++)
+{
+    @Html.Label(Model.holes[i].Number)
+    @Html.EditorFor(m => m.holeStats[i].stroaks)
+    <br />
+}

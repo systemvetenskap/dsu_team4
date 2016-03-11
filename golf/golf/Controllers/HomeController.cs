@@ -27,19 +27,15 @@ namespace golf.Controllers
             {
                 na.ArticleImages.Add(ai);
             }
-         
-            //Nya nyheter först
             na.newarticle.Reverse();
 
             return View(na);
         }
         public ActionResult AddNews()
         {
-
             return View();
         }
 
-        
         [HttpPost]
         public ActionResult AddNews(NewsClass news)
         {
@@ -52,20 +48,19 @@ namespace golf.Controllers
                 newA.content = news.NA.content;
                 newA.newsDate = DateTime.Today.Date;
                 newA.Person_ID = Convert.ToInt32(User.Identity.Name);
-                newI.imgURL = news.bild.imgURL;
-
                 db.NewsArticle.Add(newA);
-                db.Images.Add(newI);                                        
-                 db.SaveChanges();
-
-                NewsArticleImage nai = new NewsArticleImage();
-
-                nai.Images_ID = newI.Id;
-                nai.NewsArticle_ID = newA.Id;
-
-                db.NewsArticleImage.Add(nai);
                 db.SaveChanges();
-
+                if (news.bild.imgURL!=null)
+                {
+                    NewsArticleImage nai = new NewsArticleImage();
+                    newI.imgURL = news.bild.imgURL;
+                    db.Images.Add(newI);
+                    db.SaveChanges();
+                    nai.Images_ID = newI.Id;
+                    nai.NewsArticle_ID = newA.Id;
+                    db.NewsArticleImage.Add(nai);
+                    db.SaveChanges();
+                }                                      
                return RedirectToAction("Index");
             }
             return View();
@@ -73,9 +68,6 @@ namespace golf.Controllers
         public ActionResult MemberHandling()
         {
             ViewBag.Message = "Medlemshantering";
-
-            
-
             return View();
         }
         public ActionResult Statistics()

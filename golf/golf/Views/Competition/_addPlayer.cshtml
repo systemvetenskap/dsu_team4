@@ -1,0 +1,36 @@
+﻿@model golf.Models.AddCompPlayer
+
+<h2>@Model.comp.name</h2>
+<h3>@Model.comp.cDate</h3>
+
+<table>
+    @foreach (var item in Model.golfers)
+    {
+        
+    <tr>
+        <th>
+            @Html.DisplayFor(o => item.firstName)
+        </th>
+        <th>
+            @Html.DisplayFor(o => item.lastName)
+        </th>
+        <th>
+
+        </th>
+        <th>
+            
+        </th>
+        <th>
+            
+        </th>
+        <th>
+            
+        </th>
+        <th>
+            
+        </th>
+
+        <th></th>
+    </tr>
+    }
+</table>

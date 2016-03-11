@@ -19,7 +19,7 @@
                 <div class="hourAndMinutes">
                     <div class="timedivHour" onclick="onTimeDivClick(@item.Id)" id=@item.Id time=@item.teeTime1[3] ctime="@item.teeTime1" booked="@Model.changeColor(item.Id, Model.selDate)" cdate="@Model.dateString">
                         @Html.DisplayFor(modelItem => item.teeTime1)<br />
-                        @Model.number/4
+                        @Model.status
                        
                     </div>
                     @foreach (var o in Model.TeeTime)
@@ -28,9 +28,8 @@
                         {
                             <div class="timedivMin" onclick="onTimeDivClick(@o.Id)" id=@o.Id booked="@Model.changeColor(o.Id, Model.selDate)" ctime="@o.teeTime1" cdate="@Model.dateString">
 
-                                @Html.DisplayFor(modelItem => o.teeTime1)<br />
-                                @Model.number/4
-
+                                @Html.DisplayFor(modelItem => o.teeTime1)<br />                                
+                                @Model.status
 
                             </div>
 

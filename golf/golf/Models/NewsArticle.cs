@@ -22,10 +22,10 @@ namespace golf.Models
         public int Id { get; set; }
         public string header { get; set; }
         public string content { get; set; }
-        public Nullable<int> Person_ID { get; set; }
+        public int Person_ID { get; set; }
         public Nullable<System.DateTime> newsDate { get; set; }
     
-        public virtual ICollection<NewsArticleImage> NewsArticleImage { get; set; }
         public virtual Person Person { get; set; }
+        public virtual ICollection<NewsArticleImage> NewsArticleImage { get; set; }
     }
 }

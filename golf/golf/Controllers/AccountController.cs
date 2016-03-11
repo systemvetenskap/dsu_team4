@@ -63,7 +63,6 @@ namespace golf.Controllers
             ViewBag.Message = "Logga in här";
             return View();
         }
-       
         public ActionResult Index2()
         {
             return View();
@@ -123,7 +122,6 @@ namespace golf.Controllers
        
         public ActionResult LogInCheck(Person model)
         {
-
             String email = model.email;
             String PW = model.PW;
             foreach (Person P in db.Person)
@@ -141,7 +139,7 @@ namespace golf.Controllers
                     //{
                     //    Roles.CreateRole("User");
                     //    Roles.AddUserToRole(P.Id.ToString(), "User");
-                        
+
                     //}
                     //var roles = new List<string> { "Admin", "Author", "Super" };
                     //var userRoles = Roles.GetRolesForUser(User.Identity.Name);
@@ -150,11 +148,12 @@ namespace golf.Controllers
                     //{
                     //    //do something
                     //}
-
+           
                     return RedirectToAction("MyPage");
                 }
             }
-            return View("~/Shared/Error.cshtml");
+      
+            return View("LoginFail");
         }
     }
 }

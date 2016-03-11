@@ -3,18 +3,17 @@
 
     <head>
 
-
         <meta charset="utf-8" />
-        <title>@ViewBag.Title</title>
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
         <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
         <script src="//code.jquery.com/jquery-1.10.2.js"></script>
         <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 
         @RenderSection("Styles", false)
         @Styles.Render("~/Content/css")
-        @*@Scripts.Render("~/bundles/modernizr")*@
+       @*Scripts.Render("~/bundles/modernizr")*@
 
 
     </head>
@@ -30,9 +29,8 @@
                         <ul id="menu">
                             <li>@Html.ActionLink("Hem", "Index", "Home")</li>
                             <li>@Html.ActionLink("Tidsbokning", "Index", "TeeTime")</li>
-                            <li>@Html.ActionLink("Tävlingar", "Competitions", "Home")</li>
-                            <li>@Html.ActionLink("Statistik", "Statistics", "Home")</li> 
-                           
+                            <li>@Html.ActionLink("Tävlingar", "Index", "Competition")</li>
+                          
                             @if (Request.IsAuthenticated)
                             {
                                 <li>@Html.ActionLink("Medlemshantering", "Index", "MemberManagement")</li>
