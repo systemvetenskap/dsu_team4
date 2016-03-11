@@ -14,7 +14,8 @@ namespace golf.Models
 
         public DateTime selDate { get; set; }
         
-        public string number { get; set; }
+        public string number {get; set;}
+        public string status { get; set;}
         public string dateString { get; set; }
         public string maxDate { get; set; }
         public int userId { get; set; }
@@ -38,6 +39,7 @@ namespace golf.Models
         public bool bookable(int TTD_ID)
         {
             int counter = 0;
+           
             foreach (TeeTimeDateGolfer TTDG in TeeTimeDateGolfer)
             {
                 if (TTD_ID == TTDG.TeeTimeDate_ID)
@@ -63,6 +65,7 @@ namespace golf.Models
             bool dis = false; 
             int counter = 0;
             number = "0";
+            status = "";
             foreach (TeeTimeDate TTD in TeeTimeDate)
             {
                 
@@ -71,6 +74,7 @@ namespace golf.Models
                            if(TTD.Disabled == true)
                             {
                                 dis = true;
+                                status = "Tävling";
                             }
                            else
                            {
@@ -82,6 +86,12 @@ namespace golf.Models
                                        if (counter > 0)
                                        {
                                            number = counter.ToString();
+                                           status = counter.ToString() + "/4";
+                                       }
+                                       else
+                                       {
+
+                                           status = counter.ToString() + "/4";
                                        }
 
                                    }

@@ -34,11 +34,14 @@
    
 
     <br />
-
-    @foreach (var a in Model.newarticle)
+    @if (Model.newarticle.Count>=0)
+    {
+        
+    foreach (var a in Model.newarticle)
     {   <br>    
         @Html.Label(a.header)
         @Html.Raw(a.content.Replace(Environment.NewLine, "<br/>"))
+
         foreach (var ai in Model.ArticleImages)
         {
             if (a.Id == ai.NewsArticle_ID)
@@ -49,6 +52,7 @@
 
         <br>
  
+    }
     }
 </div>
 
