@@ -30,9 +30,7 @@
                             <li>@Html.ActionLink("Hem", "Index", "Home")</li>
                             <li>@Html.ActionLink("Tidsbokning", "Index", "TeeTime")</li>
                             <li>@Html.ActionLink("Tävlingar", "Index", "Competition")</li>
-                            <li>@Html.ActionLink("Statistik", "Statistics", "Home")</li> 
-
-                           
+                          
                             @if (Request.IsAuthenticated)
                             {
                                 <li>@Html.ActionLink("Medlemshantering", "Index", "MemberManagement")</li>

@@ -194,11 +194,9 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CompetitionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LogController.cs" />
     <Compile Include="Controllers\MemberManagementController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\TeeTimeController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -392,25 +390,12 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Home\Competitions.cshtml" />
-    <Content Include="Views\Home\Statistics.cshtml" />
     <Content Include="Views\MemberManagement\Index.cshtml" />
     <Content Include="Views\MemberManagement\Details.cshtml" />
     <Content Include="Views\MemberManagement\Create.cshtml" />
     <Content Include="Views\MemberManagement\Edit.cshtml" />
     <Content Include="Views\MemberManagement\Delete.cshtml" />
-    <Content Include="Views\Account\Egister.cshtml" />
-    <Content Include="Views\User\Index.cshtml" />
-    <Content Include="Views\User\Details.cshtml" />
-    <Content Include="Views\User\Create.cshtml" />
-    <Content Include="Views\User\Edit.cshtml" />
-    <Content Include="Views\User\Delete.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Log\Details.cshtml" />
-    <Content Include="Views\Log\Create.cshtml" />
-    <Content Include="Views\Log\Edit.cshtml" />
-    <Content Include="Views\Log\Delete.cshtml" />
-    <Content Include="Views\Account\LogOff.cshtml" />
     <Content Include="Views\TeeTime\Index.cshtml" />
     <Content Include="Views\Account\MyPage.cshtml" />
     <Content Include="Views\Account\Create.cshtml" />
