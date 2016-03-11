@@ -113,13 +113,13 @@
         @Html.Raw("Start")
     </div>
     <div class="editor-field">
-        @Html.DropDownListFor(model => model.startTime, new SelectList(Model.sTimes, "Id", "teeTime1"))
+        @Html.DropDownListFor(model => model.newComp.startTime, new SelectList(Model.sTimes, "Id", "teeTime1"))
     </div>
     <div class="editor-label">
         @Html.Raw("Slut")
     </div>
     <div class="editor-field">
-        @Html.DropDownListFor(model => model.endTime, new SelectList(Model.sTimes, "Id", "teeTime1"))
+        @Html.DropDownListFor(model => model.newComp.endTime, new SelectList(Model.sTimes, "Id", "teeTime1"))
     </div>
 
     <div class="editor-label">

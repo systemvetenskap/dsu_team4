@@ -71,12 +71,28 @@ namespace golf.Controllers
         {
             using( dsuteam4Entities1 databas = new dsuteam4Entities1())
             {
+                List<TeeTime> compStarttimes = new List<TeeTime>();
                 var comp = cc.newComp;
-                //test = databas.TeeTimeDate.Where(t => t.bookingDate == d).Where(t => t.TeeTime_ID == tid).ToList();
-                var test = databas.TeeTime.Where(t => t.Id >= cc.startTime.Id).Where(t => t.Id <= cc.endTime.Id).ToList();
-            
-                databas.Competition.Add(comp); 
-                //databas.SaveChanges();
+                int start = Convert.ToInt32(cc.newComp.startTime);
+                int end = Convert.ToInt32(cc.newComp.endTime);
+               
+                compStarttimes = databas.TeeTime.Where(t => t.Id >= start).Where(t => t.Id <= end).ToList();
+                
+                foreach(var i in compStarttimes)
+                {
+                    TeeTimeDate td = new TeeTimeDate();
+
+                    td.TeeTime_ID = i.Id;
+                    td.bookingDate = cc.newComp.cDate;
+                    td.Disabled = true;
+
+                    databas.TeeTimeDate.Add(td);
+
+                }
+                
+  
+               databas.Competition.Add(comp); 
+               databas.SaveChanges();
                 
             }
             using( dsuteam4Entities1 ndatabas = new dsuteam4Entities1())
@@ -90,9 +106,19 @@ namespace golf.Controllers
             }
 
         }
-        public void getData()
+        public void slumpa(int id)
         {
+            dsuteam4Entities1 databas = new dsuteam4Entities1();
 
+            var list = databas.CompetitionGolfer.ToList();
+            
+            foreach(var i in databas.CompetitionGolfer.ToList())
+            {
+                if(i.Competition_ID == id)
+                {
+                    
+                }
+            }
         }
         public ActionResult saveResult()
         {
