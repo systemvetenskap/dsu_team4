@@ -85,14 +85,23 @@ namespace golf.Controllers
         {
             int compID = 16;
             int playerID = 666;
+            int compGolfID = 1;
             RegisterComp regcomp = new RegisterComp();
             
             using (dsuteam4Entities1 databas = new dsuteam4Entities1())
             {
                 foreach (var item in databas.Hole)
                 {
+                    HoleStats hs = new HoleStats();
                     regcomp.holes.Add(item);
+                    hs.Hole = item;
+                    hs.CompetitionGolfer_ID = compGolfID;
+                    regcomp.holeStats.Add(hs);
                 }
+                //foreach (var item in databas.HoleStats)
+                //{
+                //    regcomp.holeStats.Add(item);
+                //}
 
                 regcomp.comp = databas.Competition.Find(compID);
             }
