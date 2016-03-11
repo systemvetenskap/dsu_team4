@@ -81,6 +81,15 @@ namespace golf.Controllers
         {
 
         }
+        public ActionResult registerResult()
+        {
+            int compID = 16;
+            int playerID = 666;
+
+
+
+            return View();
+        }
 
     }
 }
