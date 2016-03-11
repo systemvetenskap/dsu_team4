@@ -277,6 +277,19 @@ namespace golf.Controllers
 
            
         }
+        public ActionResult RegisterPlayer(int golferid, int competitionid)
+        {
+            CompetitionGolfer CG = new CompetitionGolfer();
+            CG.Golfer_ID = golferid;
+            CG.Competition_ID = competitionid;
+            
+            using (dsuteam4Entities1 databas = new dsuteam4Entities1())
+            {
+                databas.CompetitionGolfer.Add(CG);
+            }
+
+            return View("Index");
+        }
 
     }
 }

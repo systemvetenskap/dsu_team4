@@ -15,22 +15,43 @@
             @Html.DisplayFor(o => item.lastName)
         </th>
         <th>
+            @*<p id="@item.golfid"><a href="#" onclick="addPlayer(@item.golfid, @Model.comp.Id)">Lägg till</a></p>*@
+
+            @Html.ActionLink("Lägg till",
+             "RegisterPlayer",
+            
+             new {item.golfid, Model.comp.Id}
+            )
+
+            @*@Html.ActionLink()*@
 
         </th>
-        <th>
-            
-        </th>
-        <th>
-            
-        </th>
-        <th>
-            
-        </th>
-        <th>
-            
-        </th>
-
-        <th></th>
     </tr>
     }
 </table>
+
+<script type="text/javascript">
+
+    function addPlayer(GID, CID){
+    
+        $.ajax({
+            url: '/Competition/RegisterPlayer',
+            contentType: 'application/html; charset=utf-8',
+            data: {golfid : GID, competitionid : CID},
+            type: 'GET',
+            dataType: 'html'
+
+        })
+    //.error(function (xhr, status) {
+    //    alert(status);
+    //})
+     
+       
+    }
+
+
+    
+
+
+
+</script>
