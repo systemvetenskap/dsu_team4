@@ -23,24 +23,24 @@
                 <div class="float-left">
                     <p class="site-title">@Html.ActionLink("Hålslaget GK", "Index", "Home")</p>
                 </div>
-                <div class="float-right">
+                <div id="loginpartial">
                     @Html.Partial("_LoginPartial")
-                    <nav>                        
-                        <ul id="menu"> 
-                            <li>@Html.ActionLink("Hem", "Index", "Home")</li>
-                            <li>@Html.ActionLink("Tidsbokning", "Index", "TeeTime")</li>
-                            <li>@Html.ActionLink("Tävlingar", "Index", "Competition")</li>
-                          
-                            @if (Request.IsAuthenticated)
-                            {
-                                <li>@Html.ActionLink("Medlemshantering", "Index", "MemberManagement")</li>
-
-                            }
-                        </ul>
-                    </nav>
-                </div>                
+                </div>
+                <br>
+                <div class="float-right">
+                        <nav>
+                            <ul id="menu">
+                                <li>@Html.ActionLink("Hem", "Index", "Home")</li>
+                                <li>@Html.ActionLink("Tidsbokning", "Index", "TeeTime")</li>
+                                <li>@Html.ActionLink("Tävlingar", "Index", "Competition")</li>
+                                @if (Request.IsAuthenticated)
+                                {
+                                    <li>@Html.ActionLink("Medlemshantering", "Index", "MemberManagement")</li>
+                                }
+                            </ul>
+                        </nav>
+                    </div>                
             </div>
-
         </header>
         <div id="body">
             @RenderSection("featured", required: false)
@@ -48,14 +48,10 @@
                 @RenderBody()
             </section>
         </div>
-        <footer>
-            <div class="content-wrapper">
-                <div class="float-left">
+        <footer>       
+                <div class="footer">
                     <p>&copy; @DateTime.Now.Year - © Grupp 4</p>
-                </div>
-            </div>
+                </div>         
         </footer>
-        @*@Scripts.Render("~/bundles/jquery")
-        @RenderSection("scripts", required: false)*@
     </body>
 </html>
