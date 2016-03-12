@@ -120,6 +120,13 @@ header .content-wrapper {
 {
     padding:2%;
 }
+.createcompetition{
+    padding:2%;
+}
+.addplayer{
+    padding:2%;
+}
+
 #loginpartial a:link{
     color:#999;    
 }

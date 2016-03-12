@@ -62,109 +62,110 @@
     });
 </script>         
 
-@using (Html.BeginForm("saveComp", "Competition", FormMethod.Post, null))
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
+    @using (Html.BeginForm("saveComp", "Competition", FormMethod.Post, null))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <div class="createcompetition" id="createcompetition">
+            <fieldset>
+                <legend>Person</legend>
 
 
-<fieldset>
-    <legend>Person</legend>
 
+                <div class="editor-label">
+                    @Html.Raw("Namn")
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.newComp.name)
+                    @Html.ValidationMessageFor(model => model.newComp.name)
+                </div>
+                <div class="editor-label">
+                    @Html.Raw("Antal höl")
+                </div>
+                <div class="editor-field">
+                    @{List<SelectListItem> holes = new List<SelectListItem>();
+                        holes.Add(new SelectListItem { Text = "9", Value = "9" });
+                        holes.Add(new SelectListItem { Text = "18", Value = "18" });
+                    }
+                    @Html.DropDownListFor(model => model.newComp.NumberOfHoles, holes, "--Antal höl--")
+                </div>
+                <div class="editor-label">
+                    @Html.Raw("Antal spelare")
+                </div>
+                <div class="editor-field">
+                    @{List<SelectListItem> players = new List<SelectListItem>();
+                        players.Add(new SelectListItem { Text = "3", Value = "3" });
+                        players.Add(new SelectListItem { Text = "4", Value = "4" });
+                    }
+                    @Html.DropDownListFor(model => model.newComp.playersPerTime, players, "--Spelare per starttid--")
+                </div>
+                <div class="editor-label">
+                    @Html.Raw("Tävlingsdatum")
+                </div>
+                <div class="editor-field">
 
+                    @Html.TextBoxFor(model => model.newComp.cDate, new { @class = "dt", placeholder = "Välj tävlingsdatum.." })
+                    @Html.ValidationMessageFor(model => model.newComp.cDate)
 
-    <div class="editor-label">
-        @Html.Raw("Namn")
-    </div>
-    <div class="editor-field">
-        @Html.EditorFor(model => model.newComp.name)
-        @Html.ValidationMessageFor(model => model.newComp.name)
-    </div>
-    <div class="editor-label">
-        @Html.Raw("Antal höl")
-    </div>
-    <div class="editor-field">
-        @{List<SelectListItem> holes = new List<SelectListItem>();
-        holes.Add(new SelectListItem { Text = "9", Value = "9" });
-        holes.Add(new SelectListItem { Text = "18", Value = "18" });
-        }
-        @Html.DropDownListFor(model => model.newComp.NumberOfHoles, holes, "--Antal höl--")
-    </div>
-    <div class="editor-label">
-        @Html.Raw("Antal spelare")
-    </div>
-    <div class="editor-field">
-        @{List<SelectListItem> players = new List<SelectListItem>();
-        players.Add(new SelectListItem { Text = "3", Value = "3" });
-        players.Add(new SelectListItem { Text = "4", Value = "4" });
-        }
-        @Html.DropDownListFor(model => model.newComp.playersPerTime, players, "--Spelare per starttid--")
-    </div>
-    <div class="editor-label">
-        @Html.Raw("Tävlingsdatum")
-    </div>
-    <div class="editor-field">
+                </div>
+                <div class="editor-label">
+                    @Html.Raw("Start")
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownListFor(model => model.newComp.startTime, new SelectList(Model.sTimes, "Id", "teeTime1"))
+                </div>
+                <div class="editor-label">
+                    @Html.Raw("Slut")
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownListFor(model => model.newComp.endTime, new SelectList(Model.sTimes, "Id", "teeTime1"))
+                </div>
 
-        @Html.TextBoxFor(model => model.newComp.cDate, new { @class = "dt", placeholder = "Välj tävlingsdatum.." })
-        @Html.ValidationMessageFor(model => model.newComp.cDate)
+                <div class="editor-label">
+                    @Html.Raw("Första anmälningsdatum")
+                </div>
+                <div class="editor-field">
+                    @Html.TextBoxFor(model => model.newComp.signUpFrom, new { @class = "dt", placeholder = "Välj första anmälningsdag.." })
+                    @Html.ValidationMessageFor(model => model.newComp.signUpFrom)
 
-    </div>
-    <div class="editor-label">
-        @Html.Raw("Start")
-    </div>
-    <div class="editor-field">
-        @Html.DropDownListFor(model => model.newComp.startTime, new SelectList(Model.sTimes, "Id", "teeTime1"))
-    </div>
-    <div class="editor-label">
-        @Html.Raw("Slut")
-    </div>
-    <div class="editor-field">
-        @Html.DropDownListFor(model => model.newComp.endTime, new SelectList(Model.sTimes, "Id", "teeTime1"))
-    </div>
+                </div>
 
-    <div class="editor-label">
-        @Html.Raw("Första anmälningsdatum")
-    </div>
-    <div class="editor-field">
-        @Html.TextBoxFor(model => model.newComp.signUpFrom, new { @class = "dt", placeholder = "Välj första anmälningsdag.." })
-        @Html.ValidationMessageFor(model => model.newComp.signUpFrom)
+                <div class="editor-label">
+                    @Html.Raw("Sista anmälningsdatum")
+                </div>
+                <div class="editor-field">
+                    @Html.TextBoxFor(model => model.newComp.signUpTo, new { @class = "dt", placeholder = "Välj sista anmälningsdag.." })
+                    @Html.ValidationMessageFor(model => model.newComp.signUpTo)
 
-    </div>
+                </div>
 
-    <div class="editor-label">
-        @Html.Raw("Sista anmälningsdatum")
-    </div>
-    <div class="editor-field">
-        @Html.TextBoxFor(model => model.newComp.signUpTo, new { @class = "dt", placeholder = "Välj sista anmälningsdag.." })
-        @Html.ValidationMessageFor(model => model.newComp.signUpTo)
+                <div class="editor-label">
+                    @Html.Raw("Tävlingsklass")
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownListFor(model => model.newComp.CompeteClass_ID, new SelectList(Model.classList, "Id", "Name"))
+                </div>
 
-    </div>
+                <div class="editor-label">
+                    @Html.Raw("Kontaktperson")
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownListFor(model => model.newComp.Person_IDc, new SelectList(Model.contactlist, "Id", "oneName"))
+                </div>
 
-    <div class="editor-label">
-        @Html.Raw("Tävlingsklass")
-    </div>
-    <div class="editor-field">
-        @Html.DropDownListFor(model => model.newComp.CompeteClass_ID, new SelectList(Model.classList, "Id", "Name"))
-    </div>
+                <div class="editor-label">
+                    @Html.Raw("Beskrivning/Övrig info")
+                </div>
+                <div class="editor-field">
+                    @Html.TextAreaFor(model => model.newComp.info)
+                    @Html.ValidationMessageFor(model => model.newComp.info)
+                </div>
 
-    <div class="editor-label">
-        @Html.Raw("Kontaktperson")
-    </div>
-    <div class="editor-field">
-        @Html.DropDownListFor(model => model.newComp.Person_IDc, new SelectList(Model.contactlist, "Id", "oneName"))
-    </div>
+                <p>
+                    <input type="submit" value="Spara" id="createcompetitionbutton" />
 
-    <div class="editor-label">
-        @Html.Raw("Beskrivning/Övrig info")
-    </div>
-    <div class="editor-field">
-        @Html.TextAreaFor(model => model.newComp.info)
-        @Html.ValidationMessageFor(model => model.newComp.info)
-    </div>
-
-    <p>
-        <input type="submit" value="Spara" id="createcompetitionbutton" />
-     
-    </p>
-</fieldset>
-} 
+                </p>
+            </fieldset>
+        </div>
+                        }
