@@ -19,7 +19,7 @@
     </head>
     <body>
         <header>
-            <div class="content-wrapper">
+            <div class="topdivs">
                 <div class="float-left">
                     <p class="site-title">@Html.ActionLink("Hålslaget GK", "Index", "Home")</p>
                 </div>
@@ -39,11 +39,11 @@
                                 }
                             </ul>
                         </nav>
-                    </div>                
+                    </div>
+                @RenderSection("featured", required: false)              
             </div>
         </header>
-        <div id="body">
-            @RenderSection("featured", required: false)
+        <div id="body">         
             <section class="content-wrapper main-content clear-fix">
                 @RenderBody()
             </section>

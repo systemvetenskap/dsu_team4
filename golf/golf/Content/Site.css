@@ -126,6 +126,12 @@ header .content-wrapper {
 .addplayer{
     padding:2%;
 }
+.topdivs {
+  
+    /*Rubrik, meny, loginpartial, featured(cirkeln)*/
+   
+ 
+}
 
 #loginpartial a:link{
     color:#999;    
