@@ -11,6 +11,7 @@ namespace golf.Models
         public List<HoleStats> holeStats = new List<HoleStats>();
         public Competition comp { get; set; }
         public List<CompetitionGolfer> compGolf = new List<CompetitionGolfer>();
+        public List<Person> p = new List<Person>();
 
     }
 }

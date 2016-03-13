@@ -159,7 +159,20 @@ namespace golf.Controllers
 
                    RegisterComp rg = new RegisterComp();
                    rg.comp = c;
-                   
+
+                   //foreach (var item in rg.comp.CompetitionGolfer)
+                   //{
+                   //    rg.p.Add(item.Golfer.Person);
+                   //}
+
+
+                   foreach (var item in db.CompetitionGolfer)
+                   {
+                       if (item.Competition_ID == id)
+                       {
+                           rg.p.Add(item.Golfer.Person);
+                       }
+                   }
                     
                     
                    return PartialView("_regResult", rg);

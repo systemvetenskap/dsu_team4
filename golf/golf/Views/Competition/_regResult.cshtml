@@ -4,16 +4,21 @@
     ViewBag.Title = "registerResult";
 }
 
-<h2>registerResult</h2>
+<h2>Registrera resultat här</h2>
+<br />
 
-@Html.Label(Model.comp.name)
+<h3>
+    @Html.Label("Tävling" + Model.comp.name)
+</h3>
 
+<br />
 
-
-@*@foreach (var item in Model.compGolf)
+@Html.Label("Golfare:")
+@foreach (var item in Model.p)
 {
-    @Html.Label(item.Golfer)
-}*@
+    @Html.Label(item.lastName)
+    <br />
+}
 
 @*@Html.LabelFor(m => m.comp.Person.lastName)
 
