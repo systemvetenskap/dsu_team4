@@ -16,7 +16,18 @@
 @Html.Label("Golfare:")
 @foreach (var item in Model.p)
 {
+
+
     @Html.Label(item.lastName)
+    
+    @Ajax.ActionLink("Registrera resultat", "regResultPerson", new { id = item.Id }, new AjaxOptions()
+    {
+        UpdateTargetId = "showComp",
+        HttpMethod = "GET",
+        InsertionMode = InsertionMode.Replace
+    })
+    
+    
     <br />
 }
 

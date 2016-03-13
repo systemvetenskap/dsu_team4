@@ -413,6 +413,7 @@
     <Content Include="Views\Competition\_createComp.cshtml" />
     <Content Include="Views\Competition\_regResult.cshtml" />
     <Content Include="Views\Competition\_addPlayer.cshtml" />
+    <Content Include="Views\Competition\_regResultPerson.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

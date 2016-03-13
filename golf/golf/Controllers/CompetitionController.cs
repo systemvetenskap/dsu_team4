@@ -180,6 +180,12 @@ namespace golf.Controllers
 
             }        
         }
+        public ActionResult regResultPerson(int id)
+        {
+
+            return View();
+        }
+
         public ActionResult createComp()
         {
             CreateComp cc = new CreateComp();
