@@ -150,19 +150,22 @@ namespace golf.Controllers
         
         public ActionResult registerResult(int id)
         {
+            
             using(dsuteam4Entities1 db = new dsuteam4Entities1())
             {
                Competition c = db.Competition.Find(id);
 
-               RegisterComp rg = new RegisterComp();
+               //if (c.CompetitionGolfer.Count == 0)
 
-               rg.comp = c;
+                   RegisterComp rg = new RegisterComp();
+                   rg.comp = c;
+                   
+                    
+                    
+                   return PartialView("_regResult", rg);
 
-               return PartialView("_regResult", rg);
 
-            }
-
-            
+            }        
         }
         public ActionResult createComp()
         {

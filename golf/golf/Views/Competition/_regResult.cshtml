@@ -4,28 +4,33 @@
     ViewBag.Title = "registerResult";
 }
 
-@*<h2>registerResult</h2>
+<h2>registerResult</h2>
 
-Html.Label(Model.comp.name)
+@Html.Label(Model.comp.name)
 
 
 
-Html.LabelFor(m => m.comp.Person.lastName)
+@*@foreach (var item in Model.compGolf)
+{
+    @Html.Label(item.Golfer)
+}*@
 
-Html.Label("Hål | Slag")
+@*@Html.LabelFor(m => m.comp.Person.lastName)
 
-foreach (var hole in Model.holes)
+@Html.Label("Hål | Slag")*@
+
+@*foreach (var hole in Model.holes)
     {
 
         @Html.Label(hole.Number)
         @Html.EditorFor(m => m.holeStats[hole.Id])
         <br />
-    }
+    }*@
 
 
-for (int i = 0; i < Model.holes.Count; i++)
+@*@for (int i = 0; i < Model.holes.Count; i++)
 {
-    Html.Label(Model.holes[i].Number)
-    Html.EditorFor(m => m.holeStats[i].stroaks)
+    @Html.Label(Model.holes[i].Number)
+    @Html.EditorFor(m => m.holeStats[i].stroaks)
     <br />
 }*@
