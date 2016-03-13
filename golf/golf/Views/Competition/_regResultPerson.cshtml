@@ -1,5 +1,16 @@
-﻿@{
+﻿@model golf.Models.RegisterComp
+
+@{
     ViewBag.Title = "_regResultPerson";
 }
 
 <h2>_regResultPerson</h2>
+
+@foreach (var item in Model.holeStats)
+{
+    @Html.Label(item.Hole.Number)
+    
+    @Html.TextBox("stroaks");
+    <br />
+
+}

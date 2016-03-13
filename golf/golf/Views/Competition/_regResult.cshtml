@@ -20,7 +20,7 @@
 
     @Html.Label(item.lastName)
     
-    @Ajax.ActionLink("Registrera resultat", "regResultPerson", new { id = item.Id }, new AjaxOptions()
+    @Ajax.ActionLink("Registrera resultat", "regResultPerson", new { golfID = item.Id, compID = Model.comp.Id, regComp = Model}, new AjaxOptions()
     {
         UpdateTargetId = "showComp",
         HttpMethod = "GET",

@@ -180,10 +180,54 @@ namespace golf.Controllers
 
             }        
         }
-        public ActionResult regResultPerson(int id)
+        public ActionResult regResultPerson(int golfID, int compID, RegisterComp regComp)
         {
+            using (dsuteam4Entities1 db = new dsuteam4Entities1())
+            {
 
-            return View();
+                int compgolf;
+
+                RegisterComp rc = new RegisterComp();
+
+                List<Hole> h = new List<Hole>();
+
+                foreach (var item in db.Hole)
+	                {
+		                 h.Add(item);
+	                }
+
+                foreach (var item in db.CompetitionGolfer)
+                {
+                    if (item.Golfer_ID == 911 /*golfID*/ && item.Competition_ID == compID)
+                    {
+                        compgolf = item.Id;
+
+
+                        for (int i = 0; i < 2; /*item.Competition.NumberOfHoles;*/ i++)
+                        {
+                            HoleStats hs = new HoleStats();
+
+                            hs.Hole = h[i];
+                            hs.Hole_ID = h[i].Id;
+
+                            hs.CompetitionGolfer = item;
+                            hs.CompetitionGolfer_ID = item.Id;
+
+                            //db.HoleStats.Add(hs);
+                            //db.SaveChanges();
+
+                            rc.holeStats.Add(hs);
+                            
+                        }
+                        
+                    }
+                }
+
+                
+
+
+                return PartialView("_regResultPerson", rc);
+            }
         }
 
         public ActionResult createComp()
