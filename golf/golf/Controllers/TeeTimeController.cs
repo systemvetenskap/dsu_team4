@@ -439,6 +439,7 @@ namespace golf.Controllers
                            select new
                            {
                                Golfid = g.Id,
+                               fullname = t.firstName+" "+t.lastName,
                                fName = t.firstName,
                                lName = t.lastName,
                                Golfstring = g.golfID,
@@ -447,7 +448,7 @@ namespace golf.Controllers
                            };
                 var ltu = list.ToList();
                
-                var listp = ltu.Where(l => l.fName.ToLower().Contains(searchstring.ToLower()) || l.lName.ToLower().Contains(searchstring.ToLower()));
+                var listp = ltu.Where(l => l.fullname.ToLower().Contains(searchstring.ToLower()));
 
                 var res = listp.ToList();
 
