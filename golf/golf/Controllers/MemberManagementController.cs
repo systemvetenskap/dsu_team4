@@ -25,9 +25,7 @@ namespace golf.Controllers
             
             using(dsuteam4Entities1 databas = new dsuteam4Entities1())
             {
-                searchClass sp = new searchClass();
-                
-                
+
 
 
                 return View();
@@ -35,8 +33,14 @@ namespace golf.Controllers
             
         
         }
-        public searchMember(string searchstring)
+        public ActionResult searchMember(string searchstring)
         {
+
+            searchClass sc = new searchClass();
+
+           List<Person> p = sc.getPersons(searchstring);
+
+            return PartialView("_searchMember", p);
 
         }
 
