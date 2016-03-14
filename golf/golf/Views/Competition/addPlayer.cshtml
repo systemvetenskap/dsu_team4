@@ -19,7 +19,6 @@
     <h3>@Model.comp.cDate</h3>
     <div>
         <input id="searchButton" type="submit" onclick="search()" value="Sök" />
-        <input id="searchButton" type="submit" onclick="sok1()" value="Sök1" />
         <input id="searchField" type="text" placeholder="sök" />
 
     </div>
@@ -31,15 +30,8 @@
 </div>
 
 <script type="text/javascript">
-    function sok1(){
-        alert("test");
-    }
     function search() {
-
-        //alert("Test");
-
-        
-        
+       
         var string = document.getElementById('searchField').value;
 
         var g = @Model.comp.Id
