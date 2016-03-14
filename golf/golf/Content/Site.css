@@ -95,6 +95,7 @@ h5, h6 {
 
 /* main layout
 ----------------------------------------------------------*/
+
 .content-wrapper {
         background:rgba(255,255,255, 0.7);
         border-radius:5px;
@@ -103,7 +104,10 @@ h5, h6 {
 #body {
     clear: both;
 }
+.no-close .ui-dialog-titlebar-close{
 
+    display: none;
+}
 header .content-wrapper {
     background:none;
     margin-top:10px;

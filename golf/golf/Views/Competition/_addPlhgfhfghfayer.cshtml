@@ -1,0 +1,59 @@
+﻿@model golf.Models.AddCompPlayer
+
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <p>
+                Tävlingar
+            </p>
+    </div>
+    </section>
+}
+<script type="text/javascript">
+
+        function search(d) {
+
+        alert("Test");
+
+        var string = document.getElementById('searchField').value;
+
+        $.ajax({
+            url: '/Competition/searchPlayer',
+            contentType: 'application/html; charset=utf-8',
+            data: { pg: @Model.golfers ,s: string },
+            type: 'GET',
+            dataType: 'html'
+
+        })
+
+        .success(function (result) {
+            $('#sDiv').html(result);
+        })
+        .error(function (xhr, status) {
+            alert(status);
+        })
+
+
+
+</script>
+
+<div class="addplayer" id="addplayer">
+    <h2>@Model.comp.name</h2>
+    <h3>@Model.comp.cDate</h3>
+    <div>
+        <input id="searchButton" type="submit" onclick="search(d)" value="Sök" />
+        <input id="searchField" type="text" placeholder="sök" />
+
+    </div>
+    <div id=" sDiv" class="sDiv">
+
+        
+    </div>
+
+</div>

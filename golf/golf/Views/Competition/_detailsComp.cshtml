@@ -1,0 +1,75 @@
+﻿@model golf.Models.Competition
+
+<div class="MyPageLoggedIn">
+    <fieldset>
+        <legend>Person</legend>
+
+        <div class="editor-label">
+            @Html.Raw("Namn")
+        </div>
+        <div class="editor-field">
+            @Html.DisplayFor(model => model.name)
+            @Html.ValidationMessageFor(model => model.name)
+        </div>
+        <br>
+        <div class="editor-label">
+            @Html.Raw("Datum")
+        </div>
+        <div class="editor-field">
+            @Html.DisplayFor(model => model.cDate)
+            @Html.ValidationMessageFor(model => model.cDate)
+        </div>
+        <br>
+        <div class="editor-label">
+            @Html.Raw("Första anmälningsdag")
+        </div>
+        <div class="editor-field">
+            @Html.DisplayFor(model => model.signUpFrom)
+            @Html.ValidationMessageFor(model => model.signUpFrom)
+        </div>
+        <br>
+        <div class="editor-label">
+            @Html.Raw("Sista anmälningsdag")
+        </div>
+        <div class="editor-field">
+            @Html.DisplayFor(model => model.signUpTo)
+            @Html.ValidationMessageFor(model => model.signUpTo)
+        </div>
+        <br>
+        <div class="editor-label">
+            @Html.Raw("Antal Hål")
+        </div>
+        <div class="editor-field">
+            @Html.DisplayFor(model => model.NumberOfHoles)
+            @Html.ValidationMessageFor(model => model.NumberOfHoles)
+        </div>
+        <br>
+        <div class="editor-label">
+            @Html.Raw("Antal spelare")
+        </div>
+        <div class="editor-field">
+            @Html.DisplayFor(model => model.playersPerTime)
+            @Html.ValidationMessageFor(model => model.playersPerTime)
+        </div>
+        <br>
+        <div class="editor-label">
+            @Html.Raw("Beskrivning")
+        </div>
+        <div class="editor-field">
+                @Html.DisplayFor(model => model.info)
+                @Html.ValidationMessageFor(model => model.info)
+            </div>
+   
+        <br>
+        <div class="edit-link">
+            @Html.HiddenFor(model => model.Id)
+       
+            @Ajax.ActionLink("Ändra", "editComp", new { id = Model.Id}, new AjaxOptions() { 
+                UpdateTargetId = "showComp",
+                HttpMethod = "GET",
+                InsertionMode = InsertionMode.Replace
+                
+            })
+        </div>
+    </fieldset>
+</div>
