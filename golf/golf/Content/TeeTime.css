@@ -13,17 +13,26 @@
     width:7%;
     float: left;
     margin-left: 1%;
+    text-align:center;
+
+
     
 }
 .timedivHour{
-    width:100%;
+
     /*background-color: lightgreen;*/
     font-weight: bold;
+    width:100%;
     padding-bottom: 50%;
     margin-left: 10%;
     margin-bottom: 10%;
     float: left;
     display: inline-block;
+    overflow: hidden;
+    border-radius:15%;
+    border:1px solid black;
+    text-align:center;
+
 }
 .timedivHour[booked = "grey"]{
     background-color: grey;
@@ -39,6 +48,9 @@
     float: left;
     display: inline-block;
     overflow: hidden;
+    border-radius:15%;
+    border:1px solid black;
+    text-align:center;
     
     
 }
