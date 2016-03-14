@@ -53,6 +53,7 @@ namespace golf.Controllers
             return PartialView("_searchMember", p);
 
         }
+     
 
         //Visa detaljer om personer
         public ActionResult Details(int id = 0)

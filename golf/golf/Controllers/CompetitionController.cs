@@ -367,6 +367,14 @@ namespace golf.Controllers
 
             return RedirectToAction("Index");
         }
+        public ActionResult searchPlayer(List<PersonGolfer> pg, string s)
+        {
+            searchClass sc = new searchClass();
+            AddCompPlayer adc = new AddCompPlayer();
+            adc.golfers = sc.getPersonGolfers(pg, s);
+            return PartialView("_searchPlayer", adc);
+
+        }
 
     }
 }

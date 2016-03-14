@@ -42,11 +42,11 @@ namespace golf.Models
 
         }
 
-        public List<Person> getPersonGolfers(List<PersonGolfer> pg, string s)
+        public List<PersonGolfer> getPersonGolfers(List<PersonGolfer> pg, string s)
         {
-            using (dsuteam4Entities1 databas = new dsuteam4Entities1())
-            {
-
+           
+            
+                List<PersonGolfer> PG = new List<PersonGolfer>();
                 List<OneNamePerson> op = new List<OneNamePerson>();
                 foreach (PersonGolfer i in pg)
                 {
@@ -63,14 +63,20 @@ namespace golf.Models
 
                 foreach (var i in pers)
                 {
-                    var selP = databas.PersonGolfer.Find(i.gol);
+                    foreach(var z in pg)
+                    {
+                        if(i.Id == z.personid)
+                        {
+                            pg.Add(z);
+                        }
 
-                    person.Add(selP);
+                    }
+                  
 
                 }
 
-                return person;
-            }
+                return PG;
+            
 
         }
 
