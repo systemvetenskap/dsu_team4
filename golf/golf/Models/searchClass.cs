@@ -16,7 +16,7 @@ namespace golf.Models
         {
             using(dsuteam4Entities1 databas = new dsuteam4Entities1())
             {
-
+               
                 List<OneNamePerson> op = new List<OneNamePerson>();
                 foreach (Person i in databas.Person.ToList())
                 {
@@ -30,9 +30,10 @@ namespace golf.Models
            
                 foreach(var i in pers)
                 {
-                    var selP = databas.Person.Find(i.Id);
 
-                    person.Add(selP);
+                    var selp = databas.Person.Find(i.Id);
+
+                    person.Add(selp);
                     
                 }
 
