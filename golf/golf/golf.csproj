@@ -268,6 +268,7 @@
       <DependentUpon>PersonModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\RegisterComp.cs" />
+    <Compile Include="Models\searchClass.cs" />
     <Compile Include="Models\TeeDate.cs">
       <DependentUpon>PersonModel.tt</DependentUpon>
     </Compile>
@@ -414,6 +415,8 @@
     <Content Include="Views\Competition\_regResult.cshtml" />
     <Content Include="Views\Competition\_addPlayer.cshtml" />
     <Content Include="Views\Competition\_regResultPerson.cshtml" />
+    <Content Include="Views\MemberManagement\_searchMember.cshtml" />
+    <Content Include="Views\Competition\_searchPlayer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -13,77 +13,39 @@
 
 }
 
-<p>
-    @Html.ActionLink("Lägg till medlem", "Create")
-</p>
-<table>
-    <tr>
-        <th>
-            @Html.Label("Förnamn")
-        </th>
-        <th>
-            @Html.Label("Efternamn")
-        </th>
-        <th>
-            @Html.Label("Adress")
-        </th>
-        <th>
-            @Html.Label("Postnummer")
-        </th>
-        <th>
-            @Html.Label("Ort")
-        </th>
-        <th>
-            @Html.Label("E-post")
-        </th>
-        <th>
-            @Html.Label("Betalat")
-        </th>
+<input id="searchButton" type="submit" onclick="soP(1)" value="Sök" />
+<input id="searchField" type="text" placeholder="sök" />
 
-        <th></th>
-    </tr>
+<div class="searchDiv" id="searchDiv">
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.firstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.lastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.streetAddres)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.postalCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.city)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.email)
-            </td>
 
-            <td>
-                @if (item.Payed == true)
-                {
-                    <p>Ja</p>
-                }
-                else
-                {
-                <p>Nej</p>
-                }
-                @*@Html.DisplayTextFor(modelItem => item.Payed)*@
-            </td>
-            <td>
-                @Html.ActionLink("Ändra", "Edit", new { id = item.Id }) 
-                @Html.ActionLink("Visa", "Details", new { id = item.Id }) 
-                @Html.ActionLink("Radera", "Delete", new { id = item.Id })
+</div>
 
-                
-            </td>
-        </tr>
+<script>
+
+    function soP(d) {
+
+        var s = document.getElementById('searchField').value;
+
+        $.ajax({
+            url: '/MemberManagement/searchMember',
+            contentType: 'application/html; charset=utf-8',
+            data: { searchstring: s },
+            type: 'GET',
+            dataType: 'html'
+
+        })
+
+        .success(function (result) {
+            $('#searchDiv').html(result);
+        })
+        .error(function (xhr, status) {
+            alert(status);
+        })
+
+
     }
 
-</table>
+
+
+</script>
