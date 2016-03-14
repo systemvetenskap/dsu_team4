@@ -1,5 +1,5 @@
 ﻿@model golf.Models.AddCompPlayer
-
+@*
 <table>
     @foreach (var item in Model.golfers)
     {
@@ -13,13 +13,13 @@
                 @Html.DisplayFor(o => item.lastName)
             </th>
             <th>
-        
+
                 @Html.ActionLink("Lägg till",
                         "RegisterPlayer", new { golferid = item.golfid, competitionid = Model.comp.Id })
 
 
 
-            </th>
+            @*</th>
         </tr>
     }
-</table>
+</table>*@
