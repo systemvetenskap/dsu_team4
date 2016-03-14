@@ -369,7 +369,7 @@ namespace golf.Controllers
                 
                 acp.comp = c;
 
-                return PartialView("_addPlayer", acp);
+                return View("addPlayer", acp);
             }
 
            
@@ -388,11 +388,81 @@ namespace golf.Controllers
 
             return RedirectToAction("Index");
         }
-        public ActionResult searchPlayer(List<PersonGolfer> pg, string s)
+        public PartialViewResult searchPlayer(int id, string s)
         {
+                AddCompPlayer acp = new AddCompPlayer();
+                Competition c = new Competition();
+            using (dsuteam4Entities1 d = new dsuteam4Entities1())
+            {
+
+                 c = d.Competition.Find(id);
+
+                var join = from p in d.Person.ToList()
+                           join g in d.Golfer.ToList()
+                           on p.Id equals g.Person_ID
+                           select new
+                           {
+
+                               p.firstName,
+                               p.lastName,
+                               p.Id,
+                               Golfstring = g.golfID,
+                               g.HCP,
+                               Golfid = g.Id,
+                               p.gender_ID,
+
+                           };
+
+                var list = join.ToList();
+
+                var persong = from p in list
+                              join g in d.Gender.ToList()
+                              on p.gender_ID equals g.Id
+                              select new
+                              {
+                                  personid = p.Id,
+                                  fName = p.firstName,
+                                  lName = p.lastName,
+                                  p.Golfstring,
+                                  HCP = p.HCP,
+                                  Gender = g.genderName,
+                                  p.Golfid,
+                                  p.gender_ID
+
+
+                              };
+                var toView = persong.ToList();
+
+
+                foreach (var i in toView)
+                {
+                    PersonGolfer pg = new PersonGolfer();
+
+                    pg.personid = i.personid;
+                    pg.firstName = i.fName;
+                    pg.lastName = i.lName;
+                    pg.golfstring = i.Golfstring;
+                    pg.HCP = i.HCP;
+                    pg.gender = i.Gender;
+                    pg.golfid = i.Golfid;
+                    pg.gender_ID = Convert.ToInt16(i.gender_ID);
+
+                    if (c.CompeteClass_ID == i.gender_ID || c.CompeteClass_ID == 1)
+                    {
+                        acp.golfers.Add(pg);
+                    }
+
+                }
+
+
+
+                acp.comp = c;
+            }
+
             searchClass sc = new searchClass();
             AddCompPlayer adc = new AddCompPlayer();
-            adc.golfers = sc.getPersonGolfers(pg, s);
+            adc.golfers = sc.getPersonGolfers(acp.golfers, s);
+            adc.comp = c;
             return PartialView("_searchPlayer", adc);
 
         }

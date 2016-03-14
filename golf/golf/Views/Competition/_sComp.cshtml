@@ -36,12 +36,13 @@
 
                 </td>
                 <td>
-                    @Ajax.ActionLink("Anmäl spelare", "addPlayer", new { id = item.Id }, new AjaxOptions()
+                    @*@Ajax.ActionLink("Anmäl spelare", "addPlayer", new { id = item.Id }, new AjaxOptions()
                        {
                            UpdateTargetId = "showComp",
                            HttpMethod = "GET",
                            InsertionMode = InsertionMode.Replace
-                       })
+                       })*@
+                    @Html.ActionLink("Anmäl spelareFDFS", "addPlayer", new { id = item.Id })
 
                 </td>
             </tr>
