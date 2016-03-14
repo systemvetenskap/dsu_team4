@@ -6,11 +6,30 @@
 
 <h2>_regResultPerson</h2>
 
-@foreach (var item in Model.holeStats)
-{
-    @Html.Label(item.Hole.Number)
-    
-    @Html.TextBox("stroaks");
-    <br />
 
-}
+
+<table>
+    <tr>
+        <th>
+            @Html.Label("Hål")
+        </th>
+        <th>
+            @Html.Label("Antal slag")
+        </th>
+    </tr>
+
+
+    @foreach (var item in Model.holeStats)
+    {
+        <tr>
+            <td>
+                @Html.Label(item.Hole.Number)
+            </td>
+            <td>
+                @Html.Label("1415")
+            </td>
+        </tr>
+    }
+
+
+</table>
