@@ -67,7 +67,7 @@ namespace golf.Models
                     {
                         if(i.Id == z.personid)
                         {
-                            pg.Add(z);
+                            PG.Add(z);
                         }
 
                     }
