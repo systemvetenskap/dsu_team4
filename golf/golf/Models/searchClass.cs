@@ -17,12 +17,23 @@ namespace golf.Models
             using(dsuteam4Entities1 databas = new dsuteam4Entities1())
             {
 
-                var pers = databas.Person.Where(p => p.firstName.ToLower().Contains(s.ToLower()) || p.lastName.ToLower().Contains(s.ToLower()));
+                List<OneNamePerson> op = new List<OneNamePerson>();
+                foreach (Person i in databas.Person.ToList())
+                {
+                    OneNamePerson onp = new OneNamePerson();
+                    onp.Id = i.Id;
+                    onp.oneName = i.firstName + " " + i.lastName;
+                    op.Add(onp);
+                }
+
+                var pers = op.Where(p => p.oneName.ToLower().Contains(s.ToLower()));
+           
                 foreach(var i in pers)
                 {
+                    var selP = databas.Person.Find(i.Id);
 
-                    person.Add(i);
-
+                    person.Add(selP);
+                    
                 }
 
                 return person;

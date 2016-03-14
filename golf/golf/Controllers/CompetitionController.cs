@@ -21,13 +21,7 @@ namespace golf.Controllers
             using (dsuteam4Entities1 databas = new dsuteam4Entities1())
             {
 
-
-            
-
-                
-
- 
-
+          
                 cc.classList = databas.CompeteClass.ToList();
                 List<Person> p = databas.Person.ToList();
 
