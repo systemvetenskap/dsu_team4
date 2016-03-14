@@ -8,7 +8,7 @@
         <th>
             @Html.Label("Datum")
         </th>
-        <th>
+        @*<th>
             @Html.Label("Första anmälningsdag")
         </th>
         <th>
@@ -20,7 +20,7 @@
 
         <th>
             @Html.Label("Övrigt")
-        </th>
+        </th>*@
 
         <th></th>
     </tr>
@@ -28,14 +28,14 @@
         {
             <tr>
                 <td>
-                    @Html.Label(item.name)
+                    @Html.Label(item.name, new { id=item.Id, onmouseover = "details("+item.Id+")" , onmouseout = "closeDialog();" })
                 </td>
 
                 <td>
                     
                     @Html.Label(item.cDate.ToShortDateString())
                 </td>
-                <td>
+                @*<td>
                     @Html.Label(item.signUpFrom.ToShortDateString())
                   
                 </td>
@@ -49,6 +49,17 @@
 
                 <td>
                     @Html.DisplayFor(m => item.info)
+                </td>*@
+                <td>
+                    @Ajax.ActionLink("Visa detaljer", "detailsComp", new { id = item.Id }, new AjaxOptions(){
+
+                   UpdateTargetId = "showComp",
+                   HttpMethod = "GET",
+                   InsertionMode = InsertionMode.Replace                
+                   
+               })
+
+
                 </td>
                 <td>
                     @Ajax.ActionLink("Registrera resultat", "registerResult", new { id = item.Id}, new AjaxOptions()
@@ -66,11 +77,89 @@
                            HttpMethod = "GET",
                            InsertionMode = InsertionMode.Replace
                        })*@
-                    @Html.ActionLink("Anmäl spelareFDFS", "addPlayer", new { id = item.Id })
+                    @Html.ActionLink("Anmäl spelare", "addPlayer", new { id = item.Id })
 
                 </td>
+                
             </tr>
-
+        
         }
 
 </table>
+<div id="dialog">
+
+  
+</div>
+<script type="text/javascript">
+    var myX, myY;
+
+    function details(id)
+    {
+
+        @using Newtonsoft.Json;
+
+        var details = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.complist, Formatting.Indented));
+
+        var element = document.getElementById(id);
+        
+        for(var i in details)
+        {
+            if(details[i].Id == id)
+            {
+               
+                $("#dialog").dialog({dialogClass: "no-close"});
+                $("#dialog").dialog( "option", "position", { my: "left top", at: "left bottom", of: element } );
+              
+
+            
+
+                var el = document.getElementById('dialog');
+                var a = document.createElement('p');
+                var b = document.createElement('p');
+                var c = document.createElement('p');
+
+                a.innerHTML = 'Första anmälningsdag</br>'+ details[i].signUpFrom+'</br>';
+                b.innerHTML = 'Sista anmälningsdag</br>'+ details[i].signUpTo+'</br>';
+                c.innerHTML = 'Övrig info:</br>'+details[i].info;
+
+                el.appendChild(a);
+                el.appendChild(b);
+                el.appendChild(c);
+
+
+
+            }
+
+        }
+
+
+
+    }
+
+
+
+    
+
+    function closeDialog()
+    {
+
+        $( "#dialog" ).dialog( "close" );
+        var el = document.getElementById('dialog');
+        el.innerHTML = '';
+    }
+
+
+
+
+    //function details(id)
+    //{
+
+    //    //$("#dialog").dialog();
+    //    $( document ).mousemove(function(e) {
+
+    //        myX = e.pageX;
+    //        myY = e.pageY;
+    //    });
+    //}
+
+</script>

@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using golf.Models;
+using System.Data.Entity;
 
 
 namespace golf.Controllers
@@ -527,6 +530,46 @@ namespace golf.Controllers
 
 
             return View();
+        }
+        public PartialViewResult detailsComp(int id)
+        {
+
+            using(dsuteam4Entities1 db = new dsuteam4Entities1())
+            {
+                Competition c  = db.Competition.Find(id);
+
+                return PartialView("_detailsComp", c);
+            }
+
+
+        }
+        public PartialViewResult editComp(int id)
+        {
+            using(dsuteam4Entities1 db = new dsuteam4Entities1())
+            {
+                Competition c = db.Competition.Find(id);
+
+                return PartialView("_editComp", c);
+
+            }
+
+        }
+        [HttpPost]
+        public ActionResult editComp(Competition c)
+        {
+            using(dsuteam4Entities1 db = new dsuteam4Entities1())
+            {
+                if(ModelState.IsValid)
+                {
+                    db.Entry(c).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+
+                return View("Error");
+            }
+
         }
 
     }

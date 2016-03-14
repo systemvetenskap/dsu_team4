@@ -418,6 +418,8 @@
     <Content Include="Views\MemberManagement\_searchMember.cshtml" />
     <Content Include="Views\Competition\_searchPlayer.cshtml" />
     <Content Include="Views\Competition\addPlayer.cshtml" />
+    <Content Include="Views\Competition\_editComp.cshtml" />
+    <Content Include="Views\Competition\_detailsComp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
