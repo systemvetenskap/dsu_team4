@@ -1,114 +1,122 @@
-﻿@model golf.Models.CreateMember
-
-@{
-    ViewBag.Title = "Edit";
+﻿@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <p>
+                Detta är medlemshanteringen.
+            </p>
+        </div>
+    </section>
 }
+@model golf.Models.CreateMember
 
-<h2>Ändra personuppgifter</h2>
+<div class="MemberManagementEdit" id="MemberManagementEdit">
+    <h2>Ändra personuppgifter</h2>
 
-@using (Html.BeginForm()) {
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>Person</legend>
+        <fieldset>
+            <legend>Person</legend>
 
-        @Html.HiddenFor(model => model.p.Id)
-        
-        <div class="editor-label">
-            @Html.Raw("Förnamn")
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.p.firstName)
-            @Html.ValidationMessageFor(model => model.p.firstName)
-        </div>
+            @Html.HiddenFor(model => model.p.Id)
 
-        <div class="editor-label">
-            @Html.Raw("Efternamn")
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.p.lastName)
-            @Html.ValidationMessageFor(model => model.p.lastName)
-        </div>
+            <div class="editor-label">
+                @Html.Raw("Förnamn")
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.p.firstName)
+                @Html.ValidationMessageFor(model => model.p.firstName)
+            </div>
 
-        <div class="editor-label">
-            @Html.Raw("Gatuadress")
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.p.streetAddres)
-            @Html.ValidationMessageFor(model => model.p.streetAddres)
-        </div>
+            <div class="editor-label">
+                @Html.Raw("Efternamn")
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.p.lastName)
+                @Html.ValidationMessageFor(model => model.p.lastName)
+            </div>
 
-        <div class="editor-label">
-            @Html.Raw("Postadress")
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.p.postalCode)
-            @Html.ValidationMessageFor(model => model.p.postalCode)
-        </div>
+            <div class="editor-label">
+                @Html.Raw("Gatuadress")
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.p.streetAddres)
+                @Html.ValidationMessageFor(model => model.p.streetAddres)
+            </div>
 
-        <div class="editor-label">
-            @Html.Raw("Stad")
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.p.city)
-            @Html.ValidationMessageFor(model => model.p.city)
-        </div>
+            <div class="editor-label">
+                @Html.Raw("Postadress")
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.p.postalCode)
+                @Html.ValidationMessageFor(model => model.p.postalCode)
+            </div>
 
-        <div class="editor-label">
-            @Html.Raw("E-postadress")
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.p.email)
-            @Html.ValidationMessageFor(model => model.p.email)
-        </div>
+            <div class="editor-label">
+                @Html.Raw("Stad")
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.p.city)
+                @Html.ValidationMessageFor(model => model.p.city)
+            </div>
 
-        <div class="editor-field">
-            @Html.Label("Kön:")
-            @Html.DropDownListFor(m => m.genderid, new SelectList(Model.genderItems, "Value", "Text"));
-        </div>
+            <div class="editor-label">
+                @Html.Raw("E-postadress")
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.p.email)
+                @Html.ValidationMessageFor(model => model.p.email)
+            </div>
 
-        <div class="editor-label">
-            @Html.Raw("Betalat")
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.p.Payed)
-            @Html.ValidationMessageFor(model => model.p.email)
-        </div>
-        
-        
+            <div class="editor-field">
+                @Html.Label("Kön:")
+                @Html.DropDownListFor(m => m.genderid, new SelectList(Model.genderItems, "Value", "Text"));
+            </div>
 
-        <p>
-            <input type="submit" value="Spara" id="savedetailsbutton" />
-        </p>
+            <div class="editor-label">
+                @Html.Raw("Betalat")
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.p.Payed)
+                @Html.ValidationMessageFor(model => model.p.email)
+            </div>
 
-        <div class="HiddenEdit">
-            @Html.Label("Lösenord")
-            @Html.EditorFor(model => model.p.PW)
-        </div>
 
-    </fieldset>
-}
 
-<div>
-    @Html.ActionLink("Tillbaks", "Index")
-</div>
+            <p>
+                <input type="submit" value="Spara" id="savedetailsbutton" />
+            </p>
 
-<script type="text/javascript">
-            $('#savedetailsbutton').click(function () {
-        var isValid = 1;
-        $('input:text').each(function () {
-            if ($(this).val() == '') {
-                $(this).css('border', '2px solid red');
-                isValid = 0;
-            }
-            else {
-                $(this).css('border', '1px solid green');
+            <div class="HiddenEdit">
+                @Html.Label("Lösenord")
+                @Html.EditorFor(model => model.p.PW)
+            </div>
+
+        </fieldset>
+    }
+
+    <div>
+        @Html.ActionLink("Tillbaks", "Index")
+    </div>
+    </div>
+
+    <script type="text/javascript">
+        $('#savedetailsbutton').click(function () {
+            var isValid = 1;
+            $('input:text').each(function () {
+                if ($(this).val() == '') {
+                    $(this).css('border', '2px solid red');
+                    isValid = 0;
+                }
+                else {
+                    $(this).css('border', '1px solid green');
+                }
+            });
+            if (isValid == 0) {
+                return false;
             }
         });
-        if (isValid == 0) {
-            return false;
-        }
-    });
-</script>
+    </script>
 

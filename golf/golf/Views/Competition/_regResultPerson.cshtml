@@ -1,0 +1,71 @@
+﻿@model golf.Models.RegisterComp
+
+@{
+    ViewBag.Title = "_regResultPerson";
+}
+
+
+
+
+@using (Html.BeginForm("addHoleStats", "Competition", FormMethod.Post, null))
+{
+    <fieldset>
+        <legend>Resultat</legend>
+
+        <table>
+            <tr>
+                <th>
+                    @Html.Label("Hål")
+                </th>
+                <th>
+                    @Html.Label("Antal slag")
+                </th>
+            </tr>
+            
+            
+
+            @*@foreach (var item in Model.holeStats)
+            {
+                
+                
+                <tr>
+                    <td>
+                        @Html.Label(item.Hole.Number)
+                    </td>
+                    <td>
+                        @Html.EditorFor(m => m.stroaks)
+                    </td>
+                </tr>
+            }*@
+
+            @for (int i = 0; i < Model.holeStats.Count; i++)
+            {
+                <tr>
+                    <td>
+                        @Html.Label(Model.holeStats[i].Hole.Number)
+                    </td>
+                    <td>
+                        @Html.EditorFor(m => m.holeStats[i].stroaks)
+                        
+                    </td>
+                </tr>
+
+            }
+            
+           
+
+        </table>
+            @Ajax.ActionLink("Spara resultatet", "addHoleStats", new {id = Model.compgoldID }, new AjaxOptions()
+                {
+                    UpdateTargetId = "showComp",
+                    HttpMethod = "GET",
+                    InsertionMode = InsertionMode.Replace
+                })
+        <input type="submit" id="saveHoleStats" value="Spara" />
+
+    </fieldset>
+}
+
+
+
+

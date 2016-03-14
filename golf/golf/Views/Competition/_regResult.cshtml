@@ -4,28 +4,63 @@
     ViewBag.Title = "registerResult";
 }
 
-@*<h2>registerResult</h2>
+<h2>Registrera resultat här</h2>
+<br />
 
-Html.Label(Model.comp.name)
+<h3>
+    @Html.Label("Tävling" + Model.comp.name)
+</h3>
+
+<br />
+
+<table>
+    <tr>
+        <th>
+            @Html.Label("Golfare")
+        </th>
+        <th>
+
+        </th>
+    </tr>
 
 
+    
+    @foreach (var item in Model.p)
+    {
+        <tr>
+            <td>
+                @Html.Label(item.firstName + " " + item.lastName)
+            </td>
+            <td>
+                @Ajax.ActionLink("Registrera resultat", "regResultPerson", new { golfID = item.Id, compID = Model.comp.Id, regComp = Model }, new AjaxOptions()
+                {
+                    UpdateTargetId = "showComp",
+                    HttpMethod = "GET",
+                    InsertionMode = InsertionMode.Replace
+                })
+            </td>
+        </tr>
+    }
 
-Html.LabelFor(m => m.comp.Person.lastName)
 
-Html.Label("Hål | Slag")
+</table>
 
-foreach (var hole in Model.holes)
+@*@Html.LabelFor(m => m.comp.Person.lastName)
+
+@Html.Label("Hål | Slag")*@
+
+@*foreach (var hole in Model.holes)
     {
 
         @Html.Label(hole.Number)
         @Html.EditorFor(m => m.holeStats[hole.Id])
         <br />
-    }
+    }*@
 
 
-for (int i = 0; i < Model.holes.Count; i++)
+@*@for (int i = 0; i < Model.holes.Count; i++)
 {
-    Html.Label(Model.holes[i].Number)
-    Html.EditorFor(m => m.holeStats[i].stroaks)
+    @Html.Label(Model.holes[i].Number)
+    @Html.EditorFor(m => m.holeStats[i].stroaks)
     <br />
 }*@

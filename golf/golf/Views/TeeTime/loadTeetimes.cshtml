@@ -100,6 +100,7 @@
 
             }
 
+
             document.getElementById('details').style.display = 'block';
             document.getElementById('TeeDetailsB').style.display = 'block';
             var D = document.getElementById('details');
@@ -114,6 +115,21 @@
                 addButton.setAttribute('value', 'Lägg till spelare')
                 addButton.setAttribute('onclick', 'addP('+id+')')
                 document.getElementById('ControlDiv').appendChild(addButton);
+
+                $('#addP').click(function ()
+                {
+                    if ($('#golfid').val() <= 0)
+                    {
+                        $('#golfid').css('border', '2px solid red');
+                        return false;
+                    }
+
+                    else
+                    {
+                        $('#golfid').css('border', '1px solid green');
+                    }
+                }
+);
 
                 var field = document.createElement('input');
                 field.setAttribute('type', 'text');
@@ -132,6 +148,7 @@
         }
     }
 
+
     function clearLi(){
 
         var u = document.getElementById('playerList');
@@ -141,11 +158,11 @@
         u.innerHTML = '';
         i.innerHTML = '';
         z.innerHTML = '';
-    
+
     }
     function addFoundP(golfid){
 
-     
+
         var personids = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.bNames, Formatting.Indented));
         if(containsGolfid(personids, golfid) == false)
         {
@@ -178,7 +195,7 @@
         var date = '@Model.selDate';
         var golfid = document.getElementById('golfid').value;
         var getHcp = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Golfer, Formatting.Indented));
-        
+
 
 
         for(var i in getHcp)
@@ -218,7 +235,7 @@
     }
 
     function book(g, t, d) {
-        
+
         var p = '@User.Identity.Name';
         $.ajax({
             url: '/TeeTime/saveBooking',
@@ -266,18 +283,18 @@
         .success(function (result) {
             $('#teetimes').html(result);
             loadPicker();
-              
+
         })
         .error(function (xhr, status) {
             alert(status);
         })
-            
+
     }
     $(function () {
         $("#datepicker").datepicker({
             //dateFormat: "yy-mm-dd",
             onSelect: function () {
-                var selected = $(this).val();                 
+                var selected = $(this).val();
                 changeDate(selected);
             }
         });
@@ -285,10 +302,10 @@
 
     function changeDate(d) {
 
-         
+
         document.getElementById('details').style.display = 'none';
         document.getElementById('TeeDetailsB').style.display = 'none';
-         
+
         $.ajax({
             url: '/TeeTime/ChangeSelDate',
             contentType: 'application/html; charset=utf-8',
@@ -297,25 +314,27 @@
             dataType: 'html'
 
         })
-            
+
         .success(function (result) {
             $('#teetimes').html(result);
         })
         .error(function (xhr, status) {
             alert(status);
         })
-            
+
     }
     function soP(d) {
-   
-        var s = document.getElementById('searchField').value;
 
+        var s = document.getElementById('searchField').value;
+        if(s!="")
+            {
         $.ajax({
             url: '/TeeTime/searchPerson',
             contentType: 'application/html; charset=utf-8',
             data: { searchstring: s },
             type: 'GET',
             dataType: 'html'
+
 
         })
 
@@ -325,11 +344,11 @@
         .error(function (xhr, status) {
             alert(status);
         })
-
+        }
 
     }
     function soPf(s) {
-   
+
         //var s = document.getElementById('searchField').value;
 
         $.ajax({
@@ -350,7 +369,7 @@
 
 
     }
-    $('#searchField').keyup(function () { 
+    $('#searchField').keyup(function () {
         var s = document.getElementById('searchField').value;
         if(s == '')
         {
@@ -360,12 +379,10 @@
         else{
             soPf(s);
         }
-        
+
          });
 
 
-
-    
-
 </script>
+    
 

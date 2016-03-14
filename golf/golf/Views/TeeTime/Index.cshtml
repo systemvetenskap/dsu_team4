@@ -1,18 +1,15 @@
 ﻿@section featured {
     <section class="featured">
         <div class="content-wrapper">
-            <hgroup class="title">
-                <h2>@ViewBag.Message</h2>
-            </hgroup>
             <p>
-                
+                Tidsbokningar
             </p>
         </div>
     </section>
 }
 @model golf.Models.CalendarClass
 @{
-    ViewBag.Title = "Index";
+ 
     
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -21,62 +18,66 @@
     <link href="@Url.Content("~/Content/TeeTime.css")" rel="stylesheet" type="text/css" />
 }
 
-
-   
-    
-
 <h2></h2>
 <div class="timeWrapper" id="timeWrapper">
 
     <div class="dateselection">
 
-
         <div class="containPicker" id="cP">
             <input type="submit" id="datepicker" class="dp" value="@Model.dateString">
         </div>
-
     </div>
+    <br><br><br>
     <div id="teetimes">
-
     </div>
     <div id="details" class="TeeDetails">
         <p id="timeInfo" class="timeInfo"></p>
-        <div id="playerName">
+        <div id="playerName"> <p></p>>
             <ul id="playerList"></ul>
 
             <ul id="addedList"></ul>
         </div>
 
-
         <div id="ControlDiv">
 
         </div>
-   
     <div id="TeeDetailsB" class="TeeDetailsB">
         <input id="searchButton" type="submit" onclick="soP(1)" value="Sök" />
         <input id="searchField" type="text" placeholder="sök" />
         
         <div id="searchDiv" class="searchDiv">
 
-
         </div>
     </div>
     </div>
 </div>
 
+<script type="text/javascript">
 
+    $('#searchButton').click(function ()
+    {
+        if ($('#searchField').val() <= 0)
+        {
+            $('#searchField').css('border', '2px solid red');
+            return false;
+        }
+    else
+        {
+            $('#textareainput').css('border', '1px solid green');
+        }
+    }
+    );
 
+</script>
 
 <script type="text/javascript">
 
 
     $(document).ready(function () {
-
         loadData();
 
         function loadPicker() {
-      
-        
+              
             $('#datepicker').datepicker();
 
             $.datepicker.regional['sv'] = {
@@ -97,13 +98,11 @@
                 yearSuffix: ''
             };
             $.datepicker.setDefaults($.datepicker.regional['sv']);
-
  
             $('#datepicker').datepicker('option', 'dateFormat', 'yy-mm-dd');
             $('#datepicker').datepicker('setDate', new Date());
             $('#datepicker').datepicker("option", "minDate", 0);
             $('#datepicker').datepicker("option", "maxDate", "+1m");
-            //document.getElementById('ui-datepicker').style.display = block;
 
         }
 
@@ -158,11 +157,6 @@
             })
             
         }
-        //$('#searchField').on('input', function (e) {
-            
-        //});
-
-
     });
 
 
