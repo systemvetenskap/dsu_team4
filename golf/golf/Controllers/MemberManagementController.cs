@@ -39,10 +39,12 @@ namespace golf.Controllers
         
         }
             else
-        public ActionResult searchMember(string searchstring)
-        {
+            {
                 return RedirectToAction("Login", "Account");
             }
+        }
+        public ActionResult searchMember(string searchstring)
+        {
 
             searchClass sc = new searchClass();
 
