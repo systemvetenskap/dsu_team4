@@ -55,7 +55,7 @@
            
 
         </table>
-            @Ajax.ActionLink("Spara resultatet", "addHoleStats", new {hsList = Model.stroaks }, new AjaxOptions()
+            @Ajax.ActionLink("Spara resultatet", "addHoleStats", new {id = Model.compgoldID }, new AjaxOptions()
                 {
                     UpdateTargetId = "showComp",
                     HttpMethod = "GET",
