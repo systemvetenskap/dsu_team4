@@ -269,6 +269,7 @@
     </Compile>
     <Compile Include="Models\RegisterComp.cs" />
     <Compile Include="Models\searchClass.cs" />
+    <Compile Include="Models\slotClass.cs" />
     <Compile Include="Models\TeeDate.cs">
       <DependentUpon>PersonModel.tt</DependentUpon>
     </Compile>
