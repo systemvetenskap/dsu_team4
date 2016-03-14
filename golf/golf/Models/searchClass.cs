@@ -41,5 +41,38 @@ namespace golf.Models
             }
 
         }
+
+        public List<Person> getPersonGolfers(List<PersonGolfer> pg, string s)
+        {
+            using (dsuteam4Entities1 databas = new dsuteam4Entities1())
+            {
+
+                List<OneNamePerson> op = new List<OneNamePerson>();
+                foreach (PersonGolfer i in pg)
+                {
+                    OneNamePerson onp = new OneNamePerson();
+                    onp.Id = i.personid;
+                    onp.oneName = i.firstName + " " + i.lastName;
+                    op.Add(onp);
+
+                    
+
+                }
+
+                var pers = op.Where(p => p.oneName.ToLower().Contains(s.ToLower()));
+
+                foreach (var i in pers)
+                {
+                    var selP = databas.PersonGolfer.Find(i.gol);
+
+                    person.Add(selP);
+
+                }
+
+                return person;
+            }
+
+        }
+
     }
 }
