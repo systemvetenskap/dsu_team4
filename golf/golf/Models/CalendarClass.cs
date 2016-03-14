@@ -65,7 +65,7 @@ namespace golf.Models
             bool dis = false; 
             int counter = 0;
             number = "0";
-            status = "0/4";
+            status = "";
             foreach (TeeTimeDate TTD in TeeTimeDate)
             {
                 
