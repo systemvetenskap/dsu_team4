@@ -13,23 +13,37 @@
 
 <br />
 
-@Html.Label("Golfare:")
-@foreach (var item in Model.p)
-{
+<table>
+    <tr>
+        <th>
+            @Html.Label("Golfare")
+        </th>
+        <th>
+
+        </th>
+    </tr>
 
 
-    @Html.Label(item.lastName)
     
-    @Ajax.ActionLink("Registrera resultat", "regResultPerson", new { golfID = item.Id, compID = Model.comp.Id, regComp = Model}, new AjaxOptions()
+    @foreach (var item in Model.p)
     {
-        UpdateTargetId = "showComp",
-        HttpMethod = "GET",
-        InsertionMode = InsertionMode.Replace
-    })
-    
-    
-    <br />
-}
+        <tr>
+            <td>
+                @Html.Label(item.firstName + " " + item.lastName)
+            </td>
+            <td>
+                @Ajax.ActionLink("Registrera resultat", "regResultPerson", new { golfID = item.Id, compID = Model.comp.Id, regComp = Model }, new AjaxOptions()
+                {
+                    UpdateTargetId = "showComp",
+                    HttpMethod = "GET",
+                    InsertionMode = InsertionMode.Replace
+                })
+            </td>
+        </tr>
+    }
+
+
+</table>
 
 @*@Html.LabelFor(m => m.comp.Person.lastName)
 
