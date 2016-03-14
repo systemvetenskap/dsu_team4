@@ -60,6 +60,24 @@
     </div>
     </div>
 </div>
+<script type="text/javascript">
+
+    $('#searchButton').click(function ()
+    {
+        if ($('#searchField').val() <= 0)
+        {
+            $('#searchField').css('border', '2px solid red');
+            return false;
+        }
+
+    else
+        {
+            $('#textareainput').css('border', '1px solid green');
+        }
+    }
+    );
+
+</script>
 
 
 
