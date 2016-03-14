@@ -116,7 +116,10 @@ header .content-wrapper {
 {
     padding:2%;
 }
-.create
+.searchDiv{
+    padding:2%;
+}
+.createAccount
 {
     padding:2%;
 }
@@ -124,6 +127,15 @@ header .content-wrapper {
     padding:2%;
 }
 .addplayer{
+    padding:2%;
+}
+.MemberManagementEdit{
+    padding:2%
+}
+.MemberManagementDetails{
+    padding:2%;
+}
+.MemberManagementDelete{
     padding:2%;
 }
 .topdivs {
