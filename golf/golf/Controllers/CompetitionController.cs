@@ -22,9 +22,18 @@ namespace golf.Controllers
             {
 
 
+            
+
+                
+
+ 
 
                 cc.classList = databas.CompeteClass.ToList();
                 List<Person> p = databas.Person.ToList();
+
+
+                
+
                 List<OneNamePerson> op = new List<OneNamePerson>();
                 foreach (Person i in p)
                 {
@@ -171,6 +180,7 @@ namespace golf.Controllers
                        if (item.Competition_ID == id)
                        {
                            rg.p.Add(item.Golfer.Person);
+                           rg.stroaks.Add(0);
                        }
                    }
                     
@@ -179,6 +189,12 @@ namespace golf.Controllers
 
 
             }        
+        }
+
+        public ActionResult addHoleStats(List<HoleStats> hsList)
+        {
+            
+            return View();
         }
         public ActionResult regResultPerson(int golfID, int compID, RegisterComp regComp)
         {

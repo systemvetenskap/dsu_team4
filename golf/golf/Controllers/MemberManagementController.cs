@@ -25,17 +25,12 @@ namespace golf.Controllers
             if (Request.IsAuthenticated)
             {
                 string id = User.Identity.Name;
-
-                //ViewBag.Message = "Tidsbokning";
-                //string date = DateTime.Today.ToShortDateString();
-                //CalendarClass cl = new CalendarClass();
-                //cl.selDate = DateTime.Today;
-                //cl.dateString = DateTime.Today.ToShortDateString();
-
+            
+  
                 if(IsAdmin(id))
                 {
                     return View(databas.Person.ToList());
-                }
+        }
                 else
                 {
                     return RedirectToAction("Login", "Account");
@@ -47,7 +42,7 @@ namespace golf.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
-  
+
         }
 
         //Visa detaljer om personer
