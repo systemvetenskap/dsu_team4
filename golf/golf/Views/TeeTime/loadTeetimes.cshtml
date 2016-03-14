@@ -326,13 +326,15 @@
     function soP(d) {
 
         var s = document.getElementById('searchField').value;
-
+        if(s!="")
+            {
         $.ajax({
             url: '/TeeTime/searchPerson',
             contentType: 'application/html; charset=utf-8',
             data: { searchstring: s },
             type: 'GET',
             dataType: 'html'
+
 
         })
 
@@ -342,7 +344,7 @@
         .error(function (xhr, status) {
             alert(status);
         })
-
+        }
 
     }
     function soPf(s) {

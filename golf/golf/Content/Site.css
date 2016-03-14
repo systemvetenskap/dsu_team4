@@ -138,6 +138,9 @@ header .content-wrapper {
 .MemberManagementDelete{
     padding:2%;
 }
+.knappar{
+    border:2px;
+}
 .topdivs {
   
     /*Rubrik, meny, loginpartial, featured(cirkeln)*/
