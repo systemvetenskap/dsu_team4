@@ -23,8 +23,21 @@ namespace golf.Controllers
         public ActionResult Index()
         {
             
-  
-            return View(databas.Person.ToList());
+            using(dsuteam4Entities1 databas = new dsuteam4Entities1())
+            {
+                searchClass sp = new searchClass();
+                
+                
+
+
+                return View();
+            }
+            
+        
+        }
+        public searchMember(string searchstring)
+        {
+
         }
 
         //Visa detaljer om personer

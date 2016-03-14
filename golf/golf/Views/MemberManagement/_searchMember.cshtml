@@ -1,23 +1,5 @@
-﻿@section featured {
-    <section class="featured">
-        <div class="content-wrapper">
-            <p>
-                Detta är medlemshanteringen.
-            </p>
-        </div>
-    </section>
-}
-@model IEnumerable<golf.Models.Person>
+﻿@model golf.Models.searchClass
 
-@{
-
-}
-
-<p>
-    @Html.ActionLink("Lägg till medlem", "Create")
-</p>
-<input id="searchButton" type="submit" onclick="soP(1)" value="Sök" />
-<input id="searchField" type="text" placeholder="sök" />
 <table>
     <tr>
         <th>
@@ -45,7 +27,8 @@
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
+
+ @foreach (var item in Model)
     {
         <tr>
             <td>
@@ -74,16 +57,16 @@
                 }
                 else
                 {
-                <p>Nej</p>
+                    <p>Nej</p>
                 }
                 @*@Html.DisplayTextFor(modelItem => item.Payed)*@
             </td>
             <td>
-                @Html.ActionLink("Ändra", "Edit", new { id = item.Id }) 
-                @Html.ActionLink("Visa", "Details", new { id = item.Id }) 
+                @Html.ActionLink("Ändra", "Edit", new { id = item.Id })
+                @Html.ActionLink("Visa", "Details", new { id = item.Id })
                 @Html.ActionLink("Radera", "Delete", new { id = item.Id })
 
-                
+
             </td>
         </tr>
     }

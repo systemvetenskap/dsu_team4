@@ -22,9 +22,18 @@ namespace golf.Controllers
             {
 
 
+            
+
+                
+
+ 
 
                 cc.classList = databas.CompeteClass.ToList();
                 List<Person> p = databas.Person.ToList();
+
+
+                
+
                 List<OneNamePerson> op = new List<OneNamePerson>();
                 foreach (Person i in p)
                 {
