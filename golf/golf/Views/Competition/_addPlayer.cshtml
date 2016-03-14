@@ -1,14 +1,11 @@
 ﻿@model golf.Models.AddCompPlayer
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 
 
 <div class="addplayer" id="addplayer">
     <h2>@Model.comp.name</h2>
     <h3>@Model.comp.cDate</h3>
     <div>
-        <input id="searchButton" type="submit" onclick="search()" value="Sök" />
+        <input id="searchButton" type="submit" onclick="search(1)" value="Sök" />
         <input id="searchField" type="text" placeholder="sök" />
 
     </div>
@@ -20,31 +17,32 @@
 </div>
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<script>
+<script type="text/javascript">
 
-    function search() {
+   
 
-        alert("Test");
+        function search(d) {
 
-        var string = document.getElementById('searchField').value;
+            alert("Test");
 
-        $.ajax({
-            url: '/Competition/searchPlayer',
-            contentType: 'application/html; charset=utf-8',
-            data: { pg: @Model.golfers ,s: string },
-            type: 'GET',
-            dataType: 'html'
+            var string = document.getElementById('searchField').value;
 
-        })
+            $.ajax({
+                url: '/Competition/searchPlayer',
+                contentType: 'application/html; charset=utf-8',
+                data: { pg: @Model.golfers ,s: string },
+                type: 'GET',
+                dataType: 'html'
 
-        .success(function (result) {
-            $('#sDiv').html(result);
-        })
-        .error(function (xhr, status) {
-            alert(status);
-        })
+            })
+
+            .success(function (result) {
+                $('#sDiv').html(result);
+            })
+            .error(function (xhr, status) {
+                alert(status);
+            })
 
 
-    }
-
+ 
 </script>

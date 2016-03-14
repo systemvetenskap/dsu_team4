@@ -375,6 +375,68 @@ namespace golf.Controllers
             return PartialView("_searchPlayer", adc);
 
         }
+        public ActionResult test()
+        {
+            //lazy loading
+            using(dsuteam4Entities1 databas = new dsuteam4Entities1())
+            {
+                var personer = databas.Person;
+                foreach(var rad in personer)
+                {                   
+                    foreach(var rad2 in rad.Golfer)
+                    {
+                        PersonGolfer pg = new PersonGolfer();
+                        foreach(var rad3 in rad2.CompetitionGolfer)
+                        {
+                            pg.lastName = rad.lastName;
+                            pg.HCP = rad2.HCP;
+                            
+                        }
+                   
+                    }
+                    
+                }
+               
+            }
+
+            //Eager-loading
+            using (dsuteam4Entities1 databas = new dsuteam4Entities1())
+            {
+                var person = databas.Person.Include("Golfer");
+                foreach(var r in person)
+                {
+                    foreach(var r2 in r.Golfer)
+                    {
+                        var namn = r.firstName;
+                        var hcp = r2.HCP;
+                    }
+
+                }
+
+
+
+
+            }
+            //Explicit 
+            using (dsuteam4Entities1 databas = new dsuteam4Entities1())
+            {
+                var pers = databas.Person.ToList();
+                
+                foreach(var i in databas.Person)
+                {
+                    databas.Entry(i).Collection(x => x.Golfer).Load();
+
+                    foreach(var p in i.Golfer)
+                    {
+                        var namn = i.firstName;
+                        var hcp = p.HCP;
+                    }
+                }
+            }
+
+
+            return View();
+        }
 
     }
 }
