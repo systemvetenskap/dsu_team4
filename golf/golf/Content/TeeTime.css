@@ -5,6 +5,7 @@
     width: 100%;
     display:block;
     margin-bottom:3%;
+   
     
     
     
@@ -71,14 +72,12 @@
 
 .timedivMin:hover{
     cursor: pointer;
-    cursor: hand;
     font-weight: bold;
     color: white;
     background-color: rgb(30, 196, 30);
 }
 .timedivHour:hover{
     cursor: pointer;
-    cursor: hand;
     font-weight: bold;
     color: white;
     background-color: rgb(30, 196, 30);
@@ -93,21 +92,14 @@
 .dateselection{
     float: left;
     display: block;
-    
-    
     width: 100%;
-
-    
 }
 
 .containPicker{
-
-    
     width: 40%;
     margin-left: 30%;
     margin-right: 30%;
     float: left;
-
 }
 #cP{
     display:none;
@@ -118,38 +110,16 @@
     margin-right: 30%;
     position: center;
 }
-
-
-.TeeDetails{
-    float:left;
-    top:0px;
-    left:0px;
-    display: none;
-    width: 45%;
-
+.TeeDetails{ 
     height:auto;
-    font-family:verdana;
-    font-size:13px;
-    padding-left:5%;
-
-    
-    /*border:2px solid grey;*/
-    
+    font-size:100%;
+    padding:2%;
+    clear:both;   
     }
 .TeeDetailsB{
-    float: left;
-    top:0px;
-    left:0px;
-    display: none;
-    width: 45%;
-  
-    height:auto;
     font-family:verdana;
-    font-size:13px;
-    padding:5%;
-    
-    /*border:2px solid grey;*/
-    
+    font-size:100%;
+    padding:2%;
     }
 ControlDiv{
     display:block;
@@ -161,9 +131,7 @@ ControlDiv{
     display: block;
 }
 .playerList{
-    max-width: 50%;
-
-    
+    max-width: 50%;  
 }
 .ui-datepicker {   
    
@@ -172,14 +140,21 @@ ControlDiv{
   display: none;
 }
 
-.listobjectP{
-    
+.listobjectP{    
     
 }
-.searchDiv{
-    float: left;
+.searchDiv{  
+    width:100%;
+    background-color:grey;
+}
 
+table, td {
+   background-color:lightblue;
+   width:100%;
+   text-align:left;
+   
 }
+
 .details timeInfo{
     
     font: bold;
