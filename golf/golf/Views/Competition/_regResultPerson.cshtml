@@ -4,32 +4,43 @@
     ViewBag.Title = "_regResultPerson";
 }
 
-<h2>_regResultPerson</h2>
 
 
 
-<table>
-    <tr>
-        <th>
-            @Html.Label("Hål")
-        </th>
-        <th>
-            @Html.Label("Antal slag")
-        </th>
-    </tr>
+@using (Html.BeginForm("addHoleStats", "Competition", FormMethod.Post, null))
+{
+    <fieldset>
+        <legend>Resultat</legend>
+
+        <table>
+            <tr>
+                <th>
+                    @Html.Label("Hål")
+                </th>
+                <th>
+                    @Html.Label("Antal slag")
+                </th>
+            </tr>
 
 
-    @foreach (var item in Model.holeStats)
-    {
-        <tr>
-            <td>
-                @Html.Label(item.Hole.Number)
-            </td>
-            <td>
-                @Html.Label("1415")
-            </td>
-        </tr>
-    }
+            @foreach (var item in Model.holeStats)
+            {
+                <tr>
+                    <td>
+                        @Html.Label(item.Hole.Number)
+                    </td>
+                    <td>
+                        @Html.EditorFor(m => item.stroaks)
+                    </td>
+                </tr>
+            }
+            
+            <input type="submit" id="saveHoleStats" value="Spara" />
+
+        </table>
+    </fieldset>
+}
 
 
-</table>
+
+
