@@ -13,6 +13,7 @@ namespace golf.Models
         public List<CompetitionGolfer> compGolf = new List<CompetitionGolfer>();
         public List<Person> p = new List<Person>();
         public List<int> stroaks = new List<int>();
+        public int compgoldID { get; set; }
 
     }
 }

@@ -189,9 +189,10 @@ namespace golf.Controllers
         }
         public ActionResult regResultPerson(int golfID, int compID, RegisterComp regComp)
         {
+
             using (dsuteam4Entities1 db = new dsuteam4Entities1())
             {
-
+                
                 int compgolf;
 
                 RegisterComp rc = new RegisterComp();
@@ -214,20 +215,40 @@ namespace golf.Controllers
                         {
                             HoleStats hs = new HoleStats();
 
-                            hs.Hole = h[i];
-                            hs.Hole_ID = h[i].Id;
 
-                            hs.CompetitionGolfer = item;
+
+
+                            //hs.CompetitionGolfer_ID = 4;
+                            //hs.Hole_ID = 1;
+                            //hs.stroaks = 0;
+                            //hs.Id = null;
+                            rc.compgoldID = item.Id;
+
+
                             hs.CompetitionGolfer_ID = item.Id;
+                            hs.Hole_ID = h[i].Id;
+                            hs.stroaks = 0;
 
                             //db.HoleStats.Add(hs);
                             //db.SaveChanges();
+
+
+
+                            hs.Hole = h[i];
+                            hs.CompetitionGolfer = item;
+
 
                             rc.holeStats.Add(hs);
                             
                         }
                         
                     }
+                }
+
+                foreach (var item in rc.holeStats)
+                {
+                    db.HoleStats.Add(item);
+                    db.SaveChanges();
                 }
 
                 
