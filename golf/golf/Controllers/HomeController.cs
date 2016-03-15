@@ -30,27 +30,64 @@ namespace golf.Controllers
             
             na.newarticle.Reverse();
 
-            if (Request.IsAuthenticated)
-            {
-                    using(dsuteam4Entities1 db2 = new dsuteam4Entities1())
-                    {
-                        foreach (var item in db2.AdminPerson)
-                        {
-                            if (User.Identity.Name == item.Person_ID.ToString())
-                            {
-                                na.logedPerson = db2.Person.Find(item.Person_ID);
-                            }
-                            else
-                            {
+            //if (Request.IsAuthenticated)
+            //{
+            //        using(dsuteam4Entities1 db2 = new dsuteam4Entities1())
+            //        {
+            //            foreach (var item in db2.AdminPerson)
+            //            {
+            //                if (User.Identity.Name == item.Person_ID.ToString())
+            //                {
+            //                    na.logedPerson = db2.Person.Find(item.Person_ID);
+            //                }
+            //                else
+            //                {
 
-                            }
-                        }
-                    }
+            //                }
+            //            }
+            //        }
                 
-            }
+            //}
 
 
             return View(na);
+        }
+
+        // can be HttpGet
+        public ActionResult admin(string id)
+        {
+            bool isValid = false;
+
+            using (dsuteam4Entities1 db = new dsuteam4Entities1())
+            {
+                if (Request.IsAuthenticated)
+                {
+                   
+                        foreach (var item in db.AdminPerson)
+                        {
+                            if (User.Identity.Name == item.Person_ID.ToString())
+                            {
+                                isValid = true;   
+                            }                      
+                       }
+                    
+
+                }
+            }
+
+
+
+            var obj = new
+            {
+                valid = isValid
+            };
+            return Json(obj);
+
+            //return Json(
+            //new { isCalculateTax = isValid },
+            //JsonRequestBehavior.AllowGet
+            //);
+
         }
         public ActionResult AddNews()
         {
