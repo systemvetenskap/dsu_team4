@@ -147,7 +147,7 @@ namespace golf.Controllers
                     extraStartTime = 1;
                 }
                 int startTimeCount = ((cgList.Count - leftOver) / ct.playersPerTime) + extraStartTime;
-
+            
             List<string> startTimes = new List<string>();
 
             DateTime compStart = Convert.ToDateTime(ct.startTime);
@@ -170,7 +170,7 @@ namespace golf.Controllers
             List<string> randomStartTimes = startTimes;
             
             
-            
+                
             
             
             
@@ -205,7 +205,7 @@ namespace golf.Controllers
 
                 //}
             //}
-        }
+                }
         
 
         public static void Shuffle<T>(this IList<T> list)
@@ -283,7 +283,7 @@ namespace golf.Controllers
             }        
         }
 
-        public ActionResult addHoleStats(List<HoleStats> hsList)
+        public ActionResult addHoleStats(RegisterComp rc)
         {
             
             return View();
@@ -293,6 +293,7 @@ namespace golf.Controllers
 
             using (dsuteam4Entities1 db = new dsuteam4Entities1())
             {
+                CreateHoleStats chs = new CreateHoleStats();
                 
                 int compgolf;
 
@@ -328,7 +329,7 @@ namespace golf.Controllers
 
                             hs.CompetitionGolfer_ID = item.Id;
                             hs.Hole_ID = h[i].Id;
-                            hs.stroaks = 0;
+                            
 
                             //db.HoleStats.Add(hs);
                             //db.SaveChanges();
@@ -340,7 +341,7 @@ namespace golf.Controllers
 
 
                             rc.holeStats.Add(hs);
-                            
+                            chs.hsList.Add(hs);
                         }
                         
                     }

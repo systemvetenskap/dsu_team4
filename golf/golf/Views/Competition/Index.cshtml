@@ -13,16 +13,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-
-
-
 <div id="showComp" class="showComp">
 
     @Html.Partial("_sComp", Model)
     
-</div>
-<div>
+
+
     @Ajax.ActionLink("Visa tävlingar", "loadComp", new AjaxOptions() {
     UpdateTargetId = "showComp",
     HttpMethod = "GET",
