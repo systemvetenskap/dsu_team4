@@ -143,15 +143,15 @@ ControlDiv{
 .listobjectP{    
     
 }
-.searchDiv{  
-   
+.searchDiv th{  
+   text-align:left;
 }
 .searchDiv table {
  
     padding:0%;
     padding-left:0%;
     padding-right:10%;
-    text-align:center;
+    text-align:left;
     width:900px;
 }
 
