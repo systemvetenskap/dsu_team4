@@ -120,9 +120,6 @@ header .content-wrapper {
 {
     padding:2%;
 }
-.searchDiv{
-    padding:2%;
-}
 .createAccount
 {
     padding:2%;
@@ -153,8 +150,9 @@ header .content-wrapper {
     width:900px;
 }
 .showComp table th{
-    padding:1.5%;
-    font-size:120%;
+   
+   text-align:left;
+
 }
 div.sDiv/*addplayer i competition*/{
     width:100%;
@@ -167,6 +165,28 @@ div.sDiv/*addplayer i competition*/{
     text-align:left;
     width:900px;
 }
+.searchDiv table td{  
+    padding:1%;
+    padding-left:1%;
+    padding-right:0%;
+    text-align:left;
+    max-width:900px;   
+}
+.searchDiv table th {
+ 
+    padding-left:1%;
+    text-align:left;
+}
+.searchDiv table {
+ 
+    margin:0 auto;
+    padding:1%;
+    padding-left:0%;
+    padding-right:0%;
+    text-align:right;
+    min-width:1000px;
+}
+
 
 
 .knappar{
@@ -623,17 +643,11 @@ input[type="checkbox"].input-validation-error {
 /* tables
 ----------------------------------------------------------*/
 table  {
-    text-align: left;
-    max-width: inherit;
-    font-size: 100%; 
-    padding:3%; 
+
 }
 
 th {
-    font-size: .9em;
-    text-align: left;
-    padding-left: 0px;
-    padding-right: 5%;
+
 }
 
     th a {
