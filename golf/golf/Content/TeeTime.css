@@ -144,15 +144,15 @@ ControlDiv{
     
 }
 .searchDiv{  
-    width:100%;
-    background-color:mediumpurple;
-}
-
-table, td {
-   background-color:lightblue;
-   width:100%;
-   text-align:left;
    
+}
+.searchDiv table {
+ 
+    padding:0%;
+    padding-left:0%;
+    padding-right:10%;
+    text-align:center;
+    width:900px;
 }
 
 .details timeInfo{

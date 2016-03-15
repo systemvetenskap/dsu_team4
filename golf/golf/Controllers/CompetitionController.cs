@@ -13,6 +13,7 @@ namespace golf.Controllers
 {
     public class CompetitionController : Controller
     {
+
         //
         // GET: /Competition/
 
@@ -117,27 +118,107 @@ namespace golf.Controllers
             dsuteam4Entities1 databas = new dsuteam4Entities1(); //Databasconnection
 
             var list = databas.CompetitionGolfer.ToList(); //Lista med alla golfare anmälda till tävlingen
+            //CompetitionGolfer cg = new CompetitionGolfer();
+            Competition ct = new Competition();
+            List<DateTime> listaDate = new List<DateTime>();
             
-            foreach(var i in list) //För varje golfare i listan
+
+            
+            DateTime start = Convert.ToDateTime(ct.startTime);
+            DateTime slut = Convert.ToDateTime(ct.endTime);
+
+            List<CompetitionGolfer> cgList = new List<CompetitionGolfer>();
+
+            foreach (var i in databas.CompetitionGolfer)
             {
-                if(i.Competition_ID == id) //Om tävlingsID = ID
+                if (i.Competition_ID == id) //Om tävlingsID = ID
                 {
-                
-                    Random rand = new Random();
-                    Competition ct = new Competition();
-
-                    DateTime start = Convert.ToDateTime(ct.startTime); //Datetime start = starttid
-                    DateTime slut = Convert.ToDateTime(ct.endTime);
-
-                    //for ()
-
-                    //DateTime timegap = start - slut;
-                    
-                    start.Date.AddHours(7); //starttid adderar 7 timmar
-                    DateTime value = start.AddMinutes(rand.Next(20)); // random var 20e minut
-                    string time = value.ToString("HH:mm"); //Konvertera till en sträng 
+                    CompetitionGolfer cg = i;
+                    cgList.Add(cg);
 
                 }
+            }
+
+                int extraStartTime = 0;
+
+                int leftOver = cgList.Count % ct.playersPerTime;
+                if (leftOver > 0)
+                {
+                    extraStartTime = 1;
+                }
+                int startTimeCount = ((cgList.Count - leftOver) / ct.playersPerTime) + extraStartTime;
+            
+            List<string> startTimes = new List<string>();
+
+            DateTime compStart = Convert.ToDateTime(ct.startTime);
+
+            for (int i = 0; i < startTimeCount; i++)
+            {
+                if (i == 0)
+                {
+                    startTimes.Add(compStart.ToShortTimeString());
+
+                }
+                else
+                {
+                    compStart.AddMinutes(20);  
+                    startTimes.Add(compStart.ToShortTimeString());
+                }
+            }
+
+            
+            List<string> randomStartTimes = startTimes;
+            
+            
+                
+            
+            
+            
+            //foreach(var i in list) //För varje golfare i listan
+            //{
+            //    if(i.Competition_ID == id) //Om tävlingsID = ID
+            //    {
+            //        while (start.TimeOfDay != slut.TimeOfDay)
+            //        {
+            //            CompetitionGolfer person = new CompetitionGolfer();
+            //            person = databas.CompetitionGolfer.OrderBy(r => Guid.NewGuid()).Take(3).First();
+            //            listaDate.Add(start);
+                        
+                        
+            //            start = start.AddMinutes(20);
+            //        }
+                    
+                
+            //        //Random rand = new Random();
+            //        //Competition ct = new Competition();
+
+            //        //DateTime start = Convert.ToDateTime(ct.startTime); //Datetime start = starttid
+            //        //DateTime slut = Convert.ToDateTime(ct.endTime);
+
+            //        ////for ()
+
+            //        ////DateTime timegap = start - slut;
+                    
+            //        //start.Date.AddHours(7); //starttid adderar 7 timmar
+            //        //DateTime value = start.AddMinutes(rand.Next(20)); // random var 20e minut
+            //        //string time = value.ToString("HH:mm"); //Konvertera till en sträng 
+
+                //}
+            //}
+                }
+        
+
+        public static void Shuffle<T>(this IList<T> list)
+        {
+            Random rng = new Random();
+            int n = list.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = rng.Next(n + 1);
+                T value = list[k];
+                list[k] = list[n];
+                list[n] = value;
             }
         }
         public ActionResult saveResult()
@@ -146,7 +227,7 @@ namespace golf.Controllers
             //int playerID = 666;
             //int compGolfID = 1;
             //RegisterComp regcomp = new RegisterComp();
-
+            
             //using (dsuteam4Entities1 databas = new dsuteam4Entities1())
             //{
             //    foreach (var item in databas.Hole)
@@ -165,7 +246,7 @@ namespace golf.Controllers
                 //regcomp.comp = databas.Competition.Find(compID);
             //}
             return View("Index");
-        }
+            }
 
         
         public ActionResult registerResult(int id)
@@ -200,7 +281,7 @@ namespace golf.Controllers
 
                var gender = db.Gender.ToList();
                foreach (var i in pg)
-               {
+                       {
                    PersonGolfer pe = new PersonGolfer();
                    pe.personid = i.Personid;
                    pe.golfid = i.Golfid;
@@ -213,9 +294,9 @@ namespace golf.Controllers
                    pe.gender_ID = g.Id;
                    rg.persongolfer.Add(pe);
                    
-               }
-
-
+                       }
+                    
+                    
                rg.comp = c;
     
 
@@ -237,7 +318,7 @@ namespace golf.Controllers
 
             using (dsuteam4Entities1 db = new dsuteam4Entities1())
             {
-             
+                
                 var golfer = from p in db.Person.ToList()
                              join g in db.Golfer.ToList()
                              on p.Id equals g.Person_ID
@@ -256,20 +337,20 @@ namespace golf.Controllers
                 List<Hole> h = new List<Hole>();
 
                 for (int i = 1; i <= currComp.NumberOfHoles; i++)
-                {
+                    {
                     string n = i.ToString();
                     var hole = db.Hole.Where(x => x.Number == n).FirstOrDefault();
                     h.Add(hole);
                    
-                 }
+                    }
 
                 List<HoleStats> createPlayerHoles = new List<HoleStats>();
                 foreach(var i in h)
                 {
-                    HoleStats hs = new HoleStats();
+                            HoleStats hs = new HoleStats();
                     hs.CompetitionGolfer_ID = compG.Id;
                     hs.Hole_ID = i.Id;
-                    
+                            
                     createPlayerHoles.Add(hs);
                 }
 
@@ -278,20 +359,20 @@ namespace golf.Controllers
                 var person = db.Person.Where(x => x.Id == personid).FirstOrDefault();
                 pg.firstName = person.firstName;
                 pg.lastName = person.lastName;
-                
+
                 rg.currPerson = pg;
-                
 
 
 
 
+                        
                 return PartialView("_regResultPerson", rg);
-            }
-        }
+                    }
+                }
         [HttpPost]
         public ActionResult regResultPerson(RegisterComp rg)
         {
-           
+
 
 
 
