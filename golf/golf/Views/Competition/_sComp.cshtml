@@ -125,8 +125,9 @@
                    <div class="isMember2">
 
                        @*Här ska det vara annan actionlink sen!*@
-
-                       @Html.ActionLink("Registrera dig här!", "addPlayer", new { id = item.Id })
+                       @if((item.signUpFrom >= DateTime.Now) && (item.signUpTo <= DateTime.Now)){
+                            @Html.ActionLink("Registrera dig här!", "addPlayer", new { id = item.Id })
+                       }
                    </div>
 
                 </td>
@@ -137,7 +138,9 @@
                            HttpMethod = "GET",
                            InsertionMode = InsertionMode.Replace
                        })*@
-                    @Html.ActionLink("Anmäl spelare", "addPlayer", new { id = item.Id })
+                    @if((item.signUpFrom >= DateTime.Now) && (item.signUpTo <= DateTime.Now)){
+                        @Html.ActionLink("Anmäl spelare", "addPlayer", new { id = item.Id })
+                    }
 
                 </td>
                 
@@ -179,8 +182,12 @@
                 var b = document.createElement('p');
                 var c = document.createElement('p');
 
-                a.innerHTML = 'Första anmälningsdag</br>'+ details[i].signUpFrom+'</br>';
-                b.innerHTML = 'Sista anmälningsdag</br>'+ details[i].signUpTo+'</br>';
+                var length = 10;
+                var signUpFrom = details[i].signUpFrom.substring(0, length)
+                var signUpTo = details[i].signUpTo.substring(0, length)
+
+                a.innerHTML = 'Första anmälningsdag</br>'+ signUpFrom +'</br>';
+                b.innerHTML = 'Sista anmälningsdag</br>'+ signUpTo+'</br>';
                 c.innerHTML = 'Övrig info:</br>'+details[i].info;
 
                 el.appendChild(a);

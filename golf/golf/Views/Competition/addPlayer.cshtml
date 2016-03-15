@@ -16,7 +16,7 @@
 }
 <div class="addplayer" id="addplayer">
     <h2>@Model.comp.name</h2>
-    <h3>@Model.comp.cDate</h3>
+    <h3>@Model.comp.cDate.ToShortDateString()</h3>
     <div>
         <input id="searchButton" type="submit" onclick="search()" value="Sök" />
         <input id="searchField" type="text" placeholder="sök" />

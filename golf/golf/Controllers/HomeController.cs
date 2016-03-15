@@ -13,6 +13,7 @@ namespace golf.Controllers
         private dsuteam4Entities1 db = new dsuteam4Entities1();
         public ActionResult Index()
         {
+            
             NewsClass na = new NewsClass();
 
             foreach (NewsArticle article in db.NewsArticle)
