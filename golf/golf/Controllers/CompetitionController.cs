@@ -339,11 +339,21 @@ namespace golf.Controllers
                              join g in db.Golfer.ToList()
                              on p.Id equals g.Person_ID
                              where p.Id == personid
-                             select new{ Golfid = g.Id};
+                             select new{ 
+                                 Golfid = g.Id, 
+                                 Personid = p.Id, 
+                                 fName = p.firstName, 
+                                 lName = p.lastName, 
+                                 HCP = g.HCP,
+                                 Golfstring = g.golfID,
+                                 Gender_ID = p.gender_ID,
 
-                var golfid = golfer.FirstOrDefault();
 
-                var compG = db.CompetitionGolfer.Where(x => x.Competition_ID == compID && x.Golfer_ID == golfid.Golfid).FirstOrDefault();
+                             };
+
+                var player = golfer.FirstOrDefault();
+
+                var compG = db.CompetitionGolfer.Where(x => x.Competition_ID == compID && x.Golfer_ID == player.Golfid).FirstOrDefault();
 
                 var currComp = db.Competition.Where(x => x.Id == compG.Competition_ID).FirstOrDefault();
 
@@ -371,11 +381,13 @@ namespace golf.Controllers
                 }
 
                 rg.holeresult = createPlayerHoles;
-                PersonGolfer pg = new PersonGolfer();
-                var person = db.Person.Where(x => x.Id == personid).FirstOrDefault();
-                pg.firstName = person.firstName;
-                pg.lastName = person.lastName;
 
+                PersonGolfer pg = new PersonGolfer();
+
+                pg.firstName = player.fName;
+                pg.lastName = player.lName;
+                
+                
                 rg.currPerson = pg;
 
 
@@ -388,7 +400,19 @@ namespace golf.Controllers
         [HttpPost]
         public ActionResult regResultPerson(RegisterComp rg)
         {
+            using(dsuteam4Entities1 db = new dsuteam4Entities1())
+            {
 
+                PersonGolfer pg = rg.currPerson;
+
+                var playerHCP = Convert.ToDecimal(pg.HCP);
+
+                var gameHCP = db.Slope.Where(x => x.min >= playerHCP && x.max <= playerHCP && x.Gender_ID == pg.gender_ID).FirstOrDefault();
+
+                var test = 11;
+
+
+            }
 
 
 
