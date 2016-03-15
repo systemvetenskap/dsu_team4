@@ -1,7 +1,7 @@
 ﻿@model golf.Models.CreateComp
 
 
-@*<head>
+<head>
     <title>
 
     </title>
@@ -28,12 +28,12 @@
                 success: function (data) {
 
                     if (data.valid == false) {
-                        $("#isAdmin").hide();
-                        $("#isMember").show();
+                        $(".isAdmin2").hide();
+                        $(".isMember2").show();
                     }
                     else {
-                        $("#isAdmin").show();
-                        $("#isMember").hide();
+                        $(".isAdmin2").show();
+                        $(".isMember2").hide();
                     }
                     //document.getElementById('member').style.display = 'none'
 
@@ -50,7 +50,7 @@
 
 
 
-</head>*@
+</head>
 
 <table>
     <tr>
@@ -114,7 +114,7 @@
 
                 </td>
                 <td>
-                    <div>
+                    <div class="isAdmin2">
                         @Ajax.ActionLink("Spelarlista", "registerResult", new { id = item.Id }, new AjaxOptions()
                        {
                            UpdateTargetId = "showComp",
@@ -122,17 +122,15 @@
                            InsertionMode = InsertionMode.Replace
                        })
                     </div>
-                   @*<div id="isMember">
-                       @Ajax.ActionLink("Registrera dig här!", "_addPlayer", new { id = item.Id }, new AjaxOptions()
-                       {
-                           UpdateTargetId = "showComp",
-                           HttpMethod = "GET",
-                           InsertionMode = InsertionMode.Replace
-                       })
-                   </div>*@
+                   <div class="isMember2">
+
+                       @*Här ska det vara annan actionlink sen!*@
+
+                       @Html.ActionLink("Registrera dig här!", "addPlayer", new { id = item.Id })
+                   </div>
 
                 </td>
-                <td>
+                <td class="isAdmin2">
                     @*@Ajax.ActionLink("Anmäl spelare", "addPlayer", new { id = item.Id }, new AjaxOptions()
                        {
                            UpdateTargetId = "showComp",
@@ -153,6 +151,7 @@
   
 </div>
 <script type="text/javascript">
+
     var myX, myY;
 
     function details(id)
