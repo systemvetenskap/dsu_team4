@@ -7,14 +7,13 @@ namespace golf.Models
 {
     public class RegisterComp
     {
-        public List<Hole> holes = new List<Hole>();
-        public List<HoleStats> holeStats = new List<HoleStats>();
+    
         public Competition comp { get; set; }
-        public List<CompetitionGolfer> compGolf = new List<CompetitionGolfer>();
-        public List<Person> p = new List<Person>();
-        public List<int> stroaks = new List<int>();
-        public int compgoldID { get; set; }
-  
-
+        public int Holes { get; set; }
+        public int Golfid { get; set; }
+        public List<Hole> courseHoles = new List<Hole>();
+        public List<PersonGolfer> persongolfer = new List<PersonGolfer>();
+        public PersonGolfer currPerson { get; set; }
+        public IList<HoleStats> holeresult { get; set; }
     }
 }
