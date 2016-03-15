@@ -530,8 +530,8 @@ namespace golf.Controllers
                     i.calcPoints();
                 }
 
-                int points = (from i in scrList select i.net).Sum();
-
+                int net = (from i in scrList select i.net).Sum();
+                int points = (from i in scrList select i.points).Sum();
 
                 CompetitionGolfer cg = db.CompetitionGolfer.Find(r.comp.Id);
 
