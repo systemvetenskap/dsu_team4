@@ -113,7 +113,7 @@ namespace golf.Controllers
             }
 
         }
-        ActionResult generateStartTimes(int id)
+        public ActionResult generateStartTimes(int id)
         {
             List<CompetitionGolfer> CG = RandomCGStartTimes(id);
 
@@ -135,16 +135,13 @@ namespace golf.Controllers
         {
             dsuteam4Entities1 databas = new dsuteam4Entities1(); //Databasconnection
 
-            var list = databas.CompetitionGolfer.ToList(); //Lista med alla golfare anmälda till tävlingen
+            //var list = databas.CompetitionGolfer.ToList(); //Lista med alla golfare anmälda till tävlingen
             //CompetitionGolfer cg = new CompetitionGolfer();
-            Competition ct = new Competition();
-            List<DateTime> listaDate = new List<DateTime>();
+            //List<DateTime> listaDate = new List<DateTime>();
+            //DateTime start = Convert.ToDateTime(ct.startTime);
+            //DateTime slut = Convert.ToDateTime(ct.endTime);
 
-
-
-            DateTime start = Convert.ToDateTime(ct.startTime);
-            DateTime slut = Convert.ToDateTime(ct.endTime);
-
+            Competition ct = databas.Competition.Find(id);
             List<CompetitionGolfer> cgList = new List<CompetitionGolfer>();
 
             foreach (var i in databas.CompetitionGolfer)
@@ -167,8 +164,8 @@ namespace golf.Controllers
             int startTimeCount = ((cgList.Count - leftOver) / ct.playersPerTime) + extraStartTime;
 
             List<string> startTimes = new List<string>();
-
-            DateTime compStart = Convert.ToDateTime(ct.startTime);
+            TeeTime tee = databas.TeeTime.Find(ct.startTime);
+            DateTime compStart = Convert.ToDateTime(tee.teeTime1.ToString());
 
             for (int i = 0; i < startTimeCount; i++)
             {
