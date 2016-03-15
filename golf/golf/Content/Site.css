@@ -161,18 +161,18 @@ div.sDiv/*addplayer i competition*/{
     width:100%;
 }
 .sDiv table th{
-    padding:0%;
-    font-size:110%;
-    padding-left:10%;
-    padding-right:10%;
-    text-align:left;
-    
+    padding:2%;
+    width:900px;
+    padding-left:1%;
+    padding-right:0%;
+    text-align:left;   
 }
 .searchDiv table td{  
     padding-bottom:0%;
     padding-left:0%;
     padding-right:0%;
     text-align:left;
+
     
        
 }
