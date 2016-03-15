@@ -8,15 +8,74 @@
         </div>
     </section>
 }
+
+<head>
+    <title>
+
+    </title>
+
+
+    <meta charset="utf-8" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+    <script type="text/JavaScript">
+
+        $(document).ready(function () {
+
+            $.ajax({
+                url: '@Url.Action("admin", "Home")',
+                type: "POST",
+                async: true,
+                dataType: "json",
+                data: $('#form').serialize(),
+                success: function (data) {
+
+                    if (data.valid == false) {
+                        $(".adm").hide();
+                    }
+                    else {
+                        $(".adm").show();                    }
+                    //document.getElementById('member').style.display = 'none'
+
+                },
+                error: function (request, status, error) {
+                    // process error message
+                }
+            });
+
+        });
+    </script>
+
+
+
+
+
+</head>
+
+
+
+
+
+
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
+
 <div id="showComp" class="showComp">
 
-    @Html.Partial("_sComp", Model)
-    
+
+
+        @Html.Partial("_sComp", Model)
+
 
 
     @Ajax.ActionLink("Visa tävlingar", "loadComp", new AjaxOptions() {
@@ -25,12 +84,14 @@
     InsertionMode = InsertionMode.Replace
      })
 
+    <div class="adm">
+            @Ajax.ActionLink("Skapa tävling", "createComp", new AjaxOptions()
+       {
+           UpdateTargetId = "showComp",
+           HttpMethod = "GET",
+           InsertionMode = InsertionMode.Replace
+       })
+    </div>
 
-    @Ajax.ActionLink("Skapa tävling", "createComp", new AjaxOptions()
-   {
-       UpdateTargetId = "showComp",
-       HttpMethod = "GET",
-       InsertionMode = InsertionMode.Replace
-   })
 </div>
 
