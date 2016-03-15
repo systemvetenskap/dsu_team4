@@ -299,7 +299,15 @@ namespace golf.Controllers
                    var g = gender.Where(x => x.Id == i.Gender_ID).FirstOrDefault();
                    pe.gender = g.genderName;
                    pe.gender_ID = g.Id;
+                   if (i.Startime != null)
+                   {
                    pe.startime = i.Startime;
+
+                   }
+                   else
+                   {
+                       pe.startime = "Ej lottad";
+                   }
                    rg.persongolfer.Add(pe);
                    
                        }

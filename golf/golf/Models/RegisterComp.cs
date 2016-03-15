@@ -15,6 +15,6 @@ namespace golf.Models
         public List<PersonGolfer> persongolfer = new List<PersonGolfer>();
         public PersonGolfer currPerson { get; set; }
         public IList<HoleStats> holeresult { get; set; }
-        public 
+        
     }
 }

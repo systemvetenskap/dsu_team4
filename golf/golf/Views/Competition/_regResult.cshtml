@@ -32,7 +32,7 @@
                 @Html.Label(item.firstName + " " + item.lastName)
             </td>
             <td>
-                @*@Html.Label(item)*@
+                @Html.Label(item.startime.ToString())
             </td>
             <td>
                 @Ajax.ActionLink("Registrera resultat", "regResultPerson", new { personid = item.personid, compID = Model.comp.Id, regComp = Model }, new AjaxOptions()
