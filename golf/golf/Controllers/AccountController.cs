@@ -24,7 +24,8 @@ namespace golf.Controllers
             CreateMember CM = new CreateMember();
             SelectList gender = new SelectList(db.Gender.ToList(), "id","genderName");
             SelectList membertype = new SelectList(db.MemberType.ToList(), "id", "name");
-           
+            
+            
             CM.genderItems = gender;
             CM.memberType = membertype;
 
