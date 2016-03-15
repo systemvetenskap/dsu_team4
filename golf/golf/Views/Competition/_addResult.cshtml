@@ -9,6 +9,7 @@
     @Html.HiddenFor(m => m.currentPerson.personid)
     @Html.HiddenFor(m => m.currentPerson.HCP)
     @Html.HiddenFor(m => m.currentPerson.gender_ID)
+    @Html.HiddenFor(m=>m.comp.NumberOfHoles)
     for(var i = 0; i < Model.holeresult.Count; i++)
     {
         @Html.HiddenFor(m => m.holeresult[i].Id)

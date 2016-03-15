@@ -271,6 +271,7 @@
     </Compile>
     <Compile Include="Models\RegisterComp.cs" />
     <Compile Include="Models\resultClass.cs" />
+    <Compile Include="Models\ScoreCardClass.cs" />
     <Compile Include="Models\searchClass.cs" />
     <Compile Include="Models\Slope.cs">
       <DependentUpon>PersonModel.tt</DependentUpon>
