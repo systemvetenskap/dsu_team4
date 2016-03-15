@@ -451,8 +451,7 @@ namespace golf.Controllers
                 string s = r.currentPerson.HCP;
 
                 decimal playerHCP  = decimal.Parse(s, CultureInfo.InvariantCulture);
-                string tst = playerHCP.ToString(CultureInfo.CreateSpecificCulture("sv-SE"));
-                decimal tst1 = decimal.Parse(tst, CultureInfo.CreateSpecificCulture("sv-SE"));
+      
 
                 List<Slope> sl = new List<Slope>();
                 var slope = db.Slope.ToList();
@@ -462,7 +461,7 @@ namespace golf.Controllers
                     string xMin = i.min.ToString();
                     decimal Max = decimal.Parse(xMax, CultureInfo.CreateSpecificCulture("sv-SE"));
                     decimal Min = decimal.Parse(xMin, CultureInfo.CreateSpecificCulture("sv-SE"));
-                   if(tst1 >= Min && tst1 <= Max && i.Gender_ID == r.currentPerson.gender_ID)
+                   if(playerHCP>= Min && playerHCP<= Max && i.Gender_ID == r.currentPerson.gender_ID)
                    {
                        sl.Add(i);
                    }
