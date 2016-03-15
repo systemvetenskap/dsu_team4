@@ -18,6 +18,9 @@
         <th>
             @Html.Label("Starttid")
         </th>
+        <th>
+            @Html.Label("Registrera")
+        </th>
     </tr>
 
 
@@ -27,6 +30,9 @@
         <tr>
             <td>
                 @Html.Label(item.firstName + " " + item.lastName)
+            </td>
+            <td>
+                @*@Html.Label(item)*@
             </td>
             <td>
                 @Ajax.ActionLink("Registrera resultat", "regResultPerson", new { personid = item.personid, compID = Model.comp.Id, regComp = Model }, new AjaxOptions()
