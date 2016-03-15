@@ -21,9 +21,9 @@
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
 
-        @Html.EditorFor(model => model.p.Payed)
         <fieldset>
             <legend>Person</legend>
+        @*@Html.HiddenFor(model => model.p.Payed)*@
 
             <div class="editor-label">
                 @Html.Label("Förnamn:")
