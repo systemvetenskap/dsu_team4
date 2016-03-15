@@ -469,22 +469,74 @@ namespace golf.Controllers
 
                 }
                var strokes = sl.FirstOrDefault();
-               var extraStrokes = strokes.gameHCP;
+               int extraStrokes = Convert.ToInt32(strokes.gameHCP);
 
                var Hcpindex = from i in r.holeresult
                               join h in db.Hole
                               on i.Hole_ID equals h.Id
                               orderby h.HCPind ascending
-                              select new { i, h };
-               var oList = Hcpindex.ToList();
-                foreach(var i in oList)
-                {
+                              select new { 
+                                  Index = h.HCPind, 
+                                  Par = h.par, 
+                                  Holenr = h.Number, 
+                                  HoleId = h.Id, 
+                                  PlayerStrokes = i.stroaks, 
+                                  HolestatID=i.Id,
+                                  CompetitionG = i.CompetitionGolfer_ID
+                              };
 
+               var oList = Hcpindex.ToList();
+               List<ScoreCardClass> scrList = new List<ScoreCardClass>();
+               foreach(var i in oList)
+               {
+                   ScoreCardClass scr = new ScoreCardClass();
+                   scr.Id = i.HoleId;
+                   scr.CompetetionGolfer_ID = i.CompetitionG;
+                   scr.HCPind = i.Index;
+                   scr.Number = i.Holenr;
+                   scr.par = i.Par;
+                   scr.playerStrokes = i.PlayerStrokes;
+                   scrList.Add(scr);
+               }
+
+                if(extraStrokes > 0)
+                {
+                    for (var i = 0; i < extraStrokes; i++)
+                    {
+                        if (i < r.comp.NumberOfHoles)
+                        {
+                            scrList[i].addedStrokes += 1;
+                        }
+                        else
+                        {
+                            int z = i - r.comp.NumberOfHoles;
+                            scrList[z].addedStrokes += 1;
+                        }
+                    }
+
+                }
+                else
+                {
+                    foreach(var i in scrList)
+                    {
+                        i.addedStrokes = extraStrokes;
+                    }
 
                 }
 
+                
+                foreach(var i in scrList)
+                {
+                    i.calcPoints();
+                }
 
-               var t = 123;
+                int points = (from i in scrList select i.net).Sum();
+
+
+                CompetitionGolfer cg = db.CompetitionGolfer.Find(r.comp.Id);
+
+                
+               
 
 
 
