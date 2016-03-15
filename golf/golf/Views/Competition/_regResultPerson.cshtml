@@ -1,15 +1,15 @@
 ﻿@model golf.Models.RegisterComp
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("regResultPerson", "Competition", FormMethod.Post, null))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
     
-    @Html.DisplayFor(m => m.comp)
+    @*@Html.DisplayFor(m => m.comp)
     @Html.DisplayFor(m => m.Golfid)
     @Html.DisplayFor(m => m.courseHoles)
     @Html.DisplayFor(m => m.currPerson)
-    @Html.DisplayFor(m => m.persongolfer)
+    @Html.DisplayFor(m => m.persongolfer)*@
 
 
         @Html.Label(@Model.comp.name)<br />
@@ -25,7 +25,7 @@
                 </th>
             </tr>
 
-            @for (var i = 0; i < Model.holeresult.Count; i++ )               
+            @for (var i = 0; i < Model.holeresult.Count; i++)
             {
                 <tr>
                     <td>
@@ -45,7 +45,7 @@
 
         <input type="submit" value="Spara" id="savebutton"/>
 
-        <script type="text/javascript">
+        @*<script type="text/javascript">
             $('#savebutton').click(function () {
         var isValid = 1;
         $('input:textfield').each(function () {
@@ -61,7 +61,7 @@
             return false;
         }
     });
-        </script>
+        </script>*@
 
 
 }
