@@ -157,6 +157,9 @@ header .content-wrapper {
    text-align:left;
 
 }
+.anythingelse{
+    padding:2%;
+}
 div.sDiv/*addplayer i competition*/{
     width:100%;
 }

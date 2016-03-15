@@ -15,7 +15,35 @@
         @Styles.Render("~/Content/css")
        @*Scripts.Render("~/bundles/modernizr")*@
 
+        <script type="text/JavaScript">
 
+    $(document).ready(function () {
+
+        $.ajax({
+            url: '@Url.Action("admin", "Home")',
+            type: "POST",
+            async: true,
+            dataType: "json",
+            data: $('#form').serialize(),
+            success: function (data) {
+                
+                if (data.valid == false) {
+                    $("#member").hide();
+
+                }             
+                else {
+                    $("#member").show();
+                }               
+                //document.getElementById('member').style.display = 'none'
+              
+            },
+            error: function (request, status, error) {
+                // process error message
+            }
+        });
+
+    });
+        </script>
 
     </head>
     <body>
@@ -37,11 +65,13 @@
                                 @if (Request.IsAuthenticated)
                                 {
                                     
-                                     <li>@Html.ActionLink("Medlemshantering", "Index", "MemberManagement")</li>
+                                     
                                     <li>@Html.ActionLink("Tävlingar", "Index", "Competition")</li>
                                     
-                                    
+                                    <li id="member" class="memberm" name="mm">@Html.ActionLink("Medlemshantering", "Index", "MemberManagment")</li>
                                 }
+                                
+                             
                             </ul>
                         </nav>
                     </div>
