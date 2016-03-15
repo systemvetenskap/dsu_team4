@@ -282,9 +282,8 @@ namespace golf.Controllers
                             Golfstring = y.golfID,
                             HCP = y.HCP,
                             Gender_ID = p.gender_ID,
-                            Startime = y.startTime
-
-
+                            Startime = y.startTime,
+                            
                         };
 
                var gender = db.Gender.ToList();
