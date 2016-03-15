@@ -12,7 +12,7 @@ namespace golf.Models
     using System;
     using System.Collections.Generic;
     using Newtonsoft.Json;
-
+    
     public partial class Competition
     {
         public Competition()
@@ -32,7 +32,7 @@ namespace golf.Models
         public int NumberOfHoles { get; set; }
         public string startTime { get; set; }
         public string endTime { get; set; }
-    
+
         [JsonIgnore]
         public virtual CompeteClass CompeteClass { get; set; }
         [JsonIgnore]
