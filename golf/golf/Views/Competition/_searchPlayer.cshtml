@@ -1,0 +1,25 @@
+﻿@model golf.Models.AddCompPlayer
+
+<table>
+    @foreach (var item in Model.golfers)
+    {
+
+
+        <tr>
+            <th>
+                @Html.DisplayFor(o => item.firstName)
+            </th>
+            <th>
+                @Html.DisplayFor(o => item.lastName)
+            </th>
+            <th>
+
+                @Html.ActionLink("Lägg till",
+                        "RegisterPlayer", new { golferid = item.golfid, competitionid = Model.comp.Id })
+
+
+
+            </th>
+        </tr>
+    }
+</table>

@@ -22,10 +22,38 @@ namespace golf.Controllers
         //Lista Personer från persontabellen    
         public ActionResult Index()
         {
+            if (Request.IsAuthenticated)
+            {
+                string id = User.Identity.Name;
+                
+                
+                if(IsAdmin(id))
+                {
+                    return View(databas.Person.ToList());
+            }
+                else
+                {
+                    return RedirectToAction("Login", "Account");
+                }
             
-  
-            return View(databas.Person.ToList());
+        
         }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
+        }
+        public ActionResult searchMember(string searchstring)
+        {
+
+            searchClass sc = new searchClass();
+
+           List<Person> p = sc.getPersons(searchstring);
+
+            return PartialView("_searchMember", p);
+
+        }
+     
 
         //Visa detaljer om personer
         public ActionResult Details(int id = 0)
@@ -147,5 +175,23 @@ namespace golf.Controllers
             databas.Dispose();
             base.Dispose(disposing);
         }
+
+        public bool IsAdmin(string id)
+        {
+            using (dsuteam4Entities1 databas = new dsuteam4Entities1())
+            {
+
+                foreach (AdminPerson AP in databas.AdminPerson)
+                {
+                    if (Convert.ToInt16(id) == AP.Person_ID)
+                    {
+                        return true;
+                    }
+
+                }
+            }
+            return false;
+        }
+        
     }
 }

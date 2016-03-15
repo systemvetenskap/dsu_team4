@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using golf.Models;
+using System.Data.Entity;
 
 
 namespace golf.Controllers
@@ -21,10 +24,13 @@ namespace golf.Controllers
             using (dsuteam4Entities1 databas = new dsuteam4Entities1())
             {
 
-
-
+          
                 cc.classList = databas.CompeteClass.ToList();
                 List<Person> p = databas.Person.ToList();
+
+
+                
+
                 List<OneNamePerson> op = new List<OneNamePerson>();
                 foreach (Person i in p)
                 {
@@ -185,6 +191,7 @@ namespace golf.Controllers
                        if (item.Competition_ID == id)
                        {
                            rg.p.Add(item.Golfer.Person);
+                           rg.stroaks.Add(0);
                        }
                    }
                     
@@ -194,11 +201,18 @@ namespace golf.Controllers
 
             }        
         }
+
+        public ActionResult addHoleStats(List<HoleStats> hsList)
+        {
+            
+            return View();
+        }
         public ActionResult regResultPerson(int golfID, int compID, RegisterComp regComp)
         {
+
             using (dsuteam4Entities1 db = new dsuteam4Entities1())
             {
-
+                
                 int compgolf;
 
                 RegisterComp rc = new RegisterComp();
@@ -221,20 +235,40 @@ namespace golf.Controllers
                         {
                             HoleStats hs = new HoleStats();
 
-                            hs.Hole = h[i];
-                            hs.Hole_ID = h[i].Id;
 
-                            hs.CompetitionGolfer = item;
+
+
+                            //hs.CompetitionGolfer_ID = 4;
+                            //hs.Hole_ID = 1;
+                            //hs.stroaks = 0;
+                            //hs.Id = null;
+                            rc.compgoldID = item.Id;
+
+
                             hs.CompetitionGolfer_ID = item.Id;
+                            hs.Hole_ID = h[i].Id;
+                            hs.stroaks = 0;
 
                             //db.HoleStats.Add(hs);
                             //db.SaveChanges();
+
+
+
+                            hs.Hole = h[i];
+                            hs.CompetitionGolfer = item;
+
 
                             rc.holeStats.Add(hs);
                             
                         }
                         
                     }
+                }
+
+                foreach (var item in rc.holeStats)
+                {
+                    db.HoleStats.Add(item);
+                    db.SaveChanges();
                 }
 
                 
@@ -352,7 +386,7 @@ namespace golf.Controllers
                 
                 acp.comp = c;
 
-                return PartialView("_addPlayer", acp);
+                return View("addPlayer", acp);
             }
 
            
@@ -370,6 +404,186 @@ namespace golf.Controllers
             }
 
             return RedirectToAction("Index");
+        }
+        public PartialViewResult searchPlayer(int id, string s)
+        {
+                AddCompPlayer acp = new AddCompPlayer();
+                Competition c = new Competition();
+            using (dsuteam4Entities1 d = new dsuteam4Entities1())
+            {
+
+                 c = d.Competition.Find(id);
+
+                var join = from p in d.Person.ToList()
+                           join g in d.Golfer.ToList()
+                           on p.Id equals g.Person_ID
+                           select new
+                           {
+
+                               p.firstName,
+                               p.lastName,
+                               p.Id,
+                               Golfstring = g.golfID,
+                               g.HCP,
+                               Golfid = g.Id,
+                               p.gender_ID,
+
+                           };
+
+                var list = join.ToList();
+
+                var persong = from p in list
+                              join g in d.Gender.ToList()
+                              on p.gender_ID equals g.Id
+                              select new
+                              {
+                                  personid = p.Id,
+                                  fName = p.firstName,
+                                  lName = p.lastName,
+                                  p.Golfstring,
+                                  HCP = p.HCP,
+                                  Gender = g.genderName,
+                                  p.Golfid,
+                                  p.gender_ID
+
+
+                              };
+                var toView = persong.ToList();
+
+
+                foreach (var i in toView)
+                {
+                    PersonGolfer pg = new PersonGolfer();
+
+                    pg.personid = i.personid;
+                    pg.firstName = i.fName;
+                    pg.lastName = i.lName;
+                    pg.golfstring = i.Golfstring;
+                    pg.HCP = i.HCP;
+                    pg.gender = i.Gender;
+                    pg.golfid = i.Golfid;
+                    pg.gender_ID = Convert.ToInt16(i.gender_ID);
+
+                    if (c.CompeteClass_ID == i.gender_ID || c.CompeteClass_ID == 1)
+                    {
+                        acp.golfers.Add(pg);
+                    }
+
+                }
+
+
+
+                acp.comp = c;
+            }
+
+            searchClass sc = new searchClass();
+            AddCompPlayer adc = new AddCompPlayer();
+            adc.golfers = sc.getPersonGolfers(acp.golfers, s);
+            adc.comp = c;
+            return PartialView("_searchPlayer", adc);
+
+        }
+        public ActionResult test()
+        {
+            //lazy loading
+            using(dsuteam4Entities1 databas = new dsuteam4Entities1())
+            {
+                var personer = databas.Person;
+                foreach(var rad in personer)
+                {                   
+                    foreach(var rad2 in rad.Golfer)
+                    {
+                        PersonGolfer pg = new PersonGolfer();
+                        foreach(var rad3 in rad2.CompetitionGolfer)
+                        {
+                            pg.lastName = rad.lastName;
+                            pg.HCP = rad2.HCP;
+                            
+                        }
+                   
+                    }
+                    
+                }
+               
+            }
+
+            //Eager-loading
+            using (dsuteam4Entities1 databas = new dsuteam4Entities1())
+            {
+                var person = databas.Person.Include("Golfer");
+                foreach(var r in person)
+                {
+                    foreach(var r2 in r.Golfer)
+                    {
+                        var namn = r.firstName;
+                        var hcp = r2.HCP;
+                    }
+
+                }
+
+
+
+
+            }
+            //Explicit 
+            using (dsuteam4Entities1 databas = new dsuteam4Entities1())
+            {
+                var pers = databas.Person.ToList();
+                
+                foreach(var i in databas.Person)
+                {
+                    databas.Entry(i).Collection(x => x.Golfer).Load();
+
+                    foreach(var p in i.Golfer)
+                    {
+                        var namn = i.firstName;
+                        var hcp = p.HCP;
+                    }
+                }
+            }
+
+
+            return View();
+        }
+        public PartialViewResult detailsComp(int id)
+        {
+
+            using(dsuteam4Entities1 db = new dsuteam4Entities1())
+            {
+                Competition c  = db.Competition.Find(id);
+
+                return PartialView("_detailsComp", c);
+            }
+
+
+        }
+        public PartialViewResult editComp(int id)
+        {
+            using(dsuteam4Entities1 db = new dsuteam4Entities1())
+            {
+                Competition c = db.Competition.Find(id);
+
+                return PartialView("_editComp", c);
+
+            }
+
+        }
+        [HttpPost]
+        public ActionResult editComp(Competition c)
+        {
+            using(dsuteam4Entities1 db = new dsuteam4Entities1())
+            {
+                if(ModelState.IsValid)
+                {
+                    db.Entry(c).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+
+                return View("Error");
+            }
+
         }
 
     }

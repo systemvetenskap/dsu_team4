@@ -1,12 +1,19 @@
-﻿@model golf.Models.CreateMember
-
-@{
-    ViewBag.Title = "Edit";
+﻿@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <p>
+                Detta är medlemshanteringen.
+            </p>
+        </div>
+    </section>
 }
+@model golf.Models.CreateMember
 
+<div class="MemberManagementEdit" id="MemberManagementEdit">
 <h2>Ändra personuppgifter</h2>
 
-@using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
@@ -91,7 +98,8 @@
 }
 
 <div>
-    @Html.ActionLink("Tillbaks", "Index")
+        @Html.ActionLink("Tillbaka", "Index")
+    </div>
 </div>
 
 <script type="text/javascript">

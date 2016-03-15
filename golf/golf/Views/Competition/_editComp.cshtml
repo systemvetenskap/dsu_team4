@@ -1,0 +1,148 @@
+﻿@model golf.Models.Competition
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#createcompetitionbutton').click(function () {
+            var isValid = 1;
+            $('input:text').each(function () {
+                if ($(this).val() == '') {
+                    $(this).css('border', '2px solid red');
+                    isValid = 0;
+                }
+                else {
+                    $(this).css('border', '1px solid green');
+                }
+            });
+            if (isValid == 0) {
+                return false;
+            }
+        });
+
+
+
+        $('.dt').datepicker();
+        $('.dt2').datepicker();
+        $('.dt3').datepicker();
+
+
+        $('#dt').datepicker('option', 'dateFormat', 'yy-mm-dd');
+        $('#dt').datepicker('setDate', new Date());
+
+
+
+        $(function () {
+            $("#dt1").datepicker({
+                onSelect: function () {
+                    var selected = $(this).val();
+
+
+                }
+            });
+        });
+
+        $(function () {
+            $("#dt2").datepicker({
+                onSelect: function () {
+                    var selected = $(this).val();
+                    alert("test2");
+                }
+            });
+        });
+        $(function () {
+            $("#dt3").datepicker({
+                onSelect: function () {
+                    var selected = $(this).val();
+                    alert("test3");
+                }
+            });
+        });
+
+
+    });
+</script>         
+@using (Html.BeginForm())
+{
+<fieldset>
+    <legend>Person</legend>
+
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.startTime)
+    @Html.HiddenFor(model => model.endTime)
+    @Html.HiddenFor(model => model.Person_IDc)
+    @Html.HiddenFor(model => model.CompeteClass_ID)
+   
+
+
+    <div class="editor-label">
+        @Html.Raw("Namn")
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.name)
+        @Html.ValidationMessageFor(model => model.name)
+    </div>
+
+    <div class="editor-label">
+        @Html.Raw("Datum")
+    </div>
+    <div class="editor-field">
+        @Html.TextBoxFor(model => model.cDate, new { @class = "dt", placerholder = Model.cDate })
+        @Html.ValidationMessageFor(model => model.cDate)
+    </div>
+
+    <div class="editor-label">
+        @Html.Raw("Första anmälningsdatum")
+    </div>
+    <div class="editor-field">
+        @Html.TextBoxFor(model => model.signUpFrom, new { @class = "dt", placerholder = Model.signUpFrom})
+        @Html.ValidationMessageFor(model => model.signUpFrom)
+    </div>
+
+    <div class="editor-label">
+        @Html.Raw("Sista anmälningsdatum")
+    </div>
+    <div class="editor-field">
+        @Html.TextBoxFor(model => model.signUpTo, new { @class = "dt", placerholder = Model.signUpTo})
+        @Html.ValidationMessageFor(model => model.signUpTo)
+    </div>
+
+    <div class="editor-label">
+        @Html.Raw("Antal hål")
+    </div>
+    <div class="editor-field">
+        @{List<SelectListItem> holes = new List<SelectListItem>();
+        holes.Add(new SelectListItem { Text = "9", Value = "9" });
+        holes.Add(new SelectListItem { Text = "18", Value = "18" });
+        }
+        @Html.DropDownListFor(model => model.NumberOfHoles, holes, Model.NumberOfHoles)
+    </div>
+
+    <div class="editor-label">
+        @Html.Raw("Spelare/starttid")
+    </div>
+    <div class="editor-field">
+        @{List<SelectListItem> players = new List<SelectListItem>();
+        players.Add(new SelectListItem { Text = "3", Value = "3" });
+        players.Add(new SelectListItem { Text = "4", Value = "4" });
+        }
+        @Html.DropDownListFor(model => model.playersPerTime, players, Model.playersPerTime)
+    </div>
+    <div class="editor-label">
+        @Html.Label("Beskrivning")
+    </div>
+    <div class="editor-field">
+       
+        @Html.EditorFor(model => model.info)
+        @Html.ValidationMessageFor(model => model.info)
+    </div>
+
+
+
+
+
+    <p>
+        <input type="submit" value="Spara" id="saveComp" />
+    </p>
+
+
+</fieldset>
+}
