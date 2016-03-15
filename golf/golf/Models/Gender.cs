@@ -17,11 +17,13 @@ namespace golf.Models
         public Gender()
         {
             this.Person = new HashSet<Person>();
+            this.Slope = new HashSet<Slope>();
         }
     
         public int Id { get; set; }
         public string genderName { get; set; }
     
         public virtual ICollection<Person> Person { get; set; }
+        public virtual ICollection<Slope> Slope { get; set; }
     }
 }
