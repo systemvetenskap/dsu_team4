@@ -23,9 +23,11 @@ namespace golf.Controllers
         {
             CreateMember CM = new CreateMember();
             SelectList gender = new SelectList(db.Gender.ToList(), "id","genderName");
-
+            SelectList membertype = new SelectList(db.MemberType.ToList(), "id", "name");
            
             CM.genderItems = gender;
+            CM.memberType = membertype;
+
 
             return View(CM);
         }
@@ -43,7 +45,9 @@ namespace golf.Controllers
             if (ModelState.IsValid)
             {
   
-                model.p.gender_ID = model.genderid;           
+                model.p.gender_ID = model.genderid;
+                model.p.memberType_ID = model.memberID;
+
                 db.Person.Add(model.p);
                 db.SaveChanges();
 
