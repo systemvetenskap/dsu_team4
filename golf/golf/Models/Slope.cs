@@ -15,9 +15,9 @@ namespace golf.Models
     public partial class Slope
     {
         public int Id { get; set; }
-        public int min { get; set; }
-        public int max { get; set; }
-        public int gameHCP { get; set; }
+        public decimal min { get; set; }
+        public decimal max { get; set; }
+        public decimal gameHCP { get; set; }
         public int Gender_ID { get; set; }
     
         public virtual Gender Gender { get; set; }

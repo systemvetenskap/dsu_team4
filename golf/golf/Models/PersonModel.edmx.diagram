@@ -37,12 +37,12 @@
         <AssociationConnector Association="dsuteam4Model1.FK_TeeTimeDateGolfer_ToPerson" />
         <AssociationConnector Association="dsuteam4Model1.FK_TeeTimeDate_ToTeeTime" />
         <AssociationConnector Association="dsuteam4Model1.FK_TeeTimeDateGolfer_ToTeeTimeDate" />
-        <EntityTypeShape EntityType="dsuteam4Model1.Slope" Width="1.5" PointX="3" PointY="13.875" />
-        <AssociationConnector Association="dsuteam4Model1.FK_Slope_ToGender" />
         <EntityTypeShape EntityType="dsuteam4Model1.CompetitionGolfer" Width="1.5" PointX="10.5" PointY="8.375" />
         <AssociationConnector Association="dsuteam4Model1.FK_CompetitionGolfer_ToCompetition" />
         <AssociationConnector Association="dsuteam4Model1.FK_CompetitionGolfer_ToGolfer" />
         <AssociationConnector Association="dsuteam4Model1.FK_HoleStats_ToCompetitionGolfer" />
+        <EntityTypeShape EntityType="dsuteam4Model1.Slope" Width="1.5" PointX="3" PointY="13.875" />
+        <AssociationConnector Association="dsuteam4Model1.FK_Slope_ToGender" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
