@@ -166,60 +166,63 @@ namespace golf.Controllers
                 }
             }
 
-            
-            List<string> randomStartTimes = startTimes;
-            
-            
-                
-            
-            
-            
-            //foreach(var i in list) //För varje golfare i listan
-            //{
-            //    if(i.Competition_ID == id) //Om tävlingsID = ID
-            //    {
-            //        while (start.TimeOfDay != slut.TimeOfDay)
-            //        {
-            //            CompetitionGolfer person = new CompetitionGolfer();
-            //            person = databas.CompetitionGolfer.OrderBy(r => Guid.NewGuid()).Take(3).First();
-            //            listaDate.Add(start);
-                        
-                        
-            //            start = start.AddMinutes(20);
-            //        }
-                    
-                
-            //        //Random rand = new Random();
-            //        //Competition ct = new Competition();
 
-            //        //DateTime start = Convert.ToDateTime(ct.startTime); //Datetime start = starttid
-            //        //DateTime slut = Convert.ToDateTime(ct.endTime);
+            List<string> randomStartTimes = RandomizeStringList(startTimes);
+            List<CompetitionGolfer> randomCGList = RandomizeCGList(cgList);
+            int count = 0;
 
-            //        ////for ()
-
-            //        ////DateTime timegap = start - slut;
-                    
-            //        //start.Date.AddHours(7); //starttid adderar 7 timmar
-            //        //DateTime value = start.AddMinutes(rand.Next(20)); // random var 20e minut
-            //        //string time = value.ToString("HH:mm"); //Konvertera till en sträng 
-
-                //}
-            //}
-                }
-        
-
-        public static void Shuffle<T>(this IList<T> list)
-        {
-            Random rng = new Random();
-            int n = list.Count;
-            while (n > 1)
+            for (int i = 0; i < randomCGList.Count; i++)
             {
-                n--;
-                int k = rng.Next(n + 1);
-                T value = list[k];
-                list[k] = list[n];
-                list[n] = value;
+                if (i % ct.playersPerTime == 0)
+                {
+                    count++;
+                }
+                randomCGList[i-1].Competition_ID = 1;
+                
             }
+
+
+            foreach (string startTime in randomStartTimes)
+            {
+
+            }
+
+            
+
+                }
+
+
+        public List<CompetitionGolfer> RandomizeCGList(List<CompetitionGolfer> inputList)
+        {
+            List<CompetitionGolfer> randomList = new List<CompetitionGolfer>();
+
+            Random r = new Random();
+            int randomIndex = 0;
+            while (inputList.Count > 0)
+            {
+                randomIndex = r.Next(0, inputList.Count); //Choose a random object in the list
+                randomList.Add(inputList[randomIndex]); //add it to the new, random list
+                inputList.RemoveAt(randomIndex); //remove to avoid duplicates
+            }
+
+            return randomList; 
+
+        }
+        public List<string> RandomizeStringList(List<string> inputList)
+        {
+            List<string> randomList = new List<string>();
+
+            Random r = new Random();
+            int randomIndex = 0;
+            while (inputList.Count > 0)
+            {
+                randomIndex = r.Next(0, inputList.Count); //Choose a random object in the list
+                randomList.Add(inputList[randomIndex]); //add it to the new, random list
+                inputList.RemoveAt(randomIndex); //remove to avoid duplicates
+            }
+
+            return randomList;
+
         }
         public ActionResult saveResult()
         {

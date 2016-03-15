@@ -29,7 +29,6 @@ namespace golf.Models
         public DbSet<AdminType> AdminType { get; set; }
         public DbSet<CompeteClass> CompeteClass { get; set; }
         public DbSet<Competition> Competition { get; set; }
-        public DbSet<CompetitionGolfer> CompetitionGolfer { get; set; }
         public DbSet<Gender> Gender { get; set; }
         public DbSet<Golfer> Golfer { get; set; }
         public DbSet<Hole> Hole { get; set; }
@@ -43,5 +42,6 @@ namespace golf.Models
         public DbSet<TeeTime> TeeTime { get; set; }
         public DbSet<TeeTimeDate> TeeTimeDate { get; set; }
         public DbSet<TeeTimeDateGolfer> TeeTimeDateGolfer { get; set; }
+        public DbSet<CompetitionGolfer> CompetitionGolfer { get; set; }
     }
 }
