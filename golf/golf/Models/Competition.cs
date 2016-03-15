@@ -12,6 +12,7 @@ namespace golf.Models
     using System;
     using System.Collections.Generic;
     using Newtonsoft.Json;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Competition
     {
@@ -26,6 +27,8 @@ namespace golf.Models
         public string info { get; set; }
         public System.DateTime signUpFrom { get; set; }
         public System.DateTime signUpTo { get; set; }
+
+        [Required(ErrorMessage = "Error test michael")]
         public int Person_IDc { get; set; }
         public int playersPerTime { get; set; }
         public int CompeteClass_ID { get; set; }

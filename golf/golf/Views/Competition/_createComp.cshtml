@@ -125,8 +125,8 @@
                     @Html.Raw("Kontaktperson")
                 </div>
                 <div class="editor-field">
-                    @Html.DropDownListFor(model => model.newComp.Person_IDc, new SelectList(Model.contactlist, "Id", "oneName"))
-                    @*@Html.ValidationMessageFor(model => model.newComp.Person_IDc)*@
+                    @Html.DropDownListFor(model => model.newComp.Person_IDc, new SelectList(Model.contactlist, "Id", "oneName"), new {id="kontaktperson", @class="kontaktperson", placeholder ="--Välj kontaktperson--"})
+                    @Html.ValidationMessageFor(model => model.newComp.Person_IDc)
                 </div>
 
                 <div class="editor-label">

@@ -75,44 +75,49 @@ namespace golf.Controllers
 
            
         }
+        [HttpPost]
         public ActionResult saveComp(CreateComp cc)
         {
-            using( dsuteam4Entities1 databas = new dsuteam4Entities1())
+            if(ModelState.IsValid)
             {
-                List<TeeTime> compStarttimes = new List<TeeTime>();
-                var comp = cc.newComp;
-                int start = Convert.ToInt32(cc.newComp.startTime);
-                int end = Convert.ToInt32(cc.newComp.endTime);
-               
-                compStarttimes = databas.TeeTime.Where(t => t.Id >= start).Where(t => t.Id <= end).ToList();
-                
-                foreach(var i in compStarttimes)
+                using (dsuteam4Entities1 databas = new dsuteam4Entities1())
                 {
-                    TeeTimeDate td = new TeeTimeDate();
+                    List<TeeTime> compStarttimes = new List<TeeTime>();
+                    var comp = cc.newComp;
+                    int start = Convert.ToInt32(cc.newComp.startTime);
+                    int end = Convert.ToInt32(cc.newComp.endTime);
 
-                    td.TeeTime_ID = i.Id;
-                    td.bookingDate = cc.newComp.cDate;
-                    td.Disabled = true;
+                    compStarttimes = databas.TeeTime.Where(t => t.Id >= start).Where(t => t.Id <= end).ToList();
 
-                    databas.TeeTimeDate.Add(td);
+                    foreach (var i in compStarttimes)
+                    {
+                        TeeTimeDate td = new TeeTimeDate();
+
+                        td.TeeTime_ID = i.Id;
+                        td.bookingDate = cc.newComp.cDate;
+                        td.Disabled = true;
+
+                        databas.TeeTimeDate.Add(td);
+
+                    }
+
+
+                    databas.Competition.Add(comp);
+                    databas.SaveChanges();
 
                 }
-                
-  
-               databas.Competition.Add(comp); 
-               databas.SaveChanges();
-                
-            }
-            using( dsuteam4Entities1 ndatabas = new dsuteam4Entities1())
-            {
-                CreateComp c = new CreateComp();
+                using (dsuteam4Entities1 ndatabas = new dsuteam4Entities1())
+                {
+                    CreateComp c = new CreateComp();
 
-                c.complist = ndatabas.Competition.ToList();
-                c.currentDate = DateTime.Today;
+                    c.complist = ndatabas.Competition.ToList();
+                    c.currentDate = DateTime.Today;
 
-                return View("Index", c);
+                    return View("Index", c);
+                }
             }
 
+            return PartialView("_createComp", cc);
         }
         public ActionResult generateStartTimes(int id)
         {
@@ -463,10 +468,27 @@ namespace golf.Controllers
                    }
 
                 }
+               var strokes = sl.FirstOrDefault();
+               var extraStrokes = strokes.gameHCP;
 
-                var test23 = 11;
+               var Hcpindex = from i in r.holeresult
+                              join h in db.Hole
+                              on i.Hole_ID equals h.Id
+                              orderby h.HCPind ascending
+                              select new { i, h };
+               var oList = Hcpindex.ToList();
+                foreach(var i in oList)
+                {
 
 
+                }
+
+
+               var t = 123;
+
+
+
+                
             }
 
 
