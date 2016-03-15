@@ -69,13 +69,8 @@
                 @Html.EditorFor(model => model.p.email)
                 @Html.ValidationMessageFor(model => model.p.email)
             </div>
-            <div class="editor-label">
-                @Html.Label("Medlemstyp:")
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.p.memberType_ID)
-                @Html.ValidationMessageFor(model => model.p.memberType_ID)
-            </div>
+
+        
 
             <div class="editor-label">
                 @Html.Label("Lösenord:")
@@ -87,6 +82,15 @@
             <div>
                 @Html.Label("Kön:")
                 @Html.DropDownListFor(m => m.genderid, new SelectList(Model.genderItems, "Value", "Text"))
+            </div>
+            <div class="editor-label">
+                @Html.Label("Medlemstyp:")
+            </div>
+            <div class="editor-field">
+                @*@Html.EditorFor(model => model.p.memberType_ID)
+            @Html.ValidationMessageFor(model => model.p.memberType_ID)*@
+
+                @Html.DropDownListFor(m => m.memberID, new SelectList(Model.memberType, "Value", "Text"))
             </div>
             <p>
                 <input type="submit" id="registerbutton"value="Registrera dig" />

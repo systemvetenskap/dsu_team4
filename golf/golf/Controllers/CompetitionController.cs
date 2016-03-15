@@ -113,7 +113,25 @@ namespace golf.Controllers
             }
 
         }
-        public void slumpa(int id)
+        ActionResult generateStartTimes(int id)
+        {
+            List<CompetitionGolfer> CG = RandomCGStartTimes(id);
+
+            using( dsuteam4Entities1 databas = new dsuteam4Entities1())
+            {
+                foreach (var item in CG)
+                {
+                    //databas.Entry(item).State = EntityState.Modified;
+                    databas.CompetitionGolfer.Attach(item);
+
+                    databas.SaveChanges();
+
+                }
+            }
+
+            return View(registerResult(id));
+        }
+        public List<CompetitionGolfer> RandomCGStartTimes(int id)
         {
             dsuteam4Entities1 databas = new dsuteam4Entities1(); //Databasconnection
 
@@ -121,9 +139,9 @@ namespace golf.Controllers
             //CompetitionGolfer cg = new CompetitionGolfer();
             Competition ct = new Competition();
             List<DateTime> listaDate = new List<DateTime>();
-            
 
-            
+
+
             DateTime start = Convert.ToDateTime(ct.startTime);
             DateTime slut = Convert.ToDateTime(ct.endTime);
 
@@ -139,15 +157,15 @@ namespace golf.Controllers
                 }
             }
 
-                int extraStartTime = 0;
+            int extraStartTime = 0;
 
-                int leftOver = cgList.Count % ct.playersPerTime;
-                if (leftOver > 0)
-                {
-                    extraStartTime = 1;
-                }
-                int startTimeCount = ((cgList.Count - leftOver) / ct.playersPerTime) + extraStartTime;
-            
+            int leftOver = cgList.Count % ct.playersPerTime;
+            if (leftOver > 0)
+            {
+                extraStartTime = 1;
+            }
+            int startTimeCount = ((cgList.Count - leftOver) / ct.playersPerTime) + extraStartTime;
+
             List<string> startTimes = new List<string>();
 
             DateTime compStart = Convert.ToDateTime(ct.startTime);
@@ -161,7 +179,7 @@ namespace golf.Controllers
                 }
                 else
                 {
-                    compStart.AddMinutes(20);  
+                    compStart.AddMinutes(20);
                     startTimes.Add(compStart.ToShortTimeString());
                 }
             }
@@ -173,16 +191,17 @@ namespace golf.Controllers
 
             for (int i = 0; i < randomCGList.Count; i++)
             {
-                if (i != 1 && i % ct.playersPerTime ==  1)
+                if (i != 1 && i % ct.playersPerTime == 1)
                 {
                     count++;
                 }
-                randomCGList[i-1].startTime = randomStartTimes[count];
-                
+                randomCGList[i - 1].startTime = randomStartTimes[count];
+
             }
 
-                }
+            return randomCGList;
 
+        }
 
         public List<CompetitionGolfer> RandomizeCGList(List<CompetitionGolfer> inputList)
         {

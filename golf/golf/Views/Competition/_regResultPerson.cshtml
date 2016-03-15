@@ -43,12 +43,27 @@
         </table>
 
 
+        <input type="submit" value="Spara" id="savebutton"/>
+
+        <script type="text/javascript">
+            $('#savebutton').click(function () {
+        var isValid = 1;
+        $('input:textfield').each(function () {
+            if ($(this).val() == '') {
+                $(this).css('border', '2px solid red');
+                isValid = 0;
+            }
+            else {
+                $(this).css('border', '1px solid green');
+            }
+        });
+        if (isValid == 0) {
+            return false;
+        }
+    });
+        </script>
 
 
-
-        <input type="submit" value="Spara" />
-
-  
 }
 
 

@@ -7,7 +7,14 @@
 <h3>
     @Html.Label("Tävling" + Model.comp.name)
 </h3>
+<br />
 
+                @Ajax.ActionLink("Lotta tider", "generateStartTimes", new {id = Model.comp.Id}, new AjaxOptions()
+                       {
+                           UpdateTargetId = "showComp",
+                           HttpMethod = "GET",
+                           InsertionMode = InsertionMode.Replace
+                       })
 <br />
 
 <table>
