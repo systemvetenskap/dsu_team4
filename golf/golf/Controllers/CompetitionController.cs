@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using golf.Models;
+using System.Globalization;
 
 
 
@@ -393,7 +394,7 @@ namespace golf.Controllers
                 List<HoleStats> createPlayerHoles = new List<HoleStats>();
                 foreach(var i in h)
                 {
-                            HoleStats hs = new HoleStats();
+                    HoleStats hs = new HoleStats();
                     hs.CompetitionGolfer_ID = compG.Id;
                     hs.Hole_ID = i.Id;
                             
@@ -401,35 +402,69 @@ namespace golf.Controllers
                 }
 
                 rg.holeresult = createPlayerHoles;
-
+                var gend = db.Gender.Where(x => x.Id == player.Gender_ID).FirstOrDefault();
+             
                 PersonGolfer pg = new PersonGolfer();
 
                 pg.firstName = player.fName;
                 pg.lastName = player.lName;
-                
-                
+                pg.HCP = player.HCP;
+                pg.personid = player.Personid;
+                pg.golfid = player.Golfid;
+                pg.golfstring = player.Golfstring;
+                pg.gender_ID = gend.Id;
+                pg.gender = gend.genderName;
+                if(compG.startTime != null)
+                {
+                    pg.startime = compG.startTime;
+                }
+                else
+                {
+                    pg.startime = "Ej lottad";
+                }
                 rg.currPerson = pg;
+
+                resultClass rs = new resultClass();
+                rs.currentPerson = pg;
+                rs.comp = currComp;
+                rs.holeresult = createPlayerHoles;
+                
 
 
 
 
                         
-                return PartialView("_regResultPerson", rg);
-                    }
-                }
+                return PartialView("_addResult", rs);
+      }
+   }
         [HttpPost]
-        public ActionResult regResultPerson(RegisterComp rg)
+        public ActionResult regResultPerson(resultClass r)
         {
             using(dsuteam4Entities1 db = new dsuteam4Entities1())
             {
 
-                PersonGolfer pg = rg.currPerson;
+                string s = r.currentPerson.HCP;
 
-                var playerHCP = Convert.ToDecimal(pg.HCP);
+                decimal playerHCP  = decimal.Parse(s, CultureInfo.InvariantCulture);
+                string tst = playerHCP.ToString(CultureInfo.CreateSpecificCulture("sv-SE"));
+                decimal tst1 = decimal.Parse(tst, CultureInfo.CreateSpecificCulture("sv-SE"));
 
-                var gameHCP = db.Slope.Where(x => x.min >= playerHCP && x.max <= playerHCP && x.Gender_ID == pg.gender_ID).FirstOrDefault();
+                List<Slope> sl = new List<Slope>();
+                var slope = db.Slope.ToList();
+                foreach(var i in slope)
+                {
+                    string xMax = i.max.ToString();
+                    string xMin = i.min.ToString();
+                    decimal Max = decimal.Parse(xMax, CultureInfo.CreateSpecificCulture("sv-SE"));
+                    decimal Min = decimal.Parse(xMin, CultureInfo.CreateSpecificCulture("sv-SE"));
+                   if(tst1 >= Min && tst1 <= Max && i.Gender_ID == r.currentPerson.gender_ID)
+                   {
+                       sl.Add(i);
+                   }
 
-                var test = 11;
+                }
+
+                var test23 = 11;
 
 
             }

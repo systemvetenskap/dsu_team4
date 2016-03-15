@@ -126,19 +126,18 @@
                 </div>
                 <div class="editor-field">
                     @Html.DropDownListFor(model => model.newComp.Person_IDc, new SelectList(Model.contactlist, "Id", "oneName"))
+                    @*@Html.ValidationMessageFor(model => model.newComp.Person_IDc)*@
                 </div>
 
                 <div class="editor-label">
                     @Html.Raw("Beskrivning/Övrig info")
                 </div>
                 <div class="editor-field">
-                    @Html.TextAreaFor(model => model.newComp.info)
+                    @Html.TextAreaFor(model => model.newComp.info, 10, 40, htmlAttributes: new { style = "width: 90%; resize:none", ID = "textareainput" })
                     @Html.ValidationMessageFor(model => model.newComp.info)
                 </div>
-
                 <p>
                     <input type="submit" value="Spara" id="createcompetitionbutton" />
-
                 </p>
             </fieldset>
 
@@ -157,7 +156,31 @@
         if (isValid == 0) {
             return false;
         }
-    });
+                });
+                $('#createcompetitionbutton').click(function () {
+
+                    if ($('#textareainput').val() <= 0)
+                    {
+                        $('#textareainput').css('border', '2px solid red');
+                        return false;
+                    }
+                    else
+                    {
+                        $('#textareainput').css('border', '1px solid green');
+                    }
+                    /*Kommer ej åt dropdownboxarna*/
+                    if ($('#kontaktperson').index == 0)
+                    {
+                        $('#kontaktperson').css('border', '2px solid red');
+                        return false;
+                    }
+                    else
+                    {
+                        $('#kontaktperson').css('border', '1px solid green');
+                    }
+                    /**/
+                }
+);
             </script>
         </div>
                         }

@@ -1,0 +1,24 @@
+﻿@model golf.Models.resultClass
+<h1>@Html.Label(@Model.comp.name+" "+@Model.comp.cDate.ToShortDateString())</h1>
+<h3>@Html.Label("Ange resultat för: "+Model.currentPerson.firstName+" "+Model.currentPerson.lastName)</h3>
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(m => m.comp.Id)
+   
+    @Html.HiddenFor(m => m.currentPerson.golfid)
+    @Html.HiddenFor(m => m.currentPerson.personid)
+    @Html.HiddenFor(m => m.currentPerson.HCP)
+    @Html.HiddenFor(m => m.currentPerson.gender_ID)
+    for(var i = 0; i < Model.holeresult.Count; i++)
+    {
+        @Html.HiddenFor(m => m.holeresult[i].Id)
+        @Html.HiddenFor(m => m.holeresult[i].Hole_ID)
+        @Html.HiddenFor(m => m.holeresult[i].CompetitionGolfer_ID)
+        @Html.TextBoxFor(m => m.holeresult[i].stroaks)<br />
+
+
+    }
+
+
+    <input type="submit" value="Registrera resultat" />
+}
