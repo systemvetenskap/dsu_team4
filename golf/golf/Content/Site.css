@@ -160,9 +160,12 @@ header .content-wrapper {
 div.sDiv/*addplayer i competition*/{
     width:100%;
 }
+.sDiv table{
+    width: 40%;
+}
 .sDiv table th{
     padding:2%;
-    width:900px;
+    width:33%;
     padding-left:1%;
     padding-right:0%;
     text-align:left;   
@@ -181,7 +184,7 @@ div.sDiv/*addplayer i competition*/{
     text-align:left;
 }
 .searchDiv table {
- 
+    
     margin-left:0 auto;
     padding:1%;
     padding-left:0%;
