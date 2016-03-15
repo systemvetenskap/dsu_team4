@@ -185,7 +185,7 @@ namespace golf.Controllers
             }        
         }
 
-        public ActionResult addHoleStats(List<HoleStats> hsList)
+        public ActionResult addHoleStats(RegisterComp rc)
         {
             
             return View();
@@ -195,6 +195,7 @@ namespace golf.Controllers
 
             using (dsuteam4Entities1 db = new dsuteam4Entities1())
             {
+                CreateHoleStats chs = new CreateHoleStats();
                 
                 int compgolf;
 
@@ -203,9 +204,9 @@ namespace golf.Controllers
                 List<Hole> h = new List<Hole>();
 
                 foreach (var item in db.Hole)
-	                {
-		                 h.Add(item);
-	                }
+                    {
+                         h.Add(item);
+                    }
 
                 foreach (var item in db.CompetitionGolfer)
                 {
@@ -230,7 +231,7 @@ namespace golf.Controllers
 
                             hs.CompetitionGolfer_ID = item.Id;
                             hs.Hole_ID = h[i].Id;
-                            hs.stroaks = 0;
+                            
 
                             //db.HoleStats.Add(hs);
                             //db.SaveChanges();
@@ -242,7 +243,7 @@ namespace golf.Controllers
 
 
                             rc.holeStats.Add(hs);
-                            
+                            chs.hsList.Add(hs);
                         }
                         
                     }
@@ -254,7 +255,7 @@ namespace golf.Controllers
                     db.SaveChanges();
                 }
 
-                
+
 
 
                 return PartialView("_regResultPerson", rc);
