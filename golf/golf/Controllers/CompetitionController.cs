@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using golf.Models;
+using System.Globalization;
 
 
 
@@ -113,19 +114,19 @@ namespace golf.Controllers
             }
 
         }
-        ActionResult generateStartTimes(int id)
+        public ActionResult generateStartTimes(int id)
         {
             List<CompetitionGolfer> CG = RandomCGStartTimes(id);
 
-            using( dsuteam4Entities1 databas = new dsuteam4Entities1())
+            foreach (CompetitionGolfer item in CG)
             {
-                foreach (var item in CG)
+                using( dsuteam4Entities1 databas = new dsuteam4Entities1())
                 {
-                    //databas.Entry(item).State = EntityState.Modified;
-                    databas.CompetitionGolfer.Attach(item);
+
+                    CompetitionGolfer cg = databas.CompetitionGolfer.Find(item.Id);
+                    cg.startTime = item.startTime;
 
                     databas.SaveChanges();
-
                 }
             }
 
@@ -135,16 +136,13 @@ namespace golf.Controllers
         {
             dsuteam4Entities1 databas = new dsuteam4Entities1(); //Databasconnection
 
-            var list = databas.CompetitionGolfer.ToList(); //Lista med alla golfare anmälda till tävlingen
+            //var list = databas.CompetitionGolfer.ToList(); //Lista med alla golfare anmälda till tävlingen
             //CompetitionGolfer cg = new CompetitionGolfer();
-            Competition ct = new Competition();
-            List<DateTime> listaDate = new List<DateTime>();
+            //List<DateTime> listaDate = new List<DateTime>();
+            //DateTime start = Convert.ToDateTime(ct.startTime);
+            //DateTime slut = Convert.ToDateTime(ct.endTime);
 
-
-
-            DateTime start = Convert.ToDateTime(ct.startTime);
-            DateTime slut = Convert.ToDateTime(ct.endTime);
-
+            Competition ct = databas.Competition.Find(id);
             List<CompetitionGolfer> cgList = new List<CompetitionGolfer>();
 
             foreach (var i in databas.CompetitionGolfer)
@@ -167,20 +165,24 @@ namespace golf.Controllers
             int startTimeCount = ((cgList.Count - leftOver) / ct.playersPerTime) + extraStartTime;
 
             List<string> startTimes = new List<string>();
-
-            DateTime compStart = Convert.ToDateTime(ct.startTime);
+            TeeTime tee = databas.TeeTime.Find(Convert.ToInt32(ct.startTime));
+            DateTime compStart = Convert.ToDateTime(tee.teeTime1.ToString());
+            
 
             for (int i = 0; i < startTimeCount; i++)
             {
                 if (i == 0)
                 {
-                    startTimes.Add(compStart.ToShortTimeString());
+                    startTimes.Add((compStart.ToShortTimeString()).ToString());
 
                 }
                 else
                 {
-                    compStart.AddMinutes(20);
-                    startTimes.Add(compStart.ToShortTimeString());
+                    
+
+                    DateTime timeCount = compStart.AddMinutes(10*i);
+                    startTimes.Add((timeCount.ToShortTimeString()).ToString());
+                    
                 }
             }
 
@@ -191,11 +193,11 @@ namespace golf.Controllers
 
             for (int i = 0; i < randomCGList.Count; i++)
             {
-                if (i != 1 && i % ct.playersPerTime == 1)
+                if (i > 1 && (i % ct.playersPerTime == 0))
                 {
                     count++;
                 }
-                randomCGList[i - 1].startTime = randomStartTimes[count];
+                randomCGList[i].startTime = randomStartTimes[count];
 
             }
 
@@ -392,7 +394,7 @@ namespace golf.Controllers
                 List<HoleStats> createPlayerHoles = new List<HoleStats>();
                 foreach(var i in h)
                 {
-                            HoleStats hs = new HoleStats();
+                    HoleStats hs = new HoleStats();
                     hs.CompetitionGolfer_ID = compG.Id;
                     hs.Hole_ID = i.Id;
                             
@@ -400,35 +402,69 @@ namespace golf.Controllers
                 }
 
                 rg.holeresult = createPlayerHoles;
-
+                var gend = db.Gender.Where(x => x.Id == player.Gender_ID).FirstOrDefault();
+             
                 PersonGolfer pg = new PersonGolfer();
 
                 pg.firstName = player.fName;
                 pg.lastName = player.lName;
-                
-                
+                pg.HCP = player.HCP;
+                pg.personid = player.Personid;
+                pg.golfid = player.Golfid;
+                pg.golfstring = player.Golfstring;
+                pg.gender_ID = gend.Id;
+                pg.gender = gend.genderName;
+                if(compG.startTime != null)
+                {
+                    pg.startime = compG.startTime;
+                }
+                else
+                {
+                    pg.startime = "Ej lottad";
+                }
                 rg.currPerson = pg;
+
+                resultClass rs = new resultClass();
+                rs.currentPerson = pg;
+                rs.comp = currComp;
+                rs.holeresult = createPlayerHoles;
+                
 
 
 
 
                         
-                return PartialView("_regResultPerson", rg);
-                    }
-                }
+                return PartialView("_addResult", rs);
+      }
+   }
         [HttpPost]
-        public ActionResult regResultPerson(RegisterComp rg)
+        public ActionResult regResultPerson(resultClass r)
         {
             using(dsuteam4Entities1 db = new dsuteam4Entities1())
             {
 
-                PersonGolfer pg = rg.currPerson;
+                string s = r.currentPerson.HCP;
 
-                var playerHCP = Convert.ToDecimal(pg.HCP);
+                decimal playerHCP  = decimal.Parse(s, CultureInfo.InvariantCulture);
+                string tst = playerHCP.ToString(CultureInfo.CreateSpecificCulture("sv-SE"));
+                decimal tst1 = decimal.Parse(tst, CultureInfo.CreateSpecificCulture("sv-SE"));
 
-                var gameHCP = db.Slope.Where(x => x.min >= playerHCP && x.max <= playerHCP && x.Gender_ID == pg.gender_ID).FirstOrDefault();
+                List<Slope> sl = new List<Slope>();
+                var slope = db.Slope.ToList();
+                foreach(var i in slope)
+                {
+                    string xMax = i.max.ToString();
+                    string xMin = i.min.ToString();
+                    decimal Max = decimal.Parse(xMax, CultureInfo.CreateSpecificCulture("sv-SE"));
+                    decimal Min = decimal.Parse(xMin, CultureInfo.CreateSpecificCulture("sv-SE"));
+                   if(tst1 >= Min && tst1 <= Max && i.Gender_ID == r.currentPerson.gender_ID)
+                   {
+                       sl.Add(i);
+                   }
 
-                var test = 11;
+                }
+
+                var test23 = 11;
 
 
             }
