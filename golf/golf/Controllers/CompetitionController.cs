@@ -254,10 +254,21 @@ namespace golf.Controllers
 
                var cg = db.CompetitionGolfer.Where(x => x.Competition_ID == c.Id).ToList();
 
+               
+
                var golfer = from g in db.Golfer.ToList()
                             join u in cg.ToList()
                             on g.Id equals u.Golfer_ID
-                            select g;
+                            select new  {
+                                g.golfID,  
+                                g.HCP,
+                                g.Id,
+                                g.Person_ID, 
+                                CompGoldID = u.Id,
+                                u.startTime,
+                                u.HoleStats,
+                                u.Golfer_ID
+                            };
 
                var pg = from p in db.Person.ToList()
                         join y in golfer.ToList()
@@ -270,8 +281,9 @@ namespace golf.Controllers
                             lName = p.lastName,
                             Golfstring = y.golfID,
                             HCP = y.HCP,
-                            Gender_ID = p.gender_ID
-
+                            Gender_ID = p.gender_ID,
+                            Startime = y.startTime,
+                            
                         };
 
                var gender = db.Gender.ToList();
@@ -287,6 +299,7 @@ namespace golf.Controllers
                    var g = gender.Where(x => x.Id == i.Gender_ID).FirstOrDefault();
                    pe.gender = g.genderName;
                    pe.gender_ID = g.Id;
+                   pe.startime = i.Startime;
                    rg.persongolfer.Add(pe);
                    
                        }
