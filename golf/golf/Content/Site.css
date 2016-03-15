@@ -142,9 +142,6 @@ header .content-wrapper {
 .showComp{
     padding:2%;
 }
-.searchDiv{
-    padding:2%;
-}
 .showComp table td{
     padding:1.5%;
     padding-left:1%;
@@ -164,18 +161,18 @@ div.sDiv/*addplayer i competition*/{
     width:100%;
 }
 .sDiv table th{
-    padding:0%;
-    font-size:110%;
-    padding-left:10%;
-    padding-right:10%;
-    text-align:left;
-    
+    padding:2%;
+    width:900px;
+    padding-left:1%;
+    padding-right:0%;
+    text-align:left;   
 }
 .searchDiv table td{  
     padding-bottom:0%;
     padding-left:0%;
     padding-right:0%;
     text-align:left;
+
     
        
 }
