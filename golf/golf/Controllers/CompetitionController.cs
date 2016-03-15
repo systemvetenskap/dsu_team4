@@ -13,6 +13,7 @@ namespace golf.Controllers
 {
     public class CompetitionController : Controller
     {
+
         //
         // GET: /Competition/
 
@@ -117,27 +118,107 @@ namespace golf.Controllers
             dsuteam4Entities1 databas = new dsuteam4Entities1(); //Databasconnection
 
             var list = databas.CompetitionGolfer.ToList(); //Lista med alla golfare anmälda till tävlingen
+            //CompetitionGolfer cg = new CompetitionGolfer();
+            Competition ct = new Competition();
+            List<DateTime> listaDate = new List<DateTime>();
             
-            foreach(var i in list) //För varje golfare i listan
+
+            
+            DateTime start = Convert.ToDateTime(ct.startTime);
+            DateTime slut = Convert.ToDateTime(ct.endTime);
+
+            List<CompetitionGolfer> cgList = new List<CompetitionGolfer>();
+
+            foreach (var i in databas.CompetitionGolfer)
             {
-                if(i.Competition_ID == id) //Om tävlingsID = ID
+                if (i.Competition_ID == id) //Om tävlingsID = ID
                 {
-                
-                    Random rand = new Random();
-                    Competition ct = new Competition();
-
-                    DateTime start = Convert.ToDateTime(ct.startTime); //Datetime start = starttid
-                    DateTime slut = Convert.ToDateTime(ct.endTime);
-
-                    for ()
-
-                    DateTime timegap = start - slut;
-                    
-                    start.Date.AddHours(7); //starttid adderar 7 timmar
-                    DateTime value = start.AddMinutes(rand.Next(20)); // random var 20e minut
-                    string time = value.ToString("HH:mm"); //Konvertera till en sträng 
+                    CompetitionGolfer cg = i;
+                    cgList.Add(cg);
 
                 }
+            }
+
+                int extraStartTime = 0;
+
+                int leftOver = cgList.Count % ct.playersPerTime;
+                if (leftOver > 0)
+                {
+                    extraStartTime = 1;
+                }
+                int startTimeCount = ((cgList.Count - leftOver) / ct.playersPerTime) + extraStartTime;
+
+            List<string> startTimes = new List<string>();
+
+            DateTime compStart = Convert.ToDateTime(ct.startTime);
+
+            for (int i = 0; i < startTimeCount; i++)
+            {
+                if (i == 0)
+                {
+                    startTimes.Add(compStart.ToShortTimeString());
+
+                }
+                else
+                {
+                    compStart.AddMinutes(20);  
+                    startTimes.Add(compStart.ToShortTimeString());
+                }
+            }
+
+            
+            List<string> randomStartTimes = startTimes;
+            
+            
+            
+            
+            
+            
+            //foreach(var i in list) //För varje golfare i listan
+            //{
+            //    if(i.Competition_ID == id) //Om tävlingsID = ID
+            //    {
+            //        while (start.TimeOfDay != slut.TimeOfDay)
+            //        {
+            //            CompetitionGolfer person = new CompetitionGolfer();
+            //            person = databas.CompetitionGolfer.OrderBy(r => Guid.NewGuid()).Take(3).First();
+            //            listaDate.Add(start);
+                        
+                        
+            //            start = start.AddMinutes(20);
+            //        }
+                    
+                
+            //        //Random rand = new Random();
+            //        //Competition ct = new Competition();
+
+            //        //DateTime start = Convert.ToDateTime(ct.startTime); //Datetime start = starttid
+            //        //DateTime slut = Convert.ToDateTime(ct.endTime);
+
+            //        ////for ()
+
+            //        ////DateTime timegap = start - slut;
+                    
+            //        //start.Date.AddHours(7); //starttid adderar 7 timmar
+            //        //DateTime value = start.AddMinutes(rand.Next(20)); // random var 20e minut
+            //        //string time = value.ToString("HH:mm"); //Konvertera till en sträng 
+
+                //}
+            //}
+        }
+        
+
+        public static void Shuffle<T>(this IList<T> list)
+        {
+            Random rng = new Random();
+            int n = list.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = rng.Next(n + 1);
+                T value = list[k];
+                list[k] = list[n];
+                list[n] = value;
             }
         }
         public ActionResult saveResult()
