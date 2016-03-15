@@ -197,6 +197,7 @@
     <Compile Include="Controllers\MemberManagementController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\TeeTimeController.cs" />
+    <Compile Include="Extentions\extentions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -221,6 +222,7 @@
       <DependentUpon>PersonModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CreateComp.cs" />
+    <Compile Include="Models\CreateHoleStats.cs" />
     <Compile Include="Models\CreateMember.cs" />
     <Compile Include="Models\Gender.cs">
       <DependentUpon>PersonModel.tt</DependentUpon>

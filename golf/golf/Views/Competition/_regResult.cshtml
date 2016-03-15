@@ -25,14 +25,14 @@
 
 
     
-    @foreach (var item in Model.p)
+    @foreach (var item in Model.persongolfer)
     {
         <tr>
             <td>
                 @Html.Label(item.firstName + " " + item.lastName)
             </td>
             <td>
-                @Ajax.ActionLink("Registrera resultat", "regResultPerson", new { golfID = item.Id, compID = Model.comp.Id, regComp = Model }, new AjaxOptions()
+                @Ajax.ActionLink("Registrera resultat", "regResultPerson", new { personid = item.personid, compID = Model.comp.Id, regComp = Model }, new AjaxOptions()
                 {
                     UpdateTargetId = "showComp",
                     HttpMethod = "GET",

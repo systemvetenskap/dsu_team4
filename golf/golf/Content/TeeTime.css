@@ -143,16 +143,16 @@ ControlDiv{
 .listobjectP{    
     
 }
-.searchDiv{  
-    width:100%;
-    background-color:mediumpurple;
-}
-
-table, td {
-   background-color:lightblue;
-   width:100%;
+.searchDiv th{  
    text-align:left;
-   
+}
+.searchDiv table {
+ 
+    padding:0%;
+    padding-left:0%;
+    padding-right:10%;
+    text-align:left;
+    width:900px;
 }
 
 .details timeInfo{

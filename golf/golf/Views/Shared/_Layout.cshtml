@@ -16,6 +16,7 @@
        @*Scripts.Render("~/bundles/modernizr")*@
 
 
+
     </head>
     <body>
         <header>
@@ -28,30 +29,34 @@
                 </div>
                 <br>
                 <div class="float-right">
-                    <nav>                        
-                        <ul id="menu"> 
-                            <li>@Html.ActionLink("Hem", "Index", "Home")</li>
-                            <li>@Html.ActionLink("Tidsbokning", "Index", "TeeTime")</li>
-                            <li>@Html.ActionLink("Tävlingar", "Index", "Competition")</li>
-                            @if (Request.IsAuthenticated)
-                            {
-                                <li>@Html.ActionLink("Medlemshantering", "Index", "MemberManagement")</li>
-                            }
-                        </ul>
-                    </nav>
-                </div>                
+                        <nav>
+                            <ul id="menu">
+                                <li>@Html.ActionLink("Hem", "Index", "Home")</li>
+                                <li>@Html.ActionLink("Tidsbokning", "Index", "TeeTime")</li>
+                                
+                                @if (Request.IsAuthenticated)
+                                {
+                                    
+                                    <li>@Html.ActionLink("Medlemshantering", "Index", "MemberManagement")</li>
+                                    <li>@Html.ActionLink("Tävlingar", "Index", "Competition")</li>
+                                    
+                                    
+                                }
+                            </ul>
+                        </nav>
+                    </div>
                 @RenderSection("featured", required: false)              
             </div>
         </header>
-        <div id="body">
+        <div id="body">         
             <section class="content-wrapper main-content clear-fix">
                 @RenderBody()
             </section>
         </div>
-        <footer>
+        <footer>       
                 <div class="footer">
                     <p>&copy; @DateTime.Now.Year - © Grupp 4</p>
-                </div>
+                </div>         
         </footer>
     </body>
 </html>

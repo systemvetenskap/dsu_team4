@@ -9,7 +9,6 @@
         <EntityTypeShape EntityType="dsuteam4Model1.AdminType" Width="1.5" PointX="3" PointY="11.125" />
         <EntityTypeShape EntityType="dsuteam4Model1.CompeteClass" Width="1.5" PointX="6" PointY="12.125" />
         <EntityTypeShape EntityType="dsuteam4Model1.Competition" Width="1.5" PointX="8.25" PointY="10" />
-        <EntityTypeShape EntityType="dsuteam4Model1.CompetitionGolfer" Width="1.5" PointX="10.5" PointY="8.375" />
         <EntityTypeShape EntityType="dsuteam4Model1.Gender" Width="1.5" PointX="0.75" PointY="7.125" />
         <EntityTypeShape EntityType="dsuteam4Model1.Golfer" Width="1.5" PointX="5.25" PointY="5.125" />
         <EntityTypeShape EntityType="dsuteam4Model1.Hole" Width="1.5" PointX="10.5" PointY="4.375" />
@@ -27,9 +26,6 @@
         <AssociationConnector Association="dsuteam4Model1.FK_AdminPerson_ToPerson" />
         <AssociationConnector Association="dsuteam4Model1.FK_Competition_ToCompeteClass" />
         <AssociationConnector Association="dsuteam4Model1.FK_Competition_ToPerson" />
-        <AssociationConnector Association="dsuteam4Model1.FK_CompetitionGolfer_ToCompetition" />
-        <AssociationConnector Association="dsuteam4Model1.FK_CompetitionGolfer_ToGolfer" />
-        <AssociationConnector Association="dsuteam4Model1.FK_HoleStats_ToCompetitionGolfer" />
         <AssociationConnector Association="dsuteam4Model1.FK_Person_ToGender" />
         <AssociationConnector Association="dsuteam4Model1.FK_Golfer_ToPerson" />
         <AssociationConnector Association="dsuteam4Model1.FK_TeeTimeDateGolfer_ToGolfer" />
@@ -41,7 +37,11 @@
         <AssociationConnector Association="dsuteam4Model1.FK_TeeTimeDateGolfer_ToPerson" />
         <AssociationConnector Association="dsuteam4Model1.FK_TeeTimeDate_ToTeeTime" />
         <AssociationConnector Association="dsuteam4Model1.FK_TeeTimeDateGolfer_ToTeeTimeDate" />
-      </Diagram>
+        <EntityTypeShape EntityType="dsuteam4Model1.CompetitionGolfer" Width="1.5" PointX="10.5" PointY="8.375" />
+        <AssociationConnector Association="dsuteam4Model1.FK_CompetitionGolfer_ToCompetition" />
+        <AssociationConnector Association="dsuteam4Model1.FK_CompetitionGolfer_ToGolfer" />
+        <AssociationConnector Association="dsuteam4Model1.FK_HoleStats_ToCompetitionGolfer" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
