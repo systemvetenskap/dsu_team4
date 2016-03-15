@@ -95,6 +95,7 @@ h5, h6 {
 
 /* main layout
 ----------------------------------------------------------*/
+
 .content-wrapper {
         background:rgba(255,255,255, 0.7);
         border-radius:5px;
@@ -103,7 +104,10 @@ h5, h6 {
 #body {
     clear: both;
 }
+.no-close .ui-dialog-titlebar-close{
 
+    display: none;
+}
 header .content-wrapper {
     background:none;
     margin-top:10px;
@@ -119,7 +123,7 @@ header .content-wrapper {
 .searchDiv{
     padding:2%;
 }
-.create
+.createAccount
 {
     padding:2%;
 }
@@ -128,6 +132,18 @@ header .content-wrapper {
 }
 .addplayer{
     padding:2%;
+}
+.MemberManagementEdit{
+    padding:2%
+}
+.MemberManagementDetails{
+    padding:2%;
+}
+.MemberManagementDelete{
+    padding:2%;
+}
+.knappar{
+    border:2px;
 }
 .topdivs {
   

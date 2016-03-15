@@ -1,76 +1,82 @@
-﻿@model golf.Models.Person
-
-
-@{
-    ViewBag.Title = "Details";
+﻿@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <p>
+                Detta är medlemshanteringen.
+            </p>
+        </div>
+    </section>
 }
+@model golf.Models.Person
 
-<h2>Details</h2>
-
-<fieldset>
-    <legend>Person</legend>
-
-    <div class="display-label">
-         @Html.Label("Förnamn")
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.firstName)
-    </div>
-
-    <div class="display-label">
-       @Html.Label("Efternamn")
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.lastName)
-    </div>
-
-    <div class="display-label">
-         @Html.Label("Adress")
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.streetAddres)
-    </div>
-
-    <div class="display-label">
-         @Html.Label("Postnummer")
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.postalCode)
-    </div>
-
-    <div class="display-label">
-         @Html.Label("Ort")
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.city)
-    </div>
-
-    <div class="display-label">
-        @Html.Label("E-post")
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.email)
-    </div>
-
-    <div class="display-field">
-        @Html.Label("HCP")
-    </div>
-    <div class="display-field">
-        @ViewBag.HCP
-    </div>
-
-    <div class="display-label">
-        @Html.Label("Golfid")
-    </div>
-    <div class="display-field">
-        @ViewBag.gid
-    </div>
+<div class="MemberManagementDetails" id="MemberManagementDetails">
 
 
-</fieldset>
+    <fieldset>
+        <legend>Person</legend>
+
+        <div class="display-label">
+            @Html.Label("Förnamn")
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.firstName)
+        </div>
+
+        <div class="display-label">
+            @Html.Label("Efternamn")
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.lastName)
+        </div>
+
+        <div class="display-label">
+            @Html.Label("Adress")
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.streetAddres)
+        </div>
+
+        <div class="display-label">
+            @Html.Label("Postnummer")
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.postalCode)
+        </div>
+
+        <div class="display-label">
+            @Html.Label("Ort")
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.city)
+        </div>
+
+        <div class="display-label">
+            @Html.Label("E-post")
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.email)
+        </div>
+
+        <div class="display-field">
+            @Html.Label("HCP")
+        </div>
+        <div class="display-field">
+            @ViewBag.HCP
+        </div>
+
+        <div class="display-label">
+            @Html.Label("Golfid")
+        </div>
+        <div class="display-field">
+            @ViewBag.gid
+        </div>
 
 
-<p>
-    @Html.ActionLink("Ändra", "Edit", new { id=Model.Id }) |
-    @Html.ActionLink("Tillbaka", "Index")
-</p>
+    </fieldset>
+
+
+    <p>
+        @Html.ActionLink("Ändra", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Tillbaka", "Index")
+    </p>
+    </div>

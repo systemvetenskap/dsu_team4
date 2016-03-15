@@ -13,13 +13,11 @@
                 @Html.DisplayFor(o => item.lastName)
             </th>
             <th>
-                @*<p id="@item.golfid"><a href="#" onclick="addPlayer(@item.golfid, @Model.comp.Id)">Lägg till</a></p>*@
 
-                @*//parametern som metoden i controller vill ha måste ha samma namn som den du skickar in härifrån, i detta fall :)*@
                 @Html.ActionLink("Lägg till",
                         "RegisterPlayer", new { golferid = item.golfid, competitionid = Model.comp.Id })
 
-                @*@Html.ActionLink()*@
+
 
             </th>
         </tr>

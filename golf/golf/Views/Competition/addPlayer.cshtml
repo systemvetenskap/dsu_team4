@@ -1,9 +1,19 @@
 ﻿@model golf.Models.AddCompPlayer
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 
+@{
+    ViewBag.Title = "View1";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <p>
+                Tävlingar
+            </p>
+        </div>
+    </section>
+}
 <div class="addplayer" id="addplayer">
     <h2>@Model.comp.name</h2>
     <h3>@Model.comp.cDate</h3>
@@ -12,28 +22,26 @@
         <input id="searchField" type="text" placeholder="sök" />
 
     </div>
-    <div id=" sDiv" class="sDiv">
+    <div id="sDiv" class="sDiv">
 
         
     </div>
 
 </div>
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<script>
 
+<script type="text/javascript">
     function search() {
-
-        alert("Test");
-
+       
         var string = document.getElementById('searchField').value;
 
+        var g = @Model.comp.Id
         $.ajax({
             url: '/Competition/searchPlayer',
             contentType: 'application/html; charset=utf-8',
-            data: { pg: @Model.golfers ,s: string },
+            data: {id: g, s: string },
             type: 'GET',
             dataType: 'html'
+            
 
         })
 
