@@ -150,9 +150,9 @@ header .content-wrapper {
     width:900px;
 }
 .showComp table th{
-    padding-right:13%;
-    padding-left:0%;
-    font-size:120%;
+   
+   text-align:left;
+
 }
 div.sDiv/*addplayer i competition*/{
     width:100%;
