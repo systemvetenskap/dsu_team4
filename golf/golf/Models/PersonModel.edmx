@@ -139,6 +139,16 @@
           <Property Name="PW" Type="nvarchar" MaxLength="400" />
           <Property Name="Payed" Type="bit" />
         </EntityType>
+        <EntityType Name="Slope">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="min" Type="decimal" Precision="18" Scale="1" Nullable="false" />
+          <Property Name="max" Type="decimal" Precision="18" Scale="1" Nullable="false" />
+          <Property Name="gameHCP" Type="decimal" Precision="18" Scale="1" Nullable="false" />
+          <Property Name="Gender_ID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="TeeDate">
           <Key>
             <PropertyRef Name="Id" />
@@ -339,6 +349,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Slope_ToGender">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
+          <End Role="Slope" Type="Self.Slope" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Slope">
+              <PropertyRef Name="Gender_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TeeTimeDate_ToTeeTime">
           <End Role="TeeTime" Type="Self.TeeTime" Multiplicity="1" />
           <End Role="TeeTimeDate" Type="Self.TeeTimeDate" Multiplicity="*" />
@@ -402,6 +424,7 @@
           <EntitySet Name="NewsArticle" EntityType="Self.NewsArticle" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NewsArticleImage" EntityType="Self.NewsArticleImage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Slope" EntityType="Self.Slope" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TeeDate" EntityType="Self.TeeDate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TeeTime" EntityType="Self.TeeTime" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TeeTimeDate" EntityType="Self.TeeTimeDate" Schema="dbo" store:Type="Tables" />
@@ -461,6 +484,10 @@
           <AssociationSet Name="FK_Person_ToMemberType" Association="Self.FK_Person_ToMemberType">
             <End Role="MemberType" EntitySet="MemberType" />
             <End Role="Person" EntitySet="Person" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Slope_ToGender" Association="Self.FK_Slope_ToGender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Slope" EntitySet="Slope" />
           </AssociationSet>
           <AssociationSet Name="FK_TeeTimeDate_ToTeeTime" Association="Self.FK_TeeTimeDate_ToTeeTime">
             <End Role="TeeTime" EntitySet="TeeTime" />
@@ -574,6 +601,11 @@
             <End Role="CompetitionGolfer" EntitySet="CompetitionGolfer" />
             <End Role="HoleStats" EntitySet="HoleStats" />
           </AssociationSet>
+          <EntitySet Name="Slope" EntityType="dsuteam4Model1.Slope" />
+          <AssociationSet Name="FK_Slope_ToGender" Association="dsuteam4Model1.FK_Slope_ToGender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Slope" EntitySet="Slope" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="AdminPerson">
           <Key>
@@ -628,6 +660,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="genderName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Person" Relationship="dsuteam4Model1.FK_Person_ToGender" FromRole="Gender" ToRole="Person" />
+          <NavigationProperty Name="Slope" Relationship="dsuteam4Model1.FK_Slope_ToGender" FromRole="Gender" ToRole="Slope" />
         </EntityType>
         <EntityType Name="Golfer">
           <Key>
@@ -993,6 +1026,29 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Slope">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="min" Type="Decimal" Nullable="false" Precision="18" Scale="1" />
+          <Property Name="max" Type="Decimal" Nullable="false" Precision="18" Scale="1" />
+          <Property Name="gameHCP" Type="Decimal" Nullable="false" Precision="18" Scale="1" />
+          <Property Name="Gender_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Gender" Relationship="dsuteam4Model1.FK_Slope_ToGender" FromRole="Slope" ToRole="Gender" />
+        </EntityType>
+        <Association Name="FK_Slope_ToGender">
+          <End Type="dsuteam4Model1.Gender" Role="Gender" Multiplicity="1" />
+          <End Type="dsuteam4Model1.Slope" Role="Slope" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Slope">
+              <PropertyRef Name="Gender_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1179,6 +1235,17 @@
                 <ScalarProperty Name="startTime" ColumnName="startTime" />
                 <ScalarProperty Name="Golfer_ID" ColumnName="Golfer_ID" />
                 <ScalarProperty Name="Competition_ID" ColumnName="Competition_ID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Slope">
+            <EntityTypeMapping TypeName="dsuteam4Model1.Slope">
+              <MappingFragment StoreEntitySet="Slope">
+                <ScalarProperty Name="Gender_ID" ColumnName="Gender_ID" />
+                <ScalarProperty Name="gameHCP" ColumnName="gameHCP" />
+                <ScalarProperty Name="max" ColumnName="max" />
+                <ScalarProperty Name="min" ColumnName="min" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

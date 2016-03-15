@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using golf.Models;
-using System.Data.Entity;
+
 
 
 namespace golf.Controllers
@@ -173,21 +173,13 @@ namespace golf.Controllers
 
             for (int i = 0; i < randomCGList.Count; i++)
             {
-                if (i % ct.playersPerTime == 0)
+                if (i != 1 && i % ct.playersPerTime ==  1)
                 {
                     count++;
                 }
-                randomCGList[i-1].Competition_ID = 1;
+                randomCGList[i-1].startTime = randomStartTimes[count];
                 
             }
-
-
-            foreach (string startTime in randomStartTimes)
-            {
-
-            }
-
-            
 
                 }
 

@@ -12,18 +12,14 @@ namespace golf.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Gender
+    public partial class Slope
     {
-        public Gender()
-        {
-            this.Person = new HashSet<Person>();
-            this.Slope = new HashSet<Slope>();
-        }
-    
         public int Id { get; set; }
-        public string genderName { get; set; }
+        public decimal min { get; set; }
+        public decimal max { get; set; }
+        public decimal gameHCP { get; set; }
+        public int Gender_ID { get; set; }
     
-        public virtual ICollection<Person> Person { get; set; }
-        public virtual ICollection<Slope> Slope { get; set; }
+        public virtual Gender Gender { get; set; }
     }
 }

@@ -271,6 +271,9 @@
     </Compile>
     <Compile Include="Models\RegisterComp.cs" />
     <Compile Include="Models\searchClass.cs" />
+    <Compile Include="Models\Slope.cs">
+      <DependentUpon>PersonModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TeeDate.cs">
       <DependentUpon>PersonModel.tt</DependentUpon>
     </Compile>
