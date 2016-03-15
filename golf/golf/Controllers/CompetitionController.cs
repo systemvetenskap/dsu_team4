@@ -108,15 +108,29 @@ namespace golf.Controllers
         }
         public void slumpa(int id)
         {
-            dsuteam4Entities1 databas = new dsuteam4Entities1();
+            dsuteam4Entities1 databas = new dsuteam4Entities1(); //Databasconnection
 
-            var list = databas.CompetitionGolfer.ToList();
+            var list = databas.CompetitionGolfer.ToList(); //Lista med alla golfare anmälda till tävlingen
             
-            foreach(var i in databas.CompetitionGolfer.ToList())
+            foreach(var i in list) //För varje golfare i listan
             {
-                if(i.Competition_ID == id)
+                if(i.Competition_ID == id) //Om tävlingsID = ID
                 {
+                
+                    Random rand = new Random();
+                    Competition ct = new Competition();
+
+                    DateTime start = Convert.ToDateTime(ct.startTime); //Datetime start = starttid
+                    DateTime slut = Convert.ToDateTime(ct.endTime);
+
+                    for ()
+
+                    DateTime timegap = start - slut;
                     
+                    start.Date.AddHours(7); //starttid adderar 7 timmar
+                    DateTime value = start.AddMinutes(rand.Next(20)); // random var 20e minut
+                    string time = value.ToString("HH:mm"); //Konvertera till en sträng 
+
                 }
             }
         }
