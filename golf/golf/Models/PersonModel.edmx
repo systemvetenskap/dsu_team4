@@ -52,6 +52,8 @@
           <Property Name="Competition_ID" Type="int" Nullable="false" />
           <Property Name="Golfer_ID" Type="int" Nullable="false" />
           <Property Name="startTime" Type="nvarchar" MaxLength="50" />
+          <Property Name="net" Type="int" />
+          <Property Name="points" Type="int" />
         </EntityType>
         <EntityType Name="Gender">
           <Key>
@@ -989,6 +991,8 @@
           <NavigationProperty Name="Competition" Relationship="dsuteam4Model1.FK_CompetitionGolfer_ToCompetition" FromRole="CompetitionGolfer" ToRole="Competition" />
           <NavigationProperty Name="Golfer" Relationship="dsuteam4Model1.FK_CompetitionGolfer_ToGolfer" FromRole="CompetitionGolfer" ToRole="Golfer" />
           <NavigationProperty Name="HoleStats" Relationship="dsuteam4Model1.FK_HoleStats_ToCompetitionGolfer" FromRole="CompetitionGolfer" ToRole="HoleStats" />
+          <Property Name="net" Type="Int32" />
+          <Property Name="points" Type="Int32" />
         </EntityType>
         <Association Name="FK_CompetitionGolfer_ToCompetition">
           <End Type="dsuteam4Model1.Competition" Role="Competition" Multiplicity="1" />
@@ -1232,6 +1236,8 @@
           <EntitySetMapping Name="CompetitionGolfer">
             <EntityTypeMapping TypeName="dsuteam4Model1.CompetitionGolfer">
               <MappingFragment StoreEntitySet="CompetitionGolfer">
+                <ScalarProperty Name="points" ColumnName="points" />
+                <ScalarProperty Name="net" ColumnName="net" />
                 <ScalarProperty Name="startTime" ColumnName="startTime" />
                 <ScalarProperty Name="Golfer_ID" ColumnName="Golfer_ID" />
                 <ScalarProperty Name="Competition_ID" ColumnName="Competition_ID" />
