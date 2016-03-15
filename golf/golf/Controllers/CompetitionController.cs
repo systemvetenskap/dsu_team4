@@ -117,15 +117,15 @@ namespace golf.Controllers
         {
             List<CompetitionGolfer> CG = RandomCGStartTimes(id);
 
-            using( dsuteam4Entities1 databas = new dsuteam4Entities1())
+            foreach (CompetitionGolfer item in CG)
             {
-                foreach (var item in CG)
+                using( dsuteam4Entities1 databas = new dsuteam4Entities1())
                 {
-                    //databas.Entry(item).State = EntityState.Modified;
-                    databas.CompetitionGolfer.Attach(item);
+
+                    CompetitionGolfer cg = databas.CompetitionGolfer.Find(item.Id);
+                    cg.startTime = item.startTime;
 
                     databas.SaveChanges();
-
                 }
             }
 
@@ -164,20 +164,24 @@ namespace golf.Controllers
             int startTimeCount = ((cgList.Count - leftOver) / ct.playersPerTime) + extraStartTime;
 
             List<string> startTimes = new List<string>();
-            TeeTime tee = databas.TeeTime.Find(ct.startTime);
+            TeeTime tee = databas.TeeTime.Find(Convert.ToInt32(ct.startTime));
             DateTime compStart = Convert.ToDateTime(tee.teeTime1.ToString());
+            
 
             for (int i = 0; i < startTimeCount; i++)
             {
                 if (i == 0)
                 {
-                    startTimes.Add(compStart.ToShortTimeString());
+                    startTimes.Add((compStart.ToShortTimeString()).ToString());
 
                 }
                 else
                 {
-                    compStart.AddMinutes(20);
-                    startTimes.Add(compStart.ToShortTimeString());
+                    
+
+                    DateTime timeCount = compStart.AddMinutes(10*i);
+                    startTimes.Add((timeCount.ToShortTimeString()).ToString());
+                    
                 }
             }
 
@@ -188,11 +192,11 @@ namespace golf.Controllers
 
             for (int i = 0; i < randomCGList.Count; i++)
             {
-                if (i != 1 && i % ct.playersPerTime == 1)
+                if (i > 1 && (i % ct.playersPerTime == 0))
                 {
                     count++;
                 }
-                randomCGList[i - 1].startTime = randomStartTimes[count];
+                randomCGList[i].startTime = randomStartTimes[count];
 
             }
 
