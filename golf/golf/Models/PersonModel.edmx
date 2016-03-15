@@ -144,9 +144,9 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="min" Type="int" Nullable="false" />
-          <Property Name="max" Type="int" Nullable="false" />
-          <Property Name="gameHCP" Type="int" Nullable="false" />
+          <Property Name="min" Type="decimal" Precision="18" Scale="1" Nullable="false" />
+          <Property Name="max" Type="decimal" Precision="18" Scale="1" Nullable="false" />
+          <Property Name="gameHCP" Type="decimal" Precision="18" Scale="1" Nullable="false" />
           <Property Name="Gender_ID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TeeDate">
@@ -588,11 +588,6 @@
             <End Role="TeeTimeDate" EntitySet="TeeTimeDate" />
             <End Role="TeeTimeDateGolfer" EntitySet="TeeTimeDateGolfer" />
           </AssociationSet>
-          <EntitySet Name="Slope" EntityType="dsuteam4Model1.Slope" />
-          <AssociationSet Name="FK_Slope_ToGender" Association="dsuteam4Model1.FK_Slope_ToGender">
-            <End Role="Gender" EntitySet="Gender" />
-            <End Role="Slope" EntitySet="Slope" />
-          </AssociationSet>
           <EntitySet Name="CompetitionGolfer" EntityType="dsuteam4Model1.CompetitionGolfer" />
           <AssociationSet Name="FK_CompetitionGolfer_ToCompetition" Association="dsuteam4Model1.FK_CompetitionGolfer_ToCompetition">
             <End Role="Competition" EntitySet="Competition" />
@@ -605,6 +600,11 @@
           <AssociationSet Name="FK_HoleStats_ToCompetitionGolfer" Association="dsuteam4Model1.FK_HoleStats_ToCompetitionGolfer">
             <End Role="CompetitionGolfer" EntitySet="CompetitionGolfer" />
             <End Role="HoleStats" EntitySet="HoleStats" />
+          </AssociationSet>
+          <EntitySet Name="Slope" EntityType="dsuteam4Model1.Slope" />
+          <AssociationSet Name="FK_Slope_ToGender" Association="dsuteam4Model1.FK_Slope_ToGender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Slope" EntitySet="Slope" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="AdminPerson">
@@ -978,29 +978,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Slope">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="min" Type="Int32" Nullable="false" />
-          <Property Name="max" Type="Int32" Nullable="false" />
-          <Property Name="gameHCP" Type="Int32" Nullable="false" />
-          <Property Name="Gender_ID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Gender" Relationship="dsuteam4Model1.FK_Slope_ToGender" FromRole="Slope" ToRole="Gender" />
-        </EntityType>
-        <Association Name="FK_Slope_ToGender">
-          <End Type="dsuteam4Model1.Gender" Role="Gender" Multiplicity="1" />
-          <End Type="dsuteam4Model1.Slope" Role="Slope" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Gender">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Slope">
-              <PropertyRef Name="Gender_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="CompetitionGolfer">
           <Key>
             <PropertyRef Name="Id" />
@@ -1046,6 +1023,29 @@
             </Principal>
             <Dependent Role="HoleStats">
               <PropertyRef Name="CompetitionGolfer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Slope">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="min" Type="Decimal" Nullable="false" Precision="18" Scale="1" />
+          <Property Name="max" Type="Decimal" Nullable="false" Precision="18" Scale="1" />
+          <Property Name="gameHCP" Type="Decimal" Nullable="false" Precision="18" Scale="1" />
+          <Property Name="Gender_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Gender" Relationship="dsuteam4Model1.FK_Slope_ToGender" FromRole="Slope" ToRole="Gender" />
+        </EntityType>
+        <Association Name="FK_Slope_ToGender">
+          <End Type="dsuteam4Model1.Gender" Role="Gender" Multiplicity="1" />
+          <End Type="dsuteam4Model1.Slope" Role="Slope" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Slope">
+              <PropertyRef Name="Gender_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1229,6 +1229,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="CompetitionGolfer">
+            <EntityTypeMapping TypeName="dsuteam4Model1.CompetitionGolfer">
+              <MappingFragment StoreEntitySet="CompetitionGolfer">
+                <ScalarProperty Name="startTime" ColumnName="startTime" />
+                <ScalarProperty Name="Golfer_ID" ColumnName="Golfer_ID" />
+                <ScalarProperty Name="Competition_ID" ColumnName="Competition_ID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Slope">
             <EntityTypeMapping TypeName="dsuteam4Model1.Slope">
               <MappingFragment StoreEntitySet="Slope">
@@ -1236,16 +1246,6 @@
                 <ScalarProperty Name="gameHCP" ColumnName="gameHCP" />
                 <ScalarProperty Name="max" ColumnName="max" />
                 <ScalarProperty Name="min" ColumnName="min" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CompetitionGolfer">
-            <EntityTypeMapping TypeName="dsuteam4Model1.CompetitionGolfer">
-              <MappingFragment StoreEntitySet="CompetitionGolfer">
-                <ScalarProperty Name="startTime" ColumnName="startTime" />
-                <ScalarProperty Name="Golfer_ID" ColumnName="Golfer_ID" />
-                <ScalarProperty Name="Competition_ID" ColumnName="Competition_ID" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
