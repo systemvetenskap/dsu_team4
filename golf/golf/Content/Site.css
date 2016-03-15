@@ -149,17 +149,19 @@ header .content-wrapper {
     padding:1.5%;
     padding-left:1%;
     padding-right:1%;
-    text-align:center;
+    text-align:left;
     width:900px;
 }
 .showComp table th{
     padding:1.5%;
+    font-size:120%;
 }
 div.sDiv/*addplayer i competition*/{
     width:100%;
 }
 .sDiv table th{
-    padding:2%;
+    padding:1.2%;
+    font-size:110%;
     padding-left:10%;
     padding-right:10%;
     text-align:left;

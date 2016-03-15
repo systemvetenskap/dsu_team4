@@ -23,6 +23,7 @@ namespace golf.Models
         public int Competition_ID { get; set; }
         public int Golfer_ID { get; set; }
         public string startTime { get; set; }
+        public Nullable<int> points { get; set; }
     
         public virtual Competition Competition { get; set; }
         public virtual Golfer Golfer { get; set; }
