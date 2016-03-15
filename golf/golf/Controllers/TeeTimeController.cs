@@ -396,7 +396,10 @@ namespace golf.Controllers
 
             CalendarClass cl = loadData(dt);
 
+
             return PartialView("loadTeetimes", cl);
+
+            
         }
 
         public bool IsAdmin(string id)
