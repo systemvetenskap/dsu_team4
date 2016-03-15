@@ -16,6 +16,7 @@
        @*Scripts.Render("~/bundles/modernizr")*@
 
 
+
     </head>
     <body>
         <header>
@@ -32,10 +33,14 @@
                             <ul id="menu">
                                 <li>@Html.ActionLink("Hem", "Index", "Home")</li>
                                 <li>@Html.ActionLink("Tidsbokning", "Index", "TeeTime")</li>
-                                <li>@Html.ActionLink("Tävlingar", "Index", "Competition")</li>
+                                
                                 @if (Request.IsAuthenticated)
                                 {
-                                    <li>@Html.ActionLink("Medlemshantering", "Index", "MemberManagement")</li>
+                                    
+                                     <li>@Html.ActionLink("Medlemshantering", "Index", "MemberManagement")</li>
+                                    <li>@Html.ActionLink("Tävlingar", "Index", "Competition")</li>
+                                    
+                                    
                                 }
                             </ul>
                         </nav>

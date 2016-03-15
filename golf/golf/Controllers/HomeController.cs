@@ -27,7 +27,28 @@ namespace golf.Controllers
             {
                 na.ArticleImages.Add(ai);
             }
+            
             na.newarticle.Reverse();
+
+            if (Request.IsAuthenticated)
+            {
+                    using(dsuteam4Entities1 db2 = new dsuteam4Entities1())
+                    {
+                        foreach (var item in db2.AdminPerson)
+                        {
+                            if (User.Identity.Name == item.Person_ID.ToString())
+                            {
+                                na.logedPerson = db2.Person.Find(item.Person_ID);
+                            }
+                            else
+                            {
+
+                            }
+                        }
+                    }
+                
+            }
+
 
             return View(na);
         }
