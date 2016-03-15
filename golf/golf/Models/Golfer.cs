@@ -21,6 +21,7 @@ namespace golf.Models
             this.CompetitionGolfer = new HashSet<CompetitionGolfer>();
         }
     
+        //yey
         public int Id { get; set; }
         public string golfID { get; set; }
         public string HCP { get; set; }
