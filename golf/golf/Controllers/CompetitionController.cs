@@ -129,9 +129,9 @@ namespace golf.Controllers
                     DateTime start = Convert.ToDateTime(ct.startTime); //Datetime start = starttid
                     DateTime slut = Convert.ToDateTime(ct.endTime);
 
-                    for ()
+                    //for ()
 
-                    DateTime timegap = start - slut;
+                    //DateTime timegap = start - slut;
                     
                     start.Date.AddHours(7); //starttid adderar 7 timmar
                     DateTime value = start.AddMinutes(rand.Next(20)); // random var 20e minut
