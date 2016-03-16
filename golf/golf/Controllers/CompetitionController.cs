@@ -711,9 +711,17 @@ namespace golf.Controllers
             CG.Competition_ID = competitionid;
             
             using (dsuteam4Entities1 databas = new dsuteam4Entities1())
-            {
-                databas.CompetitionGolfer.Add(CG);
-                databas.SaveChanges();
+            {      databas.CompetitionGolfer.Add(CG);
+                    databas.SaveChanges();
+                }
+                //if(databas.CompetitionGolfer.Any(x => x.Id == competitionid && x.Golfer_ID == golferid) == null)
+                //{
+              
+                //else
+                //{
+                //    return View("Error");
+                //}
+            
             }
 
             using (dsuteam4Entities1 d = new dsuteam4Entities1())
