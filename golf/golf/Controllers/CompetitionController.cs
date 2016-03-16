@@ -878,8 +878,17 @@ namespace golf.Controllers
         {
                 AddCompPlayer acp = new AddCompPlayer();
                 Competition c = new Competition();
+                List<CompetitionGolfer> cg = new List<CompetitionGolfer>();
             using (dsuteam4Entities1 d = new dsuteam4Entities1())
             {
+
+                foreach (var i in d.CompetitionGolfer)
+                {
+                    if (i.Competition_ID == id)
+                    {
+                        cg.Add(i);
+                    }
+                }
 
                  c = d.Competition.Find(id);
 
@@ -935,7 +944,19 @@ namespace golf.Controllers
 
                     if (c.CompeteClass_ID == i.gender_ID || c.CompeteClass_ID == 1)
                     {
-                        acp.golfers.Add(pg);
+                        int count = 0;
+                        foreach(var item in cg)
+                        {
+                            if(pg.golfid == item.Golfer_ID)
+                            {
+                                count++;
+                            }
+
+                        }
+                        if (count == 0)
+                        {
+                            acp.golfers.Add(pg);
+                        }
                     }
 
                 }

@@ -80,11 +80,13 @@
 
         @if (Model.p.Payed == true)
         {
-            <p>Ja</p>
+            @Html.Raw("Ja")
+            
         }
         else
         {
-            <p>Nej</p>
+            @Html.Raw("Nej")
+            
         }
         @*<div class="editor-label">
             @Html.Raw("Kön")
@@ -93,11 +95,11 @@
             @Html.DisplayFor(model => model.gender_ID)
             @Html.ValidationMessageFor(model => model.gender_ID)
         </div>*@
-       
+        <br />
+        <br>
         <div class="editor-label">
             @Html.Raw("Golf ID")
         </div>
-       
         <div class="editor-field">
             @Html.DisplayFor(model => model.golfID)
             @Html.ValidationMessageFor(model => model.golfID)
