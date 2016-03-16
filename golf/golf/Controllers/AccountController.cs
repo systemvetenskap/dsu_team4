@@ -50,9 +50,18 @@ namespace golf.Controllers
                 model.p.memberType_ID = model.memberID;
                 model.p.Payed = false;
 
-
+               
                 db.Person.Add(model.p);
                 db.SaveChanges();
+
+                Golfer g = new Golfer();
+                g.Person_ID = model.p.Id;
+                g.HCP = "32";
+                g.golfID = "12035_" + model.p.Id;
+
+                db.Golfer.Add(g);
+                db.SaveChanges();
+
 
                 FormsAuthentication.SetAuthCookie(model.p.Id.ToString(), false);
 
