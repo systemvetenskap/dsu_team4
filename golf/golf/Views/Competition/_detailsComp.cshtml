@@ -60,7 +60,7 @@
             @Html.Raw("Namn")
         </div>
         <div class="editor-field">
-            @Html.DisplayFor(model => model.name)
+            @Html.Label(Model.name)
             @Html.ValidationMessageFor(model => model.name)
         </div>
         <br>
@@ -68,7 +68,7 @@
             @Html.Raw("Datum")
         </div>
         <div class="editor-field">
-            @Html.DisplayFor(model => model.cDate)
+            @Html.Label(Model.cDate.ToShortDateString())
             @Html.ValidationMessageFor(model => model.cDate)
         </div>
         <br>
@@ -76,7 +76,7 @@
             @Html.Raw("Första anmälningsdag")
         </div>
         <div class="editor-field">
-            @Html.DisplayFor(model => model.signUpFrom)
+            @Html.Label(Model.signUpFrom.ToShortDateString())
             @Html.ValidationMessageFor(model => model.signUpFrom)
         </div>
         <br>
@@ -84,7 +84,7 @@
             @Html.Raw("Sista anmälningsdag")
         </div>
         <div class="editor-field">
-            @Html.DisplayFor(model => model.signUpTo)
+            @Html.Label(Model.signUpTo.ToShortDateString())
             @Html.ValidationMessageFor(model => model.signUpTo)
         </div>
         <br>
