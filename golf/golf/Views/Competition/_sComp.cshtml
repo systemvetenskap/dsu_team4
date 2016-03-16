@@ -114,7 +114,7 @@
 
                 </td>
                 <td>
-                    <div class="isAdmin2">
+                    <div class="isAdmin2" style="display:none">
                         @Ajax.ActionLink("Resultat", "showResult", new { id = item.Id }, new AjaxOptions()
                        {
                            UpdateTargetId = "showComp",
@@ -124,7 +124,7 @@
                     </div>
                 </td>
                 <td>
-                    <div class="isAdmin2">
+                    <div class="isAdmin2" style="display:none">
                         @Ajax.ActionLink("Spelarlista", "registerResult", new { id = item.Id }, new AjaxOptions()
                        {
                            UpdateTargetId = "showComp",
@@ -133,26 +133,28 @@
                        })
                     </div>
   
-                   <div class="isMember2">
+                    <div class="isMember2" style="display:none">
 
-                       @*Här ska det vara annan actionlink sen!*@
-                       @if((item.signUpFrom >= DateTime.Now) && (item.signUpTo <= DateTime.Now)){
+                        @*Här ska det vara annan actionlink sen!*@
+                        @if ((item.signUpFrom >= DateTime.Now) && (item.signUpTo <= DateTime.Now))
+                        {
                             @Html.ActionLink("Registrera dig här!", "addYourself", new { confirm = true, id = item.Id },
                             new { onclick = "return confirm('Vill du verkligen anmäla dig till denna tävling?')" })
-                       }
-                   </div>
+                        }
+                    </div>
 
 
                 </td>
-                <td class="isAdmin2">
+                <td class="isAdmin2" style="display:none">
                     @*@Ajax.ActionLink("Anmäl spelare", "addPlayer", new { id = item.Id }, new AjaxOptions()
-                       {
-                           UpdateTargetId = "showComp",
-                           HttpMethod = "GET",
-                           InsertionMode = InsertionMode.Replace
-                       })*@
-                    @if((item.signUpFrom >= DateTime.Now) && (item.signUpTo <= DateTime.Now)){
-                    @Html.ActionLink("Anmäl spelare", "addPlayer", new { id = item.Id })
+            {
+                UpdateTargetId = "showComp",
+                HttpMethod = "GET",
+                InsertionMode = InsertionMode.Replace
+            })*@
+                    @if ((item.signUpFrom >= DateTime.Now) && (item.signUpTo <= DateTime.Now))
+                    {
+                        @Html.ActionLink("Anmäl spelare", "addPlayer", new { id = item.Id })
                     }
 
                 </td>
