@@ -605,9 +605,30 @@ namespace golf.Controllers
         }
 
 
-        public ActionResult addYourself(int golfID, int compID)
+        public ActionResult addYourself(int id)
         {
-            return View();
+
+            CompetitionGolfer CG = new CompetitionGolfer();
+           
+           
+
+            using (dsuteam4Entities1 databas = new dsuteam4Entities1())
+            {
+                foreach (var golfer in databas.Golfer)
+                {
+                    if (id == golfer.Person_ID)
+                    {
+                        CG.Golfer_ID = golfer.Id;
+                    }
+                }
+
+                CG.Competition_ID = id;
+
+                databas.CompetitionGolfer.Add(CG);
+                databas.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
         }
         public ActionResult addPlayer(int id)
         {

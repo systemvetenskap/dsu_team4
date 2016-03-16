@@ -137,7 +137,7 @@
 
                        @*Här ska det vara annan actionlink sen!*@
                        @if((item.signUpFrom >= DateTime.Now) && (item.signUpTo <= DateTime.Now)){
-                            @Html.ActionLink("Registrera dig här!", "addPlayer", new { id = item.Id })
+                            @Html.ActionLink("Registrera dig här!", "addYourself", new { id = item.Id })
                        }
                    </div>
 
