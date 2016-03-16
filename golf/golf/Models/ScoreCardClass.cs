@@ -38,6 +38,7 @@ namespace golf.Models
                     points=0;
                 }
                 else{
+
                     points = p;
                 }
                  

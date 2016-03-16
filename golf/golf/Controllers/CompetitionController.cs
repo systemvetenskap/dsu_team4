@@ -526,8 +526,7 @@ namespace golf.Controllers
                     }
 
                 }
-
-                
+              
                 foreach(var i in scrList)
                 {
                     i.calcPoints();
