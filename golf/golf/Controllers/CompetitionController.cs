@@ -310,7 +310,9 @@ namespace golf.Controllers
             }
             var orderList = randomCGList.OrderBy(x => x.startTime);
 
-            return randomCGList;
+            var orderedByTime = randomCGList.OrderBy(x => x.startTime).ToList();
+
+            return orderedByTime;
 
         }
 
