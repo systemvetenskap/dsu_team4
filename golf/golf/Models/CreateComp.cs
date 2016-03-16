@@ -24,6 +24,7 @@ namespace golf.Models
         public Competition comp { get; set; }
 
         public List<PersonGolfer> golfers = new List<PersonGolfer>();
+        public List<bool> alreadySigned = new List<bool>();
        
     }
 

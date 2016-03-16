@@ -80,6 +80,18 @@ namespace golf.Controllers
                 //        cc.golfers.Add(pg);
                 //    }
                 //}
+                //foreach (var item in cc.complist)
+                //{
+                //    foreach (var item2 in databas.CompetitionGolfer)
+                //    {
+                //        if (item.Id == item2.Competition_ID )
+                //        {
+                            
+                //        }
+                //    }
+                //}
+
+
 
 
                 return PartialView("_sComp", cc);

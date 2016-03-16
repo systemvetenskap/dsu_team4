@@ -43,6 +43,32 @@
                 }
             });
 
+            $.ajax({
+                url: '@Url.Action("alreadySignedUp", "Home")',
+                type: "POST",
+                async: true,
+                dataType: "json",
+                data: $('#form').serialize(),
+                success: function (data) {
+
+                    if (data.valid == false) {
+                        $(".isAdmin2").hide();
+                        $(".isMember2").show();
+                    }
+                    else {
+                        $(".isAdmin2").show();
+                        $(".isMember2").hide();
+                    }
+                    //document.getElementById('member').style.display = 'none'
+
+                },
+                error: function (request, status, error) {
+                    // process error message
+                }
+            });
+
+            
+
         });
     </script>
 

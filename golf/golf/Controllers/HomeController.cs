@@ -90,6 +90,41 @@ namespace golf.Controllers
             //);
 
         }
+        public ActionResult alreadySignedUp(string id)
+        {
+            bool isValid = false;
+
+            using (dsuteam4Entities1 db = new dsuteam4Entities1())
+            {
+                if (Request.IsAuthenticated)
+                {
+
+                    foreach (var item in db.CompetitionGolfer)
+                    {
+                        if (User.Identity.Name == "asdf")
+                        {
+                            isValid = true;
+                        }
+                    }
+
+
+                }
+            }
+
+
+
+            var obj = new
+            {
+                valid = isValid
+            };
+            return Json(obj);
+
+            //return Json(
+            //new { isCalculateTax = isValid },
+            //JsonRequestBehavior.AllowGet
+            //);
+
+        }
         public ActionResult AddNews()
         {
             return View();
