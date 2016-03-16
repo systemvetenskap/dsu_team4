@@ -54,14 +54,14 @@
                     @Html.ValidationMessageFor(model => model.newComp.name)
                 </div>
                 <div class="editor-label">
-                    @Html.Raw("Antal hål")
+                    @Html.Raw("Antal höl")
                 </div>
                 <div class="editor-field">
                     @{List<SelectListItem> holes = new List<SelectListItem>();
                         holes.Add(new SelectListItem { Text = "9", Value = "9" });
                         holes.Add(new SelectListItem { Text = "18", Value = "18" });
                     }
-                    @Html.DropDownListFor(model => model.newComp.NumberOfHoles, holes, "--Antal hål--")
+                    @Html.DropDownListFor(model => model.newComp.NumberOfHoles, holes, "--Antal höl--")
                 </div>
                 <div class="editor-label">
                     @Html.Raw("Antal spelare")
