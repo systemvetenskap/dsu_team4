@@ -137,7 +137,8 @@
 
                        @*Här ska det vara annan actionlink sen!*@
                        @if((item.signUpFrom >= DateTime.Now) && (item.signUpTo <= DateTime.Now)){
-                            @Html.ActionLink("Registrera dig här!", "addPlayer", new { id = item.Id })
+                            @Html.ActionLink("Registrera dig här!", "addYourself", new { confirm = true, id = item.Id },
+                            new { onclick = "return confirm('Vill du verkligen anmäla dig till denna tävling?')" })
                        }
                    </div>
 
@@ -151,7 +152,7 @@
                            InsertionMode = InsertionMode.Replace
                        })*@
                     @if((item.signUpFrom >= DateTime.Now) && (item.signUpTo <= DateTime.Now)){
-                        @Html.ActionLink("Anmäl spelare", "addPlayer", new { id = item.Id })
+                    @Html.ActionLink("Anmäl spelare", "addPlayer", new { id = item.Id })
                     }
 
                 </td>

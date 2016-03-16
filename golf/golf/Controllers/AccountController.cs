@@ -48,6 +48,8 @@ namespace golf.Controllers
   
                 model.p.gender_ID = model.genderid;
                 model.p.memberType_ID = model.memberID;
+                model.p.Payed = false;
+
 
                 db.Person.Add(model.p);
                 db.SaveChanges();
