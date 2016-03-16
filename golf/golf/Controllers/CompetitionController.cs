@@ -69,17 +69,17 @@ namespace golf.Controllers
                 CreateComp cc = new CreateComp();
                 cc.complist = databas.Competition.ToList();
 
-                foreach (var item in databas.Golfer)
-                {
-                    if (item.Person_ID.ToString() == User.Identity.Name)
-                    {
-                        PersonGolfer pg = new PersonGolfer();
-                        pg.golfid = Convert.ToInt32(item.golfID);
-                        pg.personid = Convert.ToInt32(item.Person_ID.ToString());
+                //foreach (var item in databas.Golfer)
+                //{
+                //    if (item.Person_ID.ToString() == User.Identity.Name)
+                //    {
+                //        PersonGolfer pg = new PersonGolfer();
+                //        pg.golfid = Convert.ToInt32(item.golfID);
+                //        pg.personid = Convert.ToInt32(item.Person_ID.ToString());
 
-                        cc.golfers.Add(pg);
-                    }
-                }
+                //        cc.golfers.Add(pg);
+                //    }
+                //}
 
 
                 return PartialView("_sComp", cc);
@@ -615,7 +615,7 @@ namespace golf.Controllers
             {
                 foreach (var golfer in databas.Golfer)
                 {
-                    if (id == golfer.Person_ID)
+                    if (User.Identity.Name == golfer.Person_ID.ToString())
                     {
                         CG.Golfer_ID = golfer.Id;
                     }
