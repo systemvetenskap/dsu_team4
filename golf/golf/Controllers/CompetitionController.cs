@@ -466,7 +466,15 @@ namespace golf.Controllers
                 string s = r.currentPerson.HCP;
 
                 decimal playerHCP  = decimal.Parse(s, CultureInfo.InvariantCulture);
-      
+                foreach(var i in r.holeresult)
+                {
+                    HoleStats hst = new HoleStats();
+                    hst.CompetitionGolfer_ID = r.CompetitionGolferID;
+                    hst.Hole_ID = i.Hole_ID;
+                    hst.stroaks = i.stroaks;
+                    db.HoleStats.Add(hst);
+                    db.SaveChanges();
+                }
 
                 List<Slope> sl = new List<Slope>();
                 var slope = db.Slope.ToList();

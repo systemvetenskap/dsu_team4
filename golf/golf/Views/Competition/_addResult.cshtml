@@ -3,42 +3,44 @@
 <h3>@Html.Label("Ange resultat för: "+Model.currentPerson.firstName+" "+Model.currentPerson.lastName)</h3>
 @using (Html.BeginForm())
 {
-    <table>
-       <tr>
-           <th>
-               @Html.Label("Hål")
-           </th>
-           <th>
-               @Html.Label("Ange slag")
-           </th>
-       </tr>
+    <div class="addresultdiv" id="addresultdiv">
+        <table>
+            <tr>
+                <th>
+                    @Html.Label("Hål")
+                </th>
+                <th>
+                    @Html.Label("Ange slag")
+                </th>
+            </tr>
 
-    @for (var i = 0; i < Model.holeresult.Count; i++)
-    {
-        var z = i + 1;
-        <tr>
-            
-            <td>
-                @Html.Label(z.ToString())
-                </td>
-            <td>
-                @Html.TextBoxFor(m => m.holeresult[i].stroaks)
-                @Html.HiddenFor(m => m.holeresult[i].Id)
-                @Html.HiddenFor(m => m.holeresult[i].Hole_ID)
-                @Html.HiddenFor(m => m.holeresult[i].CompetitionGolfer_ID)
-         
-            </td>
+            @for (var i = 0; i < Model.holeresult.Count; i++)
+            {
+                var z = i + 1;
+                <tr>
 
-    </tr>
-    }
+                    <td>
+                        @Html.Label(z.ToString())
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.holeresult[i].stroaks)
+                        @Html.HiddenFor(m => m.holeresult[i].Id)
+                        @Html.HiddenFor(m => m.holeresult[i].Hole_ID)
+                        @Html.HiddenFor(m => m.holeresult[i].CompetitionGolfer_ID)
 
-    </table>
-    <input type="submit" value="Registrera resultat" />
-    @Html.HiddenFor(m => m.comp.Id)
-    @Html.HiddenFor(m => m.currentPerson.golfid)
-    @Html.HiddenFor(m => m.currentPerson.personid)
-    @Html.HiddenFor(m => m.currentPerson.HCP)
-    @Html.HiddenFor(m => m.currentPerson.gender_ID)
-    @Html.HiddenFor(m => m.comp.NumberOfHoles)
-    @Html.HiddenFor(m => m.CompetitionGolferID)
-}
+                    </td>
+
+                </tr>
+            }
+
+        </table>
+        </div>
+        <input type="submit" value="Registrera resultat" />
+        @Html.HiddenFor(m => m.comp.Id)
+        @Html.HiddenFor(m => m.currentPerson.golfid)
+        @Html.HiddenFor(m => m.currentPerson.personid)
+        @Html.HiddenFor(m => m.currentPerson.HCP)
+        @Html.HiddenFor(m => m.currentPerson.gender_ID)
+        @Html.HiddenFor(m => m.comp.NumberOfHoles)
+        @Html.HiddenFor(m => m.CompetitionGolferID)
+        }
