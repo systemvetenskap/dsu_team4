@@ -149,6 +149,9 @@ header .content-wrapper {
     text-align:left;
     width:900px;
 }
+.addresultdiv table td{
+    width:30px;
+}
 .showComp table th{
    
    text-align:left;
