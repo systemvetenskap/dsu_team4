@@ -270,6 +270,8 @@
       <DependentUpon>PersonModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\RegisterComp.cs" />
+    <Compile Include="Models\resultClass.cs" />
+    <Compile Include="Models\ScoreCardClass.cs" />
     <Compile Include="Models\searchClass.cs" />
     <Compile Include="Models\Slope.cs">
       <DependentUpon>PersonModel.tt</DependentUpon>
@@ -425,6 +427,8 @@
     <Content Include="Views\Competition\addPlayer.cshtml" />
     <Content Include="Views\Competition\_editComp.cshtml" />
     <Content Include="Views\Competition\_detailsComp.cshtml" />
+    <Content Include="Views\Competition\_addResult.cshtml" />
+    <Content Include="Views\Competition\_showResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

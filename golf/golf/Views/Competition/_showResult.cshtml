@@ -1,0 +1,39 @@
+﻿@model IEnumerable<golf.Models.resultClass>
+
+<table>
+
+<tr>
+    <th>
+        @Html.Label("Namn")
+
+    </th>
+    <th>
+        @Html.Label("Hcp")
+    </th>
+    <th>
+        @Html.Label("Netto")
+    </th>
+    <th>
+        @Html.Label("Poäng")
+    </th>
+</tr>
+ @foreach(var o in Model)
+ { 
+<tr>
+    <td>
+       @Html.Label(o.currentPerson.firstName+" "+o.currentPerson.lastName)
+    </td>
+    <td>
+        @Html.Label(o.currentPerson.HCP)
+    </td>
+    <td>
+        @Html.Label(o.net.ToString())
+    </td>
+    <td>
+        @Html.Label(o.points.ToString())
+    </td>
+
+
+</tr>
+ }
+</table>

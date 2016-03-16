@@ -74,24 +74,26 @@
 
 
 
-        @Html.Partial("_sComp", Model)
+    @Html.Partial("_sComp", Model)
+    
 
 
 
-    @Ajax.ActionLink("Visa tävlingar", "loadComp", new AjaxOptions() {
+
+</div>
+<div>
+    @Ajax.ActionLink("Visa tävlingar", "loadComp", new AjaxOptions()
+{
     UpdateTargetId = "showComp",
     HttpMethod = "GET",
     InsertionMode = InsertionMode.Replace
-     })
-
-    <div class="adm">
-            @Ajax.ActionLink("Skapa tävling", "createComp", new AjaxOptions()
-       {
-           UpdateTargetId = "showComp",
-           HttpMethod = "GET",
-           InsertionMode = InsertionMode.Replace
-       })
-    </div>
-
+})
 </div>
-
+<div class="adm">
+    @Ajax.ActionLink("Skapa tävling", "createComp", new AjaxOptions()
+   {
+       UpdateTargetId = "showComp",
+       HttpMethod = "GET",
+       InsertionMode = InsertionMode.Replace
+   })
+</div>
