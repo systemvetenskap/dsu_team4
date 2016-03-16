@@ -10,6 +10,61 @@
 }
 
 
+<head>
+    <title>
+
+    </title>
+
+    <meta charset="utf-8" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+    @*@RenderSection("Styles", false)
+
+
+    @Styles.Render("~/Content/css")*@
+
+
+    @*Scripts.Render("~/bundles/modernizr")*@
+
+    <script type="text/JavaScript">
+
+            $(document).ready(function () {
+
+                $.ajax({
+                    url: '@Url.Action("admin", "Home")',
+                    type: "POST",
+                    async: true,
+                    dataType: "json",
+                    data: $('#form').serialize(),
+                    success: function (data) {
+
+                        if (data.valid == false) {
+                            $(".isAdmin").hide();
+                            $(".isMember").show();
+                        }
+                        else {
+                            $(".isAdmin").show();
+                            $(".isMember").hide();
+                        }
+                        //document.getElementById('member').style.display = 'none'
+
+                    },
+                    error: function (request, status, error) {
+                        // process error message
+                    }
+                });
+
+            });
+    </script>
+
+</head>
+
+
 <div class="sectionone">
     <h3>Startsidans innehåll</h3>
     <br>
@@ -29,7 +84,8 @@
     @if(User.Identity.IsAuthenticated)
     {
 
-        <a href="/Home/AddNews"><button type="submit">Skapa nytt inlägg</button></a>
+        <a class="isAdmin" href="/Home/AddNews"><button type="submit">Skapa nytt inlägg</button></a>
+        
     }
    
 
