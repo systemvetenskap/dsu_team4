@@ -18,13 +18,16 @@
         var z = i + 1;
         <tr>
             
-            <td>@Html.Label(z.ToString())</td>
             <td>
+                @Html.Label(z.ToString())
+                </td>
+            <td>
+                @Html.TextBoxFor(m => m.holeresult[i].stroaks)
                 @Html.HiddenFor(m => m.holeresult[i].Id)
-            @Html.HiddenFor(m => m.holeresult[i].Hole_ID)
-            @Html.HiddenFor(m => m.holeresult[i].CompetitionGolfer_ID)
-            @Html.TextBoxFor(m => m.holeresult[i].stroaks)
-        </td>
+                @Html.HiddenFor(m => m.holeresult[i].Hole_ID)
+                @Html.HiddenFor(m => m.holeresult[i].CompetitionGolfer_ID)
+         
+            </td>
 
     </tr>
     }
