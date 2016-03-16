@@ -13,6 +13,8 @@ namespace golf.Models
         public List<Gender> GenderL = new List<Gender>();
         public int genderid { get; set; }
         public int memberID { get; set; }
+        public string golfID { get; set; }
+
         public IEnumerable<SelectListItem> genderItems { get; set; }
         public IEnumerable<SelectListItem> memberType { get; set; }
         public IEnumerable<SelectListItem> payed { get; set; }
