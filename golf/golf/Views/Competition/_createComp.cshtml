@@ -61,7 +61,7 @@
                         holes.Add(new SelectListItem { Text = "9", Value = "9" });
                         holes.Add(new SelectListItem { Text = "18", Value = "18" });
                     }
-                    @Html.DropDownListFor(model => model.newComp.NumberOfHoles, holes, "--Antal hål--")
+                    @Html.DropDownListFor(model => model.newComp.NumberOfHoles, holes,"--Antal hål--", new { id = "holes", @class = "holes" })
                 </div>
                 <div class="editor-label">
                     @Html.Raw("Antal spelare")
@@ -140,8 +140,16 @@
                 </p>
             </fieldset>
 
-            <script type="text/javascript">
-                $('#createcompetitionbutton').click(function () {
+ <script type="text/javascript">
+
+     $("#holes").bind("change", function () {
+         
+         //var t = $("#holes option:selected").index()
+         //alert(t);
+
+     });
+
+        $('#createcompetitionbutton').click(function () {
         var isValid = 1;
         $('input:text').each(function () {
             if ($(this).val() == '') {
@@ -157,7 +165,7 @@
         }
                 });
                 $('#createcompetitionbutton').click(function () {
-
+                    
                     if ($('#textareainput').val() <= 0)
                     {
                         $('#textareainput').css('border', '2px solid red');
@@ -168,14 +176,15 @@
                         $('#textareainput').css('border', '1px solid green');
                     }
                     /*Kommer ej åt dropdownboxarna*/
-                    if ($('#kontaktperson').index == 0)
+                    if ($("#holes option:selected").index() == 0)
                     {
-                        $('#kontaktperson').css('border', '2px solid red');
+                        $('#holes').css('border', '2px solid red');
+                        alert("Du är rätt");
                         return false;
                     }
                     else
                     {
-                        $('#kontaktperson').css('border', '1px solid green');
+                        $('#holes').css('border', '1px solid green');
                     }
                     /**/
                 }
