@@ -605,7 +605,7 @@ namespace golf.Controllers
         }
 
 
-        public ActionResult addYourself(int id)
+        public ActionResult addYourself(bool confirm, int id)
         {
 
             CompetitionGolfer CG = new CompetitionGolfer();
