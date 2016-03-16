@@ -860,6 +860,48 @@ namespace golf.Controllers
             }
 
         }
+        public PartialViewResult showResult(int id)
+        {
+            using(dsuteam4Entities1 db = new dsuteam4Entities1())
+            {
+                var cg = db.CompetitionGolfer.Where(x => x.Competition_ID == id).ToList();
 
+                var pg = from i in db.Golfer.ToList()
+                         join p in cg.ToList()
+                         on i.Id equals p.Golfer_ID
+                         orderby p.net descending
+                         select new {Hcp = i.HCP, Net = p.net, Points = p.points, Personid = i.Person_ID, CompGid= p.Id};
+
+                var list = pg.ToList();
+
+                var j = from i in list
+                        join p in db.Person.ToList() on i.Personid equals p.Id
+                        select new {fName = p.firstName, lName = p.lastName, Hcp = i.Hcp, Net = i.Net, Points = i.Points, i.CompGid};
+
+                List<resultClass> rslist = new List<resultClass>();
+                foreach(var i in j)
+                {
+            
+                    resultClass rs = new resultClass();
+                    rs.comp = db.Competition.Find(id);
+                    rs.net = i.Net;
+                    rs.points = i.Points;
+                    rs.CompetitionGolferID = i.CompGid;
+                    PersonGolfer pge = new PersonGolfer();
+                    pge.firstName = i.fName;
+                    pge.lastName = i.lName;
+                    pge.HCP = i.Hcp;
+                    rs.currentPerson = pge;
+
+                    rslist.Add(rs);
+                }
+                
+
+                return PartialView("_showResult", rslist);
+            }
+
+
+           
+        }
     }
 }
