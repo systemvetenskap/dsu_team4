@@ -113,13 +113,17 @@
 .TeeDetails{ 
     height:auto;
     font-size:100%;
-    padding:2%;
-    clear:both;   
+    padding:1%;
+    clear:both;
+    max-width:900px;   
     }
-.TeeDetailsB{
-    font-family:verdana;
-    font-size:100%;
+.TeeDetailsB table td{
+    
+    width:10%;
     padding:2%;
+    }
+.TeeDetailsB table th{
+    background-color:deeppink;
     }
 ControlDiv{
     display:block;
@@ -143,17 +147,6 @@ ControlDiv{
 .listobjectP{    
     
 }
-.searchDiv th{  
-   text-align:left;
-}
-.searchDiv table {
- 
-    padding:0%;
-    padding-left:0%;
-    padding-right:10%;
-    text-align:left;
-    width:900px;
-}
 
 .details timeInfo{
     
@@ -167,4 +160,5 @@ ControlDiv{
 #golf{
     max-width: 100%
 }
+
 

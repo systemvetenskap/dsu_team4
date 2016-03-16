@@ -6,7 +6,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using golf.Models;
-using System.Data.Entity;
+using System.Globalization;
+
 
 
 namespace golf.Controllers
@@ -74,59 +75,79 @@ namespace golf.Controllers
 
            
         }
+        [HttpPost]
         public ActionResult saveComp(CreateComp cc)
         {
-            using( dsuteam4Entities1 databas = new dsuteam4Entities1())
+            if(ModelState.IsValid)
             {
-                List<TeeTime> compStarttimes = new List<TeeTime>();
-                var comp = cc.newComp;
-                int start = Convert.ToInt32(cc.newComp.startTime);
-                int end = Convert.ToInt32(cc.newComp.endTime);
-               
-                compStarttimes = databas.TeeTime.Where(t => t.Id >= start).Where(t => t.Id <= end).ToList();
-                
-                foreach(var i in compStarttimes)
+                using (dsuteam4Entities1 databas = new dsuteam4Entities1())
                 {
-                    TeeTimeDate td = new TeeTimeDate();
+                    List<TeeTime> compStarttimes = new List<TeeTime>();
+                    var comp = cc.newComp;
+                    int start = Convert.ToInt32(cc.newComp.startTime);
+                    int end = Convert.ToInt32(cc.newComp.endTime);
 
-                    td.TeeTime_ID = i.Id;
-                    td.bookingDate = cc.newComp.cDate;
-                    td.Disabled = true;
+                    compStarttimes = databas.TeeTime.Where(t => t.Id >= start).Where(t => t.Id <= end).ToList();
 
-                    databas.TeeTimeDate.Add(td);
+                    foreach (var i in compStarttimes)
+                    {
+                        TeeTimeDate td = new TeeTimeDate();
+
+                        td.TeeTime_ID = i.Id;
+                        td.bookingDate = cc.newComp.cDate;
+                        td.Disabled = true;
+
+                        databas.TeeTimeDate.Add(td);
+
+                    }
+
+
+                    databas.Competition.Add(comp);
+                    databas.SaveChanges();
 
                 }
-                
-  
-               databas.Competition.Add(comp); 
-               databas.SaveChanges();
-                
-            }
-            using( dsuteam4Entities1 ndatabas = new dsuteam4Entities1())
-            {
-                CreateComp c = new CreateComp();
+                using (dsuteam4Entities1 ndatabas = new dsuteam4Entities1())
+                {
+                    CreateComp c = new CreateComp();
 
-                c.complist = ndatabas.Competition.ToList();
-                c.currentDate = DateTime.Today;
+                    c.complist = ndatabas.Competition.ToList();
+                    c.currentDate = DateTime.Today;
 
-                return View("Index", c);
+                    return View("Index", c);
+                }
             }
 
+            return PartialView("_createComp", cc);
         }
-        public void slumpa(int id)
+        public ActionResult generateStartTimes(int id)
+        {
+            List<CompetitionGolfer> CG = RandomCGStartTimes(id);
+
+            foreach (CompetitionGolfer item in CG)
+            {
+                using( dsuteam4Entities1 databas = new dsuteam4Entities1())
+                {
+
+                    CompetitionGolfer cg = databas.CompetitionGolfer.Find(item.Id);
+                    cg.startTime = item.startTime;
+
+                    databas.SaveChanges();
+                }
+            }
+
+            return View(registerResult(id));
+        }
+        public List<CompetitionGolfer> RandomCGStartTimes(int id)
         {
             dsuteam4Entities1 databas = new dsuteam4Entities1(); //Databasconnection
 
-            var list = databas.CompetitionGolfer.ToList(); //Lista med alla golfare anmälda till tävlingen
+            //var list = databas.CompetitionGolfer.ToList(); //Lista med alla golfare anmälda till tävlingen
             //CompetitionGolfer cg = new CompetitionGolfer();
-            Competition ct = new Competition();
-            List<DateTime> listaDate = new List<DateTime>();
-            
+            //List<DateTime> listaDate = new List<DateTime>();
+            //DateTime start = Convert.ToDateTime(ct.startTime);
+            //DateTime slut = Convert.ToDateTime(ct.endTime);
 
-            
-            DateTime start = Convert.ToDateTime(ct.startTime);
-            DateTime slut = Convert.ToDateTime(ct.endTime);
-
+            Competition ct = databas.Competition.Find(id);
             List<CompetitionGolfer> cgList = new List<CompetitionGolfer>();
 
             foreach (var i in databas.CompetitionGolfer)
@@ -139,30 +160,34 @@ namespace golf.Controllers
                 }
             }
 
-                int extraStartTime = 0;
+            int extraStartTime = 0;
 
-                int leftOver = cgList.Count % ct.playersPerTime;
-                if (leftOver > 0)
-                {
-                    extraStartTime = 1;
-                }
-                int startTimeCount = ((cgList.Count - leftOver) / ct.playersPerTime) + extraStartTime;
-            
+            int leftOver = cgList.Count % ct.playersPerTime;
+            if (leftOver > 0)
+            {
+                extraStartTime = 1;
+            }
+            int startTimeCount = ((cgList.Count - leftOver) / ct.playersPerTime) + extraStartTime;
+
             List<string> startTimes = new List<string>();
-
-            DateTime compStart = Convert.ToDateTime(ct.startTime);
+            TeeTime tee = databas.TeeTime.Find(Convert.ToInt32(ct.startTime));
+            DateTime compStart = Convert.ToDateTime(tee.teeTime1.ToString());
+            
 
             for (int i = 0; i < startTimeCount; i++)
             {
                 if (i == 0)
                 {
-                    startTimes.Add(compStart.ToShortTimeString());
+                    startTimes.Add((compStart.ToShortTimeString()).ToString());
 
                 }
                 else
                 {
-                    compStart.AddMinutes(20);  
-                    startTimes.Add(compStart.ToShortTimeString());
+                    
+
+                    DateTime timeCount = compStart.AddMinutes(10*i);
+                    startTimes.Add((timeCount.ToShortTimeString()).ToString());
+                    
                 }
             }
 
@@ -173,24 +198,17 @@ namespace golf.Controllers
 
             for (int i = 0; i < randomCGList.Count; i++)
             {
-                if (i % ct.playersPerTime == 0)
+                if (i > 1 && (i % ct.playersPerTime == 0))
                 {
                     count++;
                 }
-                randomCGList[i-1].Competition_ID = 1;
-                
-            }
-
-
-            foreach (string startTime in randomStartTimes)
-            {
+                randomCGList[i].startTime = randomStartTimes[count];
 
             }
 
-            
+            return randomCGList;
 
-                }
-
+        }
 
         public List<CompetitionGolfer> RandomizeCGList(List<CompetitionGolfer> inputList)
         {
@@ -262,10 +280,21 @@ namespace golf.Controllers
 
                var cg = db.CompetitionGolfer.Where(x => x.Competition_ID == c.Id).ToList();
 
+               
+
                var golfer = from g in db.Golfer.ToList()
                             join u in cg.ToList()
                             on g.Id equals u.Golfer_ID
-                            select g;
+                            select new  {
+                                g.golfID,  
+                                g.HCP,
+                                g.Id,
+                                g.Person_ID, 
+                                CompGoldID = u.Id,
+                                u.startTime,
+                                u.HoleStats,
+                                u.Golfer_ID
+                            };
 
                var pg = from p in db.Person.ToList()
                         join y in golfer.ToList()
@@ -278,8 +307,10 @@ namespace golf.Controllers
                             lName = p.lastName,
                             Golfstring = y.golfID,
                             HCP = y.HCP,
-                            Gender_ID = p.gender_ID
-
+                            Gender_ID = p.gender_ID,
+                            Startime = y.startTime,
+                            CompGolfID = y.CompGoldID
+                            
                         };
 
                var gender = db.Gender.ToList();
@@ -295,6 +326,16 @@ namespace golf.Controllers
                    var g = gender.Where(x => x.Id == i.Gender_ID).FirstOrDefault();
                    pe.gender = g.genderName;
                    pe.gender_ID = g.Id;
+                   
+                   if (i.Startime != null)
+                   {
+                   pe.startime = i.Startime;
+
+                   }
+                   else
+                   {
+                       pe.startime = "Ej lottad";
+                   }
                    rg.persongolfer.Add(pe);
                    
                        }
@@ -326,11 +367,21 @@ namespace golf.Controllers
                              join g in db.Golfer.ToList()
                              on p.Id equals g.Person_ID
                              where p.Id == personid
-                             select new{ Golfid = g.Id};
+                             select new{ 
+                                 Golfid = g.Id, 
+                                 Personid = p.Id, 
+                                 fName = p.firstName, 
+                                 lName = p.lastName, 
+                                 HCP = g.HCP,
+                                 Golfstring = g.golfID,
+                                 Gender_ID = p.gender_ID,
 
-                var golfid = golfer.FirstOrDefault();
 
-                var compG = db.CompetitionGolfer.Where(x => x.Competition_ID == compID && x.Golfer_ID == golfid.Golfid).FirstOrDefault();
+                             };
+
+                var player = golfer.FirstOrDefault();
+
+                var compG = db.CompetitionGolfer.Where(x => x.Competition_ID == compID && x.Golfer_ID == player.Golfid).FirstOrDefault();
 
                 var currComp = db.Competition.Where(x => x.Id == compG.Competition_ID).FirstOrDefault();
 
@@ -350,7 +401,7 @@ namespace golf.Controllers
                 List<HoleStats> createPlayerHoles = new List<HoleStats>();
                 foreach(var i in h)
                 {
-                            HoleStats hs = new HoleStats();
+                    HoleStats hs = new HoleStats();
                     hs.CompetitionGolfer_ID = compG.Id;
                     hs.Hole_ID = i.Id;
                             
@@ -358,29 +409,148 @@ namespace golf.Controllers
                 }
 
                 rg.holeresult = createPlayerHoles;
+                var gend = db.Gender.Where(x => x.Id == player.Gender_ID).FirstOrDefault();
+             
                 PersonGolfer pg = new PersonGolfer();
-                var person = db.Person.Where(x => x.Id == personid).FirstOrDefault();
-                pg.firstName = person.firstName;
-                pg.lastName = person.lastName;
 
+                pg.firstName = player.fName;
+                pg.lastName = player.lName;
+                pg.HCP = player.HCP;
+                pg.personid = player.Personid;
+                pg.golfid = player.Golfid;
+                pg.golfstring = player.Golfstring;
+                pg.gender_ID = gend.Id;
+                pg.gender = gend.genderName;
+                if(compG.startTime != null)
+                {
+                    pg.startime = compG.startTime;
+                }
+                else
+                {
+                    pg.startime = "Ej lottad";
+                }
                 rg.currPerson = pg;
+
+                resultClass rs = new resultClass();
+                rs.currentPerson = pg;
+                rs.comp = currComp;
+                rs.CompetitionGolferID = compG.Id;
+                rs.holeresult = createPlayerHoles;
+                
 
 
 
 
                         
-                return PartialView("_regResultPerson", rg);
-                    }
-                }
+                return PartialView("_addResult", rs);
+      }
+   }
         [HttpPost]
-        public ActionResult regResultPerson(RegisterComp rg)
+        public ActionResult regResultPerson(resultClass r)
         {
+            using(dsuteam4Entities1 db = new dsuteam4Entities1())
+            {
+
+                string s = r.currentPerson.HCP;
+
+                decimal playerHCP  = decimal.Parse(s, CultureInfo.InvariantCulture);
+      
+
+                List<Slope> sl = new List<Slope>();
+                var slope = db.Slope.ToList();
+                foreach(var i in slope)
+                {
+                    string xMax = i.max.ToString();
+                    string xMin = i.min.ToString();
+                    decimal Max = decimal.Parse(xMax, CultureInfo.CreateSpecificCulture("sv-SE"));
+                    decimal Min = decimal.Parse(xMin, CultureInfo.CreateSpecificCulture("sv-SE"));
+                   if(playerHCP>= Min && playerHCP<= Max && i.Gender_ID == r.currentPerson.gender_ID)
+                   {
+                       sl.Add(i);
+                   }
+
+                }
+               var strokes = sl.FirstOrDefault();
+               int extraStrokes = Convert.ToInt32(strokes.gameHCP);
+
+               var Hcpindex = from i in r.holeresult
+                              join h in db.Hole
+                              on i.Hole_ID equals h.Id
+                              orderby h.HCPind ascending
+                              select new { 
+                                  Index = h.HCPind, 
+                                  Par = h.par, 
+                                  Holenr = h.Number, 
+                                  HoleId = h.Id, 
+                                  PlayerStrokes = i.stroaks, 
+                                  HolestatID=i.Id,
+                                  CompetitionG = i.CompetitionGolfer_ID
+                              };
+
+               var oList = Hcpindex.ToList();
+               List<ScoreCardClass> scrList = new List<ScoreCardClass>();
+               foreach(var i in oList)
+               {
+                   ScoreCardClass scr = new ScoreCardClass();
+                   scr.Id = i.HoleId;
+                   scr.CompetetionGolfer_ID = i.CompetitionG;
+                   scr.HCPind = i.Index;
+                   scr.Number = i.Holenr;
+                   scr.par = i.Par;
+                   scr.playerStrokes = i.PlayerStrokes;
+                   scrList.Add(scr);
+               }
+
+                if(extraStrokes > 0)
+                {
+                    for (var i = 0; i < extraStrokes; i++)
+                    {
+                        if (i < r.comp.NumberOfHoles)
+                        {
+                            scrList[i].addedStrokes += 1;
+                        }
+                        else
+                        {
+                            int z = i - r.comp.NumberOfHoles;
+                            scrList[z].addedStrokes += 1;
+                        }
+                    }
+
+                }
+                else
+                {
+                    int x = extraStrokes * -1;
+                    for(var i = 0; i < x; i++)
+                    {
+                        scrList[i].addedStrokes -= 1;
+                    }
+
+                }
+
+                
+                foreach(var i in scrList)
+                {
+                    i.calcPoints();
+                }
+
+
+                var compid = r.CompetitionGolferID;
+                CompetitionGolfer cg = db.CompetitionGolfer.Find(compid);
+                cg.net = (from i in scrList select i.net).Sum();
+                cg.points = (from i in scrList select i.points).Sum();
+
+                db.SaveChanges();
+
+                RegisterComp rg = new RegisterComp();
+
+                return RedirectToAction("Index");
+                
+            }
 
 
 
 
-
-            return View("Index");
+            return RedirectToAction("Index");
         }
 
         public ActionResult createComp()
@@ -690,6 +860,48 @@ namespace golf.Controllers
             }
 
         }
+        public PartialViewResult showResult(int id)
+        {
+            using(dsuteam4Entities1 db = new dsuteam4Entities1())
+            {
+                var cg = db.CompetitionGolfer.Where(x => x.Competition_ID == id).ToList();
 
+                var pg = from i in db.Golfer.ToList()
+                         join p in cg.ToList()
+                         on i.Id equals p.Golfer_ID
+                         orderby p.net descending
+                         select new {Hcp = i.HCP, Net = p.net, Points = p.points, Personid = i.Person_ID, CompGid= p.Id};
+
+                var list = pg.ToList();
+
+                var j = from i in list
+                        join p in db.Person.ToList() on i.Personid equals p.Id
+                        select new {fName = p.firstName, lName = p.lastName, Hcp = i.Hcp, Net = i.Net, Points = i.Points, i.CompGid};
+
+                List<resultClass> rslist = new List<resultClass>();
+                foreach(var i in j)
+                {
+            
+                    resultClass rs = new resultClass();
+                    rs.comp = db.Competition.Find(id);
+                    rs.net = i.Net;
+                    rs.points = i.Points;
+                    rs.CompetitionGolferID = i.CompGid;
+                    PersonGolfer pge = new PersonGolfer();
+                    pge.firstName = i.fName;
+                    pge.lastName = i.lName;
+                    pge.HCP = i.Hcp;
+                    rs.currentPerson = pge;
+
+                    rslist.Add(rs);
+                }
+                
+
+                return PartialView("_showResult", rslist);
+            }
+
+
+           
+        }
     }
 }

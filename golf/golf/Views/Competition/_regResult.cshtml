@@ -1,16 +1,20 @@
 ﻿@model golf.Models.RegisterComp
 
-@{
-    ViewBag.Title = "registerResult";
-}
 
-<h2>Registrera resultat här</h2>
+<h2>Spelarlista</h2>
 <br />
 
 <h3>
     @Html.Label("Tävling" + Model.comp.name)
 </h3>
+<br />
 
+                @Ajax.ActionLink("Lotta tider", "generateStartTimes", new {id = Model.comp.Id}, new AjaxOptions()
+                       {
+                           UpdateTargetId = "showComp",
+                           HttpMethod = "GET",
+                           InsertionMode = InsertionMode.Replace
+                       })
 <br />
 
 <table>
@@ -19,7 +23,10 @@
             @Html.Label("Golfare")
         </th>
         <th>
-
+            @Html.Label("Starttid")
+        </th>
+        <th>
+            @Html.Label("Registrera")
         </th>
     </tr>
 
@@ -30,6 +37,9 @@
         <tr>
             <td>
                 @Html.Label(item.firstName + " " + item.lastName)
+            </td>
+            <td>
+                @Html.Label(item.startime.ToString())
             </td>
             <td>
                 @Ajax.ActionLink("Registrera resultat", "regResultPerson", new { personid = item.personid, compID = Model.comp.Id, regComp = Model }, new AjaxOptions()

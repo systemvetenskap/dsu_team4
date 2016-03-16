@@ -1,5 +1,57 @@
 ﻿@model golf.Models.Competition
 
+<head>
+    <title>
+
+    </title>
+
+
+    <meta charset="utf-8" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+    <script type="text/JavaScript">
+
+        $(document).ready(function () {
+
+            $.ajax({
+                url: '@Url.Action("admin", "Home")',
+                type: "POST",
+                async: true,
+                dataType: "json",
+                data: $('#form').serialize(),
+                success: function (data) {
+
+                    if (data.valid == false) {
+                        $(".isAdmin3").hide();
+                        $(".isMember3").show();
+                    }
+                    else {
+                        $(".isAdmin3").show();
+                        $(".isMember3").hide();
+                    }
+                    //document.getElementById('member').style.display = 'none'
+
+                },
+                error: function (request, status, error) {
+                    // process error message
+                }
+            });
+
+        });
+    </script>
+
+
+
+
+
+</head>
+
+
 <div class="MyPageLoggedIn">
     <fieldset>
         <legend>Person</legend>
@@ -8,7 +60,7 @@
             @Html.Raw("Namn")
         </div>
         <div class="editor-field">
-            @Html.DisplayFor(model => model.name)
+            @Html.Label(Model.name)
             @Html.ValidationMessageFor(model => model.name)
         </div>
         <br>
@@ -16,7 +68,7 @@
             @Html.Raw("Datum")
         </div>
         <div class="editor-field">
-            @Html.DisplayFor(model => model.cDate)
+            @Html.Label(Model.cDate.ToShortDateString())
             @Html.ValidationMessageFor(model => model.cDate)
         </div>
         <br>
@@ -24,7 +76,7 @@
             @Html.Raw("Första anmälningsdag")
         </div>
         <div class="editor-field">
-            @Html.DisplayFor(model => model.signUpFrom)
+            @Html.Label(Model.signUpFrom.ToShortDateString())
             @Html.ValidationMessageFor(model => model.signUpFrom)
         </div>
         <br>
@@ -32,7 +84,7 @@
             @Html.Raw("Sista anmälningsdag")
         </div>
         <div class="editor-field">
-            @Html.DisplayFor(model => model.signUpTo)
+            @Html.Label(Model.signUpTo.ToShortDateString())
             @Html.ValidationMessageFor(model => model.signUpTo)
         </div>
         <br>
@@ -61,7 +113,7 @@
             </div>
    
         <br>
-        <div class="edit-link">
+        <div class="edit-link isAdmin3">
             @Html.HiddenFor(model => model.Id)
        
             @Ajax.ActionLink("Ändra", "editComp", new { id = Model.Id}, new AjaxOptions() { 

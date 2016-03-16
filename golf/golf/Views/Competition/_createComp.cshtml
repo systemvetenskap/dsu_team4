@@ -3,40 +3,17 @@
 <script type="text/javascript">
     $(document).ready(function () {
 
-        $('#createcompetitionbutton').click(function () {
-            var isValid = 1;
-            $('input:text').each(function () {
-                if ($(this).val() == '') {
-                    $(this).css('border', '2px solid red');
-                    isValid = 0;
-                }
-                else {
-                    $(this).css('border', '1px solid green');
-                }
-            });
-            if (isValid == 0) {
-                return false;
-            }
-        });
-
-
-
         $('.dt').datepicker();
         $('.dt2').datepicker();
         $('.dt3').datepicker();
 
-
         $('#dt').datepicker('option', 'dateFormat', 'yy-mm-dd');
         $('#dt').datepicker('setDate', new Date());
-
-
 
         $(function () {
             $("#dt1").datepicker({
                 onSelect: function () {
                     var selected = $(this).val();
-
-
                 }
             });
         });
@@ -58,7 +35,6 @@
             });
         });
 
-
     });
 </script>         
 
@@ -66,12 +42,9 @@
     {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
-
         <div class="createcompetition" id="createcompetition">
             <fieldset>
                 <legend>Person</legend>
-
-
 
                 <div class="editor-label">
                     @Html.Raw("Namn")
@@ -151,21 +124,62 @@
                     @Html.Raw("Kontaktperson")
                 </div>
                 <div class="editor-field">
-                    @Html.DropDownListFor(model => model.newComp.Person_IDc, new SelectList(Model.contactlist, "Id", "oneName"))
+                    @Html.DropDownListFor(model => model.newComp.Person_IDc, new SelectList(Model.contactlist, "Id", "oneName"), new {id="kontaktperson", @class="kontaktperson", placeholder ="--Välj kontaktperson--"})
+                    @Html.ValidationMessageFor(model => model.newComp.Person_IDc)
                 </div>
 
                 <div class="editor-label">
                     @Html.Raw("Beskrivning/Övrig info")
                 </div>
                 <div class="editor-field">
-                    @Html.TextAreaFor(model => model.newComp.info)
+                    @Html.TextAreaFor(model => model.newComp.info, 10, 40, htmlAttributes: new { style = "width: 90%; resize:none", ID = "textareainput" })
                     @Html.ValidationMessageFor(model => model.newComp.info)
                 </div>
-
                 <p>
                     <input type="submit" value="Spara" id="createcompetitionbutton" />
-
                 </p>
             </fieldset>
+
+            <script type="text/javascript">
+                $('#createcompetitionbutton').click(function () {
+        var isValid = 1;
+        $('input:text').each(function () {
+            if ($(this).val() == '') {
+                $(this).css('border', '2px solid red');
+                isValid = 0;
+            }
+            else {
+                $(this).css('border', '1px solid green');
+            }
+        });
+        if (isValid == 0) {
+            return false;
+        }
+                });
+                $('#createcompetitionbutton').click(function () {
+
+                    if ($('#textareainput').val() <= 0)
+                    {
+                        $('#textareainput').css('border', '2px solid red');
+                        return false;
+                    }
+                    else
+                    {
+                        $('#textareainput').css('border', '1px solid green');
+                    }
+                    /*Kommer ej åt dropdownboxarna*/
+                    if ($('#kontaktperson').index == 0)
+                    {
+                        $('#kontaktperson').css('border', '2px solid red');
+                        return false;
+                    }
+                    else
+                    {
+                        $('#kontaktperson').css('border', '1px solid green');
+                    }
+                    /**/
+                }
+);
+            </script>
         </div>
                         }

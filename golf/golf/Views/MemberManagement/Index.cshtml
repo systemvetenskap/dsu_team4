@@ -8,53 +8,54 @@
     </section>
 }
 @model IEnumerable<golf.Models.Person>
-
-<div class="searchDiv" id="searchDiv">
-
-
+<div class="anythingelse" id="anythingelse">
     <input id="searchButton" type="submit" onclick="soP(1)" value="Sök" />
     <input id="searchField" type="text" placeholder="Sök efter medlem" />
 
-</div>
+    </div>
 
-<script>
+    <div class="searchDiv" id="searchDiv">
 
-    function soP(d) {
+    </div>
 
-        var s = document.getElementById('searchField').value;
+    <script>
 
-        $.ajax({
-            url: '/MemberManagement/searchMember',
-            contentType: 'application/html; charset=utf-8',
-            data: { searchstring: s },
-            type: 'GET',
-            dataType: 'html'
+        function soP(d) {
 
-        })
+            var s = document.getElementById('searchField').value;
 
-        .success(function (result) {
-            $('#searchDiv').html(result);
-        })
-        .error(function (xhr, status) {
-            alert(status);
-        })
+            $.ajax({
+                url: '/MemberManagement/searchMember',
+                contentType: 'application/html; charset=utf-8',
+                data: { searchstring: s },
+                type: 'GET',
+                dataType: 'html'
+
+            })
+
+            .success(function (result) {
+                $('#searchDiv').html(result);
+            })
+            .error(function (xhr, status) {
+                alert(status);
+            })
 
 
-    }
+        }
 
-    $('#searchButton').click(function () {
-        var isValid = 1;
-        $('input:text').each(function () {
-            if ($(this).val() == '') {
-                $(this).css('border', '2px solid red');
-                isValid = 0;
-            }
-            else {
-                $(this).css('border', '1px solid green');
+        $('#searchButton').click(function () {
+            var isValid = 1;
+            $('input:text').each(function () {
+                if ($(this).val() == '') {
+                    $(this).css('border', '2px solid red');
+                    isValid = 0;
+                }
+                else {
+                    $(this).css('border', '1px solid green');
+                }
+            });
+            if (isValid == 0) {
+                return false;
             }
         });
-        if (isValid == 0) {
-            return false;
-        }
-    });
-</script>
+    </script>

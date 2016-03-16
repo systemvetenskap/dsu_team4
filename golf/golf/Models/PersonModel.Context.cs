@@ -43,5 +43,6 @@ namespace golf.Models
         public DbSet<TeeTimeDate> TeeTimeDate { get; set; }
         public DbSet<TeeTimeDateGolfer> TeeTimeDateGolfer { get; set; }
         public DbSet<CompetitionGolfer> CompetitionGolfer { get; set; }
+        public DbSet<Slope> Slope { get; set; }
     }
 }

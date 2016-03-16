@@ -1,5 +1,57 @@
 ﻿@model golf.Models.CreateComp
 
+
+<head>
+    <title>
+
+    </title>
+
+
+    <meta charset="utf-8" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+    <script type="text/JavaScript">
+
+        $(document).ready(function () {
+
+            $.ajax({
+                url: '@Url.Action("admin", "Home")',
+                type: "POST",
+                async: true,
+                dataType: "json",
+                data: $('#form').serialize(),
+                success: function (data) {
+
+                    if (data.valid == false) {
+                        $(".isAdmin2").hide();
+                        $(".isMember2").show();
+                    }
+                    else {
+                        $(".isAdmin2").show();
+                        $(".isMember2").hide();
+                    }
+                    //document.getElementById('member').style.display = 'none'
+
+                },
+                error: function (request, status, error) {
+                    // process error message
+                }
+            });
+
+        });
+    </script>
+
+
+
+
+
+</head>
+
 <table>
     <tr>
         <th>
@@ -62,22 +114,45 @@
 
                 </td>
                 <td>
-                    @Ajax.ActionLink("Spelarlista", "registerResult", new { id = item.Id}, new AjaxOptions()
+                    <div class="isAdmin2">
+                        @Ajax.ActionLink("Resultat", "showResult", new { id = item.Id }, new AjaxOptions()
                        {
                            UpdateTargetId = "showComp",
                            HttpMethod = "GET",
                            InsertionMode = InsertionMode.Replace
                        })
-
+                    </div>
                 </td>
                 <td>
+                    <div class="isAdmin2">
+                        @Ajax.ActionLink("Spelarlista", "registerResult", new { id = item.Id }, new AjaxOptions()
+                       {
+                           UpdateTargetId = "showComp",
+                           HttpMethod = "GET",
+                           InsertionMode = InsertionMode.Replace
+                       })
+                    </div>
+  
+                   <div class="isMember2">
+
+                       @*Här ska det vara annan actionlink sen!*@
+                       @if((item.signUpFrom >= DateTime.Now) && (item.signUpTo <= DateTime.Now)){
+                            @Html.ActionLink("Registrera dig här!", "addPlayer", new { id = item.Id })
+                       }
+                   </div>
+
+
+                </td>
+                <td class="isAdmin2">
                     @*@Ajax.ActionLink("Anmäl spelare", "addPlayer", new { id = item.Id }, new AjaxOptions()
                        {
                            UpdateTargetId = "showComp",
                            HttpMethod = "GET",
                            InsertionMode = InsertionMode.Replace
                        })*@
-                    @Html.ActionLink("Anmäl spelare", "addPlayer", new { id = item.Id })
+                    @if((item.signUpFrom >= DateTime.Now) && (item.signUpTo <= DateTime.Now)){
+                        @Html.ActionLink("Anmäl spelare", "addPlayer", new { id = item.Id })
+                    }
 
                 </td>
                 
@@ -91,6 +166,7 @@
   
 </div>
 <script type="text/javascript">
+
     var myX, myY;
 
     function details(id)
@@ -118,8 +194,12 @@
                 var b = document.createElement('p');
                 var c = document.createElement('p');
 
-                a.innerHTML = 'Första anmälningsdag</br>'+ details[i].signUpFrom+'</br>';
-                b.innerHTML = 'Sista anmälningsdag</br>'+ details[i].signUpTo+'</br>';
+                var length = 10;
+                var signUpFrom = details[i].signUpFrom.substring(0, length)
+                var signUpTo = details[i].signUpTo.substring(0, length)
+
+                a.innerHTML = 'Första anmälningsdag</br>'+ signUpFrom +'</br>';
+                b.innerHTML = 'Sista anmälningsdag</br>'+ signUpTo+'</br>';
                 c.innerHTML = 'Övrig info:</br>'+details[i].info;
 
                 el.appendChild(a);

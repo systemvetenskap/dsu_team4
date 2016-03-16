@@ -2,6 +2,9 @@
 <html lang="en">
 
     <head>
+        <title>
+
+        </title>
 
         <meta charset="utf-8" />
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
@@ -15,7 +18,36 @@
         @Styles.Render("~/Content/css")
        @*Scripts.Render("~/bundles/modernizr")*@
 
+        <script type="text/JavaScript">
 
+            $(document).ready(function () {
+
+                $.ajax({
+                    url: '@Url.Action("admin", "Home")',
+                    type: "POST",
+                    async: true,
+                    dataType: "json",
+                    data: $('#form').serialize(),
+                    success: function (data) {
+                
+                        if (data.valid == false) {
+                            $("#isAdmin").hide();
+                            $("#isMember").show();
+                        }
+                        else {
+                            $("#isAdmin").show();
+                            $("#isMember").hide();
+                        }
+                        //document.getElementById('member').style.display = 'none'
+              
+                    },
+                    error: function (request, status, error) {
+                        // process error message
+                    }
+                });
+
+            });
+        </script>
 
     </head>
     <body>
@@ -37,11 +69,13 @@
                                 @if (Request.IsAuthenticated)
                                 {
                                     
-                                    <li>@Html.ActionLink("Medlemshantering", "Index", "MemberManagement")</li>
+                                     
                                     <li>@Html.ActionLink("Tävlingar", "Index", "Competition")</li>
                                     
-                                    
+                                    <li id="isAdmin" class="memberm" name="mm">@Html.ActionLink("Medlemshantering", "Index", "MemberManagement")</li>
                                 }
+                                
+                                    
                             </ul>
                         </nav>
                     </div>

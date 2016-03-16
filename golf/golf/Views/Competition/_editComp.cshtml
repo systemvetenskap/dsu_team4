@@ -34,6 +34,21 @@
                 }
             });
         });
+        $('#saveCompButton').click(function () {
+            var isValid = 1;
+            $('input:text').each(function () {
+                if ($(this).val() == '') {
+                    $(this).css('border', '2px solid red');
+                    isValid = 0;
+                }
+                else {
+                    $(this).css('border', '1px solid green');
+                }
+            });
+            if (isValid == 0) {
+                return false;
+            }
+        });
     });
 </script>         
 @using (Html.BeginForm())
@@ -115,21 +130,6 @@
 
 
 </fieldset>
-<script type="text/javascript">
-    $('#saveCompButton').click(function () {
-        var isValid = 1;
-        $('input:text').each(function () {
-            if ($(this).val() == '') {
-                $(this).css('border', '2px solid red');
-                isValid = 0;
-            }
-            else {
-                $(this).css('border', '1px solid green');
-            }
-        });
-        if (isValid == 0) {
-            return false;
-        }
-    });
-</script>
-            }
+}
+
+            
