@@ -157,7 +157,86 @@ namespace golf.Controllers
 
                     databas.SaveChanges();
                 }
+
             }
+            using (dsuteam4Entities1 db = new dsuteam4Entities1())
+            {
+                Competition c = db.Competition.Find(id);
+                RegisterComp rg = new RegisterComp();
+
+                var cg = db.CompetitionGolfer.Where(x => x.Competition_ID == c.Id).ToList();
+
+
+
+                var golfer = from g in db.Golfer.ToList()
+                             join u in cg.ToList()
+                             on g.Id equals u.Golfer_ID
+                             select new
+                             {
+                                 g.golfID,
+                                 g.HCP,
+                                 g.Id,
+                                 g.Person_ID,
+                                 CompGoldID = u.Id,
+                                 u.startTime,
+                                 u.HoleStats,
+                                 u.Golfer_ID
+                             };
+
+                var pg = from p in db.Person.ToList()
+                         join y in golfer.ToList()
+                         on p.Id equals y.Person_ID
+                         select new
+                         {
+                             Personid = p.Id,
+                             Golfid = y.Id,
+                             fName = p.firstName,
+                             lName = p.lastName,
+                             Golfstring = y.golfID,
+                             HCP = y.HCP,
+                             Gender_ID = p.gender_ID,
+                             Startime = y.startTime,
+                             CompGolfID = y.CompGoldID
+
+                         };
+
+                var gender = db.Gender.ToList();
+                foreach (var i in pg)
+                {
+                    PersonGolfer pe = new PersonGolfer();
+                    pe.personid = i.Personid;
+                    pe.golfid = i.Golfid;
+                    pe.firstName = i.fName;
+                    pe.lastName = i.lName;
+                    pe.HCP = i.HCP;
+                    pe.golfstring = i.Golfstring;
+                    var g = gender.Where(x => x.Id == i.Gender_ID).FirstOrDefault();
+                    pe.gender = g.genderName;
+                    pe.gender_ID = g.Id;
+
+                    if (i.Startime != null)
+                    {
+                        pe.startime = i.Startime;
+
+                    }
+                    else
+                    {
+                        pe.startime = "Ej lottad";
+                    }
+                    rg.persongolfer.Add(pe);
+
+                }
+
+
+                rg.comp = c;
+
+
+
+
+                return PartialView("_regResult", rg);
+
+
+            }   
 
             return View(registerResult(id));
         }
@@ -811,8 +890,17 @@ namespace golf.Controllers
         {
                 AddCompPlayer acp = new AddCompPlayer();
                 Competition c = new Competition();
+                List<CompetitionGolfer> cg = new List<CompetitionGolfer>();
             using (dsuteam4Entities1 d = new dsuteam4Entities1())
             {
+
+                foreach (var i in d.CompetitionGolfer)
+                {
+                    if (i.Competition_ID == id)
+                    {
+                        cg.Add(i);
+                    }
+                }
 
                  c = d.Competition.Find(id);
 
@@ -868,7 +956,19 @@ namespace golf.Controllers
 
                     if (c.CompeteClass_ID == i.gender_ID || c.CompeteClass_ID == 1)
                     {
-                        acp.golfers.Add(pg);
+                        int count = 0;
+                        foreach(var item in cg)
+                        {
+                            if(pg.golfid == item.Golfer_ID)
+                            {
+                                count++;
+                            }
+
+                        }
+                        if (count == 0)
+                        {
+                            acp.golfers.Add(pg);
+                        }
                     }
 
                 }
@@ -1030,5 +1130,6 @@ namespace golf.Controllers
 
            
         }
+
     }
 }
