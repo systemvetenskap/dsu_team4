@@ -68,6 +68,18 @@ namespace golf.Controllers
                 CreateComp cc = new CreateComp();
                 cc.complist = databas.Competition.ToList();
 
+                foreach (var item in databas.Golfer)
+                {
+                    if (item.Person_ID.ToString() == User.Identity.Name)
+                    {
+                        PersonGolfer pg = new PersonGolfer();
+                        pg.golfid = Convert.ToInt32(item.golfID);
+                        pg.personid = Convert.ToInt32(item.Person_ID.ToString());
+
+                        cc.golfers.Add(pg);
+                    }
+                }
+
 
                 return PartialView("_sComp", cc);
             }
@@ -476,6 +488,12 @@ namespace golf.Controllers
 
                 return PartialView("_createComp", cc);
             }
+        }
+
+
+        public ActionResult addYourself(int golfID, int compID)
+        {
+            return View();
         }
         public ActionResult addPlayer(int id)
         {
