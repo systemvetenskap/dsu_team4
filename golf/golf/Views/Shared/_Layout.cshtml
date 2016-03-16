@@ -1,22 +1,22 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <title>
+   <head>
+     <title>
 
-        </title>
+     </title>
 
-        <meta charset="utf-8" />
-        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-        <meta name="viewport" content="width=device-width" />
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-        <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+     <meta charset="utf-8" />
+     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+     <meta name="viewport" content="width=device-width" />
+     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 
-        @RenderSection("Styles", false)
-        @Styles.Render("~/Content/css")
-       @*Scripts.Render("~/bundles/modernizr")*@
+     @RenderSection("Styles", false)
+     @Styles.Render("~/Content/css")
+    @*Scripts.Render("~/bundles/modernizr") *@
 
         <script type="text/JavaScript">
 
@@ -31,12 +31,12 @@
                     success: function (data) {
                 
                         if (data.valid == false) {
-                            $("#isAdmin").hide();
-                            $("#isMember").show();
+                            $(".isAdmin").hide();
+                            $(".isMember").show();
                         }
                         else {
-                            $("#isAdmin").show();
-                            $("#isMember").hide();
+                            $(".isAdmin").show();
+                            $(".isMember").hide();
                         }
                         //document.getElementById('member').style.display = 'none'
               
@@ -50,6 +50,7 @@
         </script>
 
     </head>
+
     <body>
         <header>
             <div class="topdivs">
@@ -71,8 +72,8 @@
                                     
                                      
                                     <li>@Html.ActionLink("Tävlingar", "Index", "Competition")</li>
-                                    
-                                    <li id="isAdmin" class="memberm" name="mm">@Html.ActionLink("Medlemshantering", "Index", "MemberManagement")</li>
+
+                                    <li id="isAdmin" class="isAdmin" style="display: none" name="mm">@Html.ActionLink("Medlemshantering", "Index", "MemberManagement")</li>
                                 }
                                 
                              

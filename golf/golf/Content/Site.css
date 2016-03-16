@@ -92,7 +92,35 @@ h5, h6 {
         padding: 0;
         text-decoration: none;
     }
+    /*
+        Admin behörighet
+        ---------------------------------------------------------
+    */
 
+    .isAdmin{
+        display: none
+    }
+    .adm{
+        display: none
+    }
+    .isAdmin2{
+         display: none
+    }
+    .isAdmin3{
+         display: none
+    }
+    .isMember2{
+        display: none
+    }
+    .isMember3{
+        display: none
+    }
+    #isAdmin{
+        display: none
+    }
+    #isMember{
+        display: none
+    }
 /* main layout
 ----------------------------------------------------------*/
 
