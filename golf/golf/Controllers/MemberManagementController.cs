@@ -56,11 +56,11 @@ namespace golf.Controllers
      
 
         //Visa detaljer om personer
-        public ActionResult Details(int id = 0)
+        public ActionResult Details(int id)
         {
             
             Person person = databas.Person.Find(id);
-            Golfer golf = databas.Golfer.Find(id);
+            Golfer golf = databas.Golfer.Where(x => x.Person_ID == id).FirstOrDefault();
 
 
             ViewBag.gid = golf.golfID.ToString();
@@ -114,6 +114,17 @@ namespace golf.Controllers
             CM.p = databas.Person.Find(id);
             SelectList gender = new SelectList(databas.Gender.ToList(), "id", "genderName");
 
+
+            var selectListItems = new List<SelectListItem>();
+
+           
+           
+
+            selectListItems.Add(new SelectListItem() { Text = "Betalt", Value = bool.TrueString });
+            selectListItems.Add(new SelectListItem() { Text = "Inte betalt", Value = bool.FalseString });
+
+            CM.payed = selectListItems;
+            
 
             CM.genderItems = gender;
             if (CM.p == null)

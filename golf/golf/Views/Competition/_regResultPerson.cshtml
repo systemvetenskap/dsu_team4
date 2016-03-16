@@ -18,10 +18,10 @@
         <table>
             <tr>
                 <th>
-                    @Html.Label("Hål")
+                    <p>Hål</p>
                 </th>
                 <th>
-                    @Html.Label("Slag")
+                    <p>Slag</p>
                 </th>
             </tr>
 
@@ -33,7 +33,7 @@
                         
                     </td>
                     <td>                      
-                      
+                        @Html.Label("Hål" + i + 1)
                         @Html.EditorFor(m => m.holeresult[i].stroaks, new { id = "textfield" })
                     </td>
                 </tr>

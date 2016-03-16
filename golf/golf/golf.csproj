@@ -428,6 +428,7 @@
     <Content Include="Views\Competition\_editComp.cshtml" />
     <Content Include="Views\Competition\_detailsComp.cshtml" />
     <Content Include="Views\Competition\_addResult.cshtml" />
+    <Content Include="Views\Competition\_showResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
