@@ -17,7 +17,10 @@ namespace golf.Models
 
         public void calcPoints()
         {
+   
             net = playerStrokes - addedStrokes;
+            
+          
             int hcpStrokes = par + addedStrokes;
             if(hcpStrokes == playerStrokes)
             {

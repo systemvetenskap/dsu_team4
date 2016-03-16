@@ -309,6 +309,7 @@ namespace golf.Controllers
                             HCP = y.HCP,
                             Gender_ID = p.gender_ID,
                             Startime = y.startTime,
+                            CompGolfID = y.CompGoldID
                             
                         };
 
@@ -325,6 +326,7 @@ namespace golf.Controllers
                    var g = gender.Where(x => x.Id == i.Gender_ID).FirstOrDefault();
                    pe.gender = g.genderName;
                    pe.gender_ID = g.Id;
+                   
                    if (i.Startime != null)
                    {
                    pe.startime = i.Startime;
@@ -432,6 +434,7 @@ namespace golf.Controllers
                 resultClass rs = new resultClass();
                 rs.currentPerson = pg;
                 rs.comp = currComp;
+                rs.CompetitionGolferID = compG.Id;
                 rs.holeresult = createPlayerHoles;
                 
 
@@ -516,9 +519,10 @@ namespace golf.Controllers
                 }
                 else
                 {
-                    foreach(var i in scrList)
+                    int x = extraStrokes * -1;
+                    for(var i = 0; i < x; i++)
                     {
-                        i.addedStrokes = extraStrokes;
+                        scrList[i].addedStrokes -= 1;
                     }
 
                 }
@@ -529,23 +533,24 @@ namespace golf.Controllers
                     i.calcPoints();
                 }
 
-                int net = (from i in scrList select i.net).Sum();
-                int points = (from i in scrList select i.points).Sum();
 
-                CompetitionGolfer cg = db.CompetitionGolfer.Find(r.comp.Id);
+                var compid = r.CompetitionGolferID;
+                CompetitionGolfer cg = db.CompetitionGolfer.Find(compid);
+                cg.net = (from i in scrList select i.net).Sum();
+                cg.points = (from i in scrList select i.points).Sum();
 
-                
-               
+                db.SaveChanges();
 
+                RegisterComp rg = new RegisterComp();
 
-
+                return RedirectToAction("Index");
                 
             }
 
 
 
 
-            return View("Index");
+            return RedirectToAction("Index");
         }
 
         public ActionResult createComp()
