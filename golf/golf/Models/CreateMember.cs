@@ -15,6 +15,6 @@ namespace golf.Models
         public int memberID { get; set; }
         public IEnumerable<SelectListItem> genderItems { get; set; }
         public IEnumerable<SelectListItem> memberType { get; set; }
-
+        public IEnumerable<SelectListItem> payed { get; set; }
     }
 }

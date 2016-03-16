@@ -79,10 +79,14 @@
             @Html.Raw("Betalat")
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.p.Payed)
+            @*@Html.EditorFor(model => model.p.Payed)*@
+
+
             @Html.ValidationMessageFor(model => model.p.email)
         </div>
-        
+        <div class="editor-field">
+            @Html.DropDownListFor(m => m.p.Payed, new SelectList(Model.payed, "Value", "Text"));
+        </div>
         
 
         <p>
