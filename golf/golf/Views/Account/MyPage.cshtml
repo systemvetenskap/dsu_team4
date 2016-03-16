@@ -7,7 +7,7 @@
         </div>
     </section>
 }
-@model golf.Models.Person
+@model golf.Models.CreateMember
 
 @{
     ViewBag.Title = "Dina uppgifter";
@@ -15,56 +15,61 @@
 
 <div class="MyPageLoggedIn">
     <fieldset>
-        <legend>Person</legend>
+        @*<legend>Person</legend>*@
 
         <div class="editor-label">
             @Html.Raw("Förnamn")
         </div>
         <div class="editor-field">
-            @Html.DisplayFor(model => model.firstName)
-            @Html.ValidationMessageFor(model => model.firstName)
+            @Html.DisplayFor(model => model.p.firstName)
+            @Html.ValidationMessageFor(model => model.p.firstName)
         </div>
         <br>
         <div class="editor-label">
             @Html.Raw("Efternamn")
         </div>
         <div class="editor-field">
-            @Html.DisplayFor(model => model.lastName)
-            @Html.ValidationMessageFor(model => model.lastName)
+            @Html.DisplayFor(model => model.p.lastName)
+            @Html.ValidationMessageFor(model => model.p.lastName)
         </div>
         <br>
         <div class="editor-label">
             @Html.Raw("Gatuadress")
         </div>
         <div class="editor-field">
-            @Html.DisplayFor(model => model.streetAddres)
-            @Html.ValidationMessageFor(model => model.streetAddres)
+            @Html.DisplayFor(model => model.p.streetAddres)
+            @Html.ValidationMessageFor(model => model.p.streetAddres)
         </div>
         <br>
         <div class="editor-label">
             @Html.Raw("Postadress")
         </div>
         <div class="editor-field">
-            @Html.DisplayFor(model => model.postalCode)
-            @Html.ValidationMessageFor(model => model.postalCode)
+            @Html.DisplayFor(model => model.p.postalCode)
+            @Html.ValidationMessageFor(model => model.p.postalCode)
         </div>
         <br>
         <div class="editor-label">
             @Html.Raw("Stad")
         </div>
         <div class="editor-field">
-            @Html.DisplayFor(model => model.city)
-            @Html.ValidationMessageFor(model => model.city)
+            @Html.DisplayFor(model => model.p.city)
+            @Html.ValidationMessageFor(model => model.p.city)
         </div>
         <br>
         <div class="editor-label">
             @Html.Raw("E-postadress")
         </div>
         <div class="editor-field">
-            @Html.DisplayFor(model => model.email)
-            @Html.ValidationMessageFor(model => model.email)
+            @Html.DisplayFor(model => model.p.email)
+            @Html.ValidationMessageFor(model => model.p.email)
         </div>
-        <br>
+        @*<br>
+        <div class="editor-field">
+            @Html.DisplayFor(model => model)
+            @Html.ValidationMessageFor(model => model.email)
+        </div>*@
+        <br />
         <div class="editor-label">
             @Html.Raw("Betalat")
         </div>
@@ -73,7 +78,7 @@
             @Html.ValidationMessageFor(model => model.email)
         </div>*@
 
-        @if (Model.Payed == true)
+        @if (Model.p.Payed == true)
         {
             <p>Ja</p>
         }
@@ -89,9 +94,18 @@
             @Html.ValidationMessageFor(model => model.gender_ID)
         </div>*@
         <br>
+        <div class="editor-label">
+            @Html.Raw("Golf ID")
+        </div>
+        <br />
+        <div class="editor-label">
+            @Html.DisplayFor(model => model.golfID)
+            @Html.ValidationMessageFor(model => model.golfID)
+        </div>
+        <br />
         <div class="edit-link">
-            @Html.HiddenFor(model => model.Id)
-            @Html.ActionLink("Ändra uppgifter", "Edit", new { id = Model.Id })
+            @Html.HiddenFor(model => model.p.Id)
+            @Html.ActionLink("Ändra uppgifter", "Edit", new { id = Model.p.Id })
         </div>
     </fieldset>
 </div>

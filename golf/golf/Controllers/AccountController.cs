@@ -62,6 +62,8 @@ namespace golf.Controllers
                 db.Golfer.Add(g);
                 db.SaveChanges();
 
+                
+
 
                 FormsAuthentication.SetAuthCookie(model.p.Id.ToString(), false);
 
@@ -103,7 +105,19 @@ namespace golf.Controllers
             Person person = db.Person.Find(id);
             ViewBag.User = person.firstName +" "+ person.lastName;
             //Komentar
-            return View(person);
+            CreateMember cm = new CreateMember();
+            cm.p = person;
+
+            foreach (var item in db.Golfer)
+            {
+                if (person.Id == item.Person_ID)
+                {
+                    cm.golfID = item.golfID;
+                }
+            }
+
+
+            return View(cm);
         }
 
         public ActionResult Edit(int id = 0)
