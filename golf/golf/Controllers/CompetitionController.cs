@@ -1087,6 +1087,13 @@ namespace golf.Controllers
 
            
         }
+        public ActionResult MobileComp()
+        {
+            resultClass rs = new resultClass();
+
+                return View("MobileComp", rs);
+            }
+        }
 
     }
-}
+
