@@ -1041,7 +1041,7 @@ namespace golf.Controllers
             using(dsuteam4Entities1 db = new dsuteam4Entities1())
             {
                 var cg = db.CompetitionGolfer.Where(x => x.Competition_ID == id).ToList();
-
+        
                 var pg = from i in db.Golfer.ToList()
                          join p in cg.ToList()
                          on i.Id equals p.Golfer_ID
@@ -1068,7 +1068,7 @@ namespace golf.Controllers
                     pge.lastName = i.lName;
                     pge.HCP = i.Hcp;
                     rs.currentPerson = pge;
-
+                    rs.holeresult = db.HoleStats.Where(x => x.CompetitionGolfer_ID == i.CompGid).ToList();
                     rslist.Add(rs);
                 }
                 
