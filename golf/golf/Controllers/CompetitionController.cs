@@ -62,7 +62,7 @@ namespace golf.Controllers
 
             
         }
-        public ActionResult loadComp()
+        public PartialViewResult loadComp()
         {
             using( dsuteam4Entities1 databas = new dsuteam4Entities1())
             {
@@ -495,8 +495,8 @@ namespace golf.Controllers
                 return PartialView("_addResult", rs);
       }
    }
-        [HttpPost]
-        public PartialViewResult regResultPerson(resultClass r)
+       
+        public PartialViewResult regResultP(resultClass r)
         {
             List<Slope> sl = new List<Slope>();
             List<ScoreCardClass> scrList = new List<ScoreCardClass>();
@@ -589,18 +589,23 @@ namespace golf.Controllers
                     i.calcPoints();
                 }
 
-
+                foreach(var i in scrList)
+                {
+                    HoleStats hs = new HoleStats();
+                    hs.Hole_ID = i.Id;
+                    hs.stroaks = i.playerStrokes;
+                    hs.toPar = i.toPar;
+                    hs.CompetitionGolfer_ID = r.CompetitionGolferID;
+                    db.HoleStats.Add(hs);
+                   
+                 }
                 var compid = r.CompetitionGolferID;
                 CompetitionGolfer cg = db.CompetitionGolfer.Find(compid);
                 cg.net = (from i in scrList select i.net).Sum();
                 cg.points = (from i in scrList select i.points).Sum();
  
   
-                db.SaveChanges();
-
-                RegisterComp rg = new RegisterComp();
-
-               
+                db.SaveChanges();              
                 
             }
 
@@ -1090,9 +1095,11 @@ namespace golf.Controllers
         public ActionResult MobileComp()
         {
             resultClass rs = new resultClass();
+            
+            
 
-                return View("MobileComp", rs);
-            }
+            return View("MobileComp", rs);
+         }
         }
 
     }
