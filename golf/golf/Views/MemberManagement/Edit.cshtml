@@ -85,7 +85,7 @@
             @Html.ValidationMessageFor(model => model.p.email)
         </div>
         <div class="editor-field">
-            @Html.DropDownListFor(m => m.p.Payed, new SelectList(Model.payed, "Value", "Text"), "Betalat", new { id = "paid", @class = "paid" });
+            @Html.DropDownListFor(m => m.p.Payed, new SelectList(Model.payed, "Value", "Text"), "Status", new { id = "paid", @class = "paid" });
         </div>
         
 
