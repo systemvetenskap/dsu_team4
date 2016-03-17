@@ -17,41 +17,50 @@
                        })
 <br />
 
-<table>
-    <tr>
-        <th>
-            @Html.Label("Golfare")
-        </th>
-        <th>
-            @Html.Label("Starttid")
-        </th>
-        <th>
-            @Html.Label("Registrera")
-        </th>
-    </tr>
-
-
-    
-    @foreach (var item in Model.persongolfer)
-    {
+<table id="playerTable">
+    <thead>
         <tr>
-            <td>
-                @Html.Label(item.firstName + " " + item.lastName)
-            </td>
-            <td>
-                @Html.Label(item.startime.ToString())
-            </td>
-            <td>
-                
-                @Ajax.ActionLink("Registrera resultat", "regResultPerson", new { personid = item.personid, compID = Model.comp.Id, regComp = Model }, new AjaxOptions()
-                {
+            <th>
+                @Html.Label("Golfare")
+            </th>
+            <th>
+                @Html.Label("Starttid")
+            </th>
+            <th>
+                @Html.Label("Registrera")
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model.persongolfer)
+        {
+            <tr>
+                <td>
+                    @Html.Label(item.firstName + " " + item.lastName)
+                </td>
+                <td class="sortnr">
+                    @Html.Label(item.startime.ToString())
+                </td>
+                <td>
+                   @if (item.points != null)
+                   {
+                    @Ajax.ActionLink("Registrera resultat", "regResultPerson", new { personid = item.personid, compID = Model.comp.Id, regComp = Model }, new AjaxOptions()
+                    {
                     UpdateTargetId = "showComp",
                     HttpMethod = "GET",
                     InsertionMode = InsertionMode.Replace
-                })
-            </td>
-        </tr>
-    }
+                    })
+                   }
+                   else
+                   {
+                       <p><font color="green">Registrerat</font></p>
+                   }
+     
+                </td>
+            </tr>
+        }
+    </tbody>
 
 
 </table>
@@ -75,3 +84,30 @@
     @Html.EditorFor(m => m.holeStats[i].stroaks)
     <br />
 }*@
+<script type="text/javascript">
+
+    function sortTable() {
+
+        var tbl = document.getElementById("playerTable").tBodies[0];
+        var store = [];
+        for (var i = 0, len = tbl.rows.length; i < len; i++) {
+            var row = tbl.rows[i];
+            var it = row.cells[1].innerText;
+            var sub1 = it.substring(0, 2);
+            var sub2 = it.substring(3, 5)
+
+            var sortnr = parseFloat(sub1 + sub2);
+            if (!isNaN(sortnr)) store.push([sortnr, row]);
+        }
+        store.sort(function (x, y) {
+            return x[0] - y[0];
+        });
+        for (var i = 0, len = store.length; i < len; i++) {
+            tbl.appendChild(store[i][1]);
+        }
+        store = null;
+    }
+    sortTable();
+
+
+</script>

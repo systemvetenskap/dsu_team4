@@ -61,7 +61,7 @@
                         holes.Add(new SelectListItem { Text = "9", Value = "9" });
                         holes.Add(new SelectListItem { Text = "18", Value = "18" });
                     }
-                    @Html.DropDownListFor(model => model.newComp.NumberOfHoles, holes, "--Antal hål--")
+                    @Html.DropDownListFor(model => model.newComp.NumberOfHoles, holes,"--Antal hål--", new { id = "holes", @class = "holes" })
                 </div>
                 <div class="editor-label">
                     @Html.Raw("Antal spelare")
@@ -71,7 +71,7 @@
                         players.Add(new SelectListItem { Text = "3", Value = "3" });
                         players.Add(new SelectListItem { Text = "4", Value = "4" });
                     }
-                    @Html.DropDownListFor(model => model.newComp.playersPerTime, players, "--Spelare per starttid--")
+                    @Html.DropDownListFor(model => model.newComp.playersPerTime, players, "--Spelare per starttid--", new { id = "numberofplayers", @class = "numberofplayers" })
                 </div>
                 <div class="editor-label">
                     @Html.Raw("Tävlingsdatum")
@@ -83,16 +83,16 @@
 
                 </div>
                 <div class="editor-label">
-                    @Html.Raw("Start")
+                    @Html.Raw("Starttid")
                 </div>
                 <div class="editor-field">
-                    @Html.DropDownListFor(model => model.newComp.startTime, new SelectList(Model.sTimes, "Id", "teeTime1"))
+                    @Html.DropDownListFor(model => model.newComp.startTime, new SelectList(Model.sTimes, "Id", "teeTime1"), "Starttid", new { id = "starttime", @class = "starttime" })
                 </div>
                 <div class="editor-label">
-                    @Html.Raw("Slut")
+                    @Html.Raw("Sluttid")
                 </div>
                 <div class="editor-field">
-                    @Html.DropDownListFor(model => model.newComp.endTime, new SelectList(Model.sTimes, "Id", "teeTime1"))
+                    @Html.DropDownListFor(model => model.newComp.endTime, new SelectList(Model.sTimes, "Id", "teeTime1"), "Sluttid", new { id = "endtime", @class = "endtime" })
                 </div>
 
                 <div class="editor-label">
@@ -117,14 +117,14 @@
                     @Html.Raw("Tävlingsklass")
                 </div>
                 <div class="editor-field">
-                    @Html.DropDownListFor(model => model.newComp.CompeteClass_ID, new SelectList(Model.classList, "Id", "Name"))
+                    @Html.DropDownListFor(model => model.newComp.CompeteClass_ID, new SelectList(Model.classList, "Id", "Name"), "Tävlingsklass", new { id = "compclass", @class = "compclass" })
                 </div>
 
                 <div class="editor-label">
                     @Html.Raw("Kontaktperson")
                 </div>
                 <div class="editor-field">
-                    @Html.DropDownListFor(model => model.newComp.Person_IDc, new SelectList(Model.contactlist, "Id", "oneName"), new {id="kontaktperson", @class="kontaktperson", placeholder ="--Välj kontaktperson--"})
+                    @Html.DropDownListFor(model => model.newComp.Person_IDc, new SelectList(Model.contactlist, "Id", "oneName"), "Kontaktperson", new { id = "contactperson", @class = "contactperson" })
                     @Html.ValidationMessageFor(model => model.newComp.Person_IDc)
                 </div>
 
@@ -140,8 +140,10 @@
                 </p>
             </fieldset>
 
-            <script type="text/javascript">
-                $('#createcompetitionbutton').click(function () {
+ <script type="text/javascript">
+
+    /*För alla textboxar*/
+        $('#createcompetitionbutton').click(function () {
         var isValid = 1;
         $('input:text').each(function () {
             if ($(this).val() == '') {
@@ -155,9 +157,11 @@
         if (isValid == 0) {
             return false;
         }
-                });
-                $('#createcompetitionbutton').click(function () {
-
+        });
+    /*För textarea*/
+        $('#createcompetitionbutton').click(function ()
+        {
+                    
                     if ($('#textareainput').val() <= 0)
                     {
                         $('#textareainput').css('border', '2px solid red');
@@ -167,17 +171,58 @@
                     {
                         $('#textareainput').css('border', '1px solid green');
                     }
-                    /*Kommer ej åt dropdownboxarna*/
-                    if ($('#kontaktperson').index == 0)
-                    {
-                        $('#kontaktperson').css('border', '2px solid red');
+
+    /*För dropdownlists enligt labels*/
+                    /*Antal hål*/
+                    if ($("#holes option:selected").index() == 0){
+                        $('#holes').css('border', '2px solid red');
                         return false;
                     }
                     else
                     {
-                        $('#kontaktperson').css('border', '1px solid green');
+                        $('#holes').css('border', '1px solid green');
                     }
-                    /**/
+                    /*Antal spelare*/
+                    if ($("#numberofplayers option:selected").index() == 0) {
+                        $('#numberofplayers').css('border', '2px solid red');
+                        return false;
+                    }
+                    else {
+                        $('#numberofplayers').css('border', '1px solid green');
+                    }
+                    /*Start*/
+                    if ($("#starttime option:selected").index() == 0) {
+                        $('#starttime').css('border', '2px solid red');
+                        return false;
+                    }
+                    else {
+                        $('#starttime').css('border', '1px solid green');
+                    }
+                    /*Slut*/
+                    if ($("#endtime option:selected").index() == 0) {
+                        $('#endtime').css('border', '2px solid red');
+                        return false;
+                    }
+                    else {
+                        $('#endtime').css('border', '1px solid green');
+                    }
+                    /*Tävlingsklass*/
+                    if ($("#compclass option:selected").index() == 0) {
+                        $('#compclass').css('border', '2px solid red');
+                        return false;
+                    }
+                    else {
+                        $('#compclass').css('border', '1px solid green');
+                    }
+                    /*Kontaktperson*/
+                    if ($("#contactperson option:selected").index() == 0) {
+                        $('#contactperson').css('border', '2px solid red');
+                        return false;
+                    }
+                    else {
+                        $('#contactperson').css('border', '1px solid green');
+                    }
+
                 }
 );
             </script>

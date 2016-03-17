@@ -128,61 +128,73 @@
                 <td>
                     @Html.DisplayFor(m => item.info)
                 </td>*@
+
                 <td>
-                    @Ajax.ActionLink("Visa detaljer", "detailsComp", new { id = item.Id }, new AjaxOptions(){
+                    <div class="buttona">
+                        @Ajax.ActionLink("Visa detaljer", "detailsComp", new { id = item.Id }, new AjaxOptions(){
 
                    UpdateTargetId = "showComp",
                    HttpMethod = "GET",
-                   InsertionMode = InsertionMode.Replace                
-                   
+                   InsertionMode = InsertionMode.Replace
+                  
+
                })
+                    </div> 
 
 
                 </td>
+
                 <td>
                     <div class="isAdmin2" style="display:none">
-                        @Ajax.ActionLink("Resultat", "showResult", new { id = item.Id }, new AjaxOptions()
+                        <div class="buttona">
+                            @Ajax.ActionLink("Resultat", "showResult", new { id = item.Id }, new AjaxOptions()
                        {
                            UpdateTargetId = "showComp",
                            HttpMethod = "GET",
                            InsertionMode = InsertionMode.Replace
                        })
+                        </div>
                     </div>
                 </td>
                 <td>
                     <div class="isAdmin2" style="display:none">
-                        @Ajax.ActionLink("Spelarlista", "registerResult", new { id = item.Id }, new AjaxOptions()
+                        <div class="buttona">
+                            @Ajax.ActionLink("Spelarlista", "registerResult", new { id = item.Id }, new AjaxOptions()
                        {
                            UpdateTargetId = "showComp",
                            HttpMethod = "GET",
                            InsertionMode = InsertionMode.Replace
                        })
-                    </div>
+                            </div>
+                        </div>
   
                     <div class="isMember2" style="display:none">
+                        <div class="buttona">
 
-                        @*Här ska det vara annan actionlink sen!*@
-                        @if ((item.signUpFrom >= DateTime.Now) && (item.signUpTo <= DateTime.Now))
-                        {
-                            @Html.ActionLink("Registrera dig här!", "addYourself", new { confirm = true, id = item.Id },
+                            @*Här ska det vara annan actionlink sen!*@
+                            @if ((item.signUpFrom >= DateTime.Now) && (item.signUpTo <= DateTime.Now))
+                            {
+                                @Html.ActionLink("Registrera dig här!", "addYourself", new { confirm = true, id = item.Id },
                             new { onclick = "return confirm('Vill du verkligen anmäla dig till denna tävling?')" })
-                        }
-                    </div>
+                            }
+                            </div>
+                        </div>
 
 
                 </td>
                 <td class="isAdmin2" style="display:none">
-                    @*@Ajax.ActionLink("Anmäl spelare", "addPlayer", new { id = item.Id }, new AjaxOptions()
+                    <div class="buttona">
+                        @*@Ajax.ActionLink("Anmäl spelare", "addPlayer", new { id = item.Id }, new AjaxOptions()
             {
                 UpdateTargetId = "showComp",
                 HttpMethod = "GET",
                 InsertionMode = InsertionMode.Replace
             })*@
-                    @if ((item.signUpFrom >= DateTime.Now) && (item.signUpTo <= DateTime.Now))
-                    {
-                        @Html.ActionLink("Anmäl spelare", "addPlayer", new { id = item.Id })
-                    }
-
+                        @if ((item.signUpFrom >= DateTime.Now) && (item.signUpTo <= DateTime.Now))
+                        {
+                            @Html.ActionLink("Anmäl spelare", "addPlayer", new { id = item.Id })
+                        }
+                    </div>
                 </td>
                 
             </tr>
