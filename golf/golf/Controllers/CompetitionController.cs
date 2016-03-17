@@ -399,7 +399,8 @@ namespace golf.Controllers
                                 CompGoldID = u.Id,
                                 u.startTime,
                                 u.HoleStats,
-                                u.Golfer_ID
+                                u.Golfer_ID,
+                                u.points
                             };
 
                var pg = from p in db.Person.ToList()
@@ -415,7 +416,8 @@ namespace golf.Controllers
                             HCP = y.HCP,
                             Gender_ID = p.gender_ID,
                             Startime = y.startTime,
-                            CompGolfID = y.CompGoldID
+                            CompGolfID = y.CompGoldID,
+                            y.points
                             
                         };
 
@@ -432,6 +434,7 @@ namespace golf.Controllers
                    var g = gender.Where(x => x.Id == i.Gender_ID).FirstOrDefault();
                    pe.gender = g.genderName;
                    pe.gender_ID = g.Id;
+                   pe.points = i.points;
                    
                    if (i.Startime != null)
                    {
@@ -456,6 +459,88 @@ namespace golf.Controllers
 
 
             }        
+        }
+        public RegisterComp loadRegResult(int id)
+        {
+            using (dsuteam4Entities1 db = new dsuteam4Entities1())
+            {
+                Competition c = db.Competition.Find(id);
+                RegisterComp rg = new RegisterComp();
+
+                var cg = db.CompetitionGolfer.Where(x => x.Competition_ID == c.Id).ToList();
+
+
+
+                var golfer = from g in db.Golfer.ToList()
+                             join u in cg.ToList()
+                             on g.Id equals u.Golfer_ID
+                             select new
+                             {
+                                 g.golfID,
+                                 g.HCP,
+                                 g.Id,
+                                 g.Person_ID,
+                                 CompGoldID = u.Id,
+                                 u.startTime,
+                                 u.HoleStats,
+                                 u.Golfer_ID
+                             };
+
+                var pg = from p in db.Person.ToList()
+                         join y in golfer.ToList()
+                         on p.Id equals y.Person_ID
+                         select new
+                         {
+                             Personid = p.Id,
+                             Golfid = y.Id,
+                             fName = p.firstName,
+                             lName = p.lastName,
+                             Golfstring = y.golfID,
+                             HCP = y.HCP,
+                             Gender_ID = p.gender_ID,
+                             Startime = y.startTime,
+                             CompGolfID = y.CompGoldID
+
+                         };
+
+                var gender = db.Gender.ToList();
+                foreach (var i in pg)
+                {
+                    PersonGolfer pe = new PersonGolfer();
+                    pe.personid = i.Personid;
+                    pe.golfid = i.Golfid;
+                    pe.firstName = i.fName;
+                    pe.lastName = i.lName;
+                    pe.HCP = i.HCP;
+                    pe.golfstring = i.Golfstring;
+                    var g = gender.Where(x => x.Id == i.Gender_ID).FirstOrDefault();
+                    pe.gender = g.genderName;
+                    pe.gender_ID = g.Id;
+
+                    if (i.Startime != null)
+                    {
+                        pe.startime = i.Startime;
+
+                    }
+                    else
+                    {
+                        pe.startime = "Ej lottad";
+                    }
+                    rg.persongolfer.Add(pe);
+
+                }
+
+
+                rg.comp = c;
+
+
+
+
+
+                return rg;
+
+            }        
+            
         }
 
         public ActionResult addHoleStats(RegisterComp rc)
@@ -623,10 +708,15 @@ namespace golf.Controllers
                         {
                             scrList[i].addedStrokes += 1;
                         }
-                        else
+                        else if(i < (r.comp.NumberOfHoles  * 2))
                         {
                             int z = i - r.comp.NumberOfHoles;
                             scrList[z].addedStrokes += 1;
+                        }
+                        else
+                        {
+                            int x = i - (r.comp.NumberOfHoles*2);
+                            scrList[x].addedStrokes += 1;
                         }
                     }
 
@@ -656,7 +746,7 @@ namespace golf.Controllers
 
                 RegisterComp rg = new RegisterComp();
 
-                return RedirectToAction("Index");
+                return PartialView("_regResult", loadRegResult(r.comp.Id));
                 
             }
 
