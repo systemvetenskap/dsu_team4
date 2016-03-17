@@ -84,7 +84,7 @@
             </div>
             <div>
                 @Html.Label("Kön:")
-                @Html.DropDownListFor(m => m.genderid, new SelectList(Model.genderItems, "Value", "Text"))
+                @Html.DropDownListFor(m => m.genderid, new SelectList(Model.genderItems, "Value", "Text"), "Välj kön", new { id = "gender", @class = "gender" })
             </div>
             <div class="editor-label">
                 @Html.Label("Medlemstyp:")
@@ -93,7 +93,7 @@
                 @*@Html.EditorFor(model => model.p.memberType_ID)
             @Html.ValidationMessageFor(model => model.p.memberType_ID)*@
 
-                @Html.DropDownListFor(m => m.memberID, new SelectList(Model.memberType, "Value", "Text"))
+                @Html.DropDownListFor(m => m.memberID, new SelectList(Model.memberType, "Value", "Text"), "Välj medlemstyp", new { id = "membertype", @class = "membertype" })
             </div>
             <p>
                 <input type="submit" id="registerbutton"value="Registrera dig" />
@@ -115,8 +115,31 @@
         if (isValid == 0) {
             return false;
         }
-    });
+        });
+
+        $('#registerbutton').click(function ()
+        {
+                    
+            if ($('#gender').val() <= 0)
+            {
+                $('#gender').css('border', '2px solid red');
+                return false;
+            }
+            else
+            {
+                $('#gender').css('border', '1px solid green');
+            }
+            if ($('#membertype').val() <= 0) {
+                $('#membertype').css('border', '2px solid red');
+                return false;
+            }
+            else {
+                $('#membertype').css('border', '1px solid green');
+            }
+        });
     </script>
+
+    
 
 </div>
 
