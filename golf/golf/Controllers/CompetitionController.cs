@@ -84,9 +84,9 @@ namespace golf.Controllers
                 //{
                 //    foreach (var item2 in databas.CompetitionGolfer)
                 //    {
-                //        if (item.Id == item2.Competition_ID )
+                //        if (item.Id == item2.Competition_ID && User.Identity.Name == item2.p)
                 //        {
-                            
+
                 //        }
                 //    }
                 //}
