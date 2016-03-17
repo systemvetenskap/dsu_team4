@@ -159,6 +159,7 @@
                 <td>
                     <div class="isAdmin2" style="display:none">
                         <div class="buttona">
+                            
                             @Ajax.ActionLink("Spelarlista", "registerResult", new { id = item.Id }, new AjaxOptions()
                        {
                            UpdateTargetId = "showComp",
@@ -169,32 +170,32 @@
                         </div>
   
                     <div class="isMember2" style="display:none">
-                        <div class="buttona">
 
                             @*Här ska det vara annan actionlink sen!*@
-                            @if ((item.signUpFrom >= DateTime.Now) && (item.signUpTo <= DateTime.Now))
+                            @if ((item.signUpFrom.Date <= DateTime.Now.Date) && (item.signUpTo.Date >= DateTime.Now.Date) && (item.CompeteClass_ID == 1 || item.CompeteClass_ID == Model.currentUser.gender_ID))
                             {
+                        <div class="buttona">
                                 @Html.ActionLink("Registrera dig här!", "addYourself", new { confirm = true, id = item.Id },
                             new { onclick = "return confirm('Vill du verkligen anmäla dig till denna tävling?')" })
-                            }
                             </div>
+                            }
                         </div>
 
 
                 </td>
                 <td class="isAdmin2" style="display:none">
-                    <div class="buttona">
                         @*@Ajax.ActionLink("Anmäl spelare", "addPlayer", new { id = item.Id }, new AjaxOptions()
             {
                 UpdateTargetId = "showComp",
                 HttpMethod = "GET",
                 InsertionMode = InsertionMode.Replace
             })*@
-                        @if ((item.signUpFrom >= DateTime.Now) && (item.signUpTo <= DateTime.Now))
+                        @if ((item.signUpFrom.Date <= DateTime.Now.Date) && (item.signUpTo.Date >= DateTime.Now.Date))
                         {
+                    <div class="buttona">
                             @Html.ActionLink("Anmäl spelare", "addPlayer", new { id = item.Id })
-                        }
                     </div>
+                        }
                 </td>
                 
             </tr>
