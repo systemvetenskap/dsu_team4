@@ -71,7 +71,7 @@
                         players.Add(new SelectListItem { Text = "3", Value = "3" });
                         players.Add(new SelectListItem { Text = "4", Value = "4" });
                     }
-                    @Html.DropDownListFor(model => model.newComp.playersPerTime, players, "--Spelare per starttid--", new { id = "numberofplayers", @class = "numberofplayers" })
+                    @Html.DropDownListFor(model => model.newComp.playersPerTime, players, "--Välj antal spelare--", new { id = "numberofplayers", @class = "numberofplayers" })
                 </div>
                 <div class="editor-label">
                     @Html.Raw("Tävlingsdatum")
