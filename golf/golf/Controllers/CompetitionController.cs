@@ -583,12 +583,15 @@ namespace golf.Controllers
                     }
 
                 }
-              
-                foreach(var i in scrList)
+                var prevPar = 0;
+                var order = scrList.OrderBy(x => x.Number).ToList();
+                foreach(var i in order)
                 {
-                    i.calcPoints();
+                    i.calcPoints(prevPar);
+                    prevPar = i.toPar;
                 }
 
+                
                 foreach(var i in scrList)
                 {
                     HoleStats hs = new HoleStats();
@@ -597,7 +600,7 @@ namespace golf.Controllers
                     hs.toPar = i.toPar;
                     hs.CompetitionGolfer_ID = r.CompetitionGolferID;
                     db.HoleStats.Add(hs);
-                   
+                    prevPar = i.toPar;
                  }
                 var compid = r.CompetitionGolferID;
                 CompetitionGolfer cg = db.CompetitionGolfer.Find(compid);
@@ -605,23 +608,13 @@ namespace golf.Controllers
                 cg.points = (from i in scrList select i.points).Sum();
  
   
-                db.SaveChanges();              
+                db.SaveChanges();
+
                 
             }
 
-            using(dsuteam4Entities1 dbo = new dsuteam4Entities1())
-            {
-                HoleStats hst = new HoleStats();
-                hst.CompetitionGolfer_ID = r.CompetitionGolferID;
-                hst.Hole_ID = 21;
-                hst.stroaks = 3;
-                hst.toPar = 1;
-                dbo.HoleStats.Add(hst);
-                dbo.SaveChanges();
-            }
-
-
             return PartialView("_regResult", loadRegResult(r.comp.Id));
+
             
         }
 
