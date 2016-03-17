@@ -610,10 +610,10 @@ namespace golf.Controllers
   
                 db.SaveChanges();
 
-                return PartialView("_regResult", loadRegResult(r.comp.Id));
+                
             }
 
-
+            return PartialView("_regResult", loadRegResult(r.comp.Id));
 
             
         }
