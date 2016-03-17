@@ -25,6 +25,8 @@ namespace golf.Models
 
         public List<PersonGolfer> golfers = new List<PersonGolfer>();
         public List<bool> alreadySigned = new List<bool>();
+
+        public Person currentUser { get; set; }
        
     }
 

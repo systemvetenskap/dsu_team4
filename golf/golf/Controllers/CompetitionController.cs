@@ -25,7 +25,8 @@ namespace golf.Controllers
             cc.currentDate = DateTime.Today;
             using (dsuteam4Entities1 databas = new dsuteam4Entities1())
             {
-
+                int userID = Convert.ToInt16(User.Identity.Name);
+                cc.currentUser = databas.Person.Find(userID);
           
                 cc.classList = databas.CompeteClass.ToList();
                 List<Person> p = databas.Person.ToList();
@@ -68,6 +69,8 @@ namespace golf.Controllers
 
                 CreateComp cc = new CreateComp();
                 cc.complist = databas.Competition.ToList();
+                int userID = Convert.ToInt16(User.Identity.Name);
+                cc.currentUser = databas.Person.Find(userID);
 
                 //foreach (var item in databas.Golfer)
                 //{
@@ -501,15 +504,7 @@ namespace golf.Controllers
                 string s = r.currentPerson.HCP;
 
                 decimal playerHCP  = decimal.Parse(s, CultureInfo.InvariantCulture);
-                foreach(var i in r.holeresult)
-                {
-                    HoleStats hst = new HoleStats();
-                    hst.CompetitionGolfer_ID = r.CompetitionGolferID;
-                    hst.Hole_ID = i.Hole_ID;
-                    hst.stroaks = i.stroaks;
-                    db.HoleStats.Add(hst);
-                    db.SaveChanges();
-                }
+
 
                 List<Slope> sl = new List<Slope>();
                 var slope = db.Slope.ToList();
@@ -597,7 +592,16 @@ namespace golf.Controllers
                 CompetitionGolfer cg = db.CompetitionGolfer.Find(compid);
                 cg.net = (from i in scrList select i.net).Sum();
                 cg.points = (from i in scrList select i.points).Sum();
+                foreach (var i in r.holeresult)
+                {
+                    HoleStats hst = new HoleStats();
+                    hst.CompetitionGolfer_ID = r.CompetitionGolferID;
+                    hst.Hole_ID = i.Hole_ID;
+                    hst.stroaks = i.stroaks;
+                    hst.toPar = 1;
+                    db.HoleStats.Add(hst);
 
+                }
                 db.SaveChanges();
 
                 RegisterComp rg = new RegisterComp();

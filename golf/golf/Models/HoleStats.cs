@@ -18,8 +18,9 @@ namespace golf.Models
         public int CompetitionGolfer_ID { get; set; }
         public int Hole_ID { get; set; }
         public int stroaks { get; set; }
+        public int toPar { get; set; }
     
-        public virtual Hole Hole { get; set; }
         public virtual CompetitionGolfer CompetitionGolfer { get; set; }
+        public virtual Hole Hole { get; set; }
     }
 }
