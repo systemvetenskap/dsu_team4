@@ -195,6 +195,7 @@
     <Compile Include="Controllers\CompetitionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MemberManagementController.cs" />
+    <Compile Include="Controllers\MobileController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\TeeTimeController.cs" />
     <Compile Include="Extentions\extentions.cs" />
@@ -292,6 +293,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Mobile.css" />
     <Content Include="Content\TeeTime.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -347,7 +349,6 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
-    <Content Include="Content\themes\MobileComp.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <EntityDeploy Include="Models\PersonModel.edmx">
@@ -431,6 +432,7 @@
     <Content Include="Views\Competition\_addResult.cshtml" />
     <Content Include="Views\Competition\_showResult.cshtml" />
     <Content Include="Views\Competition\MobileComp.cshtml" />
+    <Content Include="Views\Mobile\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
