@@ -1,39 +1,98 @@
-﻿@model IEnumerable<golf.Models.resultClass>
+﻿@model golf.Models.showResult
 
-<table>
+<h1>@Model.comp.name</h1>
+<h2>@Model.comp.cDate.ToShortDateString()</h2>
+<table class="resultTable">
 
-<tr>
-    <th>
-        @Html.Label("Namn")
+    <tr>       
+        <th >
+        
+        </th>
+        <th>
+            @Html.Label("Hål")
 
-    </th>
-    <th>
-        @Html.Label("Hcp")
-    </th>
-    <th>
-        @Html.Label("Netto")
-    </th>
-    <th>
-        @Html.Label("Poäng")
-    </th>
-</tr>
- @foreach(var o in Model)
- { 
-<tr>
-    <td>
-       @Html.Label(o.currentPerson.firstName+" "+o.currentPerson.lastName)
-    </td>
-    <td>
-        @Html.Label(o.currentPerson.HCP)
-    </td>
-    <td>
-        @Html.Label(o.net.ToString())
-    </td>
-    <td>
-        @Html.Label(o.points.ToString())
-    </td>
+        </th>
+
+        @for (var i = 1; i <= Model.comp.NumberOfHoles; i++)
+        {
+
+            <th>
+                @Html.Label(i.ToString())
+            </th>
 
 
-</tr>
- }
+        }
+        <th>
+            @Html.Label("Netto")
+        </th>
+        <th>
+            @Html.Label("Poäng")
+        </th>
+        <th>
+            @Html.Label("+/-")
+        </th>
+
+     <tr>
+
+
+
+         <th >
+
+         </th>
+            <th>
+                @Html.Label("Par")
+            </th>
+
+            @foreach(var i in Model.holeInfo)
+            {
+                <td>
+                    @Html.Label(i.par.ToString())
+                </td>
+                
+            }
+         <td class="scoreColumn"></td>
+         <td class="scoreColumn"></td>
+         <td class="scoreColumn"></td>
+    </tr>
+ 
+    @foreach(var o in Model.player)
+         {
+        
+        <tr>
+
+
+            <td >
+                @Html.Label(o.firstName + " " + o.lastName)
+            </td>
+            <td></td>
+            @foreach(var i in o.holeResult)
+            {
+                <td class="scoreColumn">
+                    @if(i.toPar < 0)
+                    {
+                        @Html.Label(i.stroaks.ToString(), new { @class = "underPar" })
+                    }
+                    else
+                    {
+                        @Html.Label(i.stroaks.ToString(), new { @class = "overPar" })
+                    }
+                    
+                </td>
+           
+            }
+           
+            <td class="scoreColumn">
+              @Html.Label(o.net.ToString())
+
+            </td>
+            <td class="scoreColumn">
+                @Html.Label(o.points.ToString())
+            </td>
+            <td class="scoreColumn">
+                @Html.Label(o.toPar.ToString())
+            </td>
+            
+
+        </tr>
+         }
 </table>

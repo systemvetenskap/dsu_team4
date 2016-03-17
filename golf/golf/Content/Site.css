@@ -210,6 +210,20 @@ div.sDiv/*addplayer i competition*/{
     
        
 }
+table.resultTable {font-size:12px;color:#333333;width:100%;border-width: 1px;border-color: #9dcc7a;border-collapse: collapse;}
+table.resultTable th {font-size:12px;background-color:#abd28e;border-width: 1px;padding: 8px;border-style: solid;border-color: #9dcc7a;text-align:left;}
+table.resultTable th.nothere {font-size:12px;background-color:none;border-width: 1px;padding: 8px;border-style: solid;border-color: #9dcc7a;text-align:left;}
+table.resultTable tr {background-color:#bedda7;}
+table.resultTable td {font-size:12px;border-width: 1px;padding: 8px;border-style: solid;border-color: #9dcc7a;}
+table.resultTable td.scoreColumn {font-size:12px;border-width: 1px;padding: 8px;border-style: solid;border-color: #9dcc7a; background-color:#C0C0C0;}
+.underPar{
+
+    color: #32AD32;
+}
+.overPar{
+
+    color: #CC6633;
+}
 .searchDiv table th {
     padding-left:0%;   
     text-align:left;

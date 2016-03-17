@@ -584,7 +584,7 @@ namespace golf.Controllers
 
                 }
                 var prevPar = 0;
-                var order = scrList.OrderBy(x => x.Number).ToList();
+                var order = scrList.OrderBy(x => x.Id).ToList();
                 foreach(var i in order)
                 {
                     i.calcPoints(prevPar);
@@ -600,7 +600,7 @@ namespace golf.Controllers
                     hs.toPar = i.toPar;
                     hs.CompetitionGolfer_ID = r.CompetitionGolferID;
                     db.HoleStats.Add(hs);
-                    prevPar = i.toPar;
+                
                  }
                 var compid = r.CompetitionGolferID;
                 CompetitionGolfer cg = db.CompetitionGolfer.Find(compid);
@@ -1046,44 +1046,54 @@ namespace golf.Controllers
         {
             using(dsuteam4Entities1 db = new dsuteam4Entities1())
             {
-                var cg = db.CompetitionGolfer.Where(x => x.Competition_ID == id).ToList();
-        
-                var pg = from i in db.Golfer.ToList()
-                         join p in cg.ToList()
-                         on i.Id equals p.Golfer_ID
-                         orderby p.net descending
-                         select new {Hcp = i.HCP, Net = p.net, Points = p.points, Personid = i.Person_ID, CompGid= p.Id};
-
-                var list = pg.ToList();
-
-                var j = from i in list
-                        join p in db.Person.ToList() on i.Personid equals p.Id
-                        select new {fName = p.firstName, lName = p.lastName, Hcp = i.Hcp, Net = i.Net, Points = i.Points, i.CompGid};
-
-                List<resultClass> rslist = new List<resultClass>();
-                foreach(var i in j)
+                showResult sr = new showResult();
+                var cg = db.CompetitionGolfer.Where(x => x.Competition_ID == id && x.points != null && x.startTime != null).ToList();
+                if(cg.Count > 0)
                 {
-            
-                    resultClass rs = new resultClass();
-                    rs.comp = db.Competition.Find(id);
-                    rs.net = i.Net;
-                    rs.points = i.Points;
-                    rs.CompetitionGolferID = i.CompGid;
-                    PersonGolfer pge = new PersonGolfer();
-                    pge.firstName = i.fName;
-                    pge.lastName = i.lName;
-                    pge.HCP = i.Hcp;
-                    rs.currentPerson = pge;
-                    rs.holeresult = db.HoleStats.Where(x => x.CompetitionGolfer_ID == i.CompGid).ToList();
-                    rslist.Add(rs);
-                }
-                
 
-                return PartialView("_showResult", rslist);
+                    var pg = from i in db.Golfer.ToList()
+                             join p in cg.ToList()
+                             on i.Id equals p.Golfer_ID
+                             orderby p.net descending
+                             select new { Hcp = i.HCP, Net = p.net, Points = p.points, Personid = i.Person_ID, CompGid = p.Id };
+
+                    var list = pg.ToList();
+
+                    var j = from i in list
+                            join p in db.Person.ToList() on i.Personid equals p.Id
+                            select new { fName = p.firstName, lName = p.lastName, Hcp = i.Hcp, Net = i.Net, Points = i.Points, i.CompGid };
+                    List<PersonGolfer> pgList = new List<PersonGolfer>();
+                    foreach (var i in j)
+                    {
+                        PersonGolfer pege = new PersonGolfer();
+                        pege.firstName = i.fName;
+                        pege.lastName = i.lName;
+                        pege.HCP = i.Hcp;
+                        pege.holeResult = db.HoleStats.Where(x => x.CompetitionGolfer_ID == i.CompGid).OrderBy(d => d.Hole_ID).ToList();
+                        pege.points = i.Points;
+                        pege.net = i.Net;
+                        pege.toPar = db.HoleStats.Where(x => x.CompetitionGolfer_ID == i.CompGid).Select(a => a.toPar).FirstOrDefault();
+                        pgList.Add(pege);
+                    }
+                    
+                    sr.player = pgList.OrderBy(x=>x.points).ToList();
+                    sr.comp = db.Competition.Find(id);
+                    var c = db.Competition.Where(s => s.Id == id).Select(g => g.NumberOfHoles).FirstOrDefault();
+                    sr.holeInfo = db.Hole.OrderBy(x => x.Number).Take(c).ToList();
+
+                    return PartialView("_showResult", sr);
+
+
+                }
+                else
+                {
+                    return PartialView("_noResult");
+                }
+
             }
 
 
-           
+
         }
         public ActionResult MobileComp()
         {

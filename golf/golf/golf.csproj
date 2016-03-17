@@ -274,6 +274,7 @@
     <Compile Include="Models\resultClass.cs" />
     <Compile Include="Models\ScoreCardClass.cs" />
     <Compile Include="Models\searchClass.cs" />
+    <Compile Include="Models\showResult.cs" />
     <Compile Include="Models\Slope.cs">
       <DependentUpon>PersonModel.tt</DependentUpon>
     </Compile>
@@ -430,9 +431,10 @@
     <Content Include="Views\Competition\_editComp.cshtml" />
     <Content Include="Views\Competition\_detailsComp.cshtml" />
     <Content Include="Views\Competition\_addResult.cshtml" />
-    <Content Include="Views\Competition\_showResult.cshtml" />
     <Content Include="Views\Competition\MobileComp.cshtml" />
     <Content Include="Views\Mobile\Index.cshtml" />
+    <Content Include="Views\Competition\_showResult.cshtml" />
+    <Content Include="Views\Competition\_noResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
