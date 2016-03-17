@@ -12,7 +12,6 @@
         <EntityTypeShape EntityType="dsuteam4Model1.Gender" Width="1.5" PointX="0.75" PointY="7.125" />
         <EntityTypeShape EntityType="dsuteam4Model1.Golfer" Width="1.5" PointX="5.25" PointY="5.125" />
         <EntityTypeShape EntityType="dsuteam4Model1.Hole" Width="1.5" PointX="10.5" PointY="4.375" />
-        <EntityTypeShape EntityType="dsuteam4Model1.HoleStats" Width="1.5" PointX="14.75" PointY="8.625" />
         <EntityTypeShape EntityType="dsuteam4Model1.Images" Width="1.5" PointX="5.25" PointY="19" />
         <EntityTypeShape EntityType="dsuteam4Model1.MemberType" Width="1.5" PointX="0.75" PointY="3.875" />
         <EntityTypeShape EntityType="dsuteam4Model1.NewsArticle" Width="1.5" PointX="5.25" PointY="15.625" />
@@ -29,7 +28,6 @@
         <AssociationConnector Association="dsuteam4Model1.FK_Person_ToGender" />
         <AssociationConnector Association="dsuteam4Model1.FK_Golfer_ToPerson" />
         <AssociationConnector Association="dsuteam4Model1.FK_TeeTimeDateGolfer_ToGolfer" />
-        <AssociationConnector Association="dsuteam4Model1.FK_HoleStats_ToHole" />
         <AssociationConnector Association="dsuteam4Model1.FK_NewsArticleImage_Image" />
         <AssociationConnector Association="dsuteam4Model1.FK_Person_ToMemberType" />
         <AssociationConnector Association="dsuteam4Model1.FK_NewsArticle_ToPerson" />
@@ -40,9 +38,11 @@
         <EntityTypeShape EntityType="dsuteam4Model1.CompetitionGolfer" Width="1.5" PointX="10.5" PointY="8.375" />
         <AssociationConnector Association="dsuteam4Model1.FK_CompetitionGolfer_ToCompetition" />
         <AssociationConnector Association="dsuteam4Model1.FK_CompetitionGolfer_ToGolfer" />
-        <AssociationConnector Association="dsuteam4Model1.FK_HoleStats_ToCompetitionGolfer" />
         <EntityTypeShape EntityType="dsuteam4Model1.Slope" Width="1.5" PointX="3" PointY="13.875" />
         <AssociationConnector Association="dsuteam4Model1.FK_Slope_ToGender" />
+        <EntityTypeShape EntityType="dsuteam4Model1.HoleStats" Width="1.5" PointX="12.75" PointY="6.625" />
+        <AssociationConnector Association="dsuteam4Model1.FK_HoleStats_ToCompetitionGolfer" />
+        <AssociationConnector Association="dsuteam4Model1.FK_HoleStats_ToHole" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

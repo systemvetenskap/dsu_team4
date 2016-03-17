@@ -501,15 +501,7 @@ namespace golf.Controllers
                 string s = r.currentPerson.HCP;
 
                 decimal playerHCP  = decimal.Parse(s, CultureInfo.InvariantCulture);
-                foreach(var i in r.holeresult)
-                {
-                    HoleStats hst = new HoleStats();
-                    hst.CompetitionGolfer_ID = r.CompetitionGolferID;
-                    hst.Hole_ID = i.Hole_ID;
-                    hst.stroaks = i.stroaks;
-                    db.HoleStats.Add(hst);
-                    db.SaveChanges();
-                }
+
 
                 List<Slope> sl = new List<Slope>();
                 var slope = db.Slope.ToList();
@@ -597,7 +589,16 @@ namespace golf.Controllers
                 CompetitionGolfer cg = db.CompetitionGolfer.Find(compid);
                 cg.net = (from i in scrList select i.net).Sum();
                 cg.points = (from i in scrList select i.points).Sum();
+                foreach (var i in r.holeresult)
+                {
+                    HoleStats hst = new HoleStats();
+                    hst.CompetitionGolfer_ID = r.CompetitionGolferID;
+                    hst.Hole_ID = i.Hole_ID;
+                    hst.stroaks = i.stroaks;
+                    hst.toPar = 1;
+                    db.HoleStats.Add(hst);
 
+                }
                 db.SaveChanges();
 
                 RegisterComp rg = new RegisterComp();
