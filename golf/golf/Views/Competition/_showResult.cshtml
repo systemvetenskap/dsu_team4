@@ -70,11 +70,11 @@
                 <td class="scoreColumn">
                     @if(i.toPar < 0)
                     {
-                        @Html.Label(i.stroaks.ToString(), new { @class = "underPar" })
+                        @Html.Label(i.stroaks.ToString(), new { @class = "underPar", title ="+/- :"+ i.toPar.ToString() })
                     }
                     else
                     {
-                        @Html.Label(i.stroaks.ToString(), new { @class = "overPar" })
+                        @Html.Label(i.stroaks.ToString(), new { @class = "overPar", title = "+/-: "+i.toPar.ToString() })
                     }
                     
                 </td>
@@ -96,3 +96,15 @@
         </tr>
          }
 </table>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+   
+        $(function() {
+            $( document ).tooltip();
+        });
+   
+
+    });
+
+</script>
