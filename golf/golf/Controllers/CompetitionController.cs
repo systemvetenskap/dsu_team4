@@ -62,7 +62,7 @@ namespace golf.Controllers
 
             
         }
-        public ActionResult loadComp()
+        public PartialViewResult loadComp()
         {
             using( dsuteam4Entities1 databas = new dsuteam4Entities1())
             {
@@ -454,11 +454,11 @@ namespace golf.Controllers
                     HoleStats hs = new HoleStats();
                     hs.CompetitionGolfer_ID = compG.Id;
                     hs.Hole_ID = i.Id;
-                            
+                    
                     createPlayerHoles.Add(hs);
                 }
-
-                rg.holeresult = createPlayerHoles;
+                db.SaveChanges();
+                //rg.holeresult = createPlayerHoles;
                 var gend = db.Gender.Where(x => x.Id == player.Gender_ID).FirstOrDefault();
              
                 PersonGolfer pg = new PersonGolfer();
@@ -495,19 +495,21 @@ namespace golf.Controllers
                 return PartialView("_addResult", rs);
       }
    }
-        [HttpPost]
-        public ActionResult regResultPerson(resultClass r)
+       
+        public PartialViewResult regResultP(resultClass r)
         {
-            using(dsuteam4Entities1 db = new dsuteam4Entities1())
+            List<Slope> sl = new List<Slope>();
+            List<ScoreCardClass> scrList = new List<ScoreCardClass>();
+            string s = r.currentPerson.HCP;
+            decimal playerHCP = decimal.Parse(s, CultureInfo.InvariantCulture);
+          
+            
+            using(dsuteam4Entities1 db = new dsuteam4Entities1())           
             {
-
-                string s = r.currentPerson.HCP;
-
-                decimal playerHCP  = decimal.Parse(s, CultureInfo.InvariantCulture);
-
-
-                List<Slope> sl = new List<Slope>();
                 var slope = db.Slope.ToList();
+
+
+               
                 foreach(var i in slope)
                 {
                     string xMax = i.max.ToString();
@@ -538,7 +540,7 @@ namespace golf.Controllers
                               };
 
                var oList = Hcpindex.ToList();
-               List<ScoreCardClass> scrList = new List<ScoreCardClass>();
+
                foreach(var i in oList)
                {
                    ScoreCardClass scr = new ScoreCardClass();
@@ -587,33 +589,40 @@ namespace golf.Controllers
                     i.calcPoints();
                 }
 
-
+                foreach(var i in scrList)
+                {
+                    HoleStats hs = new HoleStats();
+                    hs.Hole_ID = i.Id;
+                    hs.stroaks = i.playerStrokes;
+                    hs.toPar = i.toPar;
+                    hs.CompetitionGolfer_ID = r.CompetitionGolferID;
+                    db.HoleStats.Add(hs);
+                   
+                 }
                 var compid = r.CompetitionGolferID;
                 CompetitionGolfer cg = db.CompetitionGolfer.Find(compid);
                 cg.net = (from i in scrList select i.net).Sum();
                 cg.points = (from i in scrList select i.points).Sum();
-                foreach (var i in r.holeresult)
-                {
-                    HoleStats hst = new HoleStats();
-                    hst.CompetitionGolfer_ID = r.CompetitionGolferID;
-                    hst.Hole_ID = i.Hole_ID;
-                    hst.stroaks = i.stroaks;
-                    hst.toPar = 1;
-                    db.HoleStats.Add(hst);
-
-                }
-                db.SaveChanges();
-
-                RegisterComp rg = new RegisterComp();
-
-                return PartialView("_regResult", loadRegResult(r.comp.Id));
+ 
+  
+                db.SaveChanges();              
                 
             }
 
+            using(dsuteam4Entities1 dbo = new dsuteam4Entities1())
+            {
+                HoleStats hst = new HoleStats();
+                hst.CompetitionGolfer_ID = r.CompetitionGolferID;
+                hst.Hole_ID = 21;
+                hst.stroaks = 3;
+                hst.toPar = 1;
+                dbo.HoleStats.Add(hst);
+                dbo.SaveChanges();
+            }
 
 
-
-            return RedirectToAction("Index");
+            return PartialView("_regResult", loadRegResult(r.comp.Id));
+            
         }
 
         public ActionResult createComp()
@@ -1086,9 +1095,11 @@ namespace golf.Controllers
         public ActionResult MobileComp()
         {
             resultClass rs = new resultClass();
+            
+            
 
-                return View("MobileComp", rs);
-            }
+            return View("MobileComp", rs);
+         }
         }
 
     }

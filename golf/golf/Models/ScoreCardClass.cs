@@ -14,13 +14,14 @@ namespace golf.Models
         public int addedStrokes { get; set; }
         public int net { get; set; }
         public int points { get; set; }
+        public int toPar { get; set; }
 
         public void calcPoints()
         {
    
             net = playerStrokes - addedStrokes;
             
-          
+            
             int hcpStrokes = par + addedStrokes;
             if(hcpStrokes == playerStrokes)
             {
@@ -37,13 +38,14 @@ namespace golf.Models
                 {
                     points=0;
                 }
-                else{
-
+                else
+                {
                     points = p;
                 }
                  
             }
 
+            toPar = net - par;
         }
     }
 
