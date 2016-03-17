@@ -1,26 +1,81 @@
 ﻿@model golf.Models.resultClass
 <h1>@Html.Label(@Model.comp.name+" "+@Model.comp.cDate.ToShortDateString())</h1>
 <h3>@Html.Label("Ange resultat för: "+Model.currentPerson.firstName+" "+Model.currentPerson.lastName)</h3>
-@using (Html.BeginForm())
+@using (Ajax.BeginForm("regResultP","Competition", new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "showComp" }))
 {
-    @Html.HiddenFor(m => m.comp.Id)
-   
-    @Html.HiddenFor(m => m.currentPerson.golfid)
-    @Html.HiddenFor(m => m.currentPerson.personid)
-    @Html.HiddenFor(m => m.currentPerson.HCP)
-    @Html.HiddenFor(m => m.currentPerson.gender_ID)
-    @Html.HiddenFor(m=>m.comp.NumberOfHoles)
-    @Html.HiddenFor(m=>m.CompetitionGolferID)
-    for(var i = 0; i < Model.holeresult.Count; i++)
-    {
-        @Html.HiddenFor(m => m.holeresult[i].Id)
-        @Html.HiddenFor(m => m.holeresult[i].Hole_ID)
-        @Html.HiddenFor(m => m.holeresult[i].CompetitionGolfer_ID)
-        @Html.TextBoxFor(m => m.holeresult[i].stroaks)<br />
+    <div class="addresultdiv" id="addresultdiv">
+        <table>
+            <tr>
+                <th>
+                    @Html.Label("Hål")
+                </th>
+                <th>
+                    @Html.Label("Ange slag")
+                </th>
+            </tr>
+            @for (var i = 0; i < Model.holeresult.Count; i++)
+            {
+                var z = i + 1;
+                <tr>
 
+                    <td>
+                        @Html.Label(z.ToString())
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.holeresult[i].stroaks, new { id="resultat", @class="resultat"})
+                        @Html.HiddenFor(m => m.holeresult[i].Id)
+                        @Html.HiddenFor(m => m.holeresult[i].Hole_ID)
+                        @Html.HiddenFor(m => m.holeresult[i].CompetitionGolfer_ID)
 
-    }
+                    </td>
+                </tr>
+            }
+        </table>
+        </div>
+        <input type="submit" value="Registrera resultat" id="reg" />
+        @Html.HiddenFor(m => m.comp.Id)
+        @Html.HiddenFor(m => m.currentPerson.golfid)
+        @Html.HiddenFor(m => m.currentPerson.personid)
+        @Html.HiddenFor(m => m.currentPerson.HCP)
+        @Html.HiddenFor(m => m.currentPerson.gender_ID)
+        @Html.HiddenFor(m => m.comp.NumberOfHoles)
+        @Html.HiddenFor(m => m.CompetitionGolferID)
 
-
-    <input type="submit" value="Registrera resultat" />
 }
+
+<script type="text/javascript">
+    /*Kollar efter tomma textfält*/
+    $('#reg').click(function () {
+        var isValid = 1;
+        $('input:text').each(function () {
+            if ($(this).val() == '') {
+                $(this).css('border', '2px solid red');
+                isValid = 0;
+            }
+            else {
+                $(this).css('border', '1px solid green');
+            }
+        });
+        if (isValid == 0) {
+            return false;
+        }
+    });
+
+    /*Mata endast in siffror i textfälten*/
+    $(".resultat").on("keypress keyup blur", function (event) 
+    {
+        
+        var key = window.event ? event.keyCode : event.which;
+        if (event.keyCode == 8 || event.keyCode == 46 || event.keyCode == 37 || event.keyCode == 39)
+        {
+            return true;
+        }
+        else if (key < 48 || key > 57)
+        {
+            return false;
+        }
+        else return true;
+ 
+    });
+</script>
+

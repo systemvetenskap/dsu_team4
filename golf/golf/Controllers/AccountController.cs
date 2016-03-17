@@ -48,9 +48,22 @@ namespace golf.Controllers
   
                 model.p.gender_ID = model.genderid;
                 model.p.memberType_ID = model.memberID;
+                model.p.Payed = false;
 
+               
                 db.Person.Add(model.p);
                 db.SaveChanges();
+
+                Golfer g = new Golfer();
+                g.Person_ID = model.p.Id;
+                g.HCP = "32";
+                g.golfID = "12035_" + model.p.Id;
+
+                db.Golfer.Add(g);
+                db.SaveChanges();
+
+                
+
 
                 FormsAuthentication.SetAuthCookie(model.p.Id.ToString(), false);
 
@@ -92,7 +105,19 @@ namespace golf.Controllers
             Person person = db.Person.Find(id);
             ViewBag.User = person.firstName +" "+ person.lastName;
             //Komentar
-            return View(person);
+            CreateMember cm = new CreateMember();
+            cm.p = person;
+
+            foreach (var item in db.Golfer)
+            {
+                if (person.Id == item.Person_ID)
+                {
+                    cm.golfID = item.golfID;
+                }
+            }
+
+
+            return View(cm);
         }
 
         public ActionResult Edit(int id = 0)

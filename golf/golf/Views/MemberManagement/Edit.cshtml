@@ -72,17 +72,21 @@
 
         <div class="editor-field">
             @Html.Label("Kön:")
-            @Html.DropDownListFor(m => m.genderid, new SelectList(Model.genderItems, "Value", "Text"));
+            @Html.DropDownListFor(m => m.genderid, new SelectList(Model.genderItems, "Value", "Text"), "Kön", new { id = "gender", @class = "gender" });
         </div>
 
         <div class="editor-label">
             @Html.Raw("Betalat")
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.p.Payed)
+            @*@Html.EditorFor(model => model.p.Payed)*@
+
+
             @Html.ValidationMessageFor(model => model.p.email)
         </div>
-        
+        <div class="editor-field">
+            @Html.DropDownListFor(m => m.p.Payed, new SelectList(Model.payed, "Value", "Text"), "Status", new { id = "paid", @class = "paid" });
+        </div>
         
 
         <p>
@@ -117,6 +121,24 @@
         if (isValid == 0) {
             return false;
         }
-    });
+            });
+
+            $('#savedetailsbutton').click(function () {
+
+                if ($('#gender').val() <= 0) {
+                    $('#gender').css('border', '2px solid red');
+                    return false;
+                }
+                else {
+                    $('#gender').css('border', '1px solid green');
+                }
+                if ($('#paid').val() <= 0) {
+                    $('#paid').css('border', '2px solid red');
+                    return false;
+                }
+                else {
+                    $('#paid').css('border', '1px solid green');
+                }
+            });
 </script>
 

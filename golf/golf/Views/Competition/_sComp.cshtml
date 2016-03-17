@@ -7,13 +7,13 @@
     </title>
 
 
-    <meta charset="utf-8" />
+    @*<meta charset="utf-8" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>*@
+
 
     <script type="text/JavaScript">
 
@@ -42,6 +42,32 @@
                     // process error message
                 }
             });
+
+            @*$.ajax({
+                url: '@Url.Action("alreadySignedUp", "Home")',
+                type: "POST",
+                async: true,
+                dataType: "json",
+                data: $('#form').serialize(),
+                success: function (data) {
+
+                    if (data.valid == false) {
+                        $(".isAdmin2").hide();
+                        $(".isMember2").show();
+                    }
+                    else {
+                        $(".isAdmin2").show();
+                        $(".isMember2").hide();
+                    }
+                    //document.getElementById('member').style.display = 'none'
+
+                },
+                error: function (request, status, error) {
+                    // process error message
+                }
+            });*@
+
+            
 
         });
     </script>
@@ -102,58 +128,74 @@
                 <td>
                     @Html.DisplayFor(m => item.info)
                 </td>*@
+
                 <td>
-                    @Ajax.ActionLink("Visa detaljer", "detailsComp", new { id = item.Id }, new AjaxOptions(){
+                    <div class="buttona">
+                        @Ajax.ActionLink("Visa detaljer", "detailsComp", new { id = item.Id }, new AjaxOptions(){
 
                    UpdateTargetId = "showComp",
                    HttpMethod = "GET",
-                   InsertionMode = InsertionMode.Replace                
-                   
+                   InsertionMode = InsertionMode.Replace
+                  
+
                })
+                    </div> 
 
 
                 </td>
+
                 <td>
-                    <div class="isAdmin2">
-                        @Ajax.ActionLink("Resultat", "showResult", new { id = item.Id }, new AjaxOptions()
+                    <div class="isAdmin2" style="display:none">
+                        <div class="buttona">
+                            @Ajax.ActionLink("Resultat", "showResult", new { id = item.Id }, new AjaxOptions()
                        {
                            UpdateTargetId = "showComp",
                            HttpMethod = "GET",
                            InsertionMode = InsertionMode.Replace
                        })
+                        </div>
                     </div>
                 </td>
                 <td>
-                    <div class="isAdmin2">
-                        @Ajax.ActionLink("Spelarlista", "registerResult", new { id = item.Id }, new AjaxOptions()
+                    <div class="isAdmin2" style="display:none">
+                        <div class="buttona">
+                            
+                            @Ajax.ActionLink("Spelarlista", "registerResult", new { id = item.Id }, new AjaxOptions()
                        {
                            UpdateTargetId = "showComp",
                            HttpMethod = "GET",
                            InsertionMode = InsertionMode.Replace
                        })
-                    </div>
+                            </div>
+                        </div>
   
-                   <div class="isMember2">
+                    <div class="isMember2" style="display:none">
 
-                       @*Här ska det vara annan actionlink sen!*@
-                       @if((item.signUpFrom >= DateTime.Now) && (item.signUpTo <= DateTime.Now)){
-                            @Html.ActionLink("Registrera dig här!", "addPlayer", new { id = item.Id })
-                       }
-                   </div>
+                            @*Här ska det vara annan actionlink sen!*@
+                            @if ((item.signUpFrom.Date <= DateTime.Now.Date) && (item.signUpTo.Date >= DateTime.Now.Date) && (item.CompeteClass_ID == 1 || item.CompeteClass_ID == Model.currentUser.gender_ID))
+                            {
+                        <div class="buttona">
+                                @Html.ActionLink("Anmäl dig här!", "addYourself", new { confirm = true, id = item.Id },
+                            new { onclick = "return confirm('Vill du verkligen anmäla dig till denna tävling?')" })
+                            </div>
+                            }
+                        </div>
 
 
                 </td>
-                <td class="isAdmin2">
-                    @*@Ajax.ActionLink("Anmäl spelare", "addPlayer", new { id = item.Id }, new AjaxOptions()
-                       {
-                           UpdateTargetId = "showComp",
-                           HttpMethod = "GET",
-                           InsertionMode = InsertionMode.Replace
-                       })*@
-                    @if((item.signUpFrom >= DateTime.Now) && (item.signUpTo <= DateTime.Now)){
-                        @Html.ActionLink("Anmäl spelare", "addPlayer", new { id = item.Id })
-                    }
-
+                <td class="isAdmin2" style="display:none">
+                        @*@Ajax.ActionLink("Anmäl spelare", "addPlayer", new { id = item.Id }, new AjaxOptions()
+            {
+                UpdateTargetId = "showComp",
+                HttpMethod = "GET",
+                InsertionMode = InsertionMode.Replace
+            })*@
+                        @if ((item.signUpFrom.Date <= DateTime.Now.Date) && (item.signUpTo.Date >= DateTime.Now.Date))
+                        {
+                    <div class="buttona">
+                            @Html.ActionLink("Anmäl spelare", "addPlayer", new { id = item.Id })
+                    </div>
+                        }
                 </td>
                 
             </tr>
@@ -166,7 +208,7 @@
   
 </div>
 <script type="text/javascript">
-
+  
     var myX, myY;
 
     function details(id)
@@ -230,7 +272,7 @@
 
 
 
-
+  
     //function details(id)
     //{
 

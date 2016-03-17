@@ -25,7 +25,8 @@ namespace golf.Controllers
             cc.currentDate = DateTime.Today;
             using (dsuteam4Entities1 databas = new dsuteam4Entities1())
             {
-
+                int userID = Convert.ToInt16(User.Identity.Name);
+                cc.currentUser = databas.Person.Find(userID);
           
                 cc.classList = databas.CompeteClass.ToList();
                 List<Person> p = databas.Person.ToList();
@@ -61,13 +62,39 @@ namespace golf.Controllers
 
             
         }
-        public ActionResult loadComp()
+        public PartialViewResult loadComp()
         {
             using( dsuteam4Entities1 databas = new dsuteam4Entities1())
             {
 
                 CreateComp cc = new CreateComp();
                 cc.complist = databas.Competition.ToList();
+                int userID = Convert.ToInt16(User.Identity.Name);
+                cc.currentUser = databas.Person.Find(userID);
+
+                //foreach (var item in databas.Golfer)
+                //{
+                //    if (item.Person_ID.ToString() == User.Identity.Name)
+                //    {
+                //        PersonGolfer pg = new PersonGolfer();
+                //        pg.golfid = Convert.ToInt32(item.golfID);
+                //        pg.personid = Convert.ToInt32(item.Person_ID.ToString());
+
+                //        cc.golfers.Add(pg);
+                //    }
+                //}
+                //foreach (var item in cc.complist)
+                //{
+                //    foreach (var item2 in databas.CompetitionGolfer)
+                //    {
+                //        if (item.Id == item2.Competition_ID && User.Identity.Name == item2.p)
+                //        {
+
+                //        }
+                //    }
+                //}
+
+
 
 
                 return PartialView("_sComp", cc);
@@ -133,9 +160,19 @@ namespace golf.Controllers
 
                     databas.SaveChanges();
                 }
+
             }
 
-            return View(registerResult(id));
+
+
+
+
+                return PartialView("_regResult", loadRegResult(id));
+
+
+            
+
+            
         }
         public List<CompetitionGolfer> RandomCGStartTimes(int id)
         {
@@ -205,8 +242,11 @@ namespace golf.Controllers
                 randomCGList[i].startTime = randomStartTimes[count];
 
             }
+            var orderList = randomCGList.OrderBy(x => x.startTime);
 
-            return randomCGList;
+            var orderedByTime = randomCGList.OrderBy(x => x.startTime).ToList();
+
+            return orderedByTime;
 
         }
 
@@ -273,83 +313,93 @@ namespace golf.Controllers
         public ActionResult registerResult(int id)
         {
             
-            using(dsuteam4Entities1 db = new dsuteam4Entities1())
-            {
-               Competition c = db.Competition.Find(id);
-               RegisterComp rg = new RegisterComp();
-
-               var cg = db.CompetitionGolfer.Where(x => x.Competition_ID == c.Id).ToList();
-
-               
-
-               var golfer = from g in db.Golfer.ToList()
-                            join u in cg.ToList()
-                            on g.Id equals u.Golfer_ID
-                            select new  {
-                                g.golfID,  
-                                g.HCP,
-                                g.Id,
-                                g.Person_ID, 
-                                CompGoldID = u.Id,
-                                u.startTime,
-                                u.HoleStats,
-                                u.Golfer_ID
-                            };
-
-               var pg = from p in db.Person.ToList()
-                        join y in golfer.ToList()
-                        on p.Id equals y.Person_ID
-                        select new
-                        {
-                            Personid = p.Id,
-                            Golfid = y.Id,
-                            fName = p.firstName,
-                            lName = p.lastName,
-                            Golfstring = y.golfID,
-                            HCP = y.HCP,
-                            Gender_ID = p.gender_ID,
-                            Startime = y.startTime,
-                            CompGolfID = y.CompGoldID
-                            
-                        };
-
-               var gender = db.Gender.ToList();
-               foreach (var i in pg)
-                       {
-                   PersonGolfer pe = new PersonGolfer();
-                   pe.personid = i.Personid;
-                   pe.golfid = i.Golfid;
-                   pe.firstName = i.fName;
-                   pe.lastName = i.lName;
-                   pe.HCP = i.HCP;
-                   pe.golfstring = i.Golfstring;
-                   var g = gender.Where(x => x.Id == i.Gender_ID).FirstOrDefault();
-                   pe.gender = g.genderName;
-                   pe.gender_ID = g.Id;
-                   
-                   if (i.Startime != null)
-                   {
-                   pe.startime = i.Startime;
-
-                   }
-                   else
-                   {
-                       pe.startime = "Ej lottad";
-                   }
-                   rg.persongolfer.Add(pe);
-                   
-                       }
                     
-                    
-               rg.comp = c;
     
+            return PartialView("_regResult", loadRegResult(id));
 
-                    
-                    
-                   return PartialView("_regResult", rg);
 
+                   
+        }
+        public RegisterComp loadRegResult(int id)
+        {
+            using (dsuteam4Entities1 db = new dsuteam4Entities1())
+            {
+                Competition c = db.Competition.Find(id);
+                RegisterComp rg = new RegisterComp();
+
+                var cg = db.CompetitionGolfer.Where(x => x.Competition_ID == c.Id).ToList();
+
+
+
+                var golfer = from g in db.Golfer.ToList()
+                             join u in cg.ToList()
+                             on g.Id equals u.Golfer_ID
+                             select new
+                             {
+                                 g.golfID,
+                                 g.HCP,
+                                 g.Id,
+                                 g.Person_ID,
+                                 CompGoldID = u.Id,
+                                 u.startTime,
+                                 u.HoleStats,
+                                 u.Golfer_ID,
+                                 u.points
+                             };
+
+                var pg = from p in db.Person.ToList()
+                         join y in golfer.ToList()
+                         on p.Id equals y.Person_ID
+                         select new
+                         {
+                             Personid = p.Id,
+                             Golfid = y.Id,
+                             fName = p.firstName,
+                             lName = p.lastName,
+                             Golfstring = y.golfID,
+                             HCP = y.HCP,
+                             Gender_ID = p.gender_ID,
+                             Startime = y.startTime,
+                             CompGolfID = y.CompGoldID,
+                             y.points
+
+                         };
+
+                var gender = db.Gender.ToList();
+                foreach (var i in pg)
+                {
+                    PersonGolfer pe = new PersonGolfer();
+                    pe.personid = i.Personid;
+                    pe.golfid = i.Golfid;
+                    pe.firstName = i.fName;
+                    pe.lastName = i.lName;
+                    pe.HCP = i.HCP;
+                    pe.golfstring = i.Golfstring;
+                    var g = gender.Where(x => x.Id == i.Gender_ID).FirstOrDefault();
+                    pe.gender = g.genderName;
+                    pe.gender_ID = g.Id;
+                    pe.points = i.points;
+
+                    if (i.Startime != null)
+                    {
+                        pe.startime = i.Startime;
+
+                    }
+                    else
+                    {
+                        pe.startime = "Ej lottad";
+                    }
+                    rg.persongolfer.Add(pe);
+
+                }
+
+
+                rg.comp = c;
+                       
+                return rg;
 
             }        
+            
         }
 
         public ActionResult addHoleStats(RegisterComp rc)
@@ -404,11 +454,11 @@ namespace golf.Controllers
                     HoleStats hs = new HoleStats();
                     hs.CompetitionGolfer_ID = compG.Id;
                     hs.Hole_ID = i.Id;
-                            
+                    
                     createPlayerHoles.Add(hs);
                 }
-
-                rg.holeresult = createPlayerHoles;
+                db.SaveChanges();
+                //rg.holeresult = createPlayerHoles;
                 var gend = db.Gender.Where(x => x.Id == player.Gender_ID).FirstOrDefault();
              
                 PersonGolfer pg = new PersonGolfer();
@@ -445,19 +495,21 @@ namespace golf.Controllers
                 return PartialView("_addResult", rs);
       }
    }
-        [HttpPost]
-        public ActionResult regResultPerson(resultClass r)
+       
+        public PartialViewResult regResultP(resultClass r)
         {
-            using(dsuteam4Entities1 db = new dsuteam4Entities1())
+            List<Slope> sl = new List<Slope>();
+            List<ScoreCardClass> scrList = new List<ScoreCardClass>();
+            string s = r.currentPerson.HCP;
+            decimal playerHCP = decimal.Parse(s, CultureInfo.InvariantCulture);
+          
+            
+            using(dsuteam4Entities1 db = new dsuteam4Entities1())           
             {
-
-                string s = r.currentPerson.HCP;
-
-                decimal playerHCP  = decimal.Parse(s, CultureInfo.InvariantCulture);
-      
-
-                List<Slope> sl = new List<Slope>();
                 var slope = db.Slope.ToList();
+
+
+               
                 foreach(var i in slope)
                 {
                     string xMax = i.max.ToString();
@@ -488,7 +540,7 @@ namespace golf.Controllers
                               };
 
                var oList = Hcpindex.ToList();
-               List<ScoreCardClass> scrList = new List<ScoreCardClass>();
+
                foreach(var i in oList)
                {
                    ScoreCardClass scr = new ScoreCardClass();
@@ -509,10 +561,15 @@ namespace golf.Controllers
                         {
                             scrList[i].addedStrokes += 1;
                         }
-                        else
+                        else if(i < (r.comp.NumberOfHoles  * 2))
                         {
                             int z = i - r.comp.NumberOfHoles;
                             scrList[z].addedStrokes += 1;
+                        }
+                        else
+                        {
+                            int x = i - (r.comp.NumberOfHoles*2);
+                            scrList[x].addedStrokes += 1;
                         }
                     }
 
@@ -526,31 +583,46 @@ namespace golf.Controllers
                     }
 
                 }
-
-                
+              
                 foreach(var i in scrList)
                 {
                     i.calcPoints();
                 }
 
-
+                foreach(var i in scrList)
+                {
+                    HoleStats hs = new HoleStats();
+                    hs.Hole_ID = i.Id;
+                    hs.stroaks = i.playerStrokes;
+                    hs.toPar = i.toPar;
+                    hs.CompetitionGolfer_ID = r.CompetitionGolferID;
+                    db.HoleStats.Add(hs);
+                   
+                 }
                 var compid = r.CompetitionGolferID;
                 CompetitionGolfer cg = db.CompetitionGolfer.Find(compid);
                 cg.net = (from i in scrList select i.net).Sum();
                 cg.points = (from i in scrList select i.points).Sum();
-
-                db.SaveChanges();
-
-                RegisterComp rg = new RegisterComp();
-
-                return RedirectToAction("Index");
+ 
+  
+                db.SaveChanges();              
                 
             }
 
+            using(dsuteam4Entities1 dbo = new dsuteam4Entities1())
+            {
+                HoleStats hst = new HoleStats();
+                hst.CompetitionGolfer_ID = r.CompetitionGolferID;
+                hst.Hole_ID = 21;
+                hst.stroaks = 3;
+                hst.toPar = 1;
+                dbo.HoleStats.Add(hst);
+                dbo.SaveChanges();
+            }
 
 
-
-            return RedirectToAction("Index");
+            return PartialView("_regResult", loadRegResult(r.comp.Id));
+            
         }
 
         public ActionResult createComp()
@@ -590,6 +662,33 @@ namespace golf.Controllers
 
                 return PartialView("_createComp", cc);
             }
+        }
+
+
+        public ActionResult addYourself(bool confirm, int id)
+        {
+
+            CompetitionGolfer CG = new CompetitionGolfer();
+           
+           
+
+            using (dsuteam4Entities1 databas = new dsuteam4Entities1())
+            {
+                foreach (var golfer in databas.Golfer)
+                {
+                    if (User.Identity.Name == golfer.Person_ID.ToString())
+                    {
+                        CG.Golfer_ID = golfer.Id;
+                    }
+                }
+
+                CG.Competition_ID = id;
+
+                databas.CompetitionGolfer.Add(CG);
+                databas.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
         }
         public ActionResult addPlayer(int id)
         {
@@ -678,14 +777,92 @@ namespace golf.Controllers
                 databas.SaveChanges();
             }
 
-            return RedirectToAction("Index");
+            using (dsuteam4Entities1 d = new dsuteam4Entities1())
+            {
+
+                Competition c = d.Competition.Find(competitionid);
+
+                var join = from p in d.Person.ToList()
+                           join g in d.Golfer.ToList()
+                           on p.Id equals g.Person_ID
+                           select new
+                           {
+
+                               p.firstName,
+                               p.lastName,
+                               p.Id,
+                               Golfstring = g.golfID,
+                               g.HCP,
+                               Golfid = g.Id,
+                               p.gender_ID,
+
+                           };
+
+                var list = join.ToList();
+
+                var persong = from p in list
+                              join g in d.Gender.ToList()
+                              on p.gender_ID equals g.Id
+                              select new
+                              {
+                                  personid = p.Id,
+                                  fName = p.firstName,
+                                  lName = p.lastName,
+                                  p.Golfstring,
+                                  HCP = p.HCP,
+                                  Gender = g.genderName,
+                                  p.Golfid,
+                                  p.gender_ID
+
+
+                              };
+                var toView = persong.ToList();
+
+                AddCompPlayer acp = new AddCompPlayer();
+
+                foreach (var i in toView)
+                {
+                    PersonGolfer pg = new PersonGolfer();
+
+                    pg.personid = i.personid;
+                    pg.firstName = i.fName;
+                    pg.lastName = i.lName;
+                    pg.golfstring = i.Golfstring;
+                    pg.HCP = i.HCP;
+                    pg.gender = i.Gender;
+                    pg.golfid = i.Golfid;
+                    pg.gender_ID = Convert.ToInt16(i.gender_ID);
+
+                    if (c.CompeteClass_ID == i.gender_ID || c.CompeteClass_ID == 1)
+                    {
+                        acp.golfers.Add(pg);
+                    }
+
+                }
+
+
+
+                acp.comp = c;
+
+                return View("addPlayer", acp);
+            }
+
         }
         public PartialViewResult searchPlayer(int id, string s)
         {
                 AddCompPlayer acp = new AddCompPlayer();
                 Competition c = new Competition();
+                List<CompetitionGolfer> cg = new List<CompetitionGolfer>();
             using (dsuteam4Entities1 d = new dsuteam4Entities1())
             {
+
+                foreach (var i in d.CompetitionGolfer)
+                {
+                    if (i.Competition_ID == id)
+                    {
+                        cg.Add(i);
+                    }
+                }
 
                  c = d.Competition.Find(id);
 
@@ -741,7 +918,19 @@ namespace golf.Controllers
 
                     if (c.CompeteClass_ID == i.gender_ID || c.CompeteClass_ID == 1)
                     {
-                        acp.golfers.Add(pg);
+                        int count = 0;
+                        foreach(var item in cg)
+                        {
+                            if(pg.golfid == item.Golfer_ID)
+                            {
+                                count++;
+                            }
+
+                        }
+                        if (count == 0)
+                        {
+                            acp.golfers.Add(pg);
+                        }
                     }
 
                 }
@@ -865,7 +1054,7 @@ namespace golf.Controllers
             using(dsuteam4Entities1 db = new dsuteam4Entities1())
             {
                 var cg = db.CompetitionGolfer.Where(x => x.Competition_ID == id).ToList();
-
+        
                 var pg = from i in db.Golfer.ToList()
                          join p in cg.ToList()
                          on i.Id equals p.Golfer_ID
@@ -892,7 +1081,7 @@ namespace golf.Controllers
                     pge.lastName = i.lName;
                     pge.HCP = i.Hcp;
                     rs.currentPerson = pge;
-
+                    rs.holeresult = db.HoleStats.Where(x => x.CompetitionGolfer_ID == i.CompGid).ToList();
                     rslist.Add(rs);
                 }
                 
@@ -903,5 +1092,15 @@ namespace golf.Controllers
 
            
         }
+        public ActionResult MobileComp()
+        {
+            resultClass rs = new resultClass();
+            
+            
+
+            return View("MobileComp", rs);
+         }
+        }
+
     }
-}
+

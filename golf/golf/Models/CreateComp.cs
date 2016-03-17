@@ -21,7 +21,12 @@ namespace golf.Models
         public Competition newComp { get; set; }
         public DateTime currentDate { get; set; }
        
+        public Competition comp { get; set; }
 
+        public List<PersonGolfer> golfers = new List<PersonGolfer>();
+        public List<bool> alreadySigned = new List<bool>();
+
+        public Person currentUser { get; set; }
        
     }
 

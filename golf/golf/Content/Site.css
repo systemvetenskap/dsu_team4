@@ -92,7 +92,35 @@ h5, h6 {
         padding: 0;
         text-decoration: none;
     }
+    /*
+        Admin behörighet
+        ---------------------------------------------------------
+    */
 
+    .isAdmin{
+        display: none
+    }
+    .adm{
+        display: none
+    }
+    .isAdmin2{
+         display: none
+    }
+    .isAdmin3{
+         display: none
+    }
+    .isMember2{
+        display: none
+    }
+    .isMember3{
+        display: none
+    }
+    #isAdmin{
+        display: none
+    }
+    #isMember{
+        display: none
+    }
 /* main layout
 ----------------------------------------------------------*/
 
@@ -148,6 +176,9 @@ header .content-wrapper {
     padding-right:0%;
     text-align:left;
     width:900px;
+}
+.addresultdiv table td{
+    width:30px;
 }
 .showComp table th{
    
@@ -371,6 +402,36 @@ hgroup.title h1, hgroup.title h2 {
 hgroup.title h2 {
     font-weight: normal;
     margin-left: 3px;
+}
+
+/* buttons*/
+
+.buttona
+{
+    width: 130px;
+    background-color: #e3e3e3;
+    line-height: 25px;
+    text-align:center;
+    font-weight: bold;
+    color: #eee;
+    border-radius: 2px;
+    box-shadow: 0px 0px 2px rgba(0,0,0,.5);
+    padding-top: inherit;
+    padding-bottom: 5px;
+
+
+}
+td div.buttona
+{
+        width: 130px;
+    background-color: transparent;
+    line-height: 25px;
+    text-align:center;
+    font-weight: bold;
+    color: #eee;
+    border-radius: 3px;
+    box-shadow: 0px 0px 2px rgba(0,0,0,.5);
+
 }
 
 /* features */

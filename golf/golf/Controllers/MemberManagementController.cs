@@ -115,6 +115,17 @@ namespace golf.Controllers
             SelectList gender = new SelectList(databas.Gender.ToList(), "id", "genderName");
 
 
+            var selectListItems = new List<SelectListItem>();
+
+           
+           
+
+            selectListItems.Add(new SelectListItem() { Text = "Betalt", Value = bool.TrueString });
+            selectListItems.Add(new SelectListItem() { Text = "Inte betalt", Value = bool.FalseString });
+
+            CM.payed = selectListItems;
+            
+
             CM.genderItems = gender;
             if (CM.p == null)
             {
