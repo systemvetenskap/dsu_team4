@@ -414,9 +414,23 @@ hgroup.title h2 {
     text-align:center;
     font-weight: bold;
     color: #eee;
-    border-radius: 5px;
+    border-radius: 2px;
     box-shadow: 0px 0px 2px rgba(0,0,0,.5);
+    padding-top: inherit;
+    padding-bottom: 5px;
 
+
+}
+td div.buttona
+{
+        width: 130px;
+    background-color: transparent;
+    line-height: 25px;
+    text-align:center;
+    font-weight: bold;
+    color: #eee;
+    border-radius: 3px;
+    box-shadow: 0px 0px 2px rgba(0,0,0,.5);
 
 }
 
