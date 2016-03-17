@@ -69,6 +69,8 @@ namespace golf.Controllers
 
                 CreateComp cc = new CreateComp();
                 cc.complist = databas.Competition.ToList();
+                int userID = Convert.ToInt16(User.Identity.Name);
+                cc.currentUser = databas.Person.Find(userID);
 
                 //foreach (var item in databas.Golfer)
                 //{

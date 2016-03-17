@@ -5,9 +5,9 @@
 <br />
 
 <h3>
-    @Html.Label("Tävling" + Model.comp.name)
+    @Html.Label(Model.comp.name)
 </h3>
-<br />
+
 @if (Model.comp.cDate.Date >= DateTime.Now.Date && Model.persongolfer.Count > 0)
 {
     <div class="buttona">
@@ -20,7 +20,7 @@
         </div>
 
         }
-        <br />
+
 
         <table id="playerTable">
             <thead>
