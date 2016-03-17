@@ -25,7 +25,8 @@ namespace golf.Controllers
             cc.currentDate = DateTime.Today;
             using (dsuteam4Entities1 databas = new dsuteam4Entities1())
             {
-
+                int userID = Convert.ToInt16(User.Identity.Name);
+                cc.currentUser = databas.Person.Find(userID);
           
                 cc.classList = databas.CompeteClass.ToList();
                 List<Person> p = databas.Person.ToList();
