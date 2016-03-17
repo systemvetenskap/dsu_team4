@@ -175,7 +175,7 @@
                             @if ((item.signUpFrom.Date <= DateTime.Now.Date) && (item.signUpTo.Date >= DateTime.Now.Date) && (item.CompeteClass_ID == 1 || item.CompeteClass_ID == Model.currentUser.gender_ID))
                             {
                         <div class="buttona">
-                                @Html.ActionLink("Registrera dig här!", "addYourself", new { confirm = true, id = item.Id },
+                                @Html.ActionLink("Anmäl dig här!", "addYourself", new { confirm = true, id = item.Id },
                             new { onclick = "return confirm('Vill du verkligen anmäla dig till denna tävling?')" })
                             </div>
                             }
