@@ -12,22 +12,15 @@ namespace golf.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Hole
+    public partial class MobileStats
     {
-        public Hole()
-        {
-            this.HoleStats = new HashSet<HoleStats>();
-            this.MobileStats = new HashSet<MobileStats>();
-        }
-    
         public int Id { get; set; }
-        public string Number { get; set; }
-        public int yellowRange { get; set; }
-        public int redRange { get; set; }
-        public int par { get; set; }
-        public int HCPind { get; set; }
+        public Nullable<int> strokes { get; set; }
+        public Nullable<int> plusMinus { get; set; }
+        public int CompetitionGolfer_ID { get; set; }
+        public int Hole_ID { get; set; }
     
-        public virtual ICollection<HoleStats> HoleStats { get; set; }
-        public virtual ICollection<MobileStats> MobileStats { get; set; }
+        public virtual CompetitionGolfer CompetitionGolfer { get; set; }
+        public virtual Hole Hole { get; set; }
     }
 }

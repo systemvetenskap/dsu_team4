@@ -108,6 +108,16 @@
           <Property Name="memberFee" Type="int" />
           <Property Name="cleaningFee" Type="int" />
         </EntityType>
+        <EntityType Name="MobileStats">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="strokes" Type="int" />
+          <Property Name="plusMinus" Type="int" />
+          <Property Name="CompetitionGolfer_ID" Type="int" Nullable="false" />
+          <Property Name="Hole_ID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="NewsArticle">
           <Key>
             <PropertyRef Name="Id" />
@@ -292,6 +302,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_MobileStats_ToCompetitionGolfer">
+          <End Role="CompetitionGolfer" Type="Self.CompetitionGolfer" Multiplicity="1" />
+          <End Role="MobileStats" Type="Self.MobileStats" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompetitionGolfer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MobileStats">
+              <PropertyRef Name="CompetitionGolfer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MobileStats_ToHole">
+          <End Role="Hole" Type="Self.Hole" Multiplicity="1" />
+          <End Role="MobileStats" Type="Self.MobileStats" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hole">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MobileStats">
+              <PropertyRef Name="Hole_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_NewsArticle_ToPerson">
           <End Role="Person" Type="Self.Person" Multiplicity="1" />
           <End Role="NewsArticle" Type="Self.NewsArticle" Multiplicity="*" />
@@ -424,6 +458,7 @@
           <EntitySet Name="HoleStats" EntityType="Self.HoleStats" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Images" EntityType="Self.Images" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MemberType" EntityType="Self.MemberType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MobileStats" EntityType="Self.MobileStats" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NewsArticle" EntityType="Self.NewsArticle" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NewsArticleImage" EntityType="Self.NewsArticleImage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
@@ -467,6 +502,14 @@
           <AssociationSet Name="FK_HoleStats_ToHole" Association="Self.FK_HoleStats_ToHole">
             <End Role="Hole" EntitySet="Hole" />
             <End Role="HoleStats" EntitySet="HoleStats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MobileStats_ToCompetitionGolfer" Association="Self.FK_MobileStats_ToCompetitionGolfer">
+            <End Role="CompetitionGolfer" EntitySet="CompetitionGolfer" />
+            <End Role="MobileStats" EntitySet="MobileStats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MobileStats_ToHole" Association="Self.FK_MobileStats_ToHole">
+            <End Role="Hole" EntitySet="Hole" />
+            <End Role="MobileStats" EntitySet="MobileStats" />
           </AssociationSet>
           <AssociationSet Name="FK_NewsArticle_ToPerson" Association="Self.FK_NewsArticle_ToPerson">
             <End Role="Person" EntitySet="Person" />
@@ -609,6 +652,15 @@
             <End Role="Hole" EntitySet="Hole" />
             <End Role="HoleStats" EntitySet="HoleStats" />
           </AssociationSet>
+          <EntitySet Name="MobileStats" EntityType="dsuteam4Model1.MobileStats" />
+          <AssociationSet Name="FK_MobileStats_ToCompetitionGolfer" Association="dsuteam4Model1.FK_MobileStats_ToCompetitionGolfer">
+            <End Role="CompetitionGolfer" EntitySet="CompetitionGolfer" />
+            <End Role="MobileStats" EntitySet="MobileStats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MobileStats_ToHole" Association="dsuteam4Model1.FK_MobileStats_ToHole">
+            <End Role="Hole" EntitySet="Hole" />
+            <End Role="MobileStats" EntitySet="MobileStats" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="AdminPerson">
           <Key>
@@ -688,6 +740,7 @@
           <Property Name="par" Type="Int32" Nullable="false" />
           <Property Name="HCPind" Type="Int32" Nullable="false" />
           <NavigationProperty Name="HoleStats" Relationship="dsuteam4Model1.FK_HoleStats_ToHole" FromRole="Hole" ToRole="HoleStats" />
+          <NavigationProperty Name="MobileStats" Relationship="dsuteam4Model1.FK_MobileStats_ToHole" FromRole="Hole" ToRole="MobileStats" />
         </EntityType>
         <EntityType Name="Images">
           <Key>
@@ -971,6 +1024,7 @@
           <Property Name="net" Type="Int32" />
           <Property Name="points" Type="Int32" />
           <NavigationProperty Name="HoleStats" Relationship="dsuteam4Model1.FK_HoleStats_ToCompetitionGolfer" FromRole="CompetitionGolfer" ToRole="HoleStats" />
+          <NavigationProperty Name="MobileStats" Relationship="dsuteam4Model1.FK_MobileStats_ToCompetitionGolfer" FromRole="CompetitionGolfer" ToRole="MobileStats" />
         </EntityType>
         <Association Name="FK_CompetitionGolfer_ToCompetition">
           <End Type="dsuteam4Model1.Competition" Role="Competition" Multiplicity="1" />
@@ -1051,6 +1105,42 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="HoleStats">
+              <PropertyRef Name="Hole_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="MobileStats">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="strokes" Type="Int32" />
+          <Property Name="plusMinus" Type="Int32" />
+          <Property Name="CompetitionGolfer_ID" Type="Int32" Nullable="false" />
+          <Property Name="Hole_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CompetitionGolfer" Relationship="dsuteam4Model1.FK_MobileStats_ToCompetitionGolfer" FromRole="MobileStats" ToRole="CompetitionGolfer" />
+          <NavigationProperty Name="Hole" Relationship="dsuteam4Model1.FK_MobileStats_ToHole" FromRole="MobileStats" ToRole="Hole" />
+        </EntityType>
+        <Association Name="FK_MobileStats_ToCompetitionGolfer">
+          <End Type="dsuteam4Model1.CompetitionGolfer" Role="CompetitionGolfer" Multiplicity="1" />
+          <End Type="dsuteam4Model1.MobileStats" Role="MobileStats" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompetitionGolfer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MobileStats">
+              <PropertyRef Name="CompetitionGolfer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MobileStats_ToHole">
+          <End Type="dsuteam4Model1.Hole" Role="Hole" Multiplicity="1" />
+          <End Type="dsuteam4Model1.MobileStats" Role="MobileStats" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hole">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MobileStats">
               <PropertyRef Name="Hole_ID" />
             </Dependent>
           </ReferentialConstraint>
@@ -1255,6 +1345,17 @@
                 <ScalarProperty Name="stroaks" ColumnName="stroaks" />
                 <ScalarProperty Name="Hole_ID" ColumnName="Hole_ID" />
                 <ScalarProperty Name="CompetitionGolfer_ID" ColumnName="CompetitionGolfer_ID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MobileStats">
+            <EntityTypeMapping TypeName="dsuteam4Model1.MobileStats">
+              <MappingFragment StoreEntitySet="MobileStats">
+                <ScalarProperty Name="Hole_ID" ColumnName="Hole_ID" />
+                <ScalarProperty Name="CompetitionGolfer_ID" ColumnName="CompetitionGolfer_ID" />
+                <ScalarProperty Name="plusMinus" ColumnName="plusMinus" />
+                <ScalarProperty Name="strokes" ColumnName="strokes" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
