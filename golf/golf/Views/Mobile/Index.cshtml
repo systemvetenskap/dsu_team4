@@ -82,12 +82,17 @@
 </html>
 <script type="text/javascript">
 
-    $( "#myholes" ).on( "swiperight", swiperightHandler );
+    $("#myholes").on("swiperight", swiperightHandler);
+    $("#myholes").on("swipeleft", swipeleftHandler);
 
    
     function swiperightHandler( event ){
-        alert("JAAA, swaaaaaajp");
+        alert("Höger swaajp");
+        
     }
-    
+    function swipeleftHandler(event) {
+        alert("Vänster Swaajp");
+    }
+
 
 </script>
