@@ -48,18 +48,19 @@
                             @Html.Label(item.startime.ToString())
                         </td>
                         <td>
-                            @if (item.points != null)
+                   @if (item.points != null)
                    {
-                                @Ajax.ActionLink("Registrera resultat", "regResultPerson", new { personid = item.personid, compID = Model.comp.Id, regComp = Model }, new AjaxOptions()
-                    {
-                    UpdateTargetId = "showComp",
-                    HttpMethod = "GET",
-                    InsertionMode = InsertionMode.Replace
-                    })
+                    <p><font color="green">Registrerat</font></p>
                    }
                    else
                    {
-                                <p><font color="green">Registrerat</font></p>
+
+                    @Ajax.ActionLink("Registrera resultat", "regResultPerson", new { personid = item.personid, compID = Model.comp.Id, regComp = Model }, new AjaxOptions()
+                    {
+                        UpdateTargetId = "showComp",
+                        HttpMethod = "GET",
+                        InsertionMode = InsertionMode.Replace
+                    })
                    }
 
                         </td>

@@ -1,0 +1,60 @@
+﻿body {
+}
+html{
+    margin: 0;
+    padding-bottom: 5px;
+    background:url(../../Images/wallpaper2.jpg) no-repeat;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.wrapper{
+    max-width:97%;
+    margin:0 auto;
+    
+
+}
+.myholes{
+    padding:1%;
+    text-align:center;
+    background:rgba(255,255,255, 0.7);
+    border-radius:5px;
+}
+
+.entirelist{
+    padding:1%; 
+    text-align:center;
+    background:rgba(255,255,255, 0.7);
+    border-radius:5px;
+}
+.othercompetetors {
+    width:100%;
+    padding:1%;    
+}
+.othercompetetors td{
+    width:50%;  
+}
+.othercompetetors thead{
+    font-weight:bold;
+}
+.myholescontrols{
+    width:100%;
+    height:auto;     
+}
+.btn{
+    text-align:center;
+    background-color:grey;
+    border-radius:20%;
+    width:25%;
+    display:inline-block;
+    font-weight: bold;
+    font-size:150%;     
+}
+.numberofstrokes{
+    width:33%;
+    display:inline-block;
+    text-align:center;
+    font-size:150%;
+    font-weight:bold;
+}

@@ -7,13 +7,13 @@
     </title>
 
 
-    <meta charset="utf-8" />
+    @*<meta charset="utf-8" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>*@
+
 
     <script type="text/JavaScript">
 
@@ -175,7 +175,7 @@
                             @if ((item.signUpFrom.Date <= DateTime.Now.Date) && (item.signUpTo.Date >= DateTime.Now.Date) && (item.CompeteClass_ID == 1 || item.CompeteClass_ID == Model.currentUser.gender_ID))
                             {
                         <div class="buttona">
-                                @Html.ActionLink("Registrera dig här!", "addYourself", new { confirm = true, id = item.Id },
+                                @Html.ActionLink("Anmäl dig här!", "addYourself", new { confirm = true, id = item.Id },
                             new { onclick = "return confirm('Vill du verkligen anmäla dig till denna tävling?')" })
                             </div>
                             }
@@ -208,7 +208,7 @@
   
 </div>
 <script type="text/javascript">
-
+  
     var myX, myY;
 
     function details(id)
@@ -272,7 +272,7 @@
 
 
 
-
+  
     //function details(id)
     //{
 

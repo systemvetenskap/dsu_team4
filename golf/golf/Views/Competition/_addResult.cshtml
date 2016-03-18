@@ -1,7 +1,7 @@
 ﻿@model golf.Models.resultClass
 <h1>@Html.Label(@Model.comp.name+" "+@Model.comp.cDate.ToShortDateString())</h1>
 <h3>@Html.Label("Ange resultat för: "+Model.currentPerson.firstName+" "+Model.currentPerson.lastName)</h3>
-@using (Ajax.BeginForm(new AjaxOptions { UpdateTargetId = "showComp" }))
+@using (Ajax.BeginForm("regResultP","Competition", new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "showComp" }))
 {
     <div class="addresultdiv" id="addresultdiv">
         <table>
@@ -32,7 +32,7 @@
             }
         </table>
         </div>
-        <input type="submit" value="Registrera resultat" id="registerresult" />
+        <input type="submit" value="Registrera resultat" id="reg" />
         @Html.HiddenFor(m => m.comp.Id)
         @Html.HiddenFor(m => m.currentPerson.golfid)
         @Html.HiddenFor(m => m.currentPerson.personid)
@@ -45,7 +45,7 @@
 
 <script type="text/javascript">
     /*Kollar efter tomma textfält*/
-    $('#registerresult').click(function () {
+    $('#reg').click(function () {
         var isValid = 1;
         $('input:text').each(function () {
             if ($(this).val() == '') {

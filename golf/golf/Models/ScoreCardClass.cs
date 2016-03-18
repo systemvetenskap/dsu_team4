@@ -14,13 +14,15 @@ namespace golf.Models
         public int addedStrokes { get; set; }
         public int net { get; set; }
         public int points { get; set; }
+        public int toPar { get; set; }
+        public int prevPar { get; set; }
 
-        public void calcPoints()
+        public void calcPoints(int prevP)
         {
-   
+            prevPar = prevP;
             net = playerStrokes - addedStrokes;
             
-          
+            
             int hcpStrokes = par + addedStrokes;
             if(hcpStrokes == playerStrokes)
             {
@@ -30,20 +32,21 @@ namespace golf.Models
             {
                 points = 2 + (1 * (hcpStrokes - playerStrokes)); 
             }
-            else if(playerStrokes > hcpStrokes)
+            else if(playerStrokes > hcpStrokes && playerStrokes < par + 5 )
             {
                 int p = 2 - (1*(playerStrokes - hcpStrokes));
                 if(p < 0)
                 {
                     points=0;
                 }
-                else{
-
+                else
+                {
                     points = p;
                 }
                  
             }
 
+            toPar = prevP - ( par - net);
         }
     }
 

@@ -195,6 +195,7 @@
     <Compile Include="Controllers\CompetitionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MemberManagementController.cs" />
+    <Compile Include="Controllers\MobileController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\TeeTimeController.cs" />
     <Compile Include="Extentions\extentions.cs" />
@@ -273,6 +274,7 @@
     <Compile Include="Models\resultClass.cs" />
     <Compile Include="Models\ScoreCardClass.cs" />
     <Compile Include="Models\searchClass.cs" />
+    <Compile Include="Models\showResult.cs" />
     <Compile Include="Models\Slope.cs">
       <DependentUpon>PersonModel.tt</DependentUpon>
     </Compile>
@@ -292,6 +294,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Mobile.css" />
     <Content Include="Content\TeeTime.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -428,7 +431,10 @@
     <Content Include="Views\Competition\_editComp.cshtml" />
     <Content Include="Views\Competition\_detailsComp.cshtml" />
     <Content Include="Views\Competition\_addResult.cshtml" />
+    <Content Include="Views\Competition\MobileComp.cshtml" />
+    <Content Include="Views\Mobile\Index.cshtml" />
     <Content Include="Views\Competition\_showResult.cshtml" />
+    <Content Include="Views\Competition\_noResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

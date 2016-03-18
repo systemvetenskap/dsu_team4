@@ -17,6 +17,9 @@ namespace golf.Models
         public int gender_ID { get; set; }
         public string startime { get; set;}
         public Nullable<int> points { get; set; }
+        public Nullable<int> net { get; set; }
+        public Nullable<int> toPar { get; set; }
+        public List<HoleStats> holeResult { get; set; }
 
     }
 }

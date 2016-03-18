@@ -162,11 +162,10 @@
     }
     function addFoundP(golfid){
 
+        var date = '@Model.selDate';
 
-        var personids = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.bNames, Formatting.Indented));
-        if(containsGolfid(personids, golfid) == false)
-        {
-            var date = '@Model.selDate';
+        if(containsGolfid(golfid, selectedDiv) == false)
+        {          
 
             book(golfid, selectedDiv, date);
         }
@@ -175,19 +174,19 @@
             alert("Spelaren är redan bokad");
         }
     }
-    function containsGolfid(obj, id){
-
-        for(var i in obj)
+    function containsGolfid(golfid, selectdiv){
+  
+        var personids = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.bNames, Formatting.Indented));
+        for(var i in personids)
         {
-            if(obj[i].Golferid == id)
+        
+            if(personids[i].Golfer_ID == golfid && personids[i].TeeTime == selectdiv) 
             {
                 return true;
             }
-            else{
-                return false;
-            }
+      
         }
-
+        return false;
 
     }
     function addP(id){

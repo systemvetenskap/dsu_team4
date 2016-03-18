@@ -124,7 +124,7 @@ namespace golf.Controllers
                     b.TeeTime = o.TeeTime;
                     b.HCP = o.Hcp;
                     b.gender = o.Gender;
-                    b.date = DateTime.Today.ToShortDateString();
+                    b.date = o.Date;
                     b.Golferid = o.Golfid;
                     b.admin = o.Admin;
                     b.Golfer_ID = o.Golf_ID;
@@ -347,7 +347,7 @@ namespace golf.Controllers
                 b.TeeTime = o.TeeTime;
                 b.HCP = o.Hcp;
                 b.gender = o.Gender;
-                b.date = DateTime.Today.ToShortDateString();
+                b.date = o.Date;
                 b.Golferid = o.Golfid;
                 b.Golfer_ID = o.Golfer_ID;
                 b.admin = o.Admin;
