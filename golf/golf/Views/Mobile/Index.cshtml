@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Index";
     Layout = null;
+    string disp = "block";
 }
 
 <!DOCTYPE html>
@@ -10,7 +11,9 @@
 <html>
 <head>
     <link href="@Url.Content("~/Content/Mobile.css")" rel="stylesheet" type="text/css" />
-    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script><meta name="viewport" content="width=device-width" />
     <title>MobileComp</title>
 </head>
 
@@ -18,7 +21,13 @@
     <div id="wrapper" class="wrapper">
         @foreach (var i in Model.holeinfo)
         {
-            <div id="myholes" class="myholes">
+           
+            if(Convert.ToInt16(i.Number) > 1)
+            {
+                disp = "none"; 
+            }
+            
+            <div id=@i.Number class="myholes" style= "display: @disp ">
                 <h2>Fyll i antal slag</h2>
                 <div id="myholesinfo" class="myholesinfo">
                     <label id="labelhole1" class="labelhole1">@Html.Label("Hål "+i.Number.ToString())</label>
@@ -73,3 +82,4 @@
     </div>
 </body>
 </html>
+
