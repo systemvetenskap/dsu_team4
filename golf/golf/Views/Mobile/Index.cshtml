@@ -94,11 +94,20 @@
 
    
     function swiperightHandler( event ){
-        alert("Höger swaajp");
+       
         
     }
     function swipeleftHandler(event) {
-        alert("Vänster Swaajp");
+        
+        var currentDiv = $(this).attr('id');      
+        var currNr = Number(currentDiv);
+        var nextDivNr = currNr + 1;
+        
+        var curr = '#' + currentDiv;
+        var next = '#' + nextDivNr;
+       
+        $(curr.toString()).toggle("left");
+        $(next.toString()).toggle("right");
     }
 
 
