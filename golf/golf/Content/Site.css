@@ -17,6 +17,8 @@ body {
     overflow-y: scroll;
 }
 
+
+
 a {
     color: #333;
     outline: none;
@@ -205,17 +207,26 @@ div.sDiv/*addplayer i competition*/{
     padding-bottom:0%;
     padding-left:0%;
     padding-right:0%;
-    text-align:left;
-
-    
-       
+    text-align:left;    
 }
-table.resultTable {font-size:12px;color:#333333;width:100%;border-width: 1px;border-color: #9dcc7a;border-collapse: collapse;}
+
+.showresultdiv{
+    padding:0%;
+    background-color:red;
+    margin:0 auto;
+    border-radius:15px;
+    /*overflow: hidden;*/
+    width:100%;
+
+}
+table.resultTable {font-size:12px;color:#333333;width:100%;border-width: 1px;border-color: #9dcc7a;border-collapse: collapse; border-radius:15px;}
 table.resultTable th {font-size:12px;background-color:#abd28e;border-width: 1px;padding: 8px;border-style: solid;border-color: #9dcc7a;text-align:left;}
 table.resultTable th.nothere {font-size:12px;background-color:none;border-width: 1px;padding: 8px;border-style: solid;border-color: #9dcc7a;text-align:left;}
 table.resultTable tr {background-color:#bedda7;}
 table.resultTable td {font-size:12px;border-width: 1px;padding: 8px;border-style: solid;border-color: #9dcc7a;}
 table.resultTable td.scoreColumn {font-size:12px;border-width: 1px;padding: 8px;border-style: solid;border-color: #9dcc7a; background-color:#C0C0C0;}
+table.resultTable.tbody{border-radius:15px;}
+
 .underPar{
 
     color: #32AD32;
@@ -791,23 +802,23 @@ tr.pager td {
 /********************
 *   Mobile Styles   *
 ********************/
-@media only screen and (max-width: 850px) {
+/*@media only screen and (max-width: 850px) {*/
 
     /* header
-    ----------------------------------------------------------*/
+    ----------------------------------------------------------
     header .float-left,
     header .float-right {
         float: none;
         background-color:hotpink;
     }
 
-    /* logo */
+     logo 
     header .site-title {
         margin: 10px;
         text-align: center;
     }
 
-    /* login */
+     login 
     #login {
         font-size: .85em;
         margin: 0 0 12px;
@@ -838,7 +849,7 @@ tr.pager td {
             color: #333;
         }
 
-    /* menu */
+     menu 
     nav {
         margin-bottom: 5px;
     }
@@ -855,8 +866,8 @@ tr.pager td {
         }
 
 
-    /* main layout
-    ----------------------------------------------------------*/
+     main layout
+    ----------------------------------------------------------
 
     .content-wrapper {
         padding-right: 10px;
@@ -865,14 +876,14 @@ tr.pager td {
     }
 
 
-    /* page content */
+     page content 
     article, aside {
         float: none;
         width: 100%;
     }
 
 
-     /* features */
+      features 
      section.feature {
         float: none;
         padding: 10px;
@@ -886,12 +897,12 @@ tr.pager td {
             font-weight: 600;
         }
 
-    /* forms */
+     forms 
     input {
         width: 90%;
     }
 
-    /* login page */
+     login page 
     #loginForm {
         border-right: none;
         float: none;
@@ -910,8 +921,8 @@ tr.pager td {
     }
 
 
-    /* footer
-    ----------------------------------------------------------*/
+     footer
+    ----------------------------------------------------------
     footer .float-left,
     footer .float-right {
         float: none;
@@ -928,6 +939,6 @@ tr.pager td {
                         margin:0 auto;
         }
 
-}
+}*/
 
 
