@@ -42,6 +42,7 @@ namespace golf.Controllers
                 rs.comp = cmp;
                 rs.holeinfo = db.Hole.Take(cmp.NumberOfHoles).ToList();
                 rs.currentPerson = pg;
+                rs.CompetitionGolferID = db.CompetitionGolfer.Where(x => x.Golfer_ID == golfer.Id && x.Competition_ID == cmp.Id).Select(x => x.Id).FirstOrDefault();
 
 
             }
@@ -151,7 +152,24 @@ namespace golf.Controllers
                 }
 
                 var toPar = scrList.Where(x=>x.Id == holeid).Select(v=>v.toPar).FirstOrDefault();
-                resultClass rs = new resultClass();
+
+                MobileStats ms = new MobileStats();
+                ms.CompetitionGolfer_ID = compgid;
+                ms.Hole_ID = holeid;
+                ms.strokes = strokesIn;
+                ms.plusMinus = toPar;
+                if(db.MobileStats.Where(x=>x.Hole_ID == holeid && x.CompetitionGolfer_ID == compgid).FirstOrDefault() == null)
+                {
+                    db.MobileStats.Add(ms);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    MobileStats m = db.MobileStats.Where(x => x.Hole_ID == holeid && x.CompetitionGolfer_ID == compgid).FirstOrDefault();
+                    m.strokes = strokesIn;
+                    m.plusMinus = toPar;
+                    db.SaveChanges();
+                }
                 
                 return PartialView("_listScore");
 
