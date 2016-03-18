@@ -35,7 +35,12 @@
                 </div>
                 <div id="myholescontrols" class="myholescontrols">
                     <div class="btn"><p>-</p></div>
-                    <div id="numberofstrokes" class="numberofstrokes"><p>5</p></div>
+                    <div id="numberofstrokes" class="numberofstrokes"><p>@Ajax.ActionLink("Test", "updateResult", new { compid = @Model.comp.Id, compgid = @Model.CompetitionGolferID, strokesIn = 5, holeid = i.Id }, new AjaxOptions()
+                                                                    {
+                                                                        UpdateTargetId = "entirelist",
+                                                                        HttpMethod = "GET",
+                                                                        InsertionMode = InsertionMode.Replace
+                                                                    })</p></div>
                     <div class="btn"><p>+</p></div>
                 </div>
             </div>
