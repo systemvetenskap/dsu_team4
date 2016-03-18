@@ -16,18 +16,24 @@
 
 <body>
     <div id="wrapper" class="wrapper">
-        <div id="myholes" class="myholes">
-            <h2>Fyll i antal slag</h2>
-            <div id="myholesinfo" class="myholesinfo">
-                <label id="labelhole1" class="labelhole1">Hål 1</label>
-                <label id="labelhole2" class="labelhole2">Par 4</label>
+        @foreach (var i in Model.holeinfo)
+        {
+            <div id="myholes" class="myholes">
+                <h2>Fyll i antal slag</h2>
+                <div id="myholesinfo" class="myholesinfo">
+                    <label id="labelhole1" class="labelhole1">@Html.Label("Hål "+i.Number.ToString())</label>
+                    <label id="labelhole2" class="labelhole2">@Html.Label("Par "+i.par.ToString())</label>
+                </div>
+                <div id="myholescontrols" class="myholescontrols">
+                    <div class="btn"><p>-</p></div>
+                    <div id="numberofstrokes" class="numberofstrokes"><p>5</p></div>
+                    <div class="btn"><p>+</p></div>
+                </div>
             </div>
-            <div id="myholescontrols" class="myholescontrols">
-                <div class="btn"><p>-</p></div>
-                <div id="numberofstrokes" class="numberofstrokes"><p>5</p></div>
-                <div class="btn"><p>+</p></div>
-            </div>
-        </div>
+
+        }
+
+
         <br>
         <br>
         <div id="entirelist" class="entirelist">
