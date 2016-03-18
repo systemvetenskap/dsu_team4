@@ -12,18 +12,21 @@ html{
 .wrapper{
     max-width:97%;
     margin:0 auto;
-    background:rgba(255,255,255, 0.7);
-    border-radius:5px;
+    
+
 }
 .myholes{
     padding:1%;
     text-align:center;
+    background:rgba(255,255,255, 0.7);
+    border-radius:5px;
 }
 
 .entirelist{
     padding:1%; 
     text-align:center;
-    margin:0 auto;
+    background:rgba(255,255,255, 0.7);
+    border-radius:5px;
 }
 .othercompetetors {
     width:100%;
@@ -37,8 +40,7 @@ html{
 }
 .myholescontrols{
     width:100%;
-    height:auto;  
-    margin:0 auto;     
+    height:auto;     
 }
 .btn{
     text-align:center;
