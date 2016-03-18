@@ -14,5 +14,7 @@ namespace golf.Models
         public int CompetitionGolferID { get; set; }
         public Nullable<int> points { get; set; }
         public Nullable<int> net { get; set; }
-    }
+        public List<Hole> holeinfo { get; set; }
+
+    }   
 }
