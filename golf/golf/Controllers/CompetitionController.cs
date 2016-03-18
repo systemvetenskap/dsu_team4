@@ -507,23 +507,33 @@ namespace golf.Controllers
             using(dsuteam4Entities1 db = new dsuteam4Entities1())           
             {
                 var slope = db.Slope.ToList();
+                int extraStrokes = 0;
 
+               if(playerHCP < 36)
+               {
 
-               
-                foreach(var i in slope)
-                {
-                    string xMax = i.max.ToString();
-                    string xMin = i.min.ToString();
-                    decimal Max = decimal.Parse(xMax, CultureInfo.CreateSpecificCulture("sv-SE"));
-                    decimal Min = decimal.Parse(xMin, CultureInfo.CreateSpecificCulture("sv-SE"));
-                   if(playerHCP>= Min && playerHCP<= Max && i.Gender_ID == r.currentPerson.gender_ID)
+                   foreach (var i in slope)
                    {
-                       sl.Add(i);
-                   }
+                       string xMax = i.max.ToString();
+                       string xMin = i.min.ToString();
+                       decimal Max = decimal.Parse(xMax, CultureInfo.CreateSpecificCulture("sv-SE"));
+                       decimal Min = decimal.Parse(xMin, CultureInfo.CreateSpecificCulture("sv-SE"));
+                       if (playerHCP >= Min && playerHCP <= Max && i.Gender_ID == r.currentPerson.gender_ID)
+                       {
+                           sl.Add(i);
+                       }
 
-                }
-               var strokes = sl.FirstOrDefault();
-               int extraStrokes = Convert.ToInt32(strokes.gameHCP);
+                   }
+                   var strokes = sl.FirstOrDefault();
+                   extraStrokes = Convert.ToInt32(strokes.gameHCP);
+
+               }
+               else
+               {
+                   extraStrokes = 40;
+               }
+
+
 
                var Hcpindex = from i in r.holeresult
                               join h in db.Hole
@@ -1072,8 +1082,8 @@ namespace golf.Controllers
                         pege.holeResult = db.HoleStats.Where(x => x.CompetitionGolfer_ID == i.CompGid).OrderBy(d => d.Hole_ID).ToList();
                         pege.points = i.Points;
                         pege.net = i.Net;
-                        pege.toPar = db.HoleStats.Where(x => x.CompetitionGolfer_ID == i.CompGid).Select(a => a.toPar).FirstOrDefault();
-                        pgList.Add(pege);
+                        pege.toPar = db.HoleStats.Where(x => x.CompetitionGolfer_ID == i.CompGid).OrderByDescending(z => z.Hole_ID).Select(a => a.toPar).FirstOrDefault();
+                        pgList.Add(pege); 
                     }
                     
                     sr.player = pgList.OrderBy(x=>x.points).ToList();
