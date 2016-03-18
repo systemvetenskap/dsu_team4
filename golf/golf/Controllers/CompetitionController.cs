@@ -18,6 +18,7 @@ namespace golf.Controllers
         //
         // GET: /Competition/
 
+        [Authorize]
         public ActionResult Index()
         {
             CreateComp cc = new CreateComp();
