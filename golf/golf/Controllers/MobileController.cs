@@ -170,8 +170,74 @@ namespace golf.Controllers
                     m.plusMinus = toPar;
                     db.SaveChanges();
                 }
+
+               
                 
-                return PartialView("_listScore");
+            }
+
+            using(dsuteam4Entities1 dbo = new dsuteam4Entities1())
+            {
+                dbo.Configuration.LazyLoadingEnabled = true;
+                List<PersonGolfer> listPlayers = new List<PersonGolfer>();
+                var competitiongolfer = dbo.CompetitionGolfer.Where(x => x.Competition_ID == compid).ToList();
+
+                var g = dbo.Golfer.ToList();
+
+                var m = dbo.MobileStats.ToList();
+
+                List<MobileStats> mobilesta = new List<MobileStats>();
+                 
+                foreach(var i in competitiongolfer)
+                {
+                    MobileStats n = new MobileStats();
+                    List<MobileStats> add = m.Where(x => x.CompetitionGolfer_ID == i.Id).ToList();
+                    MobileStats getH = add.OrderByDescending(x => x.Hole_ID).FirstOrDefault();
+                    n = getH;
+                    if(n != null)
+                    {
+                        mobilesta.Add(n);
+                    }
+                  
+                
+                }
+ 
+
+                var join1 = from c in competitiongolfer
+                            join p in g
+                            on c.Golfer_ID equals p.Id
+                            select new { Cgid = c.Id, p.Person_ID };
+
+                var t1 = join1.ToList();
+
+                var join2 = from c in mobilesta.ToList()
+                            join j in t1.ToList()
+                            on c.CompetitionGolfer_ID equals j.Cgid
+                            select new { c.plusMinus, c.strokes, j.Person_ID };
+
+                var t2 = join2.ToList();
+
+                var join3 = from p in dbo.Person.ToList()
+                            join j in t2.ToList()
+                            on p.Id equals j.Person_ID
+                            select new { p.firstName, p.lastName, j.plusMinus, j.strokes };
+
+                var t3 = join3.ToList();
+                var toview = join3.ToList();
+                foreach(var i in toview)
+                {
+                    PersonGolfer pg = new PersonGolfer();
+                    pg.firstName = i.firstName;
+                    pg.lastName = i.lastName;
+                    pg.toPar = i.plusMinus;
+                    pg.points = i.strokes;
+                    listPlayers.Add(pg);
+                }
+
+             
+
+
+
+                return PartialView("_listScore", listPlayers);
 
             }
 

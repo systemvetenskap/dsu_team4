@@ -1,1 +1,36 @@
-﻿
+﻿@model IEnumerable<golf.Models.PersonGolfer>
+
+<h2>Din placering</h2>
+
+<table id="othercompetetors" class="othercompetetors">
+    <thead>
+        <tr>
+            <td>
+               @Html.Label("Spelare")
+            </td>
+            <td>
+                @Html.Label("Slag")
+            </td>
+            <td>
+                @Html.Label("+/-")
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var i in Model)
+        { 
+        <tr>
+            <td>
+               @Html.Label(i.firstName+ " "+i.lastName)
+            </td>
+            <td>
+              @Html.Label(i.points.ToString())
+            </td>
+            <td>
+                @Html.Label(i.toPar.ToString())
+            </td>
+        </tr>
+        }
+
+    </tbody>
+</table>

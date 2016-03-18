@@ -27,7 +27,7 @@
                 disp = "none"; 
             }
             
-            <div id=@i.Number class="myholes" style= "display: @disp ">
+            <div id=@i.Number class="myholes" style= "display: @disp " holeid=@i.Id>
                 <h2>Fyll i antal slag</h2>
                 <div id="myholesinfo" class="myholesinfo">
                     <label id="labelhole1" class="labelhole1">@Html.Label("Hål "+i.Number.ToString())</label>
@@ -51,38 +51,9 @@
         <br>
         <br>
         <div id="entirelist" class="entirelist">
-            <h2>Din placering</h2>
 
-            <table id="othercompetetors" class="othercompetetors">
-                <thead>
-                    <tr>
-                        <td>
-                            <p>Spelare</p>
-                        </td>
-                        <td>
-                            <p>Poäng</p>
-                        </td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            Anders Johansson
-                        </td>
-                        <td>
-                            231
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Anders Johansson
-                        </td>
-                        <td>
-                            231
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+
+
         </div>
     </div>
 </body>
@@ -99,16 +70,43 @@
     }
     function swipeleftHandler(event) {
         
+        var holeid = $(this).attr('holeid');
         var currentDiv = $(this).attr('id');      
         var currNr = Number(currentDiv);
         var nextDivNr = currNr + 1;
         
         var curr = '#' + currentDiv;
         var next = '#' + nextDivNr;
+
        
         $(curr.toString()).toggle("left");
         $(next.toString()).toggle("right");
+
+        loadData(holeid);
+
     }
 
+    function loadData(hid) {
+        var c = @Model.comp.Id;
+        var cgd = @Model.CompetitionGolferID;
+        var stro = 5;
+      
+        $.ajax({
+            url: '/Mobile/updateResult',
+            contentType: 'application/html; charset=utf-8',
+            data: { compid: c, compgid: cgd, strokesIn: stro, holeid: hid },
+            type: 'GET',
+            dataType: 'html'
 
+        })
+        .success(function (result) {
+            $('#entirelist').html(result);
+           
+
+        })
+        .error(function (xhr, status) {
+            alert(status);
+        })
+
+    }
 </script>
