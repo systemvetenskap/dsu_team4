@@ -502,7 +502,8 @@ namespace golf.Controllers
             List<Slope> sl = new List<Slope>();
             List<ScoreCardClass> scrList = new List<ScoreCardClass>();
             string s = r.currentPerson.HCP;
-            decimal playerHCP = decimal.Parse(s, CultureInfo.InvariantCulture);
+            string test1 = s.Replace(".", ",");
+            decimal playerHCP = decimal.Parse(test1);
           
             
             using(dsuteam4Entities1 db = new dsuteam4Entities1())           
@@ -517,8 +518,8 @@ namespace golf.Controllers
                    {
                        string xMax = i.max.ToString();
                        string xMin = i.min.ToString();
-                       decimal Max = decimal.Parse(xMax, CultureInfo.CreateSpecificCulture("sv-SE"));
-                       decimal Min = decimal.Parse(xMin, CultureInfo.CreateSpecificCulture("sv-SE"));
+                       decimal Max = decimal.Parse(xMax);
+                       decimal Min = decimal.Parse(xMin);
                        if (playerHCP >= Min && playerHCP <= Max && i.Gender_ID == r.currentPerson.gender_ID)
                        {
                            sl.Add(i);
