@@ -63,10 +63,11 @@ namespace golf.Controllers
                string s =  db.Golfer.Where(x=>x.Id == golfid).Select(y => y.HCP).FirstOrDefault();
                int pid = db.Golfer.Where(x=>x.Id == golfid).Select(y => y.Person_ID).FirstOrDefault();
                Nullable<int> gender = db.Person.Where(x=>x.Id == pid).Select(u => u.gender_ID).FirstOrDefault();
-               var competition = db.Competition.Where(x=>x.Id == compid).FirstOrDefault();
-               decimal playerHCP = decimal.Parse(s, CultureInfo.InvariantCulture);
+               var competition = db.Competition.Where(x=>x.Id == compid).FirstOrDefault();             
                var slope = db.Slope.ToList();
                int extraStrokes = 0;
+               string test1 = s.Replace(".",",");
+               decimal playerHCP = decimal.Parse(test1);
 
                if(playerHCP < 36)
                {
@@ -75,8 +76,10 @@ namespace golf.Controllers
                    {
                        string xMax = i.max.ToString();
                        string xMin = i.min.ToString();
-                       decimal Max = decimal.Parse(xMax, CultureInfo.CreateSpecificCulture("sv-SE"));
-                       decimal Min = decimal.Parse(xMin, CultureInfo.CreateSpecificCulture("sv-SE"));
+          
+                       decimal Min = decimal.Parse(xMin);
+                       decimal Max = decimal.Parse(xMax);
+  
                        if (playerHCP >= Min && playerHCP <= Max && i.Gender_ID == gender)
                        {
                            sl.Add(i);
