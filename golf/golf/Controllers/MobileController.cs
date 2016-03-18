@@ -150,8 +150,16 @@ namespace golf.Controllers
                 var order = scrList.OrderBy(x => x.Id).ToList();
                 foreach(var i in order)
                 {
-                    i.calcPoints(prevPar);
-                    prevPar = i.toPar;
+                    if(i.playerStrokes != 0 || i.playerStrokes !=null)
+                    {
+                        i.calcPoints(prevPar);
+                        prevPar = i.toPar;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                  
                 }
 
                 var toPar = scrList.Where(x=>x.Id == holeid).Select(v=>v.toPar).FirstOrDefault();
