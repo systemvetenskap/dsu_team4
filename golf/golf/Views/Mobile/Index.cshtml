@@ -11,7 +11,7 @@
 <html>
 <head>
     <link href="@Url.Content("~/Content/Mobile.css")" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    @*<link rel="stylesheet" href="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">*@
     <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script><meta name="viewport" content="width=device-width" />
     <title>MobileComp</title>
@@ -89,8 +89,8 @@
 </html>
 <script type="text/javascript">
 
-    $("#myholes").on("swiperight", swiperightHandler);
-    $("#myholes").on("swipeleft", swipeleftHandler);
+    $(".myholes").on("swiperight", swiperightHandler);
+    $(".myholes").on("swipeleft", swipeleftHandler);
 
    
     function swiperightHandler( event ){
