@@ -37,8 +37,10 @@ namespace golf.Controllers
                 pg.golfid = golfer.Id;
                 pg.firstName = p.firstName;
                 pg.lastName = p.lastName;
-                
-                rs.compList = db.Competition.Where(x => x.cDate == DateTime.Today).ToList();
+
+                var cmp = db.Competition.Where(x => x.name == "sffesfe").FirstOrDefault();
+                rs.comp = cmp;
+                rs.holeinfo = db.Hole.Take(cmp.NumberOfHoles).ToList();
                 rs.currentPerson = pg;
 
 

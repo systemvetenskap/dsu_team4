@@ -10,7 +10,7 @@
 
 @if (Model.comp.cDate.Date >= DateTime.Now.Date && Model.persongolfer.Count > 0)
 {
-    <div class="buttona">
+    <div class="buttona1">
         @Ajax.ActionLink("Lotta tider", "generateStartTimes", new {id = Model.comp.Id}, new AjaxOptions()
                 {
                     UpdateTargetId = "showComp",
