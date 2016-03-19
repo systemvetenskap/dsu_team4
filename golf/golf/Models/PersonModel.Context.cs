@@ -44,5 +44,6 @@ namespace golf.Models
         public DbSet<CompetitionGolfer> CompetitionGolfer { get; set; }
         public DbSet<Slope> Slope { get; set; }
         public DbSet<HoleStats> HoleStats { get; set; }
+        public DbSet<MobileStats> MobileStats { get; set; }
     }
 }

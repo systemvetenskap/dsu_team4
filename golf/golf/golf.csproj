@@ -243,6 +243,9 @@
     <Compile Include="Models\MemberType.cs">
       <DependentUpon>PersonModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MobileStats.cs">
+      <DependentUpon>PersonModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\NewsArticle.cs">
       <DependentUpon>PersonModel.tt</DependentUpon>
     </Compile>
@@ -386,6 +389,7 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\swipeview.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -435,6 +439,7 @@
     <Content Include="Views\Mobile\Index.cshtml" />
     <Content Include="Views\Competition\_showResult.cshtml" />
     <Content Include="Views\Competition\_noResult.cshtml" />
+    <Content Include="Views\Mobile\_listScore.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

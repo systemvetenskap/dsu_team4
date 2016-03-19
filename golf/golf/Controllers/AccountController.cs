@@ -178,8 +178,20 @@ namespace golf.Controllers
                     //{
                     //    //do something
                     //}
-           
-                    return RedirectToAction("MyPage");
+                    foreach (var Pa in db.AdminPerson)
+                    {
+
+
+                        if (P.Id == Pa.Person_ID)
+                        {
+                            return RedirectToAction("Index", "TeeTime");
+                        }
+                        else
+                        {
+                            return RedirectToAction("MyPage");
+                        }
+                    }
+                   
                 }
             }
       

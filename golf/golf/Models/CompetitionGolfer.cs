@@ -17,6 +17,7 @@ namespace golf.Models
         public CompetitionGolfer()
         {
             this.HoleStats = new HashSet<HoleStats>();
+            this.MobileStats = new HashSet<MobileStats>();
         }
     
         public int Id { get; set; }
@@ -29,5 +30,6 @@ namespace golf.Models
         public virtual Competition Competition { get; set; }
         public virtual Golfer Golfer { get; set; }
         public virtual ICollection<HoleStats> HoleStats { get; set; }
+        public virtual ICollection<MobileStats> MobileStats { get; set; }
     }
 }

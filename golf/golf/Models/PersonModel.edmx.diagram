@@ -43,6 +43,9 @@
         <EntityTypeShape EntityType="dsuteam4Model1.HoleStats" Width="1.5" PointX="12.75" PointY="6.625" />
         <AssociationConnector Association="dsuteam4Model1.FK_HoleStats_ToCompetitionGolfer" />
         <AssociationConnector Association="dsuteam4Model1.FK_HoleStats_ToHole" />
+        <EntityTypeShape EntityType="dsuteam4Model1.MobileStats" Width="1.5" PointX="15.75" PointY="6.625" />
+        <AssociationConnector Association="dsuteam4Model1.FK_MobileStats_ToCompetitionGolfer" />
+        <AssociationConnector Association="dsuteam4Model1.FK_MobileStats_ToHole" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

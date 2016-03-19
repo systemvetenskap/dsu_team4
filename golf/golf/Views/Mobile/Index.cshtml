@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Index";
     Layout = null;
+    string disp = "block";
 }
 
 <!DOCTYPE html>
@@ -10,60 +11,102 @@
 <html>
 <head>
     <link href="@Url.Content("~/Content/Mobile.css")" rel="stylesheet" type="text/css" />
-    <meta name="viewport" content="width=device-width" />
+    @*<link rel="stylesheet" href="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">*@
+    <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script><meta name="viewport" content="width=device-width" />
     <title>MobileComp</title>
 </head>
 
 <body>
     <div id="wrapper" class="wrapper">
-        <div id="myholes" class="myholes">
-            <h2>Fyll i antal slag</h2>
-            <div id="myholesinfo" class="myholesinfo">
-                <label id="labelhole1" class="labelhole1">Hål 1</label>
-                <label id="labelhole2" class="labelhole2">Par 4</label>
+        @foreach (var i in Model.holeinfo)
+        {
+           
+            if(Convert.ToInt16(i.Number) > 1)
+            {
+                disp = "none"; 
+            }
+            
+            <div id=@i.Number class="myholes" style= "display: @disp " holeid=@i.Id>
+                <h2>Fyll i antal slag</h2>
+                <div id="myholesinfo" class="myholesinfo">
+                    <label id="labelhole1" class="labelhole1">@Html.Label("Hål "+i.Number.ToString())</label>
+                    <label id="labelhole2" class="labelhole2">@Html.Label("Par "+i.par.ToString())</label>
+                </div>
+                <div id="myholescontrols" class="myholescontrols">
+                    <div class="btn"><p>-</p></div>
+                    <div id="numberofstrokes" class="numberofstrokes"><p>@Ajax.ActionLink("Test", "updateResult", new { compid = @Model.comp.Id, compgid = @Model.CompetitionGolferID, strokesIn = 5, holeid = i.Id }, new AjaxOptions()
+                                                                    {
+                                                                        UpdateTargetId = "entirelist",
+                                                                        HttpMethod = "GET",
+                                                                        InsertionMode = InsertionMode.Replace
+                                                                    })</p></div>
+                    <div class="btn"><p>+</p></div>
+                </div>
             </div>
-            <div id="myholescontrols" class="myholescontrols">
-                <div class="btn"><p>-</p></div>
-                <div id="numberofstrokes" class="numberofstrokes"><p>5</p></div>
-                <div class="btn"><p>+</p></div>
-            </div>
-        </div>
+
+        }
+
+
         <br>
         <br>
         <div id="entirelist" class="entirelist">
-            <h2>Din placering</h2>
 
-            <table id="othercompetetors" class="othercompetetors">
-                <thead>
-                    <tr>
-                        <td>
-                            <p>Spelare</p>
-                        </td>
-                        <td>
-                            <p>Poäng</p>
-                        </td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            Anders Johansson
-                        </td>
-                        <td>
-                            231
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Anders Johansson
-                        </td>
-                        <td>
-                            231
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+
+
         </div>
     </div>
 </body>
 </html>
+<script type="text/javascript">
+
+    $(".myholes").on("swiperight", swiperightHandler);
+    $(".myholes").on("swipeleft", swipeleftHandler);
+
+   
+    function swiperightHandler( event ){
+       
+        
+    }
+    function swipeleftHandler(event) {
+        
+        var holeid = $(this).attr('holeid');
+        var currentDiv = $(this).attr('id');      
+        var currNr = Number(currentDiv);
+        var nextDivNr = currNr + 1;
+        
+        var curr = '#' + currentDiv;
+        var next = '#' + nextDivNr;
+
+       
+        $(curr.toString()).toggle("left");
+        $(next.toString()).toggle("right");
+
+        loadData(holeid);
+
+    }
+
+    function loadData(hid) {
+        var c = @Model.comp.Id;
+        var cgd = @Model.CompetitionGolferID;
+        var stro = 5;
+      
+        $.ajax({
+            url: '/Mobile/updateResult',
+            contentType: 'application/html; charset=utf-8',
+            data: { compid: c, compgid: cgd, strokesIn: stro, holeid: hid },
+            type: 'GET',
+            dataType: 'html'
+
+        })
+        .success(function (result) {
+            $('#entirelist').html(result);
+           
+
+        })
+        .error(function (xhr, status) {
+            alert(status);
+        })
+
+    }
+</script>
