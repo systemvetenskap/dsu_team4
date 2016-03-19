@@ -1,9 +1,7 @@
-﻿
-    @if (Request.IsAuthenticated)
+﻿    @if (Request.IsAuthenticated)
     {
 
-        <text>
-            @Html.ActionLink("Välkommen", "Mypage", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "Manage" })
+        <text>           
             @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
             {
                 @Html.AntiForgeryToken()
