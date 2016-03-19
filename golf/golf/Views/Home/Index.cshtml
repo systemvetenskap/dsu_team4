@@ -81,11 +81,11 @@
     <h3>Senaste nytt</h3>
 
     
-    @if(User.Identity.IsAuthenticated)
+    @if (User.Identity.IsAuthenticated)
     {
 
-        <a class="isAdmin" href="/Home/AddNews"><button type="submit">Skapa nytt inlägg</button></a>
-        
+            <a class="buttonGreen" @*class="isAdmin"*@ href="/Home/AddNews"><button type="submit">Skapa nytt inlägg</button></a>
+
     }
    
 

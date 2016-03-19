@@ -106,8 +106,10 @@
         </div>
         <br />
         <div class="edit-link">
-            @Html.HiddenFor(model => model.p.Id)
-            @Html.ActionLink("Ändra uppgifter", "Edit", new { id = Model.p.Id })
+            <div class="buttonGreen" id="buttonGreen">
+                @Html.HiddenFor(model => model.p.Id)
+                @Html.ActionLink("Ändra uppgifter", "Edit", new { id = Model.p.Id })
+            </div>
         </div>
     </fieldset>
 </div>

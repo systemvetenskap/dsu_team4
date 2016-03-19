@@ -135,9 +135,11 @@
                     @Html.TextAreaFor(model => model.newComp.info, 10, 40, htmlAttributes: new { style = "width: 90%; resize:none", ID = "textareainput" })
                     @Html.ValidationMessageFor(model => model.newComp.info)
                 </div>
-                <p>
-                    <input type="submit" value="Spara" id="createcompetitionbutton" />
-                </p>
+
+                    <p>
+                        <input type="submit" class="buttonGreen" value="Spara" id="createcompetitionbutton" />
+                    </p>
+
             </fieldset>
 
  <script type="text/javascript">
