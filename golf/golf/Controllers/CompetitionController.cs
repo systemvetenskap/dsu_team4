@@ -57,6 +57,37 @@ namespace golf.Controllers
                 cc.sTimes = databas.TeeTime.ToList();
                 //cc.contactlist = databas.Person.ToList();
 
+                int userGolfer = -1;
+                int userInt = Convert.ToInt32(User.Identity.Name);
+                Person pp = databas.Person.Find(userInt);
+                
+                foreach (var item in databas.Golfer)
+	            {
+		            if (pp.Id == item.Person_ID)
+	                {
+                        userGolfer = item.Id;
+	                }
+	            }
+
+
+                foreach (var item in cc.complist)
+                {
+
+                    bool already = false;
+
+                    foreach (var item2 in item.CompetitionGolfer)
+                    {
+                        if (item2.Golfer_ID == userGolfer)
+                        {
+                            already = true;
+                        }
+
+                    }
+
+                    cc.alreadySigned.Add(already);
+                }
+
+
                 return View(cc);
             }
             
@@ -72,6 +103,9 @@ namespace golf.Controllers
                 cc.complist = databas.Competition.ToList();
                 int userID = Convert.ToInt16(User.Identity.Name);
                 cc.currentUser = databas.Person.Find(userID);
+
+
+
 
                 //foreach (var item in databas.Golfer)
                 //{
@@ -669,7 +703,32 @@ namespace golf.Controllers
             }
         }
 
+        public ActionResult signedUpAlready(string id)
+        {
+            bool isValid = false;
 
+            using (dsuteam4Entities1 db = new dsuteam4Entities1())
+            {
+                if (Request.IsAuthenticated)
+                {
+
+                    foreach (var item in db.CompetitionGolfer)
+                    {
+
+                    }
+
+                }
+            }
+
+
+
+            var obj = new
+            {
+                valid = isValid
+            };
+            return Json(obj);
+
+        }
         public ActionResult addYourself(bool confirm, int id)
         {
 

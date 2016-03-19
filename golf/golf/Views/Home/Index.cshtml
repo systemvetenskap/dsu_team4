@@ -60,6 +60,35 @@
                 });
 
             });
+
+
+        $(document).ready(function () {
+
+            $.ajax({
+                url: '@Url.Action("signedUpAlready", "Home")',
+                type: "POST",
+                async: true,
+                dataType: "json",
+                data: $('#form').serialize(),
+                success: function (data) {
+
+                    if (data.valid == false) {
+                        $(".isAdmin").hide();
+                        $(".isMember").show();
+                    }
+                    else {
+                        $(".isAdmin").show();
+                        $(".isMember").hide();
+                    }
+                    //document.getElementById('member').style.display = 'none'
+
+                },
+                error: function (request, status, error) {
+                    // process error message
+                }
+            });
+
+        });
     </script>
 
 </head>
