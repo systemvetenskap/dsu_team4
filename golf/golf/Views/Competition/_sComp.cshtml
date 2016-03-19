@@ -102,16 +102,17 @@
 
         <th></th>
     </tr>
-    @foreach (var item in Model.complist)
+
+    @for (int i = 0; i < Model.complist.Count; i++)
         {
             <tr>
                 <td>
-                    @Html.Label(item.name, new { id=item.Id, onmouseover = "details("+item.Id+")" , onmouseout = "closeDialog();" })
+                    @Html.Label(Model.complist[i].name, new { id = Model.complist[i].Id, onmouseover = "details(" + Model.complist[i].Id + ")", onmouseout = "closeDialog();" })
                 </td>
 
                 <td>
                     
-                    @Html.Label(item.cDate.ToShortDateString())
+                    @Html.Label(Model.complist[i].cDate.ToShortDateString())
                 </td>
                 @*<td>
                     @Html.Label(item.signUpFrom.ToShortDateString())
@@ -131,7 +132,8 @@
 
                 <td>
                     <div class="buttona">
-                        @Ajax.ActionLink("Visa detaljer", "detailsComp", new { id = item.Id }, new AjaxOptions(){
+                        @Ajax.ActionLink("Visa detaljer", "detailsComp", new { id = Model.complist[i].Id }, new AjaxOptions()
+                   {
 
                    UpdateTargetId = "showComp",
                    HttpMethod = "GET",
@@ -147,7 +149,7 @@
                 <td>
                     <div class="isAdmin2" style="display:none">
                         <div class="buttona">
-                            @Ajax.ActionLink("Resultat", "showResult", new { id = item.Id }, new AjaxOptions()
+                            @Ajax.ActionLink("Resultat", "showResult", new { id = Model.complist[i].Id }, new AjaxOptions()
                        {
                            UpdateTargetId = "showComp",
                            HttpMethod = "GET",
@@ -160,7 +162,7 @@
                     <div class="isAdmin2" style="display:none">
                         <div class="buttona">
                             
-                            @Ajax.ActionLink("Spelarlista", "registerResult", new { id = item.Id }, new AjaxOptions()
+                            @Ajax.ActionLink("Spelarlista", "registerResult", new { id = Model.complist[i].Id }, new AjaxOptions()
                        {
                            UpdateTargetId = "showComp",
                            HttpMethod = "GET",
@@ -172,14 +174,22 @@
                     <div class="isMember2" style="display:none">
 
                             @*Här ska det vara annan actionlink sen!*@
-                            @if ((item.signUpFrom.Date <= DateTime.Now.Date) && (item.signUpTo.Date >= DateTime.Now.Date) && (item.CompeteClass_ID == 1 || item.CompeteClass_ID == Model.currentUser.gender_ID))
+                            @if ((Model.complist[i].signUpFrom.Date <= DateTime.Now.Date) && (Model.complist[i].signUpTo.Date >= DateTime.Now.Date) && (Model.complist[i].CompeteClass_ID == 1 || Model.complist[i].CompeteClass_ID == Model.currentUser.gender_ID))
                             {
-                                
-                        <div class="buttona">
-                                @Html.ActionLink("Anmäl dig här!", "addYourself", new { confirm = true, id = item.Id },
-                            new { onclick = "return confirm('Vill du verkligen anmäla dig till denna tävling?')" })
-                            </div>
+                                if (Model.alreadySigned[i] == false)
+                                {
+                                    <div class="buttona">
+                                        @Html.ActionLink("Anmäl dig här!", "addYourself", new { confirm = true, id = Model.complist[i].Id },
+                                        new { onclick = "return confirm('Vill du verkligen anmäla dig till denna tävling?')" })
+                                    </div>
+                                }
+                                else
+                                {
+                                    @Html.Label("Du är redan registrerad")
+                                }
                             }
+                            
+                            
                         </div>
 
 
@@ -191,10 +201,10 @@
                 HttpMethod = "GET",
                 InsertionMode = InsertionMode.Replace
             })*@
-                        @if ((item.signUpFrom.Date <= DateTime.Now.Date) && (item.signUpTo.Date >= DateTime.Now.Date))
+                        @if ((Model.complist[i].signUpFrom.Date <= DateTime.Now.Date) && (Model.complist[i].signUpTo.Date >= DateTime.Now.Date))
                         {
                     <div class="buttona">
-                            @Html.ActionLink("Anmäl spelare", "addPlayer", new { id = item.Id })
+                            @Html.ActionLink("Anmäl spelare", "addPlayer", new { id = Model.complist[i].Id })
                     </div>
                         }
                 </td>
