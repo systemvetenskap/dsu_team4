@@ -18,7 +18,7 @@ namespace golf.Controllers
         {
             //Hårdkodning Person---------Fixa detta från inloggning
 
-            int id = 922;
+            int id = 192;
 
             //Hårkodning------------------
 
@@ -95,12 +95,13 @@ namespace golf.Controllers
                    extraStrokes = 40;
                }
 
-              var Hcpindex = db.Hole.OrderByDescending(x=>x.HCPind).ToList();               
+              var Hcpindex = db.Hole.OrderBy(x=>x.HCPind).ToList();               
 
                 foreach(var i in Hcpindex)
                 {
                   ScoreCardClass scr = new ScoreCardClass();
                   scr.Id = i.Id;
+                
                   scr.HCPind = i.HCPind;
                   scr.Number = i.Number;
                   scr.par = i.par;
@@ -140,47 +141,56 @@ namespace golf.Controllers
 
                 }
 
-                foreach(var i in scrList.Where(x=>x.Id == holeid))
-                {
-                    i.playerStrokes = strokesIn;
+                var getPar = db.MobileStats.Where(x => x.CompetitionGolfer_ID == compgid).ToList();
 
+                if(getPar.Count == 0)
+                {
+                        //
+                        int getPrevHole = 0;
+                                   
+                        foreach (var i in scrList.Where(x => x.Id == holeid))
+                        {
+                            i.playerStrokes = strokesIn;
+                            i.calcPoints(getPrevHole);
+
+                        }
+                     var toPar = scrList.Where(x=>x.Id == holeid).FirstOrDefault();
+                 
+                        MobileStats ms = new MobileStats();
+                        ms.CompetitionGolfer_ID = compgid;
+                        ms.Hole_ID = holeid;
+                        ms.strokes = strokesIn;
+                        ms.plusMinus =toPar.toPar;
+                        db.MobileStats.Add(ms);
+                        db.SaveChanges();
+                    
+                        
                 }
-
-                var prevPar = 0;
-                var order = scrList.OrderBy(x => x.Id).ToList();
-                foreach(var i in order)
+                else if(getPar.Count >= 0)
                 {
-                    if(i.playerStrokes != 0 || i.playerStrokes !=null)
+                    
+                    int getPrevHole = db.MobileStats.OrderByDescending(x => x.Id).Select(x => x.plusMinus).First();
+                   
+                    foreach (var i in scrList.Where(x => x.Id == holeid))
                     {
-                        i.calcPoints(prevPar);
-                        prevPar = i.toPar;
-                    }
-                    else
-                    {
-                        break;
-                    }
-                  
-                }
+                        i.playerStrokes = strokesIn;
+                        i.calcPoints(getPrevHole);
 
-                var toPar = scrList.Where(x=>x.Id == holeid).Select(v=>v.toPar).FirstOrDefault();
-
-                MobileStats ms = new MobileStats();
-                ms.CompetitionGolfer_ID = compgid;
-                ms.Hole_ID = holeid;
-                ms.strokes = strokesIn;
-                ms.plusMinus = toPar;
-                if(db.MobileStats.Where(x=>x.Hole_ID == holeid && x.CompetitionGolfer_ID == compgid).FirstOrDefault() == null)
-                {
-                    db.MobileStats.Add(ms);
-                    db.SaveChanges();
-                }
-                else
-                {
-                    MobileStats m = db.MobileStats.Where(x => x.Hole_ID == holeid && x.CompetitionGolfer_ID == compgid).FirstOrDefault();
+                    }
+                    var toPar = scrList.Where(x => x.Id == holeid).FirstOrDefault();
+                    MobileStats m= new MobileStats();
+                    m.Hole_ID = holeid;
+                    m.CompetitionGolfer_ID = compgid;
                     m.strokes = strokesIn;
-                    m.plusMinus = toPar;
+                    m.plusMinus = toPar.toPar;
+                    db.MobileStats.Add(m);
                     db.SaveChanges();
                 }
+
+               
+
+
+
 
                
                 

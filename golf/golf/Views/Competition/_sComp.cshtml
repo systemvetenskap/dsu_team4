@@ -131,7 +131,7 @@
                 </td>*@
 
                 <td>
-                    <div class="buttona">
+                    <div class="buttonGreen">
                         @Ajax.ActionLink("Visa detaljer", "detailsComp", new { id = Model.complist[i].Id }, new AjaxOptions()
                    {
 
@@ -148,7 +148,7 @@
 
                 <td>
                     <div class="isAdmin2" style="display:none">
-                        <div class="buttona">
+                        <div class="buttonGreen">
                             @Ajax.ActionLink("Resultat", "showResult", new { id = Model.complist[i].Id }, new AjaxOptions()
                        {
                            UpdateTargetId = "showComp",
@@ -160,7 +160,7 @@
                 </td>
                 <td>
                     <div class="isAdmin2" style="display:none">
-                        <div class="buttona">
+                        <div class="buttonGreen">
                             
                             @Ajax.ActionLink("Spelarlista", "registerResult", new { id = Model.complist[i].Id }, new AjaxOptions()
                        {
@@ -174,22 +174,26 @@
                     <div class="isMember2" style="display:none">
 
                             @*Här ska det vara annan actionlink sen!*@
-                            @if ((Model.complist[i].signUpFrom.Date <= DateTime.Now.Date) && (Model.complist[i].signUpTo.Date >= DateTime.Now.Date) && (Model.complist[i].CompeteClass_ID == 1 || Model.complist[i].CompeteClass_ID == Model.currentUser.gender_ID))
+                            @if (Model.currentUser != null)
                             {
-                                
+                                if ((Model.complist[i].signUpFrom.Date <= DateTime.Now.Date) && (Model.complist[i].signUpTo.Date >= DateTime.Now.Date) && (Model.complist[i].CompeteClass_ID == 1 || Model.complist[i].CompeteClass_ID == Model.currentUser.gender_ID))
+                                {
 
-                                if (Model.alreadySigned[i] == false)
-                                {
-                                    <div class="buttona">
-                                        @Html.ActionLink("Anmäl dig här!", "addYourself", new { confirm = true, id = Model.complist[i].Id },
+
+                                    if (Model.alreadySigned[i] == false)
+                                    {
+                                        <div class="buttona">
+                                            @Html.ActionLink("Anmäl dig här!", "addYourself", new { confirm = true, id = Model.complist[i].Id },
                                         new { onclick = "return confirm('Vill du verkligen anmäla dig till denna tävling?')" })
-                                    </div>
-                                }
-                                else
-                                {
-                                    @Html.Label("Du är redan registrerad")
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        @Html.Label("Du är redan registrerad")
+                                    }
                                 }
                             }
+                           
                             
                             
                         </div>
@@ -205,7 +209,7 @@
             })*@
                         @if ((Model.complist[i].signUpFrom.Date <= DateTime.Now.Date) && (Model.complist[i].signUpTo.Date >= DateTime.Now.Date))
                         {
-                    <div class="buttona">
+                    <div class="buttonGreen">
                             @Html.ActionLink("Anmäl spelare", "addPlayer", new { id = Model.complist[i].Id })
                     </div>
                         }

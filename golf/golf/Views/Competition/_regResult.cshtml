@@ -54,14 +54,16 @@
                    }
                    else
                    {
-
+                    <div class="buttonGreen">   
                     @Ajax.ActionLink("Registrera resultat", "regResultPerson", new { personid = item.personid, compID = Model.comp.Id, regComp = Model }, new AjaxOptions()
                     {
                         UpdateTargetId = "showComp",
                         HttpMethod = "GET",
                         InsertionMode = InsertionMode.Replace
-                    })
+                    }
+               )</div>
                    }
+
 
                         </td>
                     </tr>

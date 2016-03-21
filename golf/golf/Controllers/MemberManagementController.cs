@@ -176,6 +176,36 @@ namespace golf.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Person person = databas.Person.Find(id);
+
+            int gId = -1;
+
+            foreach (var item in databas.Golfer)
+            {
+                if (item.Person_ID == id)
+                {
+                    gId = item.Id;
+                }
+            }
+
+            Golfer g = databas.Golfer.Find(gId);
+
+
+            foreach (var item in databas.CompetitionGolfer)
+            {
+                if (g.Id == item.Golfer_ID)
+                {
+                    databas.CompetitionGolfer.Remove(item);
+                }
+            }
+            foreach (var item in databas.TeeTimeDateGolfer)
+            {
+                if (g.Id == item.Golfer_ID)
+                {
+                    databas.TeeTimeDateGolfer.Remove(item);
+                }
+            }
+            databas.Golfer.Remove(g);
+
             databas.Person.Remove(person);
             databas.SaveChanges();
             return RedirectToAction("Index");
