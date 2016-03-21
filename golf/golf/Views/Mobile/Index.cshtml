@@ -19,28 +19,28 @@
 
 <body>
     <div id="wrapper" class="wrapper">
-        @foreach (var i in Model.holeinfo)
+                @foreach (var i in Model.holeinfo)
         {
             string holenr ="hole" + i.Number ;
-            
+
             if(Convert.ToInt16(i.Number) > 1)
             {
-                disp = "none"; 
+                disp = "none";
             }
-            
-            <div id=@i.Number class="myholes" style= "display: @disp " holeid=@i.Id>
-                <h2 id="labelhole1" class="labelhole1">@Html.Label("Hål "+i.Number.ToString()+" - Par: "+i.par.ToString())</h2>
-                <div id="myholesinfo" class="myholesinfo">
-                <label>Fyll i antal slag</label>
-                    @*<label id="labelhole2" class="labelhole2">@Html.Label("Par "+i.par.ToString())</label>*@
-                 
-                </div>
-                <div id="myholescontrols" class="myholescontrols">
-                    <div class="btnMinus" onclick=minus('@holenr')><p>-</p></div>
-                    <div id="numberofstrokes" class="numberofstrokes"><label id="@holenr"class="@holenr">@i.par.ToString()</label></div>
-                    <div class="btnPlus" onclick=plus('@holenr')><p>+</p></div>
-                </div>
-            </div>
+
+                    <div id=@i.Number class="myholes" style="display: @disp " holeid=@i.Id holenr="@holenr">
+                        <h2 id="labelhole1" class="labelhole1">@Html.Label("Hål "+i.Number.ToString()+" - Par: "+i.par.ToString())</h2>
+                        <div id="myholesinfo" class="myholesinfo">
+                            <label>Fyll i antal slag</label>
+                            @*<label id="labelhole2" class="labelhole2">@Html.Label("Par "+i.par.ToString())</label>*@
+
+                        </div>
+                        <div id="myholescontrols" class="myholescontrols">
+                            <div class="btnMinus" onclick=minus('@holenr')><p>-</p></div>
+                            <div id="numberofstrokes" class="numberofstrokes"><label id="@holenr" class="@holenr">@i.par.ToString()</label></div>
+                            <div class="btnPlus" onclick=plus('@holenr')><p>+</p></div>
+                        </div>
+                    </div>
 
         }
 
