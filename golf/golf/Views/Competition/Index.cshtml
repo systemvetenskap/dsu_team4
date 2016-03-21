@@ -78,25 +78,30 @@
     
 
 
-
-
-</div>
-<div class="buttonGreen">
-    @Ajax.ActionLink("Visa tävlingar", "loadComp", new AjaxOptions()
+    <div class="buttonGreen">
+        @Ajax.ActionLink("Visa tävlingar", "loadComp", new AjaxOptions()
 {
     UpdateTargetId = "showComp",
     HttpMethod = "GET",
     InsertionMode = InsertionMode.Replace
 })
-</div>
-<br />
-<div class="adm" style="display: none">
-    <div class="buttonGreen">
-    @Ajax.ActionLink("Skapa tävling", "createComp", new AjaxOptions()
-   {
-       UpdateTargetId = "showComp",
-       HttpMethod = "GET",
-       InsertionMode = InsertionMode.Replace
-   })
     </div>
+
+    <div class="adm" style="display: none">
+        <div class="buttonGreen">
+            @Ajax.ActionLink("Skapa tävling", "createComp", new AjaxOptions()
+{
+    UpdateTargetId = "showComp",
+    HttpMethod = "GET",
+    InsertionMode = InsertionMode.Replace
+})
+        </div>
+    </div>
+
+
+
+
+
 </div>
+
+
