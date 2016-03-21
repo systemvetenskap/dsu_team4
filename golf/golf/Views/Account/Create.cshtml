@@ -8,9 +8,10 @@
 @section featured {
     <section class="featured">
         <div class="content-wrapper">
-            <p>
-                Registrera dig här
-            </p>
+                <p>
+                    Registrera dig här
+                </p>
+
         </div>
     </section>
 }
@@ -96,7 +97,7 @@
                 @Html.DropDownListFor(m => m.memberID, new SelectList(Model.memberType, "Value", "Text"), "Välj medlemstyp", new { id = "membertype", @class = "membertype" })
             </div>
             <p>
-                <input type="submit" id="registerbutton"value="Registrera dig" />
+                <input type="submit" class="buttonGreen" id="registerbutton"value="Registrera dig" />
             </p>
         </fieldset>
     }
