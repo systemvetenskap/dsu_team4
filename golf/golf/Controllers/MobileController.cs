@@ -14,14 +14,14 @@ namespace golf.Controllers
         //
         // GET: /Mobile/
 
-        [Authorize]
-        public ActionResult Index()
+     
+        public ActionResult MobileStart(int cid)
         {
-            //Hårdkodning Person---------Fixa detta från inloggning
+           
 
             int id = Convert.ToInt32(User.Identity.Name);
 
-            //Hårkodning------------------
+           
 
             resultClass rs = new resultClass();
 
@@ -45,9 +45,26 @@ namespace golf.Controllers
                 rs.currentPerson = pg;
                 rs.CompetitionGolferID = db.CompetitionGolfer.Where(x => x.Golfer_ID == golfer.Id && x.Competition_ID == cmp.Id).Select(x => x.Id).FirstOrDefault();
 
+                return View("MobileStart", rs);
+            }
+           
+        }
+        [Authorize]
+        public ActionResult Index()
+        {
+
+            using(dsuteam4Entities1 db = new dsuteam4Entities1())
+            {
+
+                var comp = db.Competition.Where(x => x.cDate == DateTime.Today).ToList();
+                resultClass rs = new resultClass();
+                rs.compList = comp;
+
+                return View("Index", rs);
+
 
             }
-            return View("Index",rs);
+
         }
         public PartialViewResult updateResult(int compid, int compgid, int strokesIn, int holeid)
         {
