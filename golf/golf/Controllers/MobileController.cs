@@ -95,12 +95,13 @@ namespace golf.Controllers
                    extraStrokes = 40;
                }
 
-              var Hcpindex = db.Hole.OrderByDescending(x=>x.HCPind).ToList();               
+              var Hcpindex = db.Hole.OrderBy(x=>x.HCPind).ToList();               
 
                 foreach(var i in Hcpindex)
                 {
                   ScoreCardClass scr = new ScoreCardClass();
                   scr.Id = i.Id;
+                
                   scr.HCPind = i.HCPind;
                   scr.Number = i.Number;
                   scr.par = i.par;
@@ -165,8 +166,9 @@ namespace golf.Controllers
                     
                         
                 }
-                else
+                else if(getPar.Count >= 0)
                 {
+                    
                     int getPrevHole = db.MobileStats.OrderByDescending(x => x.Id).Select(x => x.plusMinus).First();
                    
                     foreach (var i in scrList.Where(x => x.Id == holeid))
@@ -177,9 +179,11 @@ namespace golf.Controllers
                     }
                     var toPar = scrList.Where(x => x.Id == holeid).FirstOrDefault();
                     MobileStats m= new MobileStats();
-                    m = db.MobileStats.Where(x => x.Hole_ID == holeid && x.CompetitionGolfer_ID == compgid).First();
+                    m.Hole_ID = holeid;
+                    m.CompetitionGolfer_ID = compgid;
                     m.strokes = strokesIn;
                     m.plusMinus = toPar.toPar;
+                    db.MobileStats.Add(m);
                     db.SaveChanges();
                 }
 
