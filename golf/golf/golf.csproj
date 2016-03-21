@@ -436,11 +436,11 @@
     <Content Include="Views\Competition\_detailsComp.cshtml" />
     <Content Include="Views\Competition\_addResult.cshtml" />
     <Content Include="Views\Competition\MobileComp.cshtml" />
-    <Content Include="Views\Mobile\MobileStart.cshtml" />
     <Content Include="Views\Competition\_showResult.cshtml" />
     <Content Include="Views\Competition\_noResult.cshtml" />
     <Content Include="Views\Mobile\_listScore.cshtml" />
     <Content Include="Views\Mobile\Index.cshtml" />
+    <Content Include="Views\Mobile\MobileStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

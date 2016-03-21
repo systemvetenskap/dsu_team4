@@ -1,21 +1,17 @@
-﻿@{
-   
+﻿@model golf.Models.resultClass
+
+@{
     Layout = null;
 }
-@model golf.Models.resultClass
 
+<!DOCTYPE html>
 
+<html>
 <head>
-    <title>t1</title>
-    <link href="@Url.Content("~/Content/Mobile.css")" rel="stylesheet" type="text/css" />
-    @*<link rel="stylesheet" href="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">*@
-    <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-
- 
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
 </head>
-
-    <h2>MobileStart</h2>
+<body>
     <div>
         <table>
 
@@ -42,7 +38,7 @@
                     </td>
                     <td>
                         @*<div class="buttonGreen">*@
-                        @Html.ActionLink("Starta", "MobileStart", new { cid = i.Id } )
+                        @Html.ActionLink("Starta", "MobileStart", new { cid = i.Id })
                         @*</div>*@
 
 
@@ -54,7 +50,6 @@
             }
         </table>
 
-
     </div>
-
-
+</body>
+</html>
