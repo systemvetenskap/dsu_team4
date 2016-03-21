@@ -43,8 +43,14 @@ namespace golf.Controllers
                 rs.comp = cmp;
                 rs.holeinfo = db.Hole.Take(cmp.NumberOfHoles).ToList();
                 rs.currentPerson = pg;
-                rs.CompetitionGolferID = db.CompetitionGolfer.Where(x => x.Golfer_ID == golfer.Id && x.Competition_ID == cmp.Id).Select(x => x.Id).FirstOrDefault();
+                var compgid =db.CompetitionGolfer.Where(x => x.Golfer_ID == golfer.Id && x.Competition_ID == cmp.Id).Select(x => x.Id).FirstOrDefault();
+                rs.CompetitionGolferID = compgid;
+                var getLatest = db.MobileStats.Where(x => x.CompetitionGolfer_ID == compgid).ToList();
 
+                var getMax = getLatest.OrderByDescending(x => x.Hole_ID).Select(x => x.Hole_ID).FirstOrDefault();
+                var number = db.Hole.Where(x => x.Id == getMax).Select(x => x.Number).FirstOrDefault();
+                rs.lastInput = Convert.ToInt32(number);
+                rs.scoreboard = getLatest;
                 return View("MobileStart", rs);
             }
            

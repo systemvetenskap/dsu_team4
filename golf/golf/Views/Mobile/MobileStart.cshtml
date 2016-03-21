@@ -2,7 +2,7 @@
 
 @{
     Layout = null;
-    string disp = "block";
+    string disp = "none";
 }
 
 <!DOCTYPE html>
@@ -25,12 +25,25 @@
         @foreach (var i in Model.holeinfo)
         {
             string holenr = "hole" + i.Number;
-
-            if (Convert.ToInt16(i.Number) > 1)
+            string nr = "";
+            
+            if (Convert.ToInt16(i.Number) == Model.lastInput || Model.lastInput == 0 && Convert.ToInt32(i.Number) == 1)
+            {
+                disp = "block";
+            }
+            else
             {
                 disp = "none";
             }
-
+            var score = Model.scoreboard.Where(x => x.Hole_ID == i.Id).Select(x => x.strokes).FirstOrDefault();
+            if(score > 0)
+            {
+                nr = score.ToString();
+            }
+            else
+            {
+                nr = i.par.ToString();
+            }
             <div id=@i.Number class="myholes" style="display: @disp " holeid=@i.Id holenr="@holenr">
                 <h2 id="labelhole1" class="labelhole1">@Html.Label("Hål " + i.Number.ToString() + " - Par: " + i.par.ToString())</h2>
                 <div id="myholesinfo" class="myholesinfo">
@@ -40,7 +53,9 @@
                 </div>
                 <div id="myholescontrols" class="myholescontrols">
                     <div class="btnMinus" onclick=minus('@holenr')><p>-</p></div>
-                    <div id="numberofstrokes" class="numberofstrokes"><label id="@holenr" class="@holenr">@i.par.ToString()</label></div>
+
+                    <div id="numberofstrokes" class="numberofstrokes"><label id="@holenr" class="@holenr">@nr</label></div>
+
                     <div class="btnPlus" onclick=plus('@holenr','@i.par.ToString()')><p>+</p></div>
                 </div>
             </div>
