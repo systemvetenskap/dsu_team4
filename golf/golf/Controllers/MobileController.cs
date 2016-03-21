@@ -18,7 +18,7 @@ namespace golf.Controllers
         {
             //Hårdkodning Person---------Fixa detta från inloggning
 
-            int id = 922;
+            int id = 192;
 
             //Hårkodning------------------
 
@@ -140,11 +140,27 @@ namespace golf.Controllers
 
                 }
 
-                foreach(var i in scrList.Where(x=>x.Id == holeid))
-                {
-                    i.playerStrokes = strokesIn;
+                var getPar = db.MobileStats.Where(x => x.CompetitionGolfer_ID == compgid).ToList();
 
+                if(getPar != null)
+                {
+                        int getPrevHole = db.MobileStats.OrderByDescending(x => x.Id).Select(x => x.plusMinus).First();
+              
+                        
+                        foreach (var i in scrList.Where(x => x.Id == holeid))
+                        {
+                            i.playerStrokes = strokesIn;
+                            i.calcPoints(getPrevHole);
+
+                        }
+                    
+                    
+  
                 }
+    
+               
+
+
 
                 var prevPar = 0;
                 var order = scrList.OrderBy(x => x.Id).ToList();

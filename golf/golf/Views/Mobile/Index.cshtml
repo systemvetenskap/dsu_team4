@@ -28,7 +28,7 @@
                 disp = "none"; 
             }
             
-            <div id=@i.Number class="myholes" style= "display: @disp " holeid=@i.Id>
+            <div id=@i.Number class="myholes" style= "display: @disp " holeid=@i.Id holenr="@holenr">
                 <h2>Fyll i antal slag</h2>
                 <div id="myholesinfo" class="myholesinfo">
                     <label id="labelhole1" class="labelhole1">@Html.Label("Hål "+i.Number.ToString())</label>
@@ -85,6 +85,7 @@
     function swipeleftHandler(event) {
         
         var holeid = $(this).attr('holeid');
+        var holenr = $(this).attr('holenr');
         var currentDiv = $(this).attr('id');      
         var currNr = Number(currentDiv);
         var nextDivNr = currNr + 1;
@@ -96,15 +97,15 @@
         $(curr.toString()).toggle("left");
         $(next.toString()).toggle("right");
 
-        loadData(holeid);
+        loadData(holeid, holenr);
 
     }
 
-    function loadData(hid) {
+    function loadData(hid, hnr) {
         var c = @Model.comp.Id;
         var cgd = @Model.CompetitionGolferID;
-        var stro = 5;
-      
+        var stro = document.getElementById(hnr).innerText;
+        
         $.ajax({
             url: '/Mobile/updateResult',
             contentType: 'application/html; charset=utf-8',
