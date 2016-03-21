@@ -290,6 +290,7 @@ namespace golf.Controllers
                 var join3 = from p in dbo.Person.ToList()
                             join j in t2.ToList()
                             on p.Id equals j.Person_ID
+                            orderby j.plusMinus ascending
                             select new { p.firstName, p.lastName, j.plusMinus, j.strokes };
 
                 var t3 = join3.ToList();
