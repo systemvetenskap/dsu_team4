@@ -284,6 +284,8 @@ namespace golf.Controllers
         public List<CompetitionGolfer> RandomCGStartTimes(int id)
         {
             dsuteam4Entities1 databas = new dsuteam4Entities1(); //Databasconnection
+            System.Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo("sv-SE");
+            System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo("sv-SE");
 
             //var list = databas.CompetitionGolfer.ToList(); //Lista med alla golfare anmälda till tävlingen
             //CompetitionGolfer cg = new CompetitionGolfer();
