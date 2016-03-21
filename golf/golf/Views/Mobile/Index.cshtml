@@ -38,7 +38,7 @@
                         <div id="myholescontrols" class="myholescontrols">
                             <div class="btnMinus" onclick=minus('@holenr')><p>-</p></div>
                             <div id="numberofstrokes" class="numberofstrokes"><label id="@holenr" class="@holenr">@i.par.ToString()</label></div>
-                            <div class="btnPlus" onclick=plus('@holenr')><p>+</p></div>
+                            <div class="btnPlus" onclick=plus('@holenr','@i.par.ToString()')><p>+</p></div>
                         </div>
                     </div>
 
@@ -59,23 +59,28 @@
 
     $(".myholes").on("swiperight", swiperightHandler);
     $(".myholes").on("swipeleft", swipeleftHandler);
-    function plus(id)
+    function plus(id, par)
     {
            
         varnr = document.getElementById(id).innerText; 
         var tonr = Number(varnr);
+        if(tonr < Number(par) + 5)
+        {
         var next = tonr + 1;
- 
         document.getElementById(id).innerText = next;
+        }       
     }
     function minus(id)
     {
-  
+        
         varnr = document.getElementById(id).innerText;    
         var tonr = Number(varnr);
+        
+        if(tonr >= 2)
+        {
         var next = tonr - 1;
-
         document.getElementById(id).innerText = next;
+        }    
 
         }
     function swiperightHandler( event ){

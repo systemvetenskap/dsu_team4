@@ -9,7 +9,7 @@
 }
 @model golf.Models.Person
 <div class="MemberManagementDelete" id="MemberManagementDelete">
-    <h2>Delete</h2>
+    <h2>Ta bort medlem</h2>
 
     
     <fieldset>
@@ -70,8 +70,8 @@
     {
         @Html.AntiForgeryToken()
         <p>
-            <input type="submit" value="Delete" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Radera" class="buttonGreen" /> |
+            @Html.ActionLink("Tillbaka", "Index")
         </p>
     }
     </div>
