@@ -247,7 +247,10 @@ table.resultTable.tbody{border-radius:15px;}
 }
 
 
-
+.containPicker{
+    text-align:center;
+    
+}
 .knappar{
     border:2px;
 }
@@ -449,7 +452,7 @@ hgroup.title h2 {
 	border:1px solid #3b6e22;
 	display:inline-block;
 	cursor:pointer;
-	color:#ffffff;
+
 	font-family:Arial;
 	font-size:13px;
 	font-weight:bold;

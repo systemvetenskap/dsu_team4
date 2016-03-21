@@ -131,7 +131,7 @@
                 </td>*@
 
                 <td>
-                    <div class="buttona">
+                    <div class="buttonGreen">
                         @Ajax.ActionLink("Visa detaljer", "detailsComp", new { id = Model.complist[i].Id }, new AjaxOptions()
                    {
 
@@ -148,7 +148,7 @@
 
                 <td>
                     <div class="isAdmin2" style="display:none">
-                        <div class="buttona">
+                        <div class="buttonGreen">
                             @Ajax.ActionLink("Resultat", "showResult", new { id = Model.complist[i].Id }, new AjaxOptions()
                        {
                            UpdateTargetId = "showComp",
@@ -160,7 +160,7 @@
                 </td>
                 <td>
                     <div class="isAdmin2" style="display:none">
-                        <div class="buttona">
+                        <div class="buttonGreen">
                             
                             @Ajax.ActionLink("Spelarlista", "registerResult", new { id = Model.complist[i].Id }, new AjaxOptions()
                        {
@@ -209,7 +209,7 @@
             })*@
                         @if ((Model.complist[i].signUpFrom.Date <= DateTime.Now.Date) && (Model.complist[i].signUpTo.Date >= DateTime.Now.Date))
                         {
-                    <div class="buttona">
+                    <div class="buttonGreen">
                             @Html.ActionLink("Anmäl spelare", "addPlayer", new { id = Model.complist[i].Id })
                     </div>
                         }
