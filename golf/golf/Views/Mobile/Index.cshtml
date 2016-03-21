@@ -19,28 +19,28 @@
 
 <body>
     <div id="wrapper" class="wrapper">
-        @foreach (var i in Model.holeinfo)
+                @foreach (var i in Model.holeinfo)
         {
             string holenr ="hole" + i.Number ;
-            
+
             if(Convert.ToInt16(i.Number) > 1)
             {
-                disp = "none"; 
+                disp = "none";
             }
-            
-            <div id=@i.Number class="myholes" style= "display: @disp " holeid=@i.Id>
-                <h2>Fyll i antal slag</h2>
-                <div id="myholesinfo" class="myholesinfo">
-                    <label id="labelhole1" class="labelhole1">@Html.Label("Hål "+i.Number.ToString())</label>
-                    <label id="labelhole2" class="labelhole2">@Html.Label("Par "+i.par.ToString())</label>
-                 
-                </div>
-                <div id="myholescontrols" class="myholescontrols">
-                    <div class="btn" onclick=minus('@holenr')><p>-</p></div>
-                    <div id="numberofstrokes" class="numberofstrokes"><label id="@holenr"class="@holenr">5</label></div>
-                    <div class="btn" onclick=plus('@holenr')><p>+</p></div>
-                </div>
-            </div>
+
+                    <div id=@i.Number class="myholes" style="display: @disp " holeid=@i.Id holenr="@holenr">
+                        <h2 id="labelhole1" class="labelhole1">@Html.Label("Hål "+i.Number.ToString()+" - Par: "+i.par.ToString())</h2>
+                        <div id="myholesinfo" class="myholesinfo">
+                            <label>Fyll i antal slag</label>
+                            @*<label id="labelhole2" class="labelhole2">@Html.Label("Par "+i.par.ToString())</label>*@
+
+                        </div>
+                        <div id="myholescontrols" class="myholescontrols">
+                            <div class="btnMinus" onclick=minus('@holenr')><p>-</p></div>
+                            <div id="numberofstrokes" class="numberofstrokes"><label id="@holenr" class="@holenr">@i.par.ToString()</label></div>
+                            <div class="btnPlus" onclick=plus('@holenr','@i.par.ToString()')><p>+</p></div>
+                        </div>
+                    </div>
 
         }
 
@@ -59,23 +59,28 @@
 
     $(".myholes").on("swiperight", swiperightHandler);
     $(".myholes").on("swipeleft", swipeleftHandler);
-    function plus(id)
+    function plus(id, par)
     {
            
         varnr = document.getElementById(id).innerText; 
         var tonr = Number(varnr);
+        if(tonr < Number(par) + 5)
+        {
         var next = tonr + 1;
- 
         document.getElementById(id).innerText = next;
+        }       
     }
     function minus(id)
     {
-  
+        
         varnr = document.getElementById(id).innerText;    
         var tonr = Number(varnr);
+        
+        if(tonr >= 2)
+        {
         var next = tonr - 1;
-
         document.getElementById(id).innerText = next;
+        }    
 
         }
     function swiperightHandler( event ){
@@ -85,6 +90,7 @@
     function swipeleftHandler(event) {
         
         var holeid = $(this).attr('holeid');
+        var holenr = $(this).attr('holenr');
         var currentDiv = $(this).attr('id');      
         var currNr = Number(currentDiv);
         var nextDivNr = currNr + 1;
@@ -96,14 +102,14 @@
         $(curr.toString()).toggle("left");
         $(next.toString()).toggle("right");
 
-        loadData(holeid);
+        loadData(holeid, holenr);
 
     }
 
-    function loadData(hid) {
+    function loadData(hid, hnr) {
         var c = @Model.comp.Id;
         var cgd = @Model.CompetitionGolferID;
-        var stro = 5;
+        var stro = document.getElementById(hnr).innerText;
       
         $.ajax({
             url: '/Mobile/updateResult',

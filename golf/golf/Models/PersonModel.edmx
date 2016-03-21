@@ -114,7 +114,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="strokes" Type="int" />
-          <Property Name="plusMinus" Type="int" />
+          <Property Name="plusMinus" Type="int" Nullable="false" />
           <Property Name="CompetitionGolfer_ID" Type="int" Nullable="false" />
           <Property Name="Hole_ID" Type="int" Nullable="false" />
         </EntityType>
@@ -1115,7 +1115,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="strokes" Type="Int32" />
-          <Property Name="plusMinus" Type="Int32" />
+          <Property Name="plusMinus" Type="Int32" Nullable="false" />
           <Property Name="CompetitionGolfer_ID" Type="Int32" Nullable="false" />
           <Property Name="Hole_ID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CompetitionGolfer" Relationship="dsuteam4Model1.FK_MobileStats_ToCompetitionGolfer" FromRole="MobileStats" ToRole="CompetitionGolfer" />

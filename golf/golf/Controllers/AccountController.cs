@@ -178,20 +178,25 @@ namespace golf.Controllers
                     //{
                     //    //do something
                     //}
+
+                    bool admin = false;
                     foreach (var Pa in db.AdminPerson)
                     {
-
-
                         if (P.Id == Pa.Person_ID)
                         {
-                            return RedirectToAction("Index", "TeeTime");
-                        }
-                        else
-                        {
-                            return RedirectToAction("MyPage");
+                            admin = true;
                         }
                     }
-                   
+
+
+                    if (admin == true)
+                    {
+                        return RedirectToAction("Index", "TeeTime");
+                    }
+                    else
+                    {
+                        return RedirectToAction("MyPage");
+                    }
                 }
             }
       
