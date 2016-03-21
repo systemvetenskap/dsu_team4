@@ -21,7 +21,8 @@
     <div id="wrapper" class="wrapper">
         @foreach (var i in Model.holeinfo)
         {
-           
+            string holenr ="hole" + i.Number ;
+            
             if(Convert.ToInt16(i.Number) > 1)
             {
                 disp = "none"; 
@@ -32,17 +33,12 @@
                 <div id="myholesinfo" class="myholesinfo">
                     <label id="labelhole1" class="labelhole1">@Html.Label("Hål "+i.Number.ToString())</label>
                     <label id="labelhole2" class="labelhole2">@Html.Label("Par "+i.par.ToString())</label>
-                    <label id="siffra" class="siffra">5</label>
+                 
                 </div>
                 <div id="myholescontrols" class="myholescontrols">
-                    <div class="btn" onclick=minus()><p>-</p></div>
-                    <div id="numberofstrokes" class="numberofstrokes"><p>@Ajax.ActionLink("Test", "updateResult", new { compid = @Model.comp.Id, compgid = @Model.CompetitionGolferID, strokesIn = 5, holeid = i.Id }, new AjaxOptions()
-                                                                    {
-                                                                        UpdateTargetId = "entirelist",
-                                                                        HttpMethod = "GET",
-                                                                        InsertionMode = InsertionMode.Replace
-                                                                    })</p></div>
-                    <div class="btn" onclick=plus();><p>+</p></div>
+                    <div class="btn" onclick=minus('@holenr')><p>-</p></div>
+                    <div id="numberofstrokes" class="numberofstrokes"><label id="@holenr"class="@holenr">5</label></div>
+                    <div class="btn" onclick=plus('@holenr')><p>+</p></div>
                 </div>
             </div>
 
@@ -63,21 +59,24 @@
 
     $(".myholes").on("swiperight", swiperightHandler);
     $(".myholes").on("swipeleft", swipeleftHandler);
-    function plus()
+    function plus(id)
     {
-        varnr = document.getElementById('siffra').innerText;    
+           
+        varnr = document.getElementById(id).innerText; 
         var tonr = Number(varnr);
         var next = tonr + 1;
  
-        document.getElementById('siffra').innerText = next;
+        document.getElementById(id).innerText = next;
     }
-    function minus()
-        {
-        varnr = document.getElementById('siffra').innerText;    
+    function minus(id)
+    {
+  
+        varnr = document.getElementById(id).innerText;    
         var tonr = Number(varnr);
         var next = tonr - 1;
 
-        document.getElementById('siffra').innerText = next;
+        document.getElementById(id).innerText = next;
+
         }
     function swiperightHandler( event ){
        

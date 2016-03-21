@@ -197,6 +197,11 @@ namespace golf.Controllers
                     databas.Competition.Add(comp);
                     databas.SaveChanges();
 
+
+
+
+
+
                 }
                 using (dsuteam4Entities1 ndatabas = new dsuteam4Entities1())
                 {
@@ -205,9 +210,46 @@ namespace golf.Controllers
                     c.complist = ndatabas.Competition.ToList();
                     c.currentDate = DateTime.Today;
 
+                    int userGolfer = -1;
+                    int userInt = Convert.ToInt32(User.Identity.Name);
+                    Person pp = ndatabas.Person.Find(userInt);
+
+                    foreach (var item in ndatabas.Golfer)
+                    {
+                        if (pp.Id == item.Person_ID)
+                        {
+                            userGolfer = item.Id;
+                        }
+                    }
+
+
+                    foreach (var item in c.complist)
+                    {
+
+                        bool already = false;
+
+                        foreach (var item2 in item.CompetitionGolfer)
+                        {
+                            if (item2.Golfer_ID == userGolfer)
+                            {
+                                already = true;
+                            }
+
+                        }
+
+                        c.alreadySigned.Add(already);
+
+                    }
+
+
                     return View("Index", c);
                 }
             }
+
+
+
+
+
 
             return PartialView("_createComp", cc);
         }
