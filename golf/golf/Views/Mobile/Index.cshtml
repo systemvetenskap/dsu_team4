@@ -9,47 +9,22 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <link href="@Url.Content("~/Content/Mobile.css")" rel="stylesheet" type="text/css" />
     <title>Index</title>
 </head>
 <body>
-    <div>
-        <table>
+    <div class=" outerContainer">
+        <div class="btnContainer">
 
-            <tr>
-                <th>
+                @foreach (var i in Model.compList)
+                {
 
-                    @Html.Label("Tävling")
-
-
-                </th>
-                <th>
-                    @Html.Label("Starta")
-                </th>
-
-            </tr>
-            @foreach (var i in Model.compList)
-            {
-
-                <tr>
-
-                    <td>
-                        @Html.Label(i.name.ToString())
-
-                    </td>
-                    <td>
-                        @*<div class="buttonGreen">*@
-                        @Html.ActionLink("Starta", "MobileStart", new { cid = i.Id})
-                        @*</div>*@
+                    <input type="button" value="Starta @i.name.ToString()" class="btnStart" onclick="window.location.href=('@Url.Action("MobileStart", "Mobile")?cid='+@i.Id)" />
+                }
 
 
-                    </td>
-
-
-
-                </tr>
-            }
-        </table>
-
+        </div>
     </div>
+
 </body>
 </html>
