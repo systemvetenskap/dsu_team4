@@ -26,6 +26,7 @@
         <br>
         <br>
         <input type="submit" value="Logga in" id="loginbutton" @*onclick="CheckEmpty()"*@/>
+        @Html.Hidden("url", ViewData["url"].ToString())
     }
 </div>
 <script type="text/javascript">

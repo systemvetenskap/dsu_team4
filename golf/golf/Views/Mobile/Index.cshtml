@@ -85,7 +85,20 @@
         }
     function swiperightHandler( event ){
        
+        var holeid = $(this).attr('holeid');
+        var holenr = $(this).attr('holenr');
+        var currentDiv = $(this).attr('id');      
+        var currNr = Number(currentDiv);
+        var nextDivNr = currNr - 1;
         
+        var curr = '#' + currentDiv;
+        var next = '#' + nextDivNr;
+
+       
+        $(curr.toString()).toggle("right");
+        $(next.toString()).toggle("left");
+
+        //loadPrev(holeid);
     }
     function swipeleftHandler(event) {
         
@@ -115,6 +128,30 @@
             url: '/Mobile/updateResult',
             contentType: 'application/html; charset=utf-8',
             data: { compid: c, compgid: cgd, strokesIn: stro, holeid: hid },
+            type: 'GET',
+            dataType: 'html'
+
+        })
+        .success(function (result) {
+            $('#entirelist').html(result);
+           
+
+        })
+        .error(function (xhr, status) {
+            alert(status);
+        })
+
+    }
+
+    function loadPrev(holeid) {
+        var c = @Model.comp.Id;
+        var cgd = @Model.CompetitionGolferID;
+        var stro = document.getElementById(hnr).innerText;
+      
+        $.ajax({
+            url: '/Mobile/updateResult',
+            contentType: 'application/html; charset=utf-8',
+            data: { compid: c, compgid: cgd, holeid: hid },
             type: 'GET',
             dataType: 'html'
 
