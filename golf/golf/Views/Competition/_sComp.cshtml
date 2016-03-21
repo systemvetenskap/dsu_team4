@@ -176,6 +176,8 @@
                             @*Här ska det vara annan actionlink sen!*@
                             @if ((Model.complist[i].signUpFrom.Date <= DateTime.Now.Date) && (Model.complist[i].signUpTo.Date >= DateTime.Now.Date) && (Model.complist[i].CompeteClass_ID == 1 || Model.complist[i].CompeteClass_ID == Model.currentUser.gender_ID))
                             {
+                                
+
                                 if (Model.alreadySigned[i] == false)
                                 {
                                     <div class="buttona">
