@@ -17,6 +17,11 @@ body {
     overflow-y: scroll;
 }
 
+.timeInfo{
+    font-weight:bold;
+    font-size:200%;
+    text-align:center;
+}
 
 
 a {

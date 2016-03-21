@@ -76,9 +76,14 @@ namespace golf.Controllers
         }
 
 
-        public ActionResult Login()
+        public ActionResult Login(string returnurl)
         {
             ViewBag.Message = "Logga in här";
+             string url = (string.IsNullOrEmpty(returnurl)
+            ? Request.QueryString["Returnurl"] ?? string.Empty
+            : returnurl)
+            .Trim('/');
+            ViewData["url"] = url;
             return View();
         }
         public ActionResult Index2()
@@ -150,10 +155,11 @@ namespace golf.Controllers
         }
 
        
-        public ActionResult LogInCheck(Person model)
+        public ActionResult LogInCheck(Person model, string url)
         {
             String email = model.email;
             String PW = model.PW;
+
             foreach (Person P in db.Person)
             {
                 if (P.email == email && P.PW == PW)
@@ -191,7 +197,11 @@ namespace golf.Controllers
 
                     if (admin == true)
                     {
-                        return RedirectToAction("Index", "TeeTime");
+                        if(url == "")
+                        {
+                            url = "TeeTime/Index";
+                        }
+                        return RedirectToAction("Index", url);
                     }
                     else
                     {

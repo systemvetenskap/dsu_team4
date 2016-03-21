@@ -10,8 +10,8 @@
 @model golf.Models.Person
 
 <div class="MemberManagementDetails" id="MemberManagementDetails">
-
-
+    <h2>Personuppgifter</h2>
+    <br>
     <fieldset>
         <legend>Person</legend>
 
@@ -75,8 +75,13 @@
     </fieldset>
 
 
-    <p>
-        @Html.ActionLink("Ändra", "Edit", new { id = Model.Id }) |
-        @Html.ActionLink("Tillbaka", "Index")
-    </p>
+        <p>
+            <div class="buttonGreen">
+                @Html.ActionLink("Ändra", "Edit", new { id = Model.Id }) 
+                </div>
+            <div class="buttonGreen">
+                @Html.ActionLink("Tillbaka", "Index")
+            </div>
+</p>
+
     </div>

@@ -14,11 +14,12 @@ namespace golf.Controllers
         //
         // GET: /Mobile/
 
+        [Authorize]
         public ActionResult Index()
         {
             //Hårdkodning Person---------Fixa detta från inloggning
 
-            int id = 192;
+            int id = Convert.ToInt32(User.Identity.Name);
 
             //Hårkodning------------------
 
@@ -95,12 +96,13 @@ namespace golf.Controllers
                    extraStrokes = 40;
                }
 
-              var Hcpindex = db.Hole.OrderByDescending(x=>x.HCPind).ToList();               
+              var Hcpindex = db.Hole.OrderBy(x=>x.HCPind).ToList();               
 
                 foreach(var i in Hcpindex)
                 {
                   ScoreCardClass scr = new ScoreCardClass();
                   scr.Id = i.Id;
+                
                   scr.HCPind = i.HCPind;
                   scr.Number = i.Number;
                   scr.par = i.par;
@@ -165,22 +167,57 @@ namespace golf.Controllers
                     
                         
                 }
-                else
+                else if(getPar.Count > 0)
                 {
-                    int getPrevHole = db.MobileStats.OrderByDescending(x => x.Id).Select(x => x.plusMinus).First();
-                   
-                    foreach (var i in scrList.Where(x => x.Id == holeid))
+                    var get = getPar.Where(x=>x.CompetitionGolfer_ID == compgid && x.Hole_ID == holeid).FirstOrDefault();
+                    if(get == null)
                     {
-                        i.playerStrokes = strokesIn;
-                        i.calcPoints(getPrevHole);
+                        int getPrevHole = db.MobileStats.OrderByDescending(x => x.Id).Select(x => x.plusMinus).First();
+
+                        foreach (var i in scrList.Where(x => x.Id == holeid))
+                        {
+                            i.playerStrokes = strokesIn;
+                            i.calcPoints(getPrevHole);
+
+                        }
+                        var toPar = scrList.Where(x => x.Id == holeid).FirstOrDefault();
+                        MobileStats m = new MobileStats();
+                        m.Hole_ID = holeid;
+                        m.CompetitionGolfer_ID = compgid;
+                        m.strokes = strokesIn;
+                        m.plusMinus = toPar.toPar;
+                        db.MobileStats.Add(m);
+                        db.SaveChanges();
 
                     }
-                    var toPar = scrList.Where(x => x.Id == holeid).FirstOrDefault();
-                    MobileStats m= new MobileStats();
-                    m = db.MobileStats.Where(x => x.Hole_ID == holeid && x.CompetitionGolfer_ID == compgid).First();
-                    m.strokes = strokesIn;
-                    m.plusMinus = toPar.toPar;
-                    db.SaveChanges();
+                    else
+                    {
+                        string cHole = db.Hole.Where(x => x.Id == holeid).Select(x=>x.Number).FirstOrDefault();
+                        int pHole = Convert.ToInt32(cHole) - 1;
+                        var prevHolePar = 0;
+                        if(pHole > 0)
+                        {
+                            string s1 = pHole.ToString();
+                            var getHole = db.Hole.Where(x => x.Number == s1).Select(x => x.Id).FirstOrDefault();
+                            prevHolePar = db.MobileStats.Where(x => x.CompetitionGolfer_ID == compgid && x.Hole_ID == getHole).Select(x => x.plusMinus).FirstOrDefault();
+                        }
+               
+                        foreach (var i in scrList.Where(x => x.Id == holeid))
+                        {
+                            i.playerStrokes = strokesIn;
+                            i.calcPoints(prevHolePar);
+
+                        }
+                        var toPar = scrList.Where(x => x.Id == holeid).FirstOrDefault();
+                        MobileStats m = db.MobileStats.Where(x => x.Hole_ID == holeid && x.CompetitionGolfer_ID == compgid).First();         
+                        m.strokes = strokesIn;
+                        m.plusMinus = toPar.toPar;
+                       
+                        db.SaveChanges();    
+
+
+                    }
+   
                 }
 
                
@@ -264,6 +301,24 @@ namespace golf.Controllers
             
 
         }
+        //public PartialViewResult prevHole(int compid, int compgid, int holeid)
+        //{
+
+        //    using (dsuteam4Entities1 db = new dsuteam4Entities1())
+        //    {
+        //        string cHole = db.Hole.Where(x => x.Id == holeid).Select(x=>x.Number).FirstOrDefault();
+        //        int pHole = Convert.ToInt32(cHole) - 1;
+        //        var getHole = db.Hole.Where(x => x.Number == pHole.ToString()).Select(x => x.Id).FirstOrDefault();
+        //        var currHole = db.MobileStats.Where(x => x.CompetitionGolfer_ID == compgid && x.Hole_ID == getHole).FirstOrDefault();
+
+        //        resultClass rs = new resultClass();
+        //        rs.comp = db.Competition.Where()
+
+
+        //    }
+
+        //    return PartialView("_listScore", rs);
+        //}
 
     }
 }
