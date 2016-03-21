@@ -247,7 +247,10 @@ table.resultTable.tbody{border-radius:15px;}
 }
 
 
-
+.containPicker{
+    text-align:center;
+    
+}
 .knappar{
     border:2px;
 }
