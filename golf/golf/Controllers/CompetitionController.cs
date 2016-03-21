@@ -85,6 +85,7 @@ namespace golf.Controllers
                     }
 
                     cc.alreadySigned.Add(already);
+
                 }
 
 
@@ -129,7 +130,36 @@ namespace golf.Controllers
                 //    }
                 //}
 
+                int userGolfer = -1;
+                int userInt = Convert.ToInt32(User.Identity.Name);
+                Person pp = databas.Person.Find(userInt);
 
+                foreach (var item in databas.Golfer)
+                {
+                    if (pp.Id == item.Person_ID)
+                    {
+                        userGolfer = item.Id;
+                    }
+                }
+
+
+                foreach (var item in cc.complist)
+                {
+
+                    bool already = false;
+
+                    foreach (var item2 in item.CompetitionGolfer)
+                    {
+                        if (item2.Golfer_ID == userGolfer)
+                        {
+                            already = true;
+                        }
+
+                    }
+
+                    cc.alreadySigned.Add(already);
+
+                }
 
 
                 return PartialView("_sComp", cc);
