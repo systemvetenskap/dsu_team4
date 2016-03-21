@@ -3,6 +3,7 @@
 @{
     Layout = null;
     string disp = "none";
+    int length = @Model.comp.NumberOfHoles + 1;
 }
 
 <!DOCTYPE html>
@@ -22,12 +23,18 @@
 
 <body>
     <div id="wrapper" class="wrapper">
+        <div class="myholes" id="0" style="display: none">
+            @Html.Label("första diven")
+
+        </div>
+        
         @foreach (var i in Model.holeinfo)
         {
             string holenr = "hole" + i.Number;
             string nr = "";
             
-            if (Convert.ToInt16(i.Number) == Model.lastInput || Model.lastInput == 0 && Convert.ToInt32(i.Number) == 1)
+            
+            if (Convert.ToInt16(i.Number) == Model.lastInput)
             {
                 disp = "block";
             }
@@ -61,6 +68,11 @@
             </div>
 
         }
+     
+        <div id="@length" class="myholes" style="display: none ">
+
+            @Html.Label("sista diven")
+        </div>
 
 
         <br>
@@ -103,37 +115,48 @@
         }
     function swiperightHandler( event ){
 
-        var holeid = $(this).attr('holeid');
-        var holenr = $(this).attr('holenr');
+       
+
         var currentDiv = $(this).attr('id');
         var currNr = Number(currentDiv);
+      
         var nextDivNr = currNr - 1;
 
         var curr = '#' + currentDiv;
         var next = '#' + nextDivNr;
+       
+        if(currNr != 0)
+        {
+            $(curr.toString()).toggle("right");
+            $(next.toString()).toggle("left");
+        }
 
+        
 
-        $(curr.toString()).toggle("right");
-        $(next.toString()).toggle("left");
 
         //loadPrev(holeid);
     }
     function swipeleftHandler(event) {
-
+    
+        var max = @length;
         var holeid = $(this).attr('holeid');
         var holenr = $(this).attr('holenr');
         var currentDiv = $(this).attr('id');
         var currNr = Number(currentDiv);
+        var maxNr = Number(max);
         var nextDivNr = currNr + 1;
 
         var curr = '#' + currentDiv;
         var next = '#' + nextDivNr;
 
-
-        $(curr.toString()).toggle("left");
-        $(next.toString()).toggle("right");
-
-        loadData(holeid, holenr);
+        if(currNr != maxNr)
+        {
+        
+            $(curr.toString()).toggle("left");
+            $(next.toString()).toggle("right");
+            loadData(holeid, holenr);
+        }
+        
 
     }
 

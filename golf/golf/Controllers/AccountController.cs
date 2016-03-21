@@ -205,7 +205,13 @@ namespace golf.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("MyPage");
+                        if(url == "")
+                        {
+                            url = "Account/MyPage";
+                            
+                        }
+                        return RedirectToAction("Index",url);
+                      
                     }
                 }
             }
