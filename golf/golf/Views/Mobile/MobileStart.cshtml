@@ -2,7 +2,18 @@
 
 @{
     Layout = null;
-    string disp = "none";
+    string disp = "";
+    string disp1 = "";
+    if(Model.lastInput == 0)
+    {
+       disp1 = "block";
+    }
+    else  
+    {
+       disp1 = "none";
+    }
+    
+    disp = "none";
     int length = @Model.comp.NumberOfHoles + 1;
 }
 
@@ -23,8 +34,9 @@
 
 <body>
     <div id="wrapper" class="wrapper">
-        <div class="myholes" id="0" style="display: none">
-            @Html.Label("första diven")
+        <div class="myholes" id="0" style="display: @disp1" holeid="0" holenr="0">
+            <h2 id="labelhole1" class="labelhole1">@Html.Label("Hej " + Model.currentPerson.firstName + "!")</h2>
+            <h3>Dra fingret åt vänster för starta!</h3>
 
         </div>
         
@@ -71,7 +83,7 @@
      
         <div id="@length" class="myholes" style="display: none ">
 
-            @Html.Label("sista diven")
+            <h2 id="labelhole1" class="labelhole1">@Html.Label("Nu är samtliga hål spelade!")</h2>
         </div>
 
 
@@ -137,24 +149,36 @@
         //loadPrev(holeid);
     }
     function swipeleftHandler(event) {
-    
+        
         var max = @length;
-        var holeid = $(this).attr('holeid');
-        var holenr = $(this).attr('holenr');
         var currentDiv = $(this).attr('id');
         var currNr = Number(currentDiv);
         var maxNr = Number(max);
+        if(currNr != maxNr)
+        {
+      
+        var holeid = $(this).attr('holeid');
+        var holenr = $(this).attr('holenr');
+        var hidnr = Number(holeid);
+        var hnr = Number(holenr);
+
         var nextDivNr = currNr + 1;
 
         var curr = '#' + currentDiv;
         var next = '#' + nextDivNr;
-
-        if(currNr != maxNr)
-        {
         
+  
+       
             $(curr.toString()).toggle("left");
             $(next.toString()).toggle("right");
-            loadData(holeid, holenr);
+
+            if(hidnr != 0 && hnr != 0)
+            {
+              
+              
+                loadData(holeid, holenr);
+            }
+            
         }
         
 
@@ -164,7 +188,7 @@
         var c = @Model.comp.Id;
         var cgd = @Model.CompetitionGolferID;
         var stro = document.getElementById(hnr).innerText;
-
+        alert("rätt");
         $.ajax({
             url: '/Mobile/updateResult',
             contentType: 'application/html; charset=utf-8',
