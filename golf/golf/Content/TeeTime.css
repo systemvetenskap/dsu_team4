@@ -5,35 +5,25 @@
     width: 100%;
     display:block;
     margin-bottom:3%;
-   
-    
-    
-    
+    margin:0 auto;
 }
 .hourAndMinutes{
     width:7%;
     float: left;
     margin-left: 1%;
+
     text-align:center;
-
-
-    
 }
 .timedivHour{
-
-    /*background-color: lightgreen;*/
     font-weight: bold;
     width:100%;
-    padding-bottom: 50%;
-    margin-left: 10%;
-    margin-bottom: 10%;
-    float: left;
+    padding-bottom: 20%;
+    padding-top:20%;
     display: inline-block;
     overflow: hidden;
-    border-radius:15%;
-    border:1px solid black;
+    border-radius:49%;
+    border:1px solid green;
     text-align:center;
-
 }
 .timedivHour[booked = "grey"]{
     background-color: grey;
@@ -43,17 +33,15 @@
 }
 .timedivMin{
     width:100%;
-    padding-bottom: 50%;
-    margin-left: 10%;
-    margin-bottom: 10%;
-    float: left;
+    padding-bottom: 20%;
+    padding-top:20%;
+
     display: inline-block;
     overflow: hidden;
-    border-radius:15%;
-    border:1px solid black;
+    border-radius:49%;
+    border:1px solid green;
     text-align:center;
-    
-    
+ 
 }
 .timedivMin nrLbl{
     overflow: hidden;

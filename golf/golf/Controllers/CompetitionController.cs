@@ -976,9 +976,18 @@ namespace golf.Controllers
 
                 }
 
+                Golfer gol = d.Golfer.Find(golferid);
+
+                string name = gol.Person.firstName + " " + gol.Person.lastName;
+
+                TempData["addedP"] = name;
 
 
                 acp.comp = c;
+
+                acp.pb = true;
+
+               
 
                 return View("addPlayer", acp);
             }
