@@ -16,7 +16,7 @@ namespace golf.Models
     {
         public int Id { get; set; }
         public Nullable<int> strokes { get; set; }
-        public Nullable<int> plusMinus { get; set; }
+        public int plusMinus { get; set; }
         public int CompetitionGolfer_ID { get; set; }
         public int Hole_ID { get; set; }
     
