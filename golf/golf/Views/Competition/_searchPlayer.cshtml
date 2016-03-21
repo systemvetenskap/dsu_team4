@@ -14,12 +14,13 @@
                 @Html.DisplayFor(o => item.lastName)
             </th>
             <th>
+                <div class="buttonGreen">
 
-                @Html.ActionLink("Lägg till",
+                    @Html.ActionLink("Lägg till",
                         "RegisterPlayer", new { golferid = item.golfid, competitionid = Model.comp.Id })
 
 
-
+                </div>
             </th>
         </tr>
     }
