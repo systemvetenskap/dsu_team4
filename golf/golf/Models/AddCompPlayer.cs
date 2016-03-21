@@ -9,5 +9,6 @@ namespace golf.Models
     {
         public Competition comp { get; set; }
         public List<PersonGolfer> golfers = new List<PersonGolfer>();
+        public bool pb { get; set; }
     }
 }
