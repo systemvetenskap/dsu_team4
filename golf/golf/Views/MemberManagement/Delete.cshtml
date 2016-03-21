@@ -69,8 +69,10 @@
     {
         @Html.AntiForgeryToken()
         <p>
-            <input type="submit" value="Radera" class="buttonGreen" /> |
-            @Html.ActionLink("Tillbaka", "Index")
+            <input type="submit" value="Radera" class="buttonGreen" /> 
+            <div class="buttonGreen">
+                @Html.ActionLink("Tillbaka", "Index")
+            </div>
         </p>
     }
     </div>

@@ -130,6 +130,7 @@
                 addButton.setAttribute('type', 'button');
                 addButton.setAttribute('id', 'addP');
                 addButton.setAttribute('tee', id);
+                addButton.setAttribute('class', 'buttonGreen');
                 addButton.setAttribute('value', 'Lägg till en annan spelare')
                 addButton.setAttribute('onclick', 'addP('+id+');');
                 document.getElementById('ControlDiv').appendChild(addButton);
@@ -141,11 +142,12 @@
                 document.getElementById('ControlDiv').appendChild(field);
 
                 if(contains(arr, currentUserId) != true){
-
+                    
                     var button = document.createElement('input');
                     button.setAttribute('type', 'button');
+                    button.setAttribute('class', 'buttonGreen');
                     button.setAttribute('value', 'Boka in dig själv');
-                    button.setAttribute('class', 'selfbutton');
+                    //button.setAttribute('class', 'selfbutton');
                     //button.setAttribute('onclick', 'addSelf('+id+','+GolfId+');');
                     button.setAttribute('onclick', 'addSelf('+id+');');
                     document.getElementById('ControlDiv').appendChild(button);

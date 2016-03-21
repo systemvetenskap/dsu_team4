@@ -6,13 +6,12 @@
     display:block;
     margin-bottom:3%;
     margin:0 auto;
-  
 }
 .hourAndMinutes{
     width:7%;
     float: left;
-    margin-left: 0.5%;
-    margin-right:0.5%;
+    margin-left: 1%;
+
     text-align:center;
 }
 .timedivHour{
