@@ -28,17 +28,17 @@
                 disp = "none"; 
             }
             
-            <div id=@i.Number class="myholes" style= "display: @disp " holeid=@i.Id holenr="@holenr">
-                <h2>Fyll i antal slag</h2>
+            <div id=@i.Number class="myholes" style= "display: @disp " holeid=@i.Id>
+                <h2 id="labelhole1" class="labelhole1">@Html.Label("Hål "+i.Number.ToString()+" - Par: "+i.par.ToString())</h2>
                 <div id="myholesinfo" class="myholesinfo">
-                    <label id="labelhole1" class="labelhole1">@Html.Label("Hål "+i.Number.ToString())</label>
-                    <label id="labelhole2" class="labelhole2">@Html.Label("Par "+i.par.ToString())</label>
+                <label>Fyll i antal slag</label>
+                    @*<label id="labelhole2" class="labelhole2">@Html.Label("Par "+i.par.ToString())</label>*@
                  
                 </div>
                 <div id="myholescontrols" class="myholescontrols">
-                    <div class="btn" onclick=minus('@holenr')><p>-</p></div>
-                    <div id="numberofstrokes" class="numberofstrokes"><label id="@holenr"class="@holenr">5</label></div>
-                    <div class="btn" onclick=plus('@holenr')><p>+</p></div>
+                    <div class="btnMinus" onclick=minus('@holenr')><p>-</p></div>
+                    <div id="numberofstrokes" class="numberofstrokes"><label id="@holenr"class="@holenr">@i.par.ToString()</label></div>
+                    <div class="btnPlus" onclick=plus('@holenr')><p>+</p></div>
                 </div>
             </div>
 
@@ -105,7 +105,7 @@
         var c = @Model.comp.Id;
         var cgd = @Model.CompetitionGolferID;
         var stro = document.getElementById(hnr).innerText;
-        
+      
         $.ajax({
             url: '/Mobile/updateResult',
             contentType: 'application/html; charset=utf-8',
