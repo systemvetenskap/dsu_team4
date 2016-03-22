@@ -156,18 +156,18 @@ namespace golf.Controllers
                     //}
                     for (var i = 0; i < extraStrokes; i++)
                     {
-                        if (i < competition.NumberOfHoles)
+                        if (i < 18)
                         {
                             scrList[i].addedStrokes += 1;
                         }
-                        else if(i < (competition.NumberOfHoles  * 2))
+                        else if(i < (18 * 2))
                         {
-                            int z = i - competition.NumberOfHoles;
+                            int z = i - 18;
                             scrList[z].addedStrokes += 1;
                         }
                         else
                         {
-                            int x = i - (competition.NumberOfHoles*2);
+                            int x = i - (18*2);
                             scrList[x].addedStrokes += 1;
                         }
                     }
