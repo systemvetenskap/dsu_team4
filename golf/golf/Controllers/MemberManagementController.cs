@@ -212,6 +212,14 @@ namespace golf.Controllers
                     databas.TeeTimeDateGolfer.Remove(item);
                 }
             }
+
+
+            string name = person.firstName + " " + person.lastName;
+
+            TempData["deletedP"] = name;
+
+
+
             databas.Golfer.Remove(g);
 
             databas.Person.Remove(person);
