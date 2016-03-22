@@ -142,12 +142,13 @@
         {
             $(curr.toString()).toggle("right");
             $(next.toString()).toggle("left");
+            loadPrev();
         }
 
         
 
 
-        //loadPrev(holeid);
+        
     }
     function swipeleftHandler(event) {
         
@@ -209,15 +210,15 @@
 
     }
 
-    function loadPrev(holeid) {
+    function loadPrev() {
         var c = @Model.comp.Id;
-        var cgd = @Model.CompetitionGolferID;
-        var stro = document.getElementById(hnr).innerText;
+        @*var cgd = @Model.CompetitionGolferID;
+        var stro = document.getElementById(hnr).innerText;*@
 
         $.ajax({
-            url: '/Mobile/updateResult',
+            url: '/Mobile/prevHole',
             contentType: 'application/html; charset=utf-8',
-            data: { compid: c, compgid: cgd, holeid: hid },
+            data: { compid: c,},
             type: 'GET',
             dataType: 'html'
 

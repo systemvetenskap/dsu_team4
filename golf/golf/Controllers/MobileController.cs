@@ -267,24 +267,24 @@ namespace golf.Controllers
                             }
                         }
 
-
-
-
-
                     }
    
                 }
 
-               
-
-
-
-
-               
+                return PartialView("_listScore", reloadScores(compid));
                 
             }
+            
 
-            using(dsuteam4Entities1 dbo = new dsuteam4Entities1())
+        }
+        public PartialViewResult prevHole(int compid)
+        {
+ 
+            return PartialView("_listScore", reloadScores(compid));
+        }
+        public List<PersonGolfer> reloadScores(int compid)
+        {
+            using (dsuteam4Entities1 dbo = new dsuteam4Entities1())
             {
                 dbo.Configuration.LazyLoadingEnabled = true;
                 List<PersonGolfer> listPlayers = new List<PersonGolfer>();
@@ -295,21 +295,21 @@ namespace golf.Controllers
                 var m = dbo.MobileStats.ToList();
 
                 List<MobileStats> mobilesta = new List<MobileStats>();
-                 
-                foreach(var i in competitiongolfer)
+
+                foreach (var i in competitiongolfer)
                 {
                     MobileStats n = new MobileStats();
                     List<MobileStats> add = m.Where(x => x.CompetitionGolfer_ID == i.Id).ToList();
                     MobileStats getH = add.OrderByDescending(x => x.Hole_ID).FirstOrDefault();
                     n = getH;
-                    if(n != null)
+                    if (n != null)
                     {
                         mobilesta.Add(n);
                     }
-                  
-                
+
+
                 }
- 
+
 
                 var join1 = from c in competitiongolfer
                             join p in g
@@ -333,51 +333,27 @@ namespace golf.Controllers
 
                 var t3 = join3.ToList();
                 var toview = join3.ToList();
-                foreach(var i in toview)
+                foreach (var i in toview)
                 {
-                  
+
                     PersonGolfer pg = new PersonGolfer();
                     pg.firstName = i.firstName;
                     pg.lastName = i.lastName;
                     pg.toPar = i.plusMinus;
                     pg.points = i.strokes;
-                    pg.playedHoles =  dbo.MobileStats.Where(x => x.CompetitionGolfer_ID == i.Cgid).Count();
+                    pg.playedHoles = dbo.MobileStats.Where(x => x.CompetitionGolfer_ID == i.Cgid).Count();
                     //pg.HCP = g.Where(x=>x.Person_ID == i.Id).Select(x=>x.HCP).First();
                     listPlayers.Add(pg);
                 }
 
-             
 
 
 
-                return PartialView("_listScore", listPlayers);
+
+                return listPlayers;
 
             }
-
-          
-       
-
-            
-
         }
-        //public PartialViewResult prevHole(int compid, int compgid, int holeid)
-        //{
-
-        //    using (dsuteam4Entities1 db = new dsuteam4Entities1())
-        //    {
-        //        string cHole = db.Hole.Where(x => x.Id == holeid).Select(x=>x.Number).FirstOrDefault();
-        //        int pHole = Convert.ToInt32(cHole) - 1;
-        //        var getHole = db.Hole.Where(x => x.Number == pHole.ToString()).Select(x => x.Id).FirstOrDefault();
-        //        var currHole = db.MobileStats.Where(x => x.CompetitionGolfer_ID == compgid && x.Hole_ID == getHole).FirstOrDefault();
-
-        //        resultClass rs = new resultClass();
-        //        rs.comp = db.Competition.Where()
-
-
-        //    }
-
-        //    return PartialView("_listScore", rs);
-        //}
 
     }
 }
