@@ -60,9 +60,11 @@
     <div class="delM">
         @if (TempData["deletedP"] != null)
         {
-
             <p>@TempData["deletedP"] blev nu Bortagen.</p>
-
+        }
+        @if (TempData["editP"] != null)
+        {
+            <p>@TempData["editP"] blev nu uppdaterad.</p>
         }
     </div>
 
