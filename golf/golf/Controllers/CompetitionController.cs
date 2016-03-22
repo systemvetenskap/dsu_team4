@@ -616,8 +616,16 @@ namespace golf.Controllers
             
             using(dsuteam4Entities1 db = new dsuteam4Entities1())           
             {
+                
                 var slope = db.Slope.ToList();
                 int extraStrokes = 0;
+                var slopeMin = db.Slope.OrderBy(x => x.min).Select(x=>x.min).FirstOrDefault();
+                if(playerHCP < slopeMin)
+                {
+                    double d = -4.0;
+                    playerHCP = Convert.ToDecimal(d);
+                }
+
 
                if(playerHCP < 36)
                {
@@ -675,6 +683,10 @@ namespace golf.Controllers
 
                 if(extraStrokes > 0)
                 {
+                    if (r.comp.NumberOfHoles == 9)
+                    {
+                        extraStrokes = extraStrokes / 2;
+                    }
                     for (var i = 0; i < extraStrokes; i++)
                     {
                         if (i < r.comp.NumberOfHoles)
