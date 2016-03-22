@@ -321,7 +321,7 @@ namespace golf.Controllers
                     pg.lastName = i.lastName;
                     pg.toPar = i.plusMinus;
                     pg.points = i.strokes;
-                    pg.HCP = g.Where(x=>x.Person_ID == i.Id).Select(x=>x.HCP).First();
+                    //pg.HCP = g.Where(x=>x.Person_ID == i.Id).Select(x=>x.HCP).First();
                     listPlayers.Add(pg);
                 }
 
