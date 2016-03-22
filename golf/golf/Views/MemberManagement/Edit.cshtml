@@ -90,11 +90,10 @@
         
 
             <p>
-                <input type="submit" class="buttonGreen" value="Spara" id="savedetailsbutton" />
+                <input type="submit" class="buttonGreen" value="Spara" id="savedetailsbutton" /> @Html.ActionLink("Tillbaka", "Index",null , new { @class = "buttonGreen" })
+
             </p>
-        <div class="buttonGreen">
-            @Html.ActionLink("Tillbaka", "Index")
-        </div>
+
 
 
         <div class="HiddenEdit">
