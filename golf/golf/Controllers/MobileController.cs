@@ -105,8 +105,9 @@ namespace golf.Controllers
                int extraStrokes = 0;
                string test1 = s.Replace(".",",");
                decimal playerHCP = decimal.Parse(test1);
+              
 
-               if(playerHCP < 36)
+               if (playerHCP < 36)
                {
 
                    foreach (var i in slope)
@@ -116,7 +117,7 @@ namespace golf.Controllers
           
                        decimal Min = decimal.Parse(xMin);
                        decimal Max = decimal.Parse(xMax);
-  
+
                        if (playerHCP >= Min && playerHCP <= Max && i.Gender_ID == gender)
                        {
                            sl.Add(i);
@@ -146,9 +147,13 @@ namespace golf.Controllers
                   scrList.Add(scr);
 
                 }
-            
+                
                 if(extraStrokes > 0)
                 {
+                    if(competition.NumberOfHoles == 9)
+                    {
+                        extraStrokes = extraStrokes / 2;
+                    }
                     for (var i = 0; i < extraStrokes; i++)
                     {
                         if (i < competition.NumberOfHoles)
