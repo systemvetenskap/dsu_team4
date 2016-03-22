@@ -150,10 +150,10 @@ namespace golf.Controllers
                 
                 if(extraStrokes > 0)
                 {
-                    if(competition.NumberOfHoles == 9)
-                    {
-                        extraStrokes = extraStrokes / 2;
-                    }
+                    //if(competition.NumberOfHoles == 9)
+                    //{
+                    //    extraStrokes = extraStrokes / 2;
+                    //}
                     for (var i = 0; i < extraStrokes; i++)
                     {
                         if (i < competition.NumberOfHoles)

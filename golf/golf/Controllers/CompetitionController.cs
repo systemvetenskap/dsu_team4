@@ -108,27 +108,6 @@ namespace golf.Controllers
 
 
 
-                //foreach (var item in databas.Golfer)
-                //{
-                //    if (item.Person_ID.ToString() == User.Identity.Name)
-                //    {
-                //        PersonGolfer pg = new PersonGolfer();
-                //        pg.golfid = Convert.ToInt32(item.golfID);
-                //        pg.personid = Convert.ToInt32(item.Person_ID.ToString());
-
-                //        cc.golfers.Add(pg);
-                //    }
-                //}
-                //foreach (var item in cc.complist)
-                //{
-                //    foreach (var item2 in databas.CompetitionGolfer)
-                //    {
-                //        if (item.Id == item2.Competition_ID && User.Identity.Name == item2.p)
-                //        {
-
-                //        }
-                //    }
-                //}
 
                 int userGolfer = -1;
                 int userInt = Convert.ToInt32(User.Identity.Name);
