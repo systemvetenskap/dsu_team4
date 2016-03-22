@@ -254,7 +254,7 @@
         var g = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.bNames, Formatting.Indented));
         for(var i in g)
         {
-            //alert(g[i].golfid);
+            
             if(g[i].Golfer_ID == golfid && g[i].TeeTime == tid) 
             {
                 return true;
