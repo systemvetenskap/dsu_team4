@@ -1,0 +1,234 @@
+﻿@model golf.Models.resultClass
+
+@{
+    Layout = null;
+    string disp = "";
+    string disp1 = "";
+    if(Model.lastInput == 0)
+    {
+       disp1 = "block";
+    }
+    else  
+    {
+       disp1 = "none";
+    }
+    
+    disp = "none";
+    int length = @Model.comp.NumberOfHoles + 1;
+}
+
+<!DOCTYPE html>
+
+    
+<html>
+
+  
+    <head>
+        <link href="@Url.Content("~/Content/Mobile.css")" rel="stylesheet" type="text/css" />
+        @*<link rel="stylesheet" href="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">*@
+        <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script src="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+        <meta name="viewport" content="width=device-width" />
+        <title>MobileComp</title>
+    </head>
+
+<body>
+    <div id="wrapper" class="wrapper">
+        <div class="myholes" id="0" style="display: @disp1" holeid="0" holenr="0">
+            <h2 id="labelhole1" class="labelhole1">@Html.Label("Hej " + Model.currentPerson.firstName + "!")</h2>
+            <h3>Dra fingret åt vänster för starta!</h3>
+
+        </div>
+        
+        @foreach (var i in Model.holeinfo)
+        {
+            string holenr = "hole" + i.Number;
+            string nr = "";
+            
+            
+            if (Convert.ToInt16(i.Number) == Model.lastInput)
+            {
+                disp = "block";
+            }
+            else
+            {
+                disp = "none";
+            }
+            var score = Model.scoreboard.Where(x => x.Hole_ID == i.Id).Select(x => x.strokes).FirstOrDefault();
+            if(score > 0)
+            {
+                nr = score.ToString();
+            }
+            else
+            {
+                nr = i.par.ToString();
+            }
+            <div id=@i.Number class="myholes" style="display: @disp " holeid=@i.Id holenr="@holenr">
+                <h2 id="labelhole1" class="labelhole1">@Html.Label("Hål " + i.Number.ToString() + " - Par: " + i.par.ToString())</h2>
+                <div id="myholesinfo" class="myholesinfo">
+                    <label>Fyll i antal slag</label>
+                    @*<label id="labelhole2" class="labelhole2">@Html.Label("Par "+i.par.ToString())</label>*@
+
+                </div>
+                <div id="myholescontrols" class="myholescontrols">
+                    <div class="btnMinus" onclick=minus('@holenr')><p>-</p></div>
+
+                    <div id="numberofstrokes" class="numberofstrokes"><label id="@holenr" class="@holenr">@nr</label></div>
+
+                    <div class="btnPlus" onclick=plus('@holenr','@i.par.ToString()')><p>+</p></div>
+                </div>
+            </div>
+
+        }
+     
+        <div id="@length" class="myholes" style="display: none ">
+
+            <h2 id="labelhole1" class="labelhole1">@Html.Label("Nu är samtliga hål spelade!")</h2>
+        </div>
+
+
+        <br>
+        <br>
+        <div id="entirelist" class="entirelist">
+
+
+
+        </div>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+
+    $(".myholes").on("swiperight", swiperightHandler);
+    $(".myholes").on("swipeleft", swipeleftHandler);
+    function plus(id, par)
+    {
+
+        varnr = document.getElementById(id).innerText;
+        var tonr = Number(varnr);
+        if(tonr < Number(par) + 5)
+        {
+        var next = tonr + 1;
+        document.getElementById(id).innerText = next;
+        }
+    }
+    function minus(id)
+    {
+
+        varnr = document.getElementById(id).innerText;
+        var tonr = Number(varnr);
+
+        if(tonr >= 2)
+        {
+        var next = tonr - 1;
+        document.getElementById(id).innerText = next;
+        }
+
+        }
+    function swiperightHandler( event ){
+
+       
+
+        var currentDiv = $(this).attr('id');
+        var currNr = Number(currentDiv);
+      
+        var nextDivNr = currNr - 1;
+
+        var curr = '#' + currentDiv;
+        var next = '#' + nextDivNr;
+       
+        if(currNr != 0)
+        {
+            $(curr.toString()).toggle("right");
+            $(next.toString()).toggle("left");
+        }
+
+        
+
+
+        //loadPrev(holeid);
+    }
+    function swipeleftHandler(event) {
+        
+        var max = @length;
+        var currentDiv = $(this).attr('id');
+        var currNr = Number(currentDiv);
+        var maxNr = Number(max);
+        if(currNr != maxNr)
+        {
+      
+        var holeid = $(this).attr('holeid');
+        var holenr = $(this).attr('holenr');
+        var hidnr = Number(holeid);
+        var hnr = Number(holenr);
+
+        var nextDivNr = currNr + 1;
+
+        var curr = '#' + currentDiv;
+        var next = '#' + nextDivNr;
+        
+  
+       
+            $(curr.toString()).toggle("left");
+            $(next.toString()).toggle("right");
+
+            if(hidnr != 0 && hnr != 0)
+            {
+              
+              
+                loadData(holeid, holenr);
+            }
+            
+        }
+        
+
+    }
+
+    function loadData(hid, hnr) {
+        var c = @Model.comp.Id;
+        var cgd = @Model.CompetitionGolferID;
+        var stro = document.getElementById(hnr).innerText;
+        
+        $.ajax({
+            url: '/Mobile/updateResult',
+            contentType: 'application/html; charset=utf-8',
+            data: { compid: c, compgid: cgd, strokesIn: stro, holeid: hid },
+            type: 'GET',
+            dataType: 'html'
+
+        })
+        .success(function (result) {
+            $('#entirelist').html(result);
+
+
+        })
+        .error(function (xhr, status) {
+            alert(status);
+        })
+
+    }
+
+    function loadPrev(holeid) {
+        var c = @Model.comp.Id;
+        var cgd = @Model.CompetitionGolferID;
+        var stro = document.getElementById(hnr).innerText;
+
+        $.ajax({
+            url: '/Mobile/updateResult',
+            contentType: 'application/html; charset=utf-8',
+            data: { compid: c, compgid: cgd, holeid: hid },
+            type: 'GET',
+            dataType: 'html'
+
+        })
+        .success(function (result) {
+            $('#entirelist').html(result);
+
+
+        })
+        .error(function (xhr, status) {
+            alert(status);
+        })
+
+    }
+</script>

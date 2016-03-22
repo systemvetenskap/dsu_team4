@@ -167,6 +167,14 @@ namespace golf.Controllers
             {
                 return HttpNotFound();
             }
+
+            //foreach (var item in databas.Gender)
+            //{
+            //    if (person.gender_ID == item.Id)
+            //    {
+            //        person.Gender = item;
+            //    }
+            //}
             return View(person);
         }
 
@@ -204,6 +212,14 @@ namespace golf.Controllers
                     databas.TeeTimeDateGolfer.Remove(item);
                 }
             }
+
+
+            string name = person.firstName + " " + person.lastName;
+
+            TempData["deletedP"] = name;
+
+
+
             databas.Golfer.Remove(g);
 
             databas.Person.Remove(person);

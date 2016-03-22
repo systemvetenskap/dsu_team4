@@ -1,169 +1,38 @@
 ﻿@model golf.Models.resultClass
 
 @{
-    ViewBag.Title = "Index";
     Layout = null;
-    string disp = "block";
 }
 
 <!DOCTYPE html>
 
 <html>
 <head>
+    <meta name="viewport" content="width=device-width" />
     <link href="@Url.Content("~/Content/Mobile.css")" rel="stylesheet" type="text/css" />
-    @*<link rel="stylesheet" href="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">*@
-    <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script><meta name="viewport" content="width=device-width" />
-    <title>MobileComp</title>
+    <title>Index</title>
 </head>
-
 <body>
-    <div id="wrapper" class="wrapper">
-                @foreach (var i in Model.holeinfo)
-        {
-            string holenr ="hole" + i.Number ;
+    <div class="outerContainer">
+        <div class="btnContainer">
 
-            if(Convert.ToInt16(i.Number) > 1)
-            {
-                disp = "none";
-            }
+                @if (Model.compList.Count > 0)
+                {
+                    foreach (var i in Model.compList)
+                    {
 
-                    <div id=@i.Number class="myholes" style="display: @disp " holeid=@i.Id holenr="@holenr">
-                        <h2 id="labelhole1" class="labelhole1">@Html.Label("Hål "+i.Number.ToString()+" - Par: "+i.par.ToString())</h2>
-                        <div id="myholesinfo" class="myholesinfo">
-                            <label>Fyll i antal slag</label>
-                            @*<label id="labelhole2" class="labelhole2">@Html.Label("Par "+i.par.ToString())</label>*@
-
-                        </div>
-                        <div id="myholescontrols" class="myholescontrols">
-                            <div class="btnMinus" onclick=minus('@holenr')><p>-</p></div>
-                            <div id="numberofstrokes" class="numberofstrokes"><label id="@holenr" class="@holenr">@i.par.ToString()</label></div>
-                            <div class="btnPlus" onclick=plus('@holenr','@i.par.ToString()')><p>+</p></div>
-                        </div>
-                    </div>
-
-        }
-
-
-        <br>
-        <br>
-        <div id="entirelist" class="entirelist">
-
+                        <input type="button" value="Starta @i.name.ToString()" class="btnStart" onclick="window.location.href=('@Url.Action("MobileStart", "Mobile")?cid='+@i.Id)" />
+                    }
+                }
+                else
+                {
+                    @Html.Label("Inga tävlingar tillgängliga");
+                }
+      
 
 
         </div>
     </div>
+
 </body>
 </html>
-<script type="text/javascript">
-
-    $(".myholes").on("swiperight", swiperightHandler);
-    $(".myholes").on("swipeleft", swipeleftHandler);
-    function plus(id, par)
-    {
-           
-        varnr = document.getElementById(id).innerText; 
-        var tonr = Number(varnr);
-        if(tonr < Number(par) + 5)
-        {
-        var next = tonr + 1;
-        document.getElementById(id).innerText = next;
-        }       
-    }
-    function minus(id)
-    {
-        
-        varnr = document.getElementById(id).innerText;    
-        var tonr = Number(varnr);
-        
-        if(tonr >= 2)
-        {
-        var next = tonr - 1;
-        document.getElementById(id).innerText = next;
-        }    
-
-        }
-    function swiperightHandler( event ){
-       
-        var holeid = $(this).attr('holeid');
-        var holenr = $(this).attr('holenr');
-        var currentDiv = $(this).attr('id');      
-        var currNr = Number(currentDiv);
-        var nextDivNr = currNr - 1;
-        
-        var curr = '#' + currentDiv;
-        var next = '#' + nextDivNr;
-
-       
-        $(curr.toString()).toggle("right");
-        $(next.toString()).toggle("left");
-
-        //loadPrev(holeid);
-    }
-    function swipeleftHandler(event) {
-        
-        var holeid = $(this).attr('holeid');
-        var holenr = $(this).attr('holenr');
-        var currentDiv = $(this).attr('id');      
-        var currNr = Number(currentDiv);
-        var nextDivNr = currNr + 1;
-        
-        var curr = '#' + currentDiv;
-        var next = '#' + nextDivNr;
-
-       
-        $(curr.toString()).toggle("left");
-        $(next.toString()).toggle("right");
-
-        loadData(holeid, holenr);
-
-    }
-
-    function loadData(hid, hnr) {
-        var c = @Model.comp.Id;
-        var cgd = @Model.CompetitionGolferID;
-        var stro = document.getElementById(hnr).innerText;
-      
-        $.ajax({
-            url: '/Mobile/updateResult',
-            contentType: 'application/html; charset=utf-8',
-            data: { compid: c, compgid: cgd, strokesIn: stro, holeid: hid },
-            type: 'GET',
-            dataType: 'html'
-
-        })
-        .success(function (result) {
-            $('#entirelist').html(result);
-           
-
-        })
-        .error(function (xhr, status) {
-            alert(status);
-        })
-
-    }
-
-    function loadPrev(holeid) {
-        var c = @Model.comp.Id;
-        var cgd = @Model.CompetitionGolferID;
-        var stro = document.getElementById(hnr).innerText;
-      
-        $.ajax({
-            url: '/Mobile/updateResult',
-            contentType: 'application/html; charset=utf-8',
-            data: { compid: c, compgid: cgd, holeid: hid },
-            type: 'GET',
-            dataType: 'html'
-
-        })
-        .success(function (result) {
-            $('#entirelist').html(result);
-           
-
-        })
-        .error(function (xhr, status) {
-            alert(status);
-        })
-
-    }
-</script>

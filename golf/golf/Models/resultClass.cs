@@ -15,6 +15,8 @@ namespace golf.Models
         public Nullable<int> points { get; set; }
         public Nullable<int> net { get; set; }
         public List<Hole> holeinfo { get; set; }
-
+        public int lastInput { get; set; }
+        public List<MobileStats> scoreboard { get; set; }
+     
     }   
 }

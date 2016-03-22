@@ -7,12 +7,72 @@
         </div>
     </section>
 }
+<head>
+    <title>
+
+    </title>
+
+    <meta charset="utf-8" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+    @*@RenderSection("Styles", false)
+
+
+        @Styles.Render("~/Content/css")*@
+
+
+    @*Scripts.Render("~/bundles/modernizr")*@
+
+    <script type="text/JavaScript">
+
+
+        //$(document).ready(function () {
+        //    $(".bc").show();
+
+        //});
+
+        $(document).ready(function () {
+
+            $("#searchButton").click(function () {
+                $(".delM").hide();
+            });
+        });
+
+    </script>
+
+</head>
+
+
+
 @model IEnumerable<golf.Models.Person>
     <div class="anythingelse" id="anythingelse">
 
         <input id="searchButton" class="buttonGreen" type="submit" onclick="soP(1)" value="Sök" />
         <input id="searchField" type="text" placeholder="Sök efter medlem" />
     </div>
+
+
+    <div class="delM">
+        @if (TempData["deletedP"] != null)
+        {
+
+            <p>@TempData["deletedP"] blev nu Bortagen.</p>
+
+        }
+    </div>
+
+
+
+
+
+
+
+
 
     <div class="searchDiv" id="searchDiv">
 

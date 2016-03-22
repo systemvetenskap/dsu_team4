@@ -1,4 +1,6 @@
-﻿body {
+﻿
+body {
+
 }
 html{
     margin: 0;
@@ -132,3 +134,43 @@ label{
    
     color: rgba(0, 0, 0, 0.62);
 }
+.btnStart{
+    width: 100%;
+    font-family: Tahoma,Verdana,Segoe,sans-serif;
+    font-size: 150%;
+    margin-top: 10%;
+    border: none;
+    line-height: 500%;
+    white-space: normal;
+    /*border-radius: 20%;*/
+
+    background: #07d107;
+    background-image: -webkit-linear-gradient(top, #07d107, #98e098);
+    background-image: -moz-linear-gradient(top, #07d107, #98e098);
+    background-image: -ms-linear-gradient(top, #07d107, #98e098);
+    background-image: -o-linear-gradient(top, #07d107, #98e098);
+    background-image: linear-gradient(to bottom, #07d107, #98e098);
+    -webkit-border-radius: 50px;
+    -webkit-box-shadow: 0px 1px 3px #666666;
+    -moz-box-shadow: 0px 1px 3px #666666;
+    box-shadow: 0px 1px 3px #666666;
+  color: #ffffff;     
+}
+.btnStart:active{
+
+    border:none;
+    background: #3cfa58;
+    background-image: -webkit-linear-gradient(top, #3cfa58, #3cfa58);
+    background-image: -moz-linear-gradient(top, #3cfa58, #3cfa58);
+    background-image: -ms-linear-gradient(top, #3cfa58, #3cfa58);
+    background-image: -o-linear-gradient(top, #3cfa58, #3cfa58);
+    background-image: linear-gradient(to bottom, #3cfa58, #3cfa58);
+}
+
+table.othercompetetors {font-size:12px;color:#333333;width:100%;border-width: 1px;border-color: #9dcc7a;border-collapse: collapse; border-radius:15px;}
+table.othercompetetors th {font-size:12px;background-color:#abd28e;border-width: 1px;padding: 8px;border-style: solid;border-color: #9dcc7a;text-align:left;}
+table.othercompetetors th.nothere {font-size:12px;background-color:none;border-width: 1px;padding: 8px;border-style: solid;border-color: #9dcc7a;text-align:left;}
+table.othercompetetors tr {background-color:#bedda7;}
+table.othercompetetors td {font-size:12px;border-width: 1px;padding: 8px;border-style: solid;border-color: #9dcc7a;}
+table.othercompetetors td.scoreColumn {font-size:12px;border-width: 1px;padding: 8px;border-style: solid;border-color: #9dcc7a; background-color:#C0C0C0;}
+table.othercompetetors.tbody{border-radius:15px;}

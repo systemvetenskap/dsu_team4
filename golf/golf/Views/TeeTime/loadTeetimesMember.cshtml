@@ -52,6 +52,13 @@
     function onTimeDivClick(id) {
 
         clearLi();
+        var disabled = document.getElementById(id).getAttribute('booked');
+
+        if(disabled != 'grey')
+        {
+
+
+     
         @using Newtonsoft.Json;
         var arrDiv = [];
         var personids = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.bNames, Formatting.Indented));
@@ -166,7 +173,7 @@
                 document.getElementById('details').style.display = 'none';
             }
         }
-
+        }
     }
     function contains(a, b) {
         for (var i = 0; i < a.length; i++) {
@@ -178,7 +185,7 @@
     }
 
     function clearLi(){
-
+        document.getElementById('timeInfo').innerHTML = "";
         var u = document.getElementById('playerList');
         var i = document.getElementById('ControlDiv');
         var z = document.getElementById('addedList');

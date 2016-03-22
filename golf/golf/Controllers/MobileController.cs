@@ -14,14 +14,14 @@ namespace golf.Controllers
         //
         // GET: /Mobile/
 
-        [Authorize]
-        public ActionResult Index()
+     
+        public ActionResult MobileStart(int cid)
         {
-            //Hårdkodning Person---------Fixa detta från inloggning
+           
 
             int id = Convert.ToInt32(User.Identity.Name);
 
-            //Hårkodning------------------
+           
 
             resultClass rs = new resultClass();
 
@@ -39,15 +39,51 @@ namespace golf.Controllers
                 pg.firstName = p.firstName;
                 pg.lastName = p.lastName;
 
-                var cmp = db.Competition.Where(x => x.name == "sffesfe").FirstOrDefault();
+                var cmp = db.Competition.Where(x => x.Id == cid).FirstOrDefault();
                 rs.comp = cmp;
                 rs.holeinfo = db.Hole.Take(cmp.NumberOfHoles).ToList();
                 rs.currentPerson = pg;
-                rs.CompetitionGolferID = db.CompetitionGolfer.Where(x => x.Golfer_ID == golfer.Id && x.Competition_ID == cmp.Id).Select(x => x.Id).FirstOrDefault();
+                var compgid =db.CompetitionGolfer.Where(x => x.Golfer_ID == golfer.Id && x.Competition_ID == cmp.Id).Select(x => x.Id).FirstOrDefault();
+                rs.CompetitionGolferID = compgid;
+                var getLatest = db.MobileStats.Where(x => x.CompetitionGolfer_ID == compgid).ToList();
+
+                var getMax = getLatest.OrderByDescending(x => x.Hole_ID).Select(x => x.Hole_ID).FirstOrDefault();
+                var number = db.Hole.Where(x => x.Id == getMax).Select(x => x.Number).FirstOrDefault();
+                rs.lastInput = Convert.ToInt32(number);
+                rs.scoreboard = getLatest;
+                return View("MobileStart", rs);
+            }
+           
+        }
+        [Authorize]
+        public ActionResult Index()
+        {
+
+            using(dsuteam4Entities1 db = new dsuteam4Entities1())
+            {
+                List<Competition> comps = new List<Competition>();
+                int id = Convert.ToInt16(User.Identity.Name);
+                var golfer = db.Golfer.Where(x=>x.Person_ID == id).Select(x=>x.Id).FirstOrDefault();
+                var compg = db.CompetitionGolfer.Where(x => x.Golfer_ID == golfer).ToList();
+                foreach(var i in compg)
+                {
+                    var addComp = db.Competition.Where(x => x.Id == i.Competition_ID).FirstOrDefault();
+                    if(addComp != null)
+                    {
+                        comps.Add(addComp);
+                    }
+                   
+                }
+
+
+                resultClass rs = new resultClass();
+                rs.compList = comps;
+
+                return View("Index", rs);
 
 
             }
-            return View("Index",rs);
+
         }
         public PartialViewResult updateResult(int compid, int compgid, int strokesIn, int holeid)
         {
@@ -273,7 +309,8 @@ namespace golf.Controllers
                 var join3 = from p in dbo.Person.ToList()
                             join j in t2.ToList()
                             on p.Id equals j.Person_ID
-                            select new { p.firstName, p.lastName, j.plusMinus, j.strokes };
+                            orderby j.plusMinus ascending
+                            select new { p.firstName, p.lastName, j.plusMinus, j.strokes, p.Id };
 
                 var t3 = join3.ToList();
                 var toview = join3.ToList();
@@ -284,6 +321,7 @@ namespace golf.Controllers
                     pg.lastName = i.lastName;
                     pg.toPar = i.plusMinus;
                     pg.points = i.strokes;
+                    pg.HCP = g.Where(x=>x.Person_ID == i.Id).Select(x=>x.HCP).First();
                     listPlayers.Add(pg);
                 }
 
