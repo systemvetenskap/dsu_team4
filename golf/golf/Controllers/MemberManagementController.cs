@@ -167,6 +167,14 @@ namespace golf.Controllers
             {
                 return HttpNotFound();
             }
+
+            //foreach (var item in databas.Gender)
+            //{
+            //    if (person.gender_ID == item.Id)
+            //    {
+            //        person.Gender = item;
+            //    }
+            //}
             return View(person);
         }
 
