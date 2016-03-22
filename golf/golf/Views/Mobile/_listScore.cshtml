@@ -8,11 +8,12 @@
             <td>
                @Html.Label("Spelare")
             </td>
-            @*<td>
-                @Html.Label("HCP")
-            </td>*@
+
             <td>
                 @Html.Label("+/-")
+            </td>
+            <td>
+                @Html.Label("Antal spelade hål")
             </td>
         </tr>
     </thead>
@@ -23,11 +24,12 @@
             <td>
                @Html.Label(i.firstName+ " "+i.lastName)
             </td>
-            @*<td>
-              @Html.Label(i.points.ToString())
-            </td>*@
+
             <td>
                 @Html.Label(i.toPar.ToString())
+            </td>
+                <td>
+              @Html.Label(i.playedHoles.ToString())
             </td>
         </tr>
         }

@@ -20,6 +20,7 @@ namespace golf.Models
         public Nullable<int> net { get; set; }
         public Nullable<int> toPar { get; set; }
         public List<HoleStats> holeResult { get; set; }
+        public int playedHoles { get; set; }
 
     }
 }

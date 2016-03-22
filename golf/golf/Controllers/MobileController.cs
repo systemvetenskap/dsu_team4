@@ -242,19 +242,33 @@ namespace golf.Controllers
                             var getHole = db.Hole.Where(x => x.Number == s1).Select(x => x.Id).FirstOrDefault();
                             prevHolePar = db.MobileStats.Where(x => x.CompetitionGolfer_ID == compgid && x.Hole_ID == getHole).Select(x => x.plusMinus).FirstOrDefault();
                         }
-               
-                        foreach (var i in scrList.Where(x => x.Id == holeid))
-                        {
-                            i.playerStrokes = strokesIn;
-                            i.calcPoints(prevHolePar);
-
-                        }
                         var toPar = scrList.Where(x => x.Id == holeid).FirstOrDefault();
-                        MobileStats m = db.MobileStats.Where(x => x.Hole_ID == holeid && x.CompetitionGolfer_ID == compgid).First();         
+                        toPar.playerStrokes = strokesIn;
+                        toPar.calcPoints(prevHolePar);
+                        prevHolePar = toPar.toPar;
+                        MobileStats m = db.MobileStats.Where(x => x.Hole_ID == holeid && x.CompetitionGolfer_ID == compgid).First();
                         m.strokes = strokesIn;
                         m.plusMinus = toPar.toPar;
-                       
-                        db.SaveChanges();    
+                        db.SaveChanges();
+                        //var antal = db.MobileStats.Where(x => x.CompetitionGolfer_ID == compgid).Count();
+                       List<MobileStats> calcagain = db.MobileStats.Where(x => x.CompetitionGolfer_ID == compgid).ToList();
+                        foreach(var i in calcagain.OrderBy(x=>x.Id))
+                        {
+                            if(i.Hole_ID > holeid)
+                            {
+                                var listobject = scrList.Where(x => x.Id == i.Hole_ID).First();
+                                listobject.playerStrokes = i.strokes.GetValueOrDefault();
+                                listobject.calcPoints(prevHolePar);
+                                prevHolePar = listobject.toPar;
+                                MobileStats ms = i;
+                                ms.strokes = listobject.playerStrokes;
+                                ms.plusMinus = listobject.toPar;
+                                db.SaveChanges();
+                            }
+                        }
+
+
+
 
 
                     }
@@ -307,7 +321,7 @@ namespace golf.Controllers
                 var join2 = from c in mobilesta.ToList()
                             join j in t1.ToList()
                             on c.CompetitionGolfer_ID equals j.Cgid
-                            select new { c.plusMinus, c.strokes, j.Person_ID };
+                            select new { c.plusMinus, c.strokes, j.Person_ID, j.Cgid };
 
                 var t2 = join2.ToList();
 
@@ -315,17 +329,19 @@ namespace golf.Controllers
                             join j in t2.ToList()
                             on p.Id equals j.Person_ID
                             orderby j.plusMinus ascending
-                            select new { p.firstName, p.lastName, j.plusMinus, j.strokes, p.Id };
+                            select new { p.firstName, p.lastName, j.plusMinus, j.strokes, p.Id, j.Cgid };
 
                 var t3 = join3.ToList();
                 var toview = join3.ToList();
                 foreach(var i in toview)
                 {
+                  
                     PersonGolfer pg = new PersonGolfer();
                     pg.firstName = i.firstName;
                     pg.lastName = i.lastName;
                     pg.toPar = i.plusMinus;
                     pg.points = i.strokes;
+                    pg.playedHoles =  dbo.MobileStats.Where(x => x.CompetitionGolfer_ID == i.Cgid).Count();
                     //pg.HCP = g.Where(x=>x.Person_ID == i.Id).Select(x=>x.HCP).First();
                     listPlayers.Add(pg);
                 }
