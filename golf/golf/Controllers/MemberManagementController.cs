@@ -150,9 +150,15 @@ namespace golf.Controllers
                 
                 
                 CM.genderItems = gender;
-                CM.p.gender_ID = CM.genderid;
+                CM.p.gender_ID = CM.p.gender_ID;
                 databas.Entry(CM.p).State = EntityState.Modified;
                 databas.SaveChanges();
+
+                string name = CM.p.firstName + " " + CM.p.lastName;
+
+                TempData["editP"] = name;
+
+
                 return RedirectToAction("Index");
             }
             return View(CM);
@@ -223,6 +229,7 @@ namespace golf.Controllers
             databas.Golfer.Remove(g);
 
             databas.Person.Remove(person);
+
             databas.SaveChanges();
             return RedirectToAction("Index");
         }
