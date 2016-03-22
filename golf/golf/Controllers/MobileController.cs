@@ -61,10 +61,23 @@ namespace golf.Controllers
 
             using(dsuteam4Entities1 db = new dsuteam4Entities1())
             {
+                List<Competition> comps = new List<Competition>();
+                int id = Convert.ToInt16(User.Identity.Name);
+                var golfer = db.Golfer.Where(x=>x.Person_ID == id).Select(x=>x.Id).FirstOrDefault();
+                var compg = db.CompetitionGolfer.Where(x => x.Golfer_ID == golfer).ToList();
+                foreach(var i in compg)
+                {
+                    var addComp = db.Competition.Where(x => x.Id == i.Competition_ID).FirstOrDefault();
+                    if(addComp != null)
+                    {
+                        comps.Add(addComp);
+                    }
+                   
+                }
 
-                var comp = db.Competition.Where(x => x.cDate == DateTime.Today).ToList();
+
                 resultClass rs = new resultClass();
-                rs.compList = comp;
+                rs.compList = comps;
 
                 return View("Index", rs);
 
@@ -297,7 +310,7 @@ namespace golf.Controllers
                             join j in t2.ToList()
                             on p.Id equals j.Person_ID
                             orderby j.plusMinus ascending
-                            select new { p.firstName, p.lastName, j.plusMinus, j.strokes };
+                            select new { p.firstName, p.lastName, j.plusMinus, j.strokes, p.Id };
 
                 var t3 = join3.ToList();
                 var toview = join3.ToList();
@@ -308,6 +321,7 @@ namespace golf.Controllers
                     pg.lastName = i.lastName;
                     pg.toPar = i.plusMinus;
                     pg.points = i.strokes;
+                    pg.HCP = g.Where(x=>x.Person_ID == i.Id).Select(x=>x.HCP).First();
                     listPlayers.Add(pg);
                 }
 

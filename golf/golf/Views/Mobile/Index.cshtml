@@ -13,14 +13,22 @@
     <title>Index</title>
 </head>
 <body>
-    <div class=" outerContainer">
+    <div class="outerContainer">
         <div class="btnContainer">
 
-                @foreach (var i in Model.compList)
+                @if (Model.compList.Count > 0)
                 {
+                    foreach (var i in Model.compList)
+                    {
 
-                    <input type="button" value="Starta @i.name.ToString()" class="btnStart" onclick="window.location.href=('@Url.Action("MobileStart", "Mobile")?cid='+@i.Id)" />
+                        <input type="button" value="Starta @i.name.ToString()" class="btnStart" onclick="window.location.href=('@Url.Action("MobileStart", "Mobile")?cid='+@i.Id)" />
+                    }
                 }
+                else
+                {
+                    @Html.Label("Inga tävlingar tillgängliga");
+                }
+      
 
 
         </div>
