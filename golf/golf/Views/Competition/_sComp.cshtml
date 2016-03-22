@@ -189,7 +189,15 @@
                                     }
                                     else
                                     {
-                                        @Html.Label("Du är redan registrerad")
+                                        if (Model.golfers[i].startime != null)
+                                        {
+                                            @Html.Label("Du är redan registrerad, starttid ej fastställd")
+                                        }
+                                        else
+                                        {
+                                            
+                                        }
+
                                     }
                                 }
                             }
