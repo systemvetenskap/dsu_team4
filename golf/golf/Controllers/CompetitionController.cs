@@ -1221,7 +1221,7 @@ namespace golf.Controllers
                         pgList.Add(pege); 
                     }
                     
-                    sr.player = pgList.OrderBy(x=>x.points).ToList();
+                    sr.player = pgList.OrderByDescending(x=>x.points).ToList();
                     sr.comp = db.Competition.Find(id);
                     var c = db.Competition.Where(s => s.Id == id).Select(g => g.NumberOfHoles).FirstOrDefault();
                     sr.holeInfo = db.Hole.OrderBy(x => x.Number).Take(c).ToList();
