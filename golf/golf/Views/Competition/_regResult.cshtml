@@ -2,12 +2,12 @@
 
 
 <h2>Spelarlista</h2>
-<br />
+
 
 <h3>
     @Html.Label(Model.comp.name)
 </h3>
-
+<br>
 @if (Model.comp.cDate.Date >= DateTime.Now.Date && Model.persongolfer.Count > 0)
 {
     <div class="buttonGreen" id="buttonGreen">
@@ -20,7 +20,7 @@
         </div>
 
         }
-
+<br><br><br>
 
         <table id="playerTable">
             <thead>
