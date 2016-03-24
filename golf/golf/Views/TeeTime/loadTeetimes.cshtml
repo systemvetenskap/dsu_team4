@@ -103,13 +103,17 @@
             }
 
 
+            var D = document.getElementById('details');
+            document.getElementById('TeeDetailsB').style.display = 'none';
+            var sd = document.getElementById(id);
+            alert(sd.id);
+            var color = sd.getAttribute('booked');
+            alert(color);
+
+            if(arr.length < 4 && color != 'grey')
+            {
             document.getElementById('details').style.display = 'block';
             document.getElementById('TeeDetailsB').style.display = 'block';
-            var D = document.getElementById('details');
-
-
-            if(arr.length < 4)
-            {
                 var addButton = document.createElement('input');
                 addButton.setAttribute('type', 'button');
                 addButton.setAttribute('id', 'addP');
@@ -118,6 +122,7 @@
                 addButton.setAttribute('value', 'Lägg till spelare')
                 addButton.setAttribute('onclick', 'addP('+id+')')
                 document.getElementById('ControlDiv').appendChild(addButton);
+
 
                 $('#addP').click(function ()
                 {
