@@ -648,38 +648,52 @@ namespace golf.Controllers
 
                var oList = Hcpindex.ToList();
 
-               foreach(var i in oList)
+               var getHcpindex = db.Hole.OrderBy(x => x.HCPind).ToList(); 
+
+               foreach(var i in getHcpindex)
                {
                    ScoreCardClass scr = new ScoreCardClass();
-                   scr.Id = i.HoleId;
-                   scr.CompetetionGolfer_ID = i.CompetitionG;
-                   scr.HCPind = i.Index;
-                   scr.Number = i.Holenr;
-                   scr.par = i.Par;
-                   scr.playerStrokes = i.PlayerStrokes;
+                   scr.Id = i.Id;
+                   //scr.CompetetionGolfer_ID = i.CompetitionG;
+                   scr.HCPind = i.HCPind;
+                   scr.Number =i.Number;
+                   scr.par = i.par;
+                   //scr.playerStrokes = oList[i].PlayerStrokes;
                    scrList.Add(scr);
+               }
+               for (int i = 0; i < oList.Count; i++)
+               {
+                   foreach(var x in scrList)
+                   {
+                       if (x.Id == oList[i].HoleId)
+                       {
+                           x.CompetetionGolfer_ID = oList[i].CompetitionG;
+                           x.playerStrokes = oList[i].PlayerStrokes;
+                       }
+                   }
+      
                }
 
                 if(extraStrokes > 0)
                 {
-                    if (r.comp.NumberOfHoles == 9)
-                    {
-                        extraStrokes = extraStrokes / 2;
-                    }
+                    //if (r.comp.NumberOfHoles == 9)
+                    //{
+                    //    extraStrokes = extraStrokes / 2;
+                    //}
                     for (var i = 0; i < extraStrokes; i++)
                     {
-                        if (i < r.comp.NumberOfHoles)
+                        if (i < 18)
                         {
                             scrList[i].addedStrokes += 1;
                         }
-                        else if(i < (r.comp.NumberOfHoles  * 2))
+                        else if(i < (18  * 2))
                         {
-                            int z = i - r.comp.NumberOfHoles;
+                            int z = i - 18;
                             scrList[z].addedStrokes += 1;
                         }
                         else
                         {
-                            int x = i - (r.comp.NumberOfHoles*2);
+                            int x = i - (18*2);
                             scrList[x].addedStrokes += 1;
                         }
                     }
@@ -698,19 +712,27 @@ namespace golf.Controllers
                 var order = scrList.OrderBy(x => x.Id).ToList();
                 foreach(var i in order)
                 {
-                    i.calcPoints(prevPar);
-                    prevPar = i.toPar;
+                    if(i.playerStrokes > 0)
+                    {
+                        i.calcPoints(prevPar);
+                        prevPar = i.toPar;
+                    }
+  
                 }
 
                 
                 foreach(var i in scrList)
                 {
-                    HoleStats hs = new HoleStats();
-                    hs.Hole_ID = i.Id;
-                    hs.stroaks = i.playerStrokes;
-                    hs.toPar = i.toPar;
-                    hs.CompetitionGolfer_ID = r.CompetitionGolferID;
-                    db.HoleStats.Add(hs);
+                    if(i.playerStrokes >0)
+                    {
+                        HoleStats hs = new HoleStats();
+                        hs.Hole_ID = i.Id;
+                        hs.stroaks = i.playerStrokes;
+                        hs.toPar = i.toPar;
+                        hs.CompetitionGolfer_ID = r.CompetitionGolferID;
+                        db.HoleStats.Add(hs);
+                    }
+    
                 
                  }
                 var compid = r.CompetitionGolferID;
