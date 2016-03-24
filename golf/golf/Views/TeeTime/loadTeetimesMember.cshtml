@@ -150,6 +150,9 @@
 
                 if(contains(arr, currentUserId) != true){
                     
+                    var br = document.createElement('br')
+                    document.getElementById('ControlDiv').appendChild(br);
+
                     var button = document.createElement('input');
                     button.setAttribute('type', 'button');
                     button.setAttribute('class', 'buttonGreen');
